@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav1"
+    app:startDestination="@id/home">
+    <fragment
+        android:id="@+id/home"
+        android:name="com.yl.wanandroid.test.BlankFragment"/>
+    <fragment
+        android:id="@+id/project"
+        android:name="com.yl.wanandroid.test.BlankFragment1"
+        android:label="BlankFragment1" />
+    <fragment
+        android:id="@+id/system"
+        android:name="com.yl.wanandroid.test.BlankFragment2"
+        android:label="BlankFragment2" />
+    <fragment
+        android:id="@+id/my"
+        android:name="com.yl.wanandroid.test.BlankFragment3"
+        android:label="BlankFragment3" />
+</navigation>
