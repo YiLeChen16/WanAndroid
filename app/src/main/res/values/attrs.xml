@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable 
+        name="BannerView">
+        <attr name="duration" format="integer"/> <!--轮播时间间隔-->
+        <attr name="loop" format="boolean"/> <!--是否自动轮播-->
+        <attr name="indicatorNormalColor" format="color"/> <!--指示器未选中颜色-->
+        <attr name="indicatorSelectedColor" format="color"/> <!--指示器选中颜色-->
+    </declare-styleable>
+
+    <!--这是多类型页面-->
+    <declare-styleable name="MultiplyStateView">
+        <attr name="msv_loadingView" format="reference" />
+        <attr name="msv_successView" format="reference" />
+        <attr name="msv_netErrorView" format="reference" />
+        <attr name="msv_emptyView" format="reference" />
+    </declare-styleable>
+</resources>

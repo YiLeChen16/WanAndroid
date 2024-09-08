@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">WanAndroid</string>
+    <string name="tip_network_error">网络疑似被外星人抢走咯~</string>
+    <string name="tip_data_empty">数据疑似被外星人抢走?!</string>
+    <string name="tips_home">首页</string>
+    <string name="tips_project">项目</string>
+    <string name="tips_system">体系</string>
+    <string name="tips_my">我的</string>
+    <string name="loading">正在玩命加载中~</string>
+
+</resources>

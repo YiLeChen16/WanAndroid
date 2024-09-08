@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--多状态布局-->
+        <com.yl.wanandroid.ui.custom.MultiplyStateView
+            android:id="@+id/multiply_state_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:msv_emptyView="@layout/view_empty"
+            app:msv_netErrorView="@layout/view_net_error"
+            app:msv_loadingView="@layout/view_loading">
+
+        </com.yl.wanandroid.ui.custom.MultiplyStateView>
+        <!--用于填充状态视图的基础布局-->
+
+        <!--        &lt;!&ndash;  加载成功的布局&ndash;&gt;
+                <FrameLayout
+                android:id="@+id/base_frame_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible" />-->
+
+
+        <!--<include
+            android:id="@+id/view_error"
+            layout="@layout/view_net_error"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/view_empty"
+            layout="@layout/view_empty"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/view_loading"
+            layout="@layout/view_loading"
+            android:visibility="gone" />-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
