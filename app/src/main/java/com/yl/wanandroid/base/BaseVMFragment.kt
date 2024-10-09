@@ -1,6 +1,5 @@
 package com.yl.wanandroid.base
 
-<<<<<<< HEAD
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
@@ -9,11 +8,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.yl.wanandroid.R
 import com.yl.wanandroid.ui.custom.MyLoadingView
 import com.yl.wanandroid.utils.LogUtils
-=======
-import androidx.annotation.LayoutRes
-import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModelProvider
->>>>>>> 891810884e0260482ab4f05672b0615f60aba451
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -22,14 +16,10 @@ import java.lang.reflect.ParameterizedType
  * @date 2024/9/6 21:52
  * @version 1.0
  */
-<<<<<<< HEAD
 abstract class BaseVMFragment<VB : ViewDataBinding, VM : BaseViewModel>(@LayoutRes layoutId: Int) :
     BaseFragment<VB>(layoutId) {
 
 
-=======
-abstract class BaseVMFragment<VB:ViewDataBinding,VM:BaseViewModel>(@LayoutRes layoutId:Int):BaseFragment<VB>(layoutId) {
->>>>>>> 891810884e0260482ab4f05672b0615f60aba451
     lateinit var mViewModel: VM
 
     override fun initData() {
@@ -39,15 +29,9 @@ abstract class BaseVMFragment<VB:ViewDataBinding,VM:BaseViewModel>(@LayoutRes la
             mBinding.setVariable(getVariableId(), mViewModel)
             mBinding.executePendingBindings()
         }
-<<<<<<< HEAD
         initState()
         initVMData()
         observeLiveData()
-=======
-        initVMData()
-        observeLiveData()
-        initState()
->>>>>>> 891810884e0260482ab4f05672b0615f60aba451
     }
 
 
@@ -62,7 +46,6 @@ abstract class BaseVMFragment<VB:ViewDataBinding,VM:BaseViewModel>(@LayoutRes la
     /**
      * 初始化状态
      */
-<<<<<<< HEAD
     private fun initState() {
         mViewModel.mStateViewLiveData.observe(this) {
             when (it) {
@@ -107,75 +90,31 @@ abstract class BaseVMFragment<VB:ViewDataBinding,VM:BaseViewModel>(@LayoutRes la
      */
     open fun loadSuccess() {
        mMultiplyStateView.showSuccess()
-=======
-    private fun initState(){
-        mViewModel.mStateViewLiveData.observe(this) {
-            when (it) {
-                StateLayoutEnum.DATA_LOADING -> {
-                    dataLoading()
-                }
-
-                StateLayoutEnum.DATA_ERROR -> {
-                    dataError()
-                }
-
-                StateLayoutEnum.DATA_NULL -> {
-                    dataEmpty()
-                }
-
-                StateLayoutEnum.NET_ERROR -> {
-                    netError()
-                }
-            }
-        }
-
->>>>>>> 891810884e0260482ab4f05672b0615f60aba451
     }
 
     /**
      * 网络加载失败
      */
     open fun netError() {
-<<<<<<< HEAD
         mMultiplyStateView.showNetError()
     }
 
-=======
-
-    }
-
-    /**
-     * 数据加载为空
-     */
-    open fun dataEmpty() {
-
-    }
->>>>>>> 891810884e0260482ab4f05672b0615f60aba451
 
     /**
      * 数据加载错误
      */
-<<<<<<< HEAD
     open fun dataEmpty() {
         mMultiplyStateView.showEmpty()
-=======
-    open fun dataError() {
-
->>>>>>> 891810884e0260482ab4f05672b0615f60aba451
     }
 
     /**
      * 数据加载中
      */
     open fun dataLoading() {
-<<<<<<< HEAD
         mMultiplyStateView.showLoading()
         val loadingView = mMultiplyStateView.getLoadingView()
         val myLoadingView = loadingView.findViewById<MyLoadingView>(R.id.my_loading_view)
         myLoadingView.startRotate()
-=======
-
->>>>>>> 891810884e0260482ab4f05672b0615f60aba451
     }
 
     /**

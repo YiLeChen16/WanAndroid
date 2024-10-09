@@ -6,14 +6,6 @@
     <string name="tips_project">项目</string>
     <string name="tips_system">体系</string>
     <string name="tips_my">我的</string>
-<<<<<<< HEAD
     <string name="loading">正在玩命加载中~</string>
 
-=======
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="hello_blank_fragment1">Hello blank fragment1</string>
-    <string name="hello_blank_fragment2">Hello blank fragment2</string>
-    <string name="hello_blank_fragment3">Hello blank fragment2</string>
->>>>>>> 891810884e0260482ab4f05672b0615f60aba451
 </resources>

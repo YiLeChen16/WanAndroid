@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AppInsightsSettings">
-<<<<<<< HEAD
     <option name="selectedTabId" value="Android Vitals" />
-=======
->>>>>>> 891810884e0260482ab4f05672b0615f60aba451
     <option name="tabSettings">
       <map>
         <entry key="Firebase Crashlytics">

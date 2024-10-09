@@ -1,27 +1,16 @@
 package com.yl.wanandroid.base
 
 import android.os.Bundle
-<<<<<<< HEAD
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-=======
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.FrameLayout
->>>>>>> 891810884e0260482ab4f05672b0615f60aba451
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.yl.wanandroid.R
-<<<<<<< HEAD
 import com.yl.wanandroid.databinding.BaseLayoutBinding
 import com.yl.wanandroid.ui.custom.MultiplyStateView
-=======
->>>>>>> 891810884e0260482ab4f05672b0615f60aba451
 import com.yl.wanandroid.utils.LogUtils
 
 /**
@@ -32,22 +21,15 @@ import com.yl.wanandroid.utils.LogUtils
  */
 abstract class BaseFragment<VB : ViewDataBinding>(@LayoutRes layoutId: Int = 0) : Fragment() {
 
-<<<<<<< HEAD
     open lateinit var mMultiplyStateView: MultiplyStateView
 
-=======
->>>>>>> 891810884e0260482ab4f05672b0615f60aba451
     //子类的布局id
     val mLayoutId: Int = layoutId
 
     //子View的dataBinding
     lateinit var mBinding: VB
 
-<<<<<<< HEAD
     lateinit var mRootView: View
-=======
-    private lateinit var rootView: View
->>>>>>> 891810884e0260482ab4f05672b0615f60aba451
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,7 +37,6 @@ abstract class BaseFragment<VB : ViewDataBinding>(@LayoutRes layoutId: Int = 0) 
         savedInstanceState: Bundle?
     ): View? {
         //设置根布局
-<<<<<<< HEAD
         mRootView = layoutInflater.inflate(R.layout.base_layout, container, false)
         LogUtils.d(this, "onCreateView--")
         return mRootView
@@ -82,21 +63,6 @@ abstract class BaseFragment<VB : ViewDataBinding>(@LayoutRes layoutId: Int = 0) 
         mMultiplyStateView = mRootView.findViewById(R.id.multiply_state_view)
         //将子类加载成功View布局添加进去
         mMultiplyStateView.setSuccessView(mBinding.root)
-=======
-        rootView = layoutInflater.inflate(R.layout.base_layout, container, false)
-        return rootView
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        //获取子类ViewDataBinding
-        //mBinding = DataBindingUtil.bind(view)!!
-        mBinding = DataBindingUtil.inflate(layoutInflater, mLayoutId, null, false)
-        //找到根布局的baseFrameLayout
-        val baseFrameLayout = rootView.findViewById<FrameLayout>(R.id.base_frame_layout)
-        //将子类布局添加进去
-        baseFrameLayout.addView(mBinding.root)
->>>>>>> 891810884e0260482ab4f05672b0615f60aba451
         //初始化视图
         initView()
         //初始化数据
@@ -105,22 +71,18 @@ abstract class BaseFragment<VB : ViewDataBinding>(@LayoutRes layoutId: Int = 0) 
         LogUtils.d(this, this.toString())
     }
 
-<<<<<<< HEAD
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         LogUtils.d(this, "onCreate--")
     }
 
 
-=======
->>>>>>> 891810884e0260482ab4f05672b0615f60aba451
     //初始化视图
     open fun initView() {
     }
 
     //初始化数据
     abstract fun initData()
-<<<<<<< HEAD
 
 
     override fun onDestroy() {
@@ -143,6 +105,4 @@ abstract class BaseFragment<VB : ViewDataBinding>(@LayoutRes layoutId: Int = 0) 
         LogUtils.d(this, "onDestroyView--")
 
     }
-=======
->>>>>>> 891810884e0260482ab4f05672b0615f60aba451
 }

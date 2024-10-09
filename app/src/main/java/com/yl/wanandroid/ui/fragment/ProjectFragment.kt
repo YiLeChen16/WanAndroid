@@ -2,7 +2,6 @@ package com.yl.wanandroid.ui.fragment
 
 import com.yl.wanandroid.R
 import com.yl.wanandroid.base.BaseVMFragment
-<<<<<<< HEAD
 import com.yl.wanandroid.base.ViewStateEnum
 import com.yl.wanandroid.databinding.FragmentProjectBinding
 import com.yl.wanandroid.viewmodel.ProjectFragmentViewModel
@@ -12,10 +11,6 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-=======
-import com.yl.wanandroid.databinding.FragmentProjectBinding
-import com.yl.wanandroid.viewmodel.ProjectFragmentViewModel
->>>>>>> 891810884e0260482ab4f05672b0615f60aba451
 
 /**
  * @description: 项目
@@ -24,7 +19,6 @@ import com.yl.wanandroid.viewmodel.ProjectFragmentViewModel
  * @version 1.0
  */
 class ProjectFragment:BaseVMFragment<FragmentProjectBinding,ProjectFragmentViewModel>(R.layout.fragment_project) {
-<<<<<<< HEAD
     companion object{
         private var projectFragment:ProjectFragment? = null
         fun newInstance() :ProjectFragment{
@@ -45,9 +39,6 @@ class ProjectFragment:BaseVMFragment<FragmentProjectBinding,ProjectFragmentViewM
             //模拟加载成功
             mViewModel.changeStateView(ViewStateEnum.VIEW_LOAD_SUCCESS)
         }
-=======
-    override fun initVMData() {
->>>>>>> 891810884e0260482ab4f05672b0615f60aba451
 
     }
 }
