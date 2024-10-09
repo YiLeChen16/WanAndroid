@@ -1,6 +1,5 @@
 package com.yl.wanandroid.viewmodel
 
-<<<<<<< HEAD
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.yl.wanandroid.base.BaseViewModel
@@ -10,9 +9,6 @@ import com.yl.wanandroid.utils.TipsToast
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-=======
-import com.yl.wanandroid.base.BaseViewModel
->>>>>>> 891810884e0260482ab4f05672b0615f60aba451
 
 /**
  * @description: 首页的ViewModel
@@ -20,7 +16,6 @@ import com.yl.wanandroid.base.BaseViewModel
  * @date 2024/9/7 15:45
  * @version 1.0
  */
-<<<<<<< HEAD
 class HomeFragmentViewModel @Inject constructor() :BaseViewModel(){
 
     @Inject lateinit var homeRepository:HomeRepository
@@ -48,7 +43,4 @@ class HomeFragmentViewModel @Inject constructor() :BaseViewModel(){
         }
         return bannerData
     }
-=======
-class HomeFragmentViewModel :BaseViewModel(){
->>>>>>> 891810884e0260482ab4f05672b0615f60aba451
 }

@@ -13,11 +13,7 @@
         android:layout_height="match_parent"
         tools:context=".ui.activity.MainActivity">
 
-<<<<<<< HEAD
 <!--        <androidx.fragment.app.FragmentContainerView
-=======
-        <androidx.fragment.app.FragmentContainerView
->>>>>>> 891810884e0260482ab4f05672b0615f60aba451
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -27,7 +23,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:defaultNavHost="true"
             android:name="androidx.navigation.fragment.NavHostFragment"
-<<<<<<< HEAD
             app:navGraph="@navigation/nav" />-->
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/fragment_container"
@@ -37,9 +32,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-=======
-            app:navGraph="@navigation/nav" />
->>>>>>> 891810884e0260482ab4f05672b0615f60aba451
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
@@ -57,11 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-<<<<<<< HEAD
             app:layout_constraintGuide_percent="0.92"
-=======
-            app:layout_constraintGuide_percent="0.9"
->>>>>>> 891810884e0260482ab4f05672b0615f60aba451
             app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

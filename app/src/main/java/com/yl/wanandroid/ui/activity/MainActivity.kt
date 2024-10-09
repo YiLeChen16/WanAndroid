@@ -1,6 +1,5 @@
 package com.yl.wanandroid.ui.activity
 
-<<<<<<< HEAD
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -21,23 +20,12 @@ import com.yl.wanandroid.utils.LogUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-=======
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI
-import com.yl.wanandroid.R
-import com.yl.wanandroid.base.BaseActivity
-import com.yl.wanandroid.databinding.ActivityMainBinding
-import com.yl.wanandroid.utils.LogUtils
-
->>>>>>> 891810884e0260482ab4f05672b0615f60aba451
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     /**
      * 初始化界面
      */
     override fun initView() {
-<<<<<<< HEAD
         //导航
         val homeFragment = HomeFragment.newInstance()
         val projectFragment = ProjectFragment.newInstance()
@@ -99,23 +87,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
 
-=======
-
-        //导航
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
-        val navController = navHostFragment.findNavController()
-        //关联底部导航栏和上方的fragmentContainerView
-        NavigationUI.setupWithNavController(
-            mBinding.bottomNavigation,
-            navController
-        )
-        // 打印调试信息
-        LogUtils.d(this, "NavController: $navController")
-        LogUtils.d(this, "BottomNavigationView: ${mBinding.bottomNavigation}")
-    }
-
->>>>>>> 891810884e0260482ab4f05672b0615f60aba451
     override fun initData() {
 
     }
