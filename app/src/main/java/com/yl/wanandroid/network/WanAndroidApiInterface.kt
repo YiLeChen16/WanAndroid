@@ -1,5 +1,6 @@
 package com.yl.wanandroid.network
 
+<<<<<<< HEAD
 import com.yl.wanandroid.model.BannerDataBean
 import com.yl.wanandroid.network.result.BaseResult
 import okhttp3.OkHttpClient
@@ -8,10 +9,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
+=======
+>>>>>>> 891810884e0260482ab4f05672b0615f60aba451
 /**
  * 网络请求接口
  */
 interface WanAndroidApiInterface {
+<<<<<<< HEAD
     companion object {
         private const val BASE_URL = "https://www.wanandroid.com"
         //使用懒加载
@@ -45,4 +49,7 @@ interface WanAndroidApiInterface {
      */
     @GET("/banner/json")
     suspend fun getBannerData():BaseResult<MutableList<BannerDataBean>>?
+=======
+
+>>>>>>> 891810884e0260482ab4f05672b0615f60aba451
 }

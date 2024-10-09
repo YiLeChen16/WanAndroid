@@ -3,7 +3,10 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
     //注解处理器，要使用Databinding必须引入此插件
+<<<<<<< HEAD
     id("com.google.dagger.hilt.android")
+=======
+>>>>>>> 891810884e0260482ab4f05672b0615f60aba451
 }
 
 android {
@@ -33,11 +36,19 @@ android {
         }
     }
     compileOptions {
+<<<<<<< HEAD
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
         jvmTarget = "17"
+=======
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+>>>>>>> 891810884e0260482ab4f05672b0615f60aba451
     }
     buildFeatures {
         compose = false
@@ -67,12 +78,15 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.material)
     implementation(libs.androidx.activity)
+<<<<<<< HEAD
     implementation(libs.glide)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
     implementation(libs.recyclerview)
     implementation(libs.lifecycle.runtime.ktx)
+=======
+>>>>>>> 891810884e0260482ab4f05672b0615f60aba451
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -89,8 +103,11 @@ dependencies {
     implementation ("androidx.navigation:navigation-fragment-ktx:2.5.3")
     implementation ("androidx.navigation:navigation-ui-ktx:2.5.3")
 
+<<<<<<< HEAD
     implementation("com.google.dagger:hilt-android:2.44")
     kapt("com.google.dagger:hilt-android-compiler:2.44")
 
 
+=======
+>>>>>>> 891810884e0260482ab4f05672b0615f60aba451
 }

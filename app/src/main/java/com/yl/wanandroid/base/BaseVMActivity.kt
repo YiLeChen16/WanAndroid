@@ -1,5 +1,6 @@
 package com.yl.wanandroid.base
 
+<<<<<<< HEAD
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
@@ -8,6 +9,11 @@ import com.yl.wanandroid.R
 import com.yl.wanandroid.ui.custom.MultiplyStateView
 import com.yl.wanandroid.ui.custom.MyLoadingView
 import com.yl.wanandroid.utils.LogUtils
+=======
+import androidx.annotation.LayoutRes
+import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModelProvider
+>>>>>>> 891810884e0260482ab4f05672b0615f60aba451
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -16,21 +22,36 @@ import java.lang.reflect.ParameterizedType
  * @date 2024/9/6 14:16
  * @version 1.0
  */
+<<<<<<< HEAD
 abstract class BaseVMActivity<VB : ViewDataBinding, VM : BaseViewModel>(@LayoutRes layoutId: Int) :
     BaseActivity<VB>(layoutId) {
     //子类ViewModel实例
     lateinit var mViewModel: VM
+=======
+abstract class BaseVMActivity<VB:ViewDataBinding,VM:BaseViewModel>(@LayoutRes layoutId:Int):BaseActivity<VB>(layoutId) {
+
+    //子类ViewModel实例
+    lateinit var mViewModel:VM
+>>>>>>> 891810884e0260482ab4f05672b0615f60aba451
 
     /**
      * 获取对应的ViewModel，并初始化数据
      */
     override fun initData() {
+<<<<<<< HEAD
         dataLoading()
         mViewModel = getViewModel()!!
         //将子类的ViewModel和dataBinding联系起来，实现界面数据的自动更新
         val variableId = getVariableId()
         if (variableId != -1) {
             mBinding.setVariable(variableId, mViewModel)
+=======
+        mViewModel = getViewModel()!!
+        //将子类的ViewModel和dataBinding联系起来，实现界面数据的自动更新
+        val variableId = getVariableId()
+        if(variableId !=-1){
+            mBinding.setVariable(variableId,mViewModel)
+>>>>>>> 891810884e0260482ab4f05672b0615f60aba451
             //立即执行 Data Binding 中的挂起绑定
             //即Data Binding 会立即将 ViewModel 的属性和方法更新到布局文件中
             mBinding.executePendingBindings()
@@ -57,6 +78,7 @@ abstract class BaseVMActivity<VB : ViewDataBinding, VM : BaseViewModel>(@LayoutR
     private fun initViewState() {
         mViewModel.mStateViewLiveData.observe(this) {
             when (it) {
+<<<<<<< HEAD
                 ViewStateEnum.VIEW_LOADING -> {
                     LogUtils.d(this, "StateLayoutEnum.DATA_LOADING")
                     dataLoading()
@@ -80,11 +102,30 @@ abstract class BaseVMActivity<VB : ViewDataBinding, VM : BaseViewModel>(@LayoutR
                 ViewStateEnum.VIEW_NONE -> {
                     LogUtils.d(this, "StateLayoutEnum.NONE")
                 }
+=======
+                StateLayoutEnum.DATA_LOADING -> {
+                    dataLoading()
+                }
+
+
+                StateLayoutEnum.DATA_ERROR -> {
+                    dataError()
+                }
+
+                StateLayoutEnum.DATA_NULL -> {
+                    dataEmpty()
+                }
+
+                StateLayoutEnum.NET_ERROR -> {
+                    netError()
+                }
+>>>>>>> 891810884e0260482ab4f05672b0615f60aba451
             }
         }
     }
 
     /**
+<<<<<<< HEAD
      * 数据加载成功
      */
     open fun loadSuccess() {
@@ -99,21 +140,40 @@ abstract class BaseVMActivity<VB : ViewDataBinding, VM : BaseViewModel>(@LayoutR
     }
 
 
+=======
+     * 网络错误
+     */
+    open fun netError() {
+    }
+
+>>>>>>> 891810884e0260482ab4f05672b0615f60aba451
     /**
      * 数据加载为空
      */
     open fun dataEmpty() {
+<<<<<<< HEAD
         mMultiplyStateView.showEmpty()
+=======
+    }
+
+    /**
+     * 数据加载错误
+     */
+    open fun dataError() {
+>>>>>>> 891810884e0260482ab4f05672b0615f60aba451
     }
 
     /**
      * 数据加载中
      */
     open fun dataLoading() {
+<<<<<<< HEAD
         mMultiplyStateView.showLoading()
         val loadingView = mMultiplyStateView.getLoadingView()
         val myLoadingView = loadingView.findViewById<MyLoadingView>(R.id.my_loading_view)
         myLoadingView.startRotate()
+=======
+>>>>>>> 891810884e0260482ab4f05672b0615f60aba451
     }
 
     /**

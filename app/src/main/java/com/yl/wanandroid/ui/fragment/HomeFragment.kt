@@ -1,5 +1,6 @@
 package com.yl.wanandroid.ui.fragment
 
+<<<<<<< HEAD
 
 import com.yl.wanandroid.R
 import com.yl.wanandroid.base.BaseVMFragment
@@ -10,6 +11,12 @@ import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.viewmodel.HomeFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+=======
+import com.yl.wanandroid.R
+import com.yl.wanandroid.base.BaseVMFragment
+import com.yl.wanandroid.databinding.FragmentHomeBinding
+import com.yl.wanandroid.viewmodel.HomeFragmentViewModel
+>>>>>>> 891810884e0260482ab4f05672b0615f60aba451
 
 /**
  * @description: 首页
@@ -17,6 +24,7 @@ import javax.inject.Inject
  * @date 2024/9/7 15:42
  * @version 1.0
  */
+<<<<<<< HEAD
 @AndroidEntryPoint
 class HomeFragment:BaseVMFragment<FragmentHomeBinding,HomeFragmentViewModel>(R.layout.fragment_home) {
 
@@ -57,4 +65,11 @@ class HomeFragment:BaseVMFragment<FragmentHomeBinding,HomeFragmentViewModel>(R.l
         }
     }
 
+=======
+class HomeFragment:BaseVMFragment<FragmentHomeBinding,HomeFragmentViewModel>(R.layout.fragment_home) {
+
+    override fun initVMData() {
+
+    }
+>>>>>>> 891810884e0260482ab4f05672b0615f60aba451
 }
