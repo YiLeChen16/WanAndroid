@@ -2,7 +2,11 @@
 agp = "8.5.1"
 appcompat = "1.7.0"
 constraintlayout = "2.1.4"
+<<<<<<< HEAD
 kotlin = "1.8.0"
+=======
+kotlin = "1.9.0"
+>>>>>>> 891810884e0260482ab4f05672b0615f60aba451
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -12,6 +16,7 @@ activityCompose = "1.9.1"
 composeBom = "2024.04.01"
 material = "1.12.0"
 activity = "1.9.1"
+<<<<<<< HEAD
 glide = "5.0.0-rc01"
 converterGson = "2.11.0"
 retrofit = "2.11.0"
@@ -20,6 +25,8 @@ recyclerviewVersion = "1.3.0"
 viewpager = "1.0.0"
 annotations = "5.0.0-rc01"
 lifecycleRuntimeKtxVersion = "2.6.2"
+=======
+>>>>>>> 891810884e0260482ab4f05672b0615f60aba451
 
 [libraries]
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
@@ -40,6 +47,7 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+<<<<<<< HEAD
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "converterGson" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
@@ -48,6 +56,8 @@ recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version
 androidx-viewpager = { group = "androidx.viewpager", name = "viewpager", version.ref = "viewpager" }
 annotations = { group = "com.github.bumptech.glide", name = "annotations", version.ref = "annotations" }
 lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtxVersion" }
+=======
+>>>>>>> 891810884e0260482ab4f05672b0615f60aba451
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
