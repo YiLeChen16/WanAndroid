@@ -10,9 +10,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.yl.wanandroid.R
+<<<<<<< HEAD
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
+=======
+
+>>>>>>> 891810884e0260482ab4f05672b0615f60aba451
 class MainActivity : AppCompatActivity(R.layout.activity_main2) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
