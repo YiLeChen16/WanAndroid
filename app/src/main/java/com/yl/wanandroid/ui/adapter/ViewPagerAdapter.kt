@@ -1,13 +1,17 @@
 package com.yl.wanandroid.ui.adapter
 
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
+import com.yl.wanandroid.Constant
 import com.yl.wanandroid.R
 import com.yl.wanandroid.model.BannerDataBean
+import com.yl.wanandroid.ui.activity.WebViewActivity
 import com.yl.wanandroid.utils.LogUtils
 import javax.inject.Inject
 
@@ -44,6 +48,14 @@ open class ViewPagerAdapter @Inject constructor() : PagerAdapter() {
         LogUtils.d(this@ViewPagerAdapter, "picUrl-->$picUrl")
         Glide.with(container.context).load(picUrl).into(iv)
         iv.scaleType = ImageView.ScaleType.CENTER_CROP
+        //为条目设置点击监听事件
+        iv.setOnClickListener {
+            //TODO：：跳转到url界面
+            LogUtils.d(this@ViewPagerAdapter, "toUrl-->${mBannerData[realPosition].url}")
+            val intent = Intent(container.context, WebViewActivity::class.java)
+            intent.putExtra(Constant.toWebUrlKey,mBannerData[realPosition].url)//携带数据跳转
+            container.context.startActivity(intent)
+        }
         container.addView(iv)
         return iv
     }

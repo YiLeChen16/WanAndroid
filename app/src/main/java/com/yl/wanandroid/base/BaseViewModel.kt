@@ -76,7 +76,6 @@ open class BaseViewModel : ViewModel(), BaseLifeCycleObserver {
                 mStateViewLiveData.postValue(ViewStateEnum.VIEW_EMPTY)
             }
 
-
             ViewStateEnum.VIEW_NET_ERROR -> {
                 mStateViewLiveData.postValue(ViewStateEnum.VIEW_NET_ERROR)
             }
@@ -94,7 +93,7 @@ open class BaseViewModel : ViewModel(), BaseLifeCycleObserver {
     /**
      * 获取Repository实例
      */
-/*    inline fun <reified R> getRepository(): R? {
+    inline fun <reified R> getRepository(): R? {
         try {
             val clazz = R::class.java
             return clazz.newInstance()
@@ -102,7 +101,7 @@ open class BaseViewModel : ViewModel(), BaseLifeCycleObserver {
             e.printStackTrace()
         }
         return null
-    }*/
+    }
 
     /**
      * View生命周期：视图创建

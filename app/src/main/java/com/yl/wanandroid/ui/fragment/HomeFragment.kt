@@ -1,6 +1,5 @@
 package com.yl.wanandroid.ui.fragment
 
-
 import com.yl.wanandroid.R
 import com.yl.wanandroid.base.BaseVMFragment
 import com.yl.wanandroid.base.ViewStateEnum
@@ -20,8 +19,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class HomeFragment:BaseVMFragment<FragmentHomeBinding,HomeFragmentViewModel>(R.layout.fragment_home) {
 
-    @Inject
-    lateinit var homeFragmentViewModel:HomeFragmentViewModel
 
     companion object{
         private var homeFragment:HomeFragment? = null
@@ -34,15 +31,11 @@ class HomeFragment:BaseVMFragment<FragmentHomeBinding,HomeFragmentViewModel>(R.l
     }
 
     override fun initVMData() {
-        homeFragmentViewModel.getBannerData()
-    }
-
-    override fun initView() {
-        super.initView()
+        mViewModel.getBannerData()
     }
 
     override fun observeLiveData() {
-        homeFragmentViewModel.bannerData.observe(viewLifecycleOwner){
+        mViewModel.bannerData.observe(viewLifecycleOwner){
                 bannerData->
             //将数据装载到Banner控件中
             LogUtils.d(this@HomeFragment,"bannerData-->${bannerData.toString()}")

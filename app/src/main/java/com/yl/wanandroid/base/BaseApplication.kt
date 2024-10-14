@@ -1,6 +1,7 @@
 package com.yl.wanandroid.base
 
 import android.app.Application
+import com.yl.wanandroid.utils.TipsToast
 import dagger.hilt.android.HiltAndroidApp
 
 /**
@@ -11,4 +12,9 @@ import dagger.hilt.android.HiltAndroidApp
  */
 //初始化Hilt框架
 @HiltAndroidApp
-class BaseApplication:Application()
+class BaseApplication:Application(){
+    override fun onCreate() {
+        TipsToast.init(this)
+        super.onCreate()
+    }
+}

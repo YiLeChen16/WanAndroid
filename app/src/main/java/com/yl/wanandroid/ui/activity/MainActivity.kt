@@ -1,12 +1,6 @@
 package com.yl.wanandroid.ui.activity
 
-import android.util.Log
-import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI
-import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.yl.wanandroid.R
@@ -83,7 +77,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 }
             }
         })
+        //禁用viewPager的滑动，避免和首页的viewpager滑动冲突
+        mBinding.fragmentContainer.isUserInputEnabled = false
         super.initView()
+        mMultiplyStateView.showSuccess()
     }
 
 

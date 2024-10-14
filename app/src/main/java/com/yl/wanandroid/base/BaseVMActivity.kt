@@ -1,11 +1,10 @@
 package com.yl.wanandroid.base
 
-import android.view.View
+
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.yl.wanandroid.R
-import com.yl.wanandroid.ui.custom.MultiplyStateView
 import com.yl.wanandroid.ui.custom.MyLoadingView
 import com.yl.wanandroid.utils.LogUtils
 import java.lang.reflect.ParameterizedType

@@ -26,12 +26,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             yl:loop="true"/>
-<!--        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/banner_view"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/guild_line"/>-->
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guild_line"
@@ -39,17 +33,32 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.2" />
-        <TextView
-            android:id="@+id/tv"
+
+        <LinearLayout
+            android:id="@+id/search_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="测试"
-            app:layout_constraintTop_toBottomOf="@id/guild_line"/>
+            app:layout_constraintTop_toBottomOf="@id/guild_line"
+            app:layout_constraintStart_toStartOf="parent"
+            android:orientation="horizontal">
+            <TableLayout
+                android:id="@+id/tab"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"/>
+            <Button
+                android:id="@+id/btn_search"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="搜索"/>
+        </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/tab_view_pager"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/tv"
+            android:layout_height="@dimen/dp_0"
+            app:layout_constraintTop_toBottomOf="@id/search_layout"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

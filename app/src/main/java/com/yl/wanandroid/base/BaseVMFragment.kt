@@ -29,6 +29,8 @@ abstract class BaseVMFragment<VB : ViewDataBinding, VM : BaseViewModel>(@LayoutR
             mBinding.setVariable(getVariableId(), mViewModel)
             mBinding.executePendingBindings()
         }
+        //页面加载完成后展示加载状态视图
+        mViewModel.changeStateView(ViewStateEnum.VIEW_LOADING)
         initState()
         initVMData()
         observeLiveData()
@@ -81,8 +83,8 @@ abstract class BaseVMFragment<VB : ViewDataBinding, VM : BaseViewModel>(@LayoutR
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         LogUtils.d(this,"onViewCreated-->dataLoading")
-        //页面加载完成后展示加载状态视图
-        dataLoading()
+/*        //页面加载完成后展示加载状态视图
+        dataLoading()*/
     }
 
     /**

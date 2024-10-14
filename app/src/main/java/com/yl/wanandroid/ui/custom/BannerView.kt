@@ -51,7 +51,7 @@ open class BannerView : ConstraintLayout {
     private val Default_Loop = false
     private val Default_Duration = 3000
     private var DefaultIndicatorNormalColor: Int = resources.getColor(R.color.grey)
-    private var DefaultIndicatorSelectedColor: Int = resources.getColor(R.color.colorPrimary)
+    private var DefaultIndicatorSelectedColor: Int = resources.getColor(R.color.md_theme_primary)
     open var mDuration: Int = Default_Duration
     open var mLoop: Boolean = Default_Loop
         set(value) {
@@ -137,7 +137,7 @@ open class BannerView : ConstraintLayout {
         //初始化指示器
         setUpIndicator(mAdapter.count)
         //设置轮播图条目监听事件
-        mAdapter.setOnItemListener(object : ViewPagerAdapter.OnItemListener {
+/*        mAdapter.setOnItemListener(object : ViewPagerAdapter.OnItemListener {
             //条目被点击
             override fun onItemClick(toUrl: String) {
                 //TODO：：跳转到url界面
@@ -146,7 +146,7 @@ open class BannerView : ConstraintLayout {
 
                 context.startActivity(intent)
             }
-        })
+        })*/
         //设置轮播图切换监听
         mViewPager.addOnPageChangeListener(object : OnPageChangeListener {
             override fun onPageScrolled(
