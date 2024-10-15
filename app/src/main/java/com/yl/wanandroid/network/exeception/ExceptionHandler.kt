@@ -3,6 +3,7 @@ package com.yl.wanandroid.network.exeception
 import android.net.ParseException
 import com.google.gson.JsonParseException
 import com.google.gson.stream.MalformedJsonException
+import com.yl.wanandroid.utils.LogUtils
 import org.json.JSONException
 import retrofit2.HttpException
 import java.net.ConnectException
@@ -17,14 +18,18 @@ object ExceptionHandler {
         val ex: ApiException
         when (e) {
             is ApiException -> {
+                LogUtils.e(this,"is ApiException")
+
                 ex = ApiException(e.errCode, e.errMsg, e)
             }
 
             is NetWorkException -> {
+                LogUtils.e(this,"is NetWorkException ")
                 ex = ApiException(ERROR.NETWORD_ERROR, e)
             }
 
             is HttpException -> {
+                LogUtils.e(this,"is HttpException code-->${e.code()}")
                 ex = when (e.code()) {
                     ERROR.UNAUTHORIZED.code -> ApiException(ERROR.UNAUTHORIZED, e)
                     ERROR.FORBIDDEN.code -> ApiException(ERROR.FORBIDDEN, e)
@@ -39,26 +44,32 @@ object ExceptionHandler {
             }
 
             is JsonParseException, is JSONException, is ParseException, is MalformedJsonException -> {
+                LogUtils.e(this,"is JsonParseException, is JSONException, is ParseException, is MalformedJsonException")
                 ex = ApiException(ERROR.PARSE_ERROR, e)
             }
 
             is ConnectException -> {
+                LogUtils.e(this,"is ConnectException")
                 ex = ApiException(ERROR.NETWORD_ERROR, e)
             }
 
             is javax.net.ssl.SSLException -> {
+                LogUtils.e(this,"is javax.net.ssl.SSLException")
                 ex = ApiException(ERROR.SSL_ERROR, e)
             }
 
             is java.net.SocketException -> {
+                LogUtils.e(this,"is java.net.SocketException")
                 ex = ApiException(ERROR.TIMEOUT_ERROR, e)
             }
 
             is java.net.SocketTimeoutException -> {
+                LogUtils.e(this,"is java.net.SocketTimeoutException")
                 ex = ApiException(ERROR.TIMEOUT_ERROR, e)
             }
 
             is java.net.UnknownHostException -> {
+                LogUtils.e(this,"is java.net.UnknownHostException")
                 ex = ApiException(ERROR.UNKNOW_HOST, e)
             }
 

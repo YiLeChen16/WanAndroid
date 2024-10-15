@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yl.wanandroid.network.exeception.ExceptionHandler
+import com.yl.wanandroid.ui.custom.MultiplyStateView
 import com.yl.wanandroid.utils.LogUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,7 +15,7 @@ import kotlinx.coroutines.launch
  * @date 2024/9/6 14:17
  * @version 1.0
  */
-open class BaseViewModel : ViewModel(), BaseLifeCycleObserver {
+abstract class BaseViewModel : ViewModel(), BaseLifeCycleObserver,MultiplyStateView.OnReLodListener {
 
     /**
      * 控制状态视图的LiveData
@@ -107,7 +108,6 @@ open class BaseViewModel : ViewModel(), BaseLifeCycleObserver {
      * View生命周期：视图创建
      */
     override fun onCreate() {
-
     }
 
     /**
@@ -139,4 +139,13 @@ open class BaseViewModel : ViewModel(), BaseLifeCycleObserver {
      */
     override fun onDestroy() {
     }
+
+    //错误视图点击回调函数
+    override fun onReLoad() {
+        //调用抽象方法强制子类实现
+        onReload()
+    }
+
+    //强制子类实现此方法
+    abstract fun onReload()
 }

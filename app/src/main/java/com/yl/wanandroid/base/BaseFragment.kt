@@ -67,7 +67,6 @@ abstract class BaseFragment<VB : ViewDataBinding>(@LayoutRes layoutId: Int = 0) 
         initView()
         //初始化数据
         initData()
-
         LogUtils.d(this, this.toString())
     }
 

@@ -70,7 +70,7 @@
         <item name="colorSurfaceContainerHighest">@color/md_theme_surfaceContainerHighest</item>
     </style>
 
-
+<!--夜间主题-->
     <style name="Theme.WanAndroid.Night" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/md_theme_primary_highContrast</item>
         <item name="android:statusBarColor">@color/md_theme_primary_highContrast</item>

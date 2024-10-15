@@ -14,7 +14,7 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.WanAndroid.Night"
+        android:theme="@style/Theme.WanAndroid.Day"
         tools:targetApi="31">
         <activity
             android:name=".ui.activity.WebViewActivity"

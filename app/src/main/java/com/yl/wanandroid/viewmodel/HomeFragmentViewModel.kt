@@ -8,22 +8,20 @@ import com.yl.wanandroid.model.BannerDataBean
 import com.yl.wanandroid.repository.HomeRepository
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast
-import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 
 /**
- * @description: 首页的ViewModel
+ * @description: 首页的ViewModel TODO:主页数据缓存，数据持久化
  * @author YL Chen
  * @date 2024/9/7 15:45
  * @version 1.0
  */
-class HomeFragmentViewModel : BaseViewModel() {
+class HomeFragmentViewModel : BaseViewModel(){
 
     //获取仓库模型
     private var homeRepository: HomeRepository? = getRepository()
 
     var bannerData = MutableLiveData<MutableList<BannerDataBean>?>()
+
 
     /**
      * 获取Banner数据
@@ -47,4 +45,12 @@ class HomeFragmentViewModel : BaseViewModel() {
         }
         return bannerData
     }
+
+
+    //错误状态视图点击回调函数
+    override fun onReload() {
+        //重新加载数据
+        getBannerData()
+    }
+
 }

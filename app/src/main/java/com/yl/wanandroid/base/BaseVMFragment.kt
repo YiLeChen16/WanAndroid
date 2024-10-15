@@ -34,6 +34,8 @@ abstract class BaseVMFragment<VB : ViewDataBinding, VM : BaseViewModel>(@LayoutR
         initState()
         initVMData()
         observeLiveData()
+        //设置状态页点击重新加载监听
+        mMultiplyStateView.setOnReLodListener(mViewModel)
     }
 
 

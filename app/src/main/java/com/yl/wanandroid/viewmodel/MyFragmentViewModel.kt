@@ -9,4 +9,7 @@ import com.yl.wanandroid.base.BaseViewModel
  * @version 1.0
  */
 class MyFragmentViewModel:BaseViewModel() {
+    override fun onReload() {
+
+    }
 }

@@ -10,4 +10,7 @@ import javax.inject.Inject
  * @version 1.0
  */
 class ProjectFragmentViewModel @Inject constructor():BaseViewModel() {
+    override fun onReload() {
+
+    }
 }

@@ -50,7 +50,6 @@ open class ViewPagerAdapter @Inject constructor() : PagerAdapter() {
         iv.scaleType = ImageView.ScaleType.CENTER_CROP
         //为条目设置点击监听事件
         iv.setOnClickListener {
-            //TODO：：跳转到url界面
             LogUtils.d(this@ViewPagerAdapter, "toUrl-->${mBannerData[realPosition].url}")
             val intent = Intent(container.context, WebViewActivity::class.java)
             intent.putExtra(Constant.toWebUrlKey,mBannerData[realPosition].url)//携带数据跳转

@@ -80,7 +80,7 @@ open class BannerView : ConstraintLayout {
                     currentItem++
                     if (currentItem == mViewPager.adapter?.count) {
                         currentItem = 0
-                        mViewPager.setCurrentItem(currentItem,false)
+                        mViewPager.setCurrentItem(currentItem, false)
                     }
                     mViewPager.currentItem = currentItem
                 }
@@ -136,17 +136,6 @@ open class BannerView : ConstraintLayout {
         LogUtils.d(this@BannerView, "mAdapter-->${mAdapter}")
         //初始化指示器
         setUpIndicator(mAdapter.count)
-        //设置轮播图条目监听事件
-/*        mAdapter.setOnItemListener(object : ViewPagerAdapter.OnItemListener {
-            //条目被点击
-            override fun onItemClick(toUrl: String) {
-                //TODO：：跳转到url界面
-                LogUtils.d(this@BannerView, "toUrl-->$toUrl")
-                val intent = Intent(context, WebViewActivity::class.java)
-
-                context.startActivity(intent)
-            }
-        })*/
         //设置轮播图切换监听
         mViewPager.addOnPageChangeListener(object : OnPageChangeListener {
             override fun onPageScrolled(
@@ -174,7 +163,7 @@ open class BannerView : ConstraintLayout {
      * @param currentPosition Int
      */
     private fun updateIndicator(currentPosition: Int) {
-        LogUtils.d(this@BannerView,"updateIndicator--")
+        LogUtils.d(this@BannerView, "updateIndicator--")
         for (i in 0 until mPointLayout.childCount) {
             if (currentPosition == i) {
                 val childAt = mPointLayout.getChildAt(i)
@@ -195,8 +184,8 @@ open class BannerView : ConstraintLayout {
         if (isIndicatorSetup) return
         isIndicatorSetup = true
         mPointLayout.removeAllViews()
-        LogUtils.d(this@BannerView,"setUpIndicator--")
-        Log.d("BannerView","setUpIndicator-->>")
+        LogUtils.d(this@BannerView, "setUpIndicator--")
+        Log.d("BannerView", "setUpIndicator-->>")
         //添加指示器
         for (i in 0 until count) {
             val point = ImageView(context)

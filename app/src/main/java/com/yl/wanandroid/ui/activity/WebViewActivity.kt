@@ -1,11 +1,9 @@
 package com.yl.wanandroid.ui.activity
 
-import android.os.Build
 import android.view.ViewGroup
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.LinearLayout
 import com.yl.wanandroid.Constant
 import com.yl.wanandroid.R
 import com.yl.wanandroid.base.BaseVMActivity
@@ -27,15 +25,6 @@ class WebViewActivity :
 
     override fun initView() {
         super.initView()
-        //为防止内存泄漏不在xml文件中编写webView，而是在activity中动态加载
-        val params = LinearLayout.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.MATCH_PARENT
-        )
-        /*mWebView = WebView(applicationContext)
-        mWebView?.layoutParams = params
-        val mLayout = mBinding.root as ViewGroup
-        mLayout.addView(mWebView)*/
         mWebView = mBinding.webView
         val webSettings = mWebView?.settings
         webSettings?.javaScriptEnabled = true
@@ -46,19 +35,16 @@ class WebViewActivity :
         webSettings?.loadWithOverviewMode = true // 缩放至屏幕的大小
 
         //缩放操作
-        webSettings?.setSupportZoom(true); //支持缩放，默认为true。是下面那个的前提。
-        webSettings?.builtInZoomControls = true; //设置内置的缩放控件。若为false，则该WebView不可缩放
-        webSettings?.displayZoomControls = false; //隐藏原生的缩放控件
+        webSettings?.setSupportZoom(true)//支持缩放，默认为true。是下面那个的前提。
+        webSettings?.builtInZoomControls = true //设置内置的缩放控件。若为false，则该WebView不可缩放
+        webSettings?.displayZoomControls = false //隐藏原生的缩放控件
 
         //其他细节操作
-        webSettings?.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK; //关闭webview中缓存
-        webSettings?.allowFileAccess = true; //设置可以访问文件
-        webSettings?.javaScriptCanOpenWindowsAutomatically = true; //支持通过JS打开新窗口
-        webSettings?.loadsImagesAutomatically = true; //支持自动加载图片
-        webSettings?.defaultTextEncodingName = "utf-8";//设置编码格式
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            webSettings?.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-        }
+        webSettings?.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK //关闭webview中缓存
+        webSettings?.allowFileAccess = true //设置可以访问文件
+        webSettings?.javaScriptCanOpenWindowsAutomatically = true //支持通过JS打开新窗口
+        webSettings?.loadsImagesAutomatically = true //支持自动加载图片
+        webSettings?.defaultTextEncodingName = "utf-8"//设置编码格式
 
     }
 

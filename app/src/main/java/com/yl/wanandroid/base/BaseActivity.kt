@@ -50,7 +50,6 @@ abstract class BaseActivity<VB : ViewDataBinding>(@LayoutRes layoutID: Int) :
 
     //初始化界面
     open fun initView() {
-//        mMultiplyStateView.showSuccess()
     }
 
     //初始化数据

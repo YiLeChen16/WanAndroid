@@ -12,7 +12,6 @@ import com.yl.wanandroid.ui.fragment.ProjectFragment
 import com.yl.wanandroid.ui.fragment.SystemFragment
 import com.yl.wanandroid.utils.LogUtils
 import dagger.hilt.android.AndroidEntryPoint
-
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
