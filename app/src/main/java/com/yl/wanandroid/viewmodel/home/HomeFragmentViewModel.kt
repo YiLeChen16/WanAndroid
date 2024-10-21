@@ -1,4 +1,4 @@
-package com.yl.wanandroid.viewmodel
+package com.yl.wanandroid.viewmodel.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -20,7 +20,9 @@ class HomeFragmentViewModel : BaseViewModel(){
     //获取仓库模型
     private var homeRepository: HomeRepository? = getRepository()
 
-    var bannerData = MutableLiveData<MutableList<BannerDataBean>?>()
+    //Banner数据
+    var bannerDatas = MutableLiveData<MutableList<BannerDataBean>?>()
+
 
 
     /**
@@ -28,23 +30,25 @@ class HomeFragmentViewModel : BaseViewModel(){
      */
     fun getBannerData(): LiveData<MutableList<BannerDataBean>?> {
         //切换到主线程运行，因为Toast需要在UI线程中调用
-        if (bannerData.value.isNullOrEmpty()) {
+        if (bannerDatas.value.isNullOrEmpty()) {
             launchUI(
                 //请求失败回调
                 errorCallback = { errorCode, errorMsg ->
                     TipsToast.showTips(errorMsg)
                     LogUtils.d(this@HomeFragmentViewModel, "errorCallback-->$errorMsg")
                     changeStateView(ViewStateEnum.VIEW_NET_ERROR)
-                    bannerData.value = null
+                    bannerDatas.value = null
                 },
                 //网络请求
                 requestCall = {
-                    bannerData.value = homeRepository?.getBannerData()
+                    bannerDatas.value = homeRepository?.getBannerData()
                 }
             )
         }
-        return bannerData
+        return bannerDatas
     }
+
+
 
 
     //错误状态视图点击回调函数

@@ -5,4 +5,5 @@ package com.yl.wanandroid
  */
 object Constant {
     const val toWebUrlKey:String = "toWebUrl"
+    const val currentSearchHotKeyOrder:String = "currentSearchHotKeyOrder"
 }

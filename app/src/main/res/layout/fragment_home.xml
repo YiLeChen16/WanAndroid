@@ -8,13 +8,13 @@
         <!--绑定对应的viewModel-->
         <variable
             name="homeViewModel"
-            type="com.yl.wanandroid.viewmodel.HomeFragmentViewModel" />
+            type="com.yl.wanandroid.viewmodel.home.HomeFragmentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.HomeFragment">
+        tools:context=".ui.fragment.home.HomeFragment">
 
         <com.yl.wanandroid.ui.custom.BannerView
             android:id="@+id/banner_view"
@@ -40,18 +40,39 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/guild_line"
             app:layout_constraintStart_toStartOf="parent"
-            android:orientation="horizontal">
-            <TableLayout
+            android:orientation="horizontal"
+            android:padding="@dimen/dp_4">
+            <ImageView
+                android:id="@+id/iv_set_theme"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/iv_change_theme"/>
+            <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab"
                 android:layout_width="@dimen/dp_0"
-                android:layout_height="wrap_content"
-                android:layout_weight="8"/>
-            <Button
-                android:id="@+id/btn_search"
+                android:layout_height="40dp"
+                android:layout_weight="8"
+                android:padding="@dimen/dp_5">
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="专栏"/>
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="推荐"/>
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="问答"/>
+            </com.google.android.material.tabs.TabLayout>
+            <ImageView
+                android:id="@+id/iv_my_collection"
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="搜索"/>
+                android:layout_weight="1"
+                android:src="@drawable/iv_collection"/>
         </LinearLayout>
 
         <androidx.viewpager2.widget.ViewPager2

@@ -1,7 +1,6 @@
 package com.yl.wanandroid.ui.custom
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.Outline
 import android.util.AttributeSet
 import android.util.Log
@@ -15,8 +14,7 @@ import androidx.viewpager.widget.ViewPager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.yl.wanandroid.R
 import com.yl.wanandroid.model.BannerDataBean
-import com.yl.wanandroid.ui.activity.WebViewActivity
-import com.yl.wanandroid.ui.adapter.ViewPagerAdapter
+import com.yl.wanandroid.ui.adapter.BannerViewPagerAdapter
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.SizeUtils
 import dagger.hilt.android.AndroidEntryPoint
@@ -99,7 +97,7 @@ open class BannerView : ConstraintLayout {
     private var isIndicatorSetup = false
 
     @Inject
-    lateinit var mAdapter: ViewPagerAdapter
+    lateinit var mAdapter: BannerViewPagerAdapter
 
     private fun initView(context: Context, attrs: AttributeSet?) {
         //获取自定义属性
@@ -120,9 +118,6 @@ open class BannerView : ConstraintLayout {
         //获取布局控件
         mViewPager = this.findViewById(R.id.view_pager)
         mPointLayout = this.findViewById(R.id.point_Layout)
-
-        //mViewPager.setPageTransformer(true, SeamlessPageTransformer())
-
     }
 
 

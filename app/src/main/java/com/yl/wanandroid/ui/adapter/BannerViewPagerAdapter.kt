@@ -1,7 +1,6 @@
 package com.yl.wanandroid.ui.adapter
 
 import android.content.Intent
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,13 +20,13 @@ import javax.inject.Inject
  * @date 2024/9/9 20:57
  * @version 1.0
  */
-open class ViewPagerAdapter @Inject constructor() : PagerAdapter() {
+open class BannerViewPagerAdapter @Inject constructor() : PagerAdapter() {
 
     private var mBannerData: MutableList<BannerDataBean> = mutableListOf()
     private var listener: OnItemListener? = null
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        LogUtils.d(this@ViewPagerAdapter, "instantiateItem...")
+        LogUtils.d(this@BannerViewPagerAdapter, "instantiateItem...")
         val itemView =
             LayoutInflater.from(container.context).inflate(R.layout.item_pager, container, false)
         val iv = itemView.findViewById<ImageView>(R.id.iv)
@@ -45,12 +44,12 @@ open class ViewPagerAdapter @Inject constructor() : PagerAdapter() {
 
         //设置加载网络图片的大小
         val picUrl: String = mBannerData[realPosition].imagePath
-        LogUtils.d(this@ViewPagerAdapter, "picUrl-->$picUrl")
+        LogUtils.d(this@BannerViewPagerAdapter, "picUrl-->$picUrl")
         Glide.with(container.context).load(picUrl).into(iv)
         iv.scaleType = ImageView.ScaleType.CENTER_CROP
         //为条目设置点击监听事件
         iv.setOnClickListener {
-            LogUtils.d(this@ViewPagerAdapter, "toUrl-->${mBannerData[realPosition].url}")
+            LogUtils.d(this@BannerViewPagerAdapter, "toUrl-->${mBannerData[realPosition].url}")
             val intent = Intent(container.context, WebViewActivity::class.java)
             intent.putExtra(Constant.toWebUrlKey,mBannerData[realPosition].url)//携带数据跳转
             container.context.startActivity(intent)
@@ -65,7 +64,7 @@ open class ViewPagerAdapter @Inject constructor() : PagerAdapter() {
         this.mBannerData.clear()
         this.mBannerData.addAll(bannerData)
         notifyDataSetChanged()
-        LogUtils.d(this@ViewPagerAdapter, "setData-->${mBannerData.size}")
+        LogUtils.d(this@BannerViewPagerAdapter, "setData-->${mBannerData.size}")
     }
 
     override fun getCount(): Int {

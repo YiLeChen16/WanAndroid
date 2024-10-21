@@ -15,4 +15,9 @@
         <attr name="msv_netErrorView" format="reference" />
         <attr name="msv_emptyView" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="SearchBoxView">
+        <attr name="main_color" format="color"/> <!--主颜色-->
+        <attr name="change_duration" format="integer"/> <!--热词轮播时间-->
+    </declare-styleable>
 </resources>
