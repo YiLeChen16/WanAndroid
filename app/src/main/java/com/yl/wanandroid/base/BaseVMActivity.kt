@@ -40,15 +40,10 @@ abstract class BaseVMActivity<VB : ViewDataBinding, VM : BaseViewModel>(@LayoutR
         observeLiveData()
         //监听View类生命周期
         lifecycle.addObserver(mViewModel)
-
-        //设置状态页点击重新加载监听
-        mMultiplyStateView.setOnReLodListener(mViewModel)
-    }
-
-    override fun onResume() {
-        super.onResume()
         //初始化视图状态
         initViewState()
+        //设置状态页点击重新加载监听
+        mMultiplyStateView.setOnReLodListener(mViewModel)
     }
 
     /**

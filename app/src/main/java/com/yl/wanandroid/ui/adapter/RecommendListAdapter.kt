@@ -11,7 +11,7 @@ import com.yl.wanandroid.model.RecommendBlogData
 import javax.inject.Inject
 
 /**
- * @description: 首页推荐列表适配器
+ * @description: 首页推荐列表适配器 使用DataBinding绑定条目
  * @author YL Chen
  * @date 2024/10/20 18:33
  * @version 1.0
@@ -44,9 +44,10 @@ class RecommendListAdapter @Inject constructor() :
         return mRecommendBlogDatas.size
     }
 
-    //绑定数据
+    //使用DataBinding绑定数据
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val binding = DataBindingUtil.getBinding<ItemBlogViewBinding>(holder.itemView)
         binding?.recommendBlogData = mRecommendBlogDatas[position]
+        binding?.executePendingBindings()
     }
 }

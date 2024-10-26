@@ -29,19 +29,12 @@ abstract class BaseVMFragment<VB : ViewDataBinding, VM : BaseViewModel>(@LayoutR
             mBinding.setVariable(getVariableId(), mViewModel)
             mBinding.executePendingBindings()
         }
+        initState()
         initVMData()
         observeLiveData()
         //设置状态页点击重新加载监听
         mMultiplyStateView.setOnReLodListener(mViewModel)
     }
-
-    override fun onResume() {
-        super.onResume()
-        //页面加载完成后展示加载状态视图
-        //mViewModel.changeStateView(ViewStateEnum.VIEW_LOADING)
-        initState()
-    }
-
 
     /**
      * 获取子类xml 的Variable
@@ -56,48 +49,45 @@ abstract class BaseVMFragment<VB : ViewDataBinding, VM : BaseViewModel>(@LayoutR
      */
     private fun initState() {
         mViewModel.mStateViewLiveData.observe(this) {
-            if (isVisible){// 检查 Fragment 是否可见
-                when (it) {
-                    ViewStateEnum.VIEW_LOADING -> {
-                        LogUtils.d(this, "StateLayoutEnum.DATA_LOADING")
-                        dataLoading()
-                    }
+            when (it) {
+                ViewStateEnum.VIEW_LOADING -> {
+                    LogUtils.d(this, "StateLayoutEnum.DATA_LOADING")
+                    dataLoading()
+                }
 
-                    ViewStateEnum.VIEW_EMPTY -> {
-                        LogUtils.d(this, "StateLayoutEnum.DATA_ERROR")
-                        dataEmpty()
-                    }
+                ViewStateEnum.VIEW_EMPTY -> {
+                    LogUtils.d(this, "StateLayoutEnum.DATA_ERROR")
+                    dataEmpty()
+                }
 
 
-                    ViewStateEnum.VIEW_NET_ERROR -> {
-                        LogUtils.d(this, "StateLayoutEnum.NET_ERROR")
-                        netError()
-                    }
+                ViewStateEnum.VIEW_NET_ERROR -> {
+                    LogUtils.d(this, "StateLayoutEnum.NET_ERROR")
+                    netError()
+                }
 
-                    ViewStateEnum.VIEW_LOAD_SUCCESS -> {
-                        LogUtils.d(this, "StateLayoutEnum.LOAD_SUCCESS")
-                        loadSuccess()
-                    }
+                ViewStateEnum.VIEW_LOAD_SUCCESS -> {
+                    LogUtils.d(this, "StateLayoutEnum.LOAD_SUCCESS")
+                    loadSuccess()
+                }
 
-                    ViewStateEnum.VIEW_NONE -> {
-                        LogUtils.d(this, "StateLayoutEnum.NONE")
-                    }
+                ViewStateEnum.VIEW_NONE -> {
+                    LogUtils.d(this, "StateLayoutEnum.NONE")
                 }
             }
-
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        LogUtils.d(this,"onViewCreated-->dataLoading")
+        LogUtils.d(this, "onViewCreated-->dataLoading")
     }
 
     /**
      * 数据加载成功
      */
     open fun loadSuccess() {
-       mMultiplyStateView.showSuccess()
+        mMultiplyStateView.showSuccess()
     }
 
     /**
