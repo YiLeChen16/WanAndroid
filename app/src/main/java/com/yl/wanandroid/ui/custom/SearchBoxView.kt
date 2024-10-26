@@ -2,6 +2,7 @@ package com.yl.wanandroid.ui.custom
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.EditText
@@ -11,6 +12,7 @@ import com.yl.wanandroid.Constant
 import com.yl.wanandroid.R
 import com.yl.wanandroid.model.SearchHotKeyDataBean
 import com.yl.wanandroid.ui.activity.SearchActivity
+import com.yl.wanandroid.utils.LogUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -18,7 +20,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 /**
- * @description: 自定义搜索控件 实现搜索热词提示，点击搜索按钮直接搜索提示的热词，点击搜索框跳转到搜索界面
+ * @description: 自定义搜索控件 实现搜索热词提示，点击搜索按钮直接搜索提示的热词，点击搜索框跳转到搜索界面 TODO::自定义控件双向数据绑定
  * @author YL Chen
  * @date 2024/10/21 13:48
  * @version 1.0
@@ -65,16 +67,28 @@ class SearchBoxView : LinearLayout {
 
         //设置监听事件
         editSearchBox.setOnClickListener{
-            //TODO:跳转到搜索界面
             //将目前搜索框显示的数据也一并传递给搜索界面
+            LogUtils.d(this@SearchBoxView,"editSearchBox.setOnClickListener")
             val intent = Intent(context, SearchActivity::class.java)
-            intent.putExtra(Constant.currentSearchHotKeyOrder,mCurrentSearchHotKeyOrder)
+            val bundle = Bundle()
+            bundle.putBoolean(Constant.isSearch,false)//表示从搜索框跳转过去
+            bundle.putInt(Constant.currentSearchHotKeyOrder,mCurrentSearchHotKeyOrder)//当前推荐搜索关键词的order
+            intent.putExtras(bundle)
             context.startActivity(intent)
         }
 
         searchButton.setOnClickListener{
-            //TODO:搜索搜索框中的热词并跳转到搜索列表
+            LogUtils.d(this@SearchBoxView,"searchButton.setOnClickListener")
 
+            //TODO:搜索搜索框中的热词并跳转到搜索列表
+            //获取搜索框中的关键词
+            //val currentSearchKey = mDatas[mCurrentSearchHotKeyOrder].name
+            val intent = Intent(context, SearchActivity::class.java)
+            val bundle = Bundle()
+            bundle.putBoolean(Constant.isSearch,true)//表示从搜索按钮跳转过去
+            bundle.putInt(Constant.currentSearchHotKeyOrder,mCurrentSearchHotKeyOrder)//当前推荐搜索关键词的order
+            intent.putExtras(bundle)
+            context.startActivity(intent)
         }
     }
 

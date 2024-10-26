@@ -36,15 +36,7 @@ class RecommendFragment :
 
     override fun initView() {
         super.initView()
-        //初始化监听事件
-/*        mBinding.edSearchBox.setOnClickListener{
-            //点击跳转到搜索界面
 
-        }
-        mBinding.btnSearch.setOnClickListener {
-            //点击跳转到搜索界面并搜索
-
-        }*/
     }
 
     override fun initVMData() {

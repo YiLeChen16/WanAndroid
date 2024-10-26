@@ -73,6 +73,7 @@ dependencies {
     implementation(libs.logging.interceptor)
     implementation(libs.recyclerview)
     implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.jsoup)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

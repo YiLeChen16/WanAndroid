@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-       <variable
-        name="searchActivityViewModel"
-        type="com.yl.wanandroid.viewmodel.SearchActivityViewModel" />
+
+        <variable
+            name="searchActivityViewModel"
+            type="com.yl.wanandroid.viewmodel.search.SearchActivityViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,39 +17,42 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/search_box_view"
-            android:layout_width="@dimen/dp_0"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/dp_0"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/dp_10"
             app:layout_constraintBottom_toTopOf="@id/guild_line1"
-            android:layout_marginTop="@dimen/dp_10">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
             <ImageView
                 android:id="@+id/iv_back"
-                android:layout_height="@dimen/dp_0"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:contentDescription="返回按钮"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:src="@drawable/back"
-                app:layout_constraintBottom_toBottomOf="@id/search_box_view"
                 android:padding="@dimen/dp_5"
                 android:scaleType="fitCenter"
-                app:layout_constraintVertical_bias="0.01"/>
+                android:src="@drawable/back"
+                android:onClick="@{()->searchActivityViewModel.onBackClick()}"
+                app:layout_constraintBottom_toBottomOf="@id/search_box_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.01" />
+
             <EditText
                 android:id="@+id/ed_search_box"
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="@dimen/dp_0"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@id/iv_back"
                 android:background="@drawable/shape_search_box1"
-                android:hint="搜点啥捏~"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:textSize="@dimen/sp_16"
-                app:layout_constraintEnd_toStartOf="@id/guild_line1"
-                android:padding="@dimen/dp_6"
                 android:drawableStart="@drawable/icon_search"
-                android:drawablePadding="@dimen/dp_6"/>
+                android:drawablePadding="@dimen/dp_6"
+                android:hint="搜点啥捏~"
+                android:padding="@dimen/dp_6"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/guild_line1"
+                app:layout_constraintStart_toEndOf="@id/iv_back"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guild_line1"
@@ -61,16 +65,17 @@
                 android:id="@+id/btn_search"
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="@dimen/dp_0"
-                app:layout_constraintStart_toEndOf="@id/guild_line1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginStart="@dimen/dp_5"
-                android:text="搜索"
                 android:gravity="center"
-                android:textStyle="bold"
+                android:text="搜索"
                 android:textColor="@color/md_theme_primary"
-                android:textSize="@dimen/sp_16" />
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold"
+                android:onClick="@{()->searchActivityViewModel.onSearchClick()}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guild_line1"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.Guideline
@@ -80,75 +85,39 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.07" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/search_histories"
+        <!--嵌套Fragment  显示多布局      -->
+        <!--        Fragment不支持直接使用DataBinding-->
+        <!--搜索界面Fragment        -->
+        <FrameLayout
+            android:id="@+id/search_fragment_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/dp_10"
-            app:layout_constraintBottom_toTopOf="@+id/recommend_search"
-            app:layout_constraintTop_toBottomOf="@id/guild_line1"
-            app:layout_constraintVertical_bias="0.01">
-
-            <View
-                android:id="@+id/line"
-                android:layout_width="@dimen/dp_5"
-                android:layout_height="@dimen/dp_18"
-                android:background="@color/md_theme_primary"
-                app:layout_constraintBottom_toBottomOf="@id/tv1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv1" />
-
-            <TextView
-                android:id="@+id/tv1"
-                android:layout_width="@dimen/dp_0"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_5"
-                android:text="历史搜索"
-                android:textSize="@dimen/sp_16"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/line"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.35" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/recommend_search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/dp_10"
+            android:layout_height="@dimen/dp_0"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline"
-            app:layout_constraintVertical_bias="0.01">
+            app:layout_constraintTop_toBottomOf="@id/guild_line1"
+            android:visibility="visible">
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/search_fragment"
+                android:name="com.yl.wanandroid.ui.fragment.search.SearchFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </FrameLayout>
 
-            <View
-                android:id="@+id/line2"
-                android:layout_width="@dimen/dp_5"
-                android:layout_height="@dimen/dp_18"
-                android:background="@color/md_theme_primary"
-                app:layout_constraintBottom_toBottomOf="@id/tv2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv2" />
+        <FrameLayout
+            android:id="@+id/search_result_fragment_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guild_line1"
+            android:visibility="gone">
+            <!--搜索结果Fragment-->
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/search_result_fragment"
+                android:name="com.yl.wanandroid.ui.fragment.search.SearchResultFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </FrameLayout>
 
-            <TextView
-                android:id="@+id/tv2"
-                android:layout_width="@dimen/dp_0"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_5"
-                android:text="推荐搜索"
-                android:textSize="@dimen/sp_16"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/line2"
-                app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

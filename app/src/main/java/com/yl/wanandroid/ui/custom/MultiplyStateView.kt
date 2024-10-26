@@ -290,5 +290,22 @@ open class MultiplyStateView : FrameLayout {
         fun onReLoad()
     }
 
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        updateVisibility()
+    }
+
+    private fun updateVisibility() {
+        // 获取父布局的可见性
+        val parentVisibility = (parent as? View)?.visibility ?: View.VISIBLE
+        visibility = parentVisibility
+    }
+
+
+    // 如果需要监听父布局的可见性变化，可以重写这个方法
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        super.onLayout(changed, left, top, right, bottom)
+        updateVisibility()
+    }
 
 }
