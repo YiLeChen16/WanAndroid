@@ -29,7 +29,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_0"
                 android:layout_marginTop="@dimen/dp_10"
-                app:layout_constraintTop_toBottomOf="@id/search_box_view" />
+                app:layout_constraintTop_toBottomOf="@id/search_box_view"
+                android:layout_marginBottom="@dimen/dp_5"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

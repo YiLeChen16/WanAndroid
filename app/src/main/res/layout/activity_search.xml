@@ -94,7 +94,8 @@
             android:layout_height="@dimen/dp_0"
             android:name="com.yl.wanandroid.ui.fragment.search.SearchFragment"
             app:layout_constraintTop_toBottomOf="@id/guild_line1"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="@dimen/dp_5" />
 
         <!--搜索结果Fragment-->
         <androidx.fragment.app.FragmentContainerView
@@ -103,6 +104,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_0"
             app:layout_constraintTop_toBottomOf="@id/guild_line1"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="@dimen/dp_5" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

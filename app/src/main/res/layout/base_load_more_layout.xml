@@ -15,12 +15,14 @@
             android:id="@+id/refreshLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:srlAccentColor="@color/md_theme_onPrimary"
+            app:srlAccentColor="@color/md_theme_surfaceContainer"
             app:srlPrimaryColor="@color/md_theme_primary">
 
             <com.scwang.smart.refresh.header.ClassicsHeader
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:srlAccentColor="@color/md_theme_primary"
+                app:srlPrimaryColor="@color/md_theme_surfaceContainer"/>
 
 
             <!--多状态布局-->
@@ -41,7 +43,8 @@
 
             <com.scwang.smart.refresh.footer.BallPulseFooter
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                />
 
         </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 

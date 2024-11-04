@@ -36,7 +36,8 @@ class HomeFragment :
 
     override fun initView() {
         super.initView()
-        //禁止下拉刷新
+        //禁止刷新
+        mRefreshLayout.setEnableRefresh(false)
         mRefreshLayout.setEnableLoadMore(false)
         //绑定tabLayout和ViewPager2
         homeTabViewPagerAdapter = HomeTabViewPagerAdapter(this)

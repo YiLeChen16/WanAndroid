@@ -23,7 +23,7 @@ import javax.inject.Inject
  */
 class SearchResultListAdapter @Inject constructor(@ActivityContext val context: Context) : RecyclerView.Adapter<SearchResultListAdapter.MyViewHolder>() {
     //搜索结果数据
-    var mSearchResultListDatas: List<SearchData> = mutableListOf()
+    var mSearchResultListDatas: MutableList<SearchData> = mutableListOf()
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -45,7 +45,14 @@ class SearchResultListAdapter @Inject constructor(@ActivityContext val context: 
 
     //暴露方法给外界设置数据
     fun setData(data: List<SearchData>) {
-        this.mSearchResultListDatas = data
+        this.mSearchResultListDatas.clear()
+        this.mSearchResultListDatas.addAll(data)
+        notifyDataSetChanged()
+    }
+
+    //暴露方法给外界添加数据
+    fun addData(data: List<SearchData>) {
+        this.mSearchResultListDatas.addAll(data)
         notifyDataSetChanged()
     }
 

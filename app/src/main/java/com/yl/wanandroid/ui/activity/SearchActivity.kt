@@ -30,6 +30,13 @@ class SearchActivity :
     @Inject
     lateinit var searchResultListAdapter: SearchResultListAdapter//搜索结果列表适配器
 
+    override fun initView() {
+        super.initView()
+        //禁止刷新和加载
+        mRefreshLayout.setEnableRefresh(false)
+        mRefreshLayout.setEnableLoadMore(false)
+    }
+
     override fun initData() {
         //获取跳转传递过来的数据
         val extras = intent.extras
@@ -53,6 +60,7 @@ class SearchActivity :
         mViewModel.isBack.observe(this) {
             //返回上一层
             if (it) {
+                mViewModel.isBack.value = false//将值重置
                 finish()
             }
         }

@@ -24,6 +24,10 @@ class RecommendRepository:BaseRepository() {
     }
 
 
+    /**
+     * 获取搜索关键词数据
+     * @return MutableList<SearchHotKeyDataBean>?
+     */
     suspend fun getSearchHotKeyData():MutableList<SearchHotKeyDataBean>?{
         return requestResponse {
             WanAndroidApiInterface.api.getSearchHotkey()

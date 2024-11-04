@@ -123,12 +123,8 @@ open class BannerView : ConstraintLayout {
 
     //暴露方法给外界设置数据
     open fun setData(bannerData: MutableList<BannerDataBean>) {
-        LogUtils.d(this@BannerView, "setData-->$bannerData")
-        //为ViewPager设置适配器
-//        mAdapter = ViewPagerAdapter()
         mViewPager.adapter = mAdapter
         mAdapter.setData(bannerData)
-        LogUtils.d(this@BannerView, "mAdapter-->${mAdapter}")
         //初始化指示器
         setUpIndicator(mAdapter.count)
         //设置轮播图切换监听
@@ -180,7 +176,6 @@ open class BannerView : ConstraintLayout {
         isIndicatorSetup = true
         mPointLayout.removeAllViews()
         LogUtils.d(this@BannerView, "setUpIndicator--")
-        Log.d("BannerView", "setUpIndicator-->>")
         //添加指示器
         for (i in 0 until count) {
             val point = ImageView(context)

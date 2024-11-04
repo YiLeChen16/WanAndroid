@@ -27,6 +27,13 @@ class SearchFragment :
         }
     }
 
+    override fun initView() {
+        super.initView()
+        //禁止刷新和加载
+        mRefreshLayout.setEnableLoadMore(false)
+        mRefreshLayout.setEnableRefresh(false)
+    }
+
     override fun initVMData() {
         mViewModel.getSearchHotkeyData()//获取从首页搜索按钮跳转过来的搜索关键词数据
     }

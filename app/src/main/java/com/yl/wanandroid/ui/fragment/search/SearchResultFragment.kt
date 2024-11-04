@@ -37,34 +37,59 @@ class SearchResultFragment :
     @Inject
     lateinit var mSearchResultListAdapter: SearchResultListAdapter
 
+    override fun initView() {
+        super.initView()
+        //为列表设置适配器
+        mBinding.searchResultList.adapter = mSearchResultListAdapter
+        //为列表设置布局管理器
+        mBinding.searchResultList.layoutManager = LinearLayoutManager(context)
+
+        //设置刷新框架监听事件
+        mRefreshLayout.setOnRefreshListener {
+            //刷新监听事件
+            mViewModel.getSearchResultData(mViewModel.mCurrentSearchKeyWord.value!!)
+        }
+        mRefreshLayout.setOnLoadMoreListener {
+            //加载更多监听事件
+            mViewModel.loadMoreSearchResultData(mViewModel.mCurrentSearchKeyWord.value!!)
+        }
+    }
+
     override fun initVMData() {
-        if(mViewModel.recommendSearchKey != null){
+        if (mViewModel.recommendSearchKey != null) {
+            //将跳转获取到的关键词赋值到当前搜索关键词
+            mViewModel.mCurrentSearchKeyWord.value = mViewModel.recommendSearchKey
             mViewModel.getSearchResultData(mViewModel.recommendSearchKey!!)
         }
     }
 
     override fun observeLiveData() {
         super.observeLiveData()
-        mViewModel.search_fragment_visibility.observe(this){
-            if (it){
+        mViewModel.search_fragment_visibility.observe(this) {
+            if (it) {
                 //此视图可见
-                mViewModel.searchResultListData.observe(this) {
-                    searchResultDataBean->
+                mViewModel.searchResultListData.observe(this) { searchResultDataBean ->
                     if (searchResultDataBean != null) {
-                        //TODO::
-                        LogUtils.d(this,"mViewModel.searchResultList-->$it")
+                        LogUtils.d(this, "mViewModel.searchResultListData-->$searchResultDataBean")
                         //为适配器装载数据
                         mSearchResultListAdapter.setData(searchResultDataBean.datas)
-                        //为列表设置适配器
-                        mBinding.searchResultList.adapter = mSearchResultListAdapter
-                        //为列表设置布局管理器
-                        mBinding.searchResultList.layoutManager = LinearLayoutManager(context)
+                        //改变当前视图状态
                         mViewModel.changeStateView(ViewStateEnum.VIEW_LOAD_SUCCESS)
+                        mRefreshLayout.finishRefresh()
                     }
                 }
-            }else{
+            } else {
                 //此视图不可见
                 mViewModel.changeStateView(ViewStateEnum.VIEW_NONE)//将视图状态设为NONE
+            }
+        }
+
+        mViewModel.loadMoreSearchResultListData.observe(viewLifecycleOwner) { loadMoreSearchResultDataBean ->
+            if(loadMoreSearchResultDataBean != null){
+                LogUtils.d(this, "mViewModel.loadMoreSearchResultListData-->$loadMoreSearchResultDataBean")
+                //为适配器添加数据
+                mSearchResultListAdapter.addData(loadMoreSearchResultDataBean.datas)
+                mRefreshLayout.finishLoadMore()
             }
         }
 

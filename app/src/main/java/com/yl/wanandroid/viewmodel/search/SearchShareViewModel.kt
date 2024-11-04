@@ -20,18 +20,34 @@ import com.yl.wanandroid.utils.TipsToast
 object SearchShareViewModel : BaseViewModel() {
 
     //从推荐界面搜索按钮点击设置进来的搜索关键词
-    var recommendSearchKey:String? = null
+    var recommendSearchKey: String? = null
 
     private val searchActivityRepository: SearchRepository? = getRepository()
 
+    //此变量用于控制searchFragment与searchResultFragment的可见性
     //true:表示searchResultFragment界面可见
     //false:表示searchFragment界面可见
     var search_fragment_visibility =
-        MutableLiveData<Boolean>()//searchFragment与searchResultFragment的可见性
+        MutableLiveData<Boolean>()
 
 
     //返回按钮状态
     var isBack = MutableLiveData(false)
+
+    //当前搜索关键词
+    var mCurrentSearchKeyWord = MutableLiveData<String>()
+
+    //搜索结果列表数据
+    var searchResultListData = MutableLiveData<SearchResultDataBean?>()
+
+    //加载更多搜索结果列表数据
+    var loadMoreSearchResultListData = MutableLiveData<SearchResultDataBean?>()
+
+    //默认搜索页数
+    var mDefaultPage = 0
+
+    //当前搜索结果页数
+    var mCurrentPage = MutableLiveData(mDefaultPage)
 
     //返回按钮点击事件
     fun onBackClick() {
@@ -44,12 +60,6 @@ object SearchShareViewModel : BaseViewModel() {
         LogUtils.d(this, "onSearchClick--")
     }
 
-    //搜索结果列表数据
-    var searchResultListData = MutableLiveData<SearchResultDataBean?>()
-
-    //当前搜索结果页数
-    var mCurrentPage = 0
-
     /**
      * 获取搜索结果列表数据
      * @param k String 搜索关键词
@@ -58,7 +68,7 @@ object SearchShareViewModel : BaseViewModel() {
     fun getSearchResultData(k: String): LiveData<SearchResultDataBean?> {
         LogUtils.d(this, "getSearchResultData-->k-->$k")
         //不能对要装载的值进行空判断,否则会导致只搜索第一次设置进来的值
-        if(search_fragment_visibility.value == true){//当搜索结果界面可见才进行搜索
+        if (search_fragment_visibility.value == true) {//当搜索结果界面可见才进行搜索
             launchUI(
                 errorCallback = { errorCode, errorMsg ->
                     TipsToast.showTips(errorMsg)
@@ -69,7 +79,7 @@ object SearchShareViewModel : BaseViewModel() {
                 requestCall = {
                     LogUtils.d(this@SearchShareViewModel, "requestCall")
                     searchResultListData.value =
-                        searchActivityRepository?.getSearchResultData(mCurrentPage, k)
+                        searchActivityRepository?.getSearchResultData(mDefaultPage, k)//默认搜索第一页数据
                 }
             )
         }
@@ -82,22 +92,47 @@ object SearchShareViewModel : BaseViewModel() {
 
     //获取搜索热词
     fun getSearchHotkeyData(): LiveData<MutableList<SearchHotKeyDataBean>?> {
-            launchUI(
-                errorCallback = { errorCode, errorMsg ->
-                    TipsToast.showTips(errorMsg)
-                    LogUtils.d(this@SearchShareViewModel, "errorCallback-->$errorMsg")
-                    changeStateView(ViewStateEnum.VIEW_NET_ERROR)
-                    searchHotKeyData.value = null
-                },
-                requestCall = {
-                    searchHotKeyData.value = searchActivityRepository?.getSearchHotKeyData()
-                }
-            )
+        launchUI(
+            errorCallback = { errorCode, errorMsg ->
+                TipsToast.showTips(errorMsg)
+                LogUtils.d(this@SearchShareViewModel, "errorCallback-->$errorMsg")
+                changeStateView(ViewStateEnum.VIEW_NET_ERROR)
+                searchHotKeyData.value = null
+            },
+            requestCall = {
+                searchHotKeyData.value = searchActivityRepository?.getSearchHotKeyData()
+            }
+        )
         return searchHotKeyData
     }
 
 
     override fun onReload() {
 
+    }
+
+    /**
+     * 加载更多搜索结果数据
+     * @param k String
+     */
+    fun loadMoreSearchResultData(k: String): LiveData<SearchResultDataBean?> {
+        //当前页码数+1
+        mCurrentPage.value = mCurrentPage.value?.plus(1)
+        launchUI(
+            errorCallback = { errorCode, errorMsg ->
+                TipsToast.showTips(errorMsg)
+                LogUtils.d(this@SearchShareViewModel, "errorCallback-->$errorMsg")
+                loadMoreSearchResultListData.value = null
+                //还原页码数
+                mCurrentPage.value = mCurrentPage.value?.minus(1)
+            },
+            requestCall = {
+                LogUtils.d(this@SearchShareViewModel, "requestCall")
+                loadMoreSearchResultListData.value =
+                    searchActivityRepository?.getSearchResultData(mCurrentPage.value!!, k)
+            }
+        )
+
+        return loadMoreSearchResultListData
     }
 }

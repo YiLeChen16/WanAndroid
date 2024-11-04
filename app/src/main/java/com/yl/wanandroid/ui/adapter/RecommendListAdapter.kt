@@ -28,13 +28,21 @@ class RecommendListAdapter @Inject constructor(@ActivityContext val context: Con
     //private var listener: OnItemListener? = null
 
 
-    private var mRecommendBlogDatas: List<RecommendBlogData> = mutableListOf()
+    private var mRecommendBlogDatas: MutableList<RecommendBlogData> = mutableListOf()
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     //暴露方法给外界设置数据
     fun setData(recommendBlogDatas: List<RecommendBlogData>) {
-        this.mRecommendBlogDatas = recommendBlogDatas
+        this.mRecommendBlogDatas.clear()//清空数据
+        this.mRecommendBlogDatas.addAll(recommendBlogDatas)
+        notifyDataSetChanged()
+    }
+
+    //暴露方法给外界添加数据
+    fun addData(recommendBlogDatas: List<RecommendBlogData>){
+        this.mRecommendBlogDatas.addAll(recommendBlogDatas)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {

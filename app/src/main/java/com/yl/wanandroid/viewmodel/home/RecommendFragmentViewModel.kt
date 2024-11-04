@@ -17,16 +17,20 @@ import com.yl.wanandroid.utils.TipsToast
  * @date 2024/10/20 16:04
  * @version 1.0
  */
-class RecommendFragmentViewModel:BaseViewModel() {
+class RecommendFragmentViewModel : BaseViewModel() {
 
-    private var recommendRepository:RecommendRepository? = getRepository()
+    private var recommendRepository: RecommendRepository? = getRepository()
 
     //推荐博客数据
     var recommendBlogData = MutableLiveData<RecommendBlogDataBean?>()
+
+    //加载更多推荐博客数据
+    var loadMoreRecommendBlogData = MutableLiveData<RecommendBlogDataBean?>()
+
     //搜索热词数据
     var searchHotKeyData = MutableLiveData<MutableList<SearchHotKeyDataBean>?>()
 
-    //默认加载第一页的数据
+    //默认加载第一页
     val mDefaultPageSize = 0
 
     //记录当前推荐博客加载页数
@@ -38,41 +42,57 @@ class RecommendFragmentViewModel:BaseViewModel() {
      * @return LiveData<RecommendBlogDataBean?>
      */
     fun getRecommendBlogData(): LiveData<RecommendBlogDataBean?> {
-        if (recommendBlogData.value?.datas.isNullOrEmpty()){
-            launchUI(
-                errorCallback = {errorCode,errorMsg->
-                    TipsToast.showTips(errorMsg)
-                    LogUtils.d(this@RecommendFragmentViewModel, "errorCallback-->$errorMsg")
-                    changeStateView(ViewStateEnum.VIEW_NET_ERROR)
-                    recommendBlogData.value = null
-                },
-                requestCall = {
-                    recommendBlogData.value = recommendRepository?.getRecommendBlogData(mCurrentPageSize.value!!)
-                }
-            )
-        }
+        launchUI(
+            errorCallback = { errorCode, errorMsg ->
+                TipsToast.showTips(errorMsg)
+                LogUtils.d(this@RecommendFragmentViewModel, "errorCallback-->$errorMsg")
+                changeStateView(ViewStateEnum.VIEW_NET_ERROR)
+                recommendBlogData.value = null
+            },
+            requestCall = {
+                recommendBlogData.value =
+                    recommendRepository?.getRecommendBlogData(mDefaultPageSize)
+            }
+        )
         return recommendBlogData
     }
 
-    fun getSearchHotkeyData():LiveData<MutableList<SearchHotKeyDataBean>?>{
-        if(searchHotKeyData.value == null){
-            launchUI(
-                errorCallback = {errorCode,errorMsg->
-                    TipsToast.showTips(errorMsg)
-                    LogUtils.d(this@RecommendFragmentViewModel, "errorCallback-->$errorMsg")
-                    changeStateView(ViewStateEnum.VIEW_NET_ERROR)
-                    searchHotKeyData.value = null
-                },
-                requestCall = {
-                    searchHotKeyData.value = recommendRepository?.getSearchHotKeyData()
-                }
-            )
-        }
+    fun getSearchHotkeyData(): LiveData<MutableList<SearchHotKeyDataBean>?> {
+        launchUI(
+            errorCallback = { errorCode, errorMsg ->
+                TipsToast.showTips(errorMsg)
+                LogUtils.d(this@RecommendFragmentViewModel, "errorCallback-->$errorMsg")
+                changeStateView(ViewStateEnum.VIEW_NET_ERROR)
+                searchHotKeyData.value = null
+            },
+            requestCall = {
+                searchHotKeyData.value = recommendRepository?.getSearchHotKeyData()
+            }
+        )
         return searchHotKeyData
     }
 
     //TODO::加载更多推荐博客数据
+    fun loadMoreRecommendBlogData() {
+        //当前页码数+1
+        mCurrentPageSize.value = mCurrentPageSize.value?.plus(1)
 
+        launchUI(
+            errorCallback = { errorCode, errorMsg ->
+                TipsToast.showTips(errorMsg)
+                LogUtils.d(this@RecommendFragmentViewModel, "errorCallback-->$errorMsg")
+                //changeStateView(ViewStateEnum.VIEW_NET_ERROR)
+                loadMoreRecommendBlogData.value = null
+                //请求失败将页码数-1
+                mCurrentPageSize.value = mCurrentPageSize.value?.minus(1)
+            },
+            requestCall = {
+                //网络请求数据
+                loadMoreRecommendBlogData.value =
+                    recommendRepository?.getRecommendBlogData(mCurrentPageSize.value!!)
+            }
+        )
+    }
 
 
     //重新加载数据
