@@ -4,8 +4,8 @@
 
     <data>
         <variable
-            name="searchFragmentViewModel"
-            type="com.yl.wanandroid.viewmodel.search.SearchFragmentViewModel" />
+            name="searchShareViewModel"
+            type="com.yl.wanandroid.viewmodel.search.SearchShareViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

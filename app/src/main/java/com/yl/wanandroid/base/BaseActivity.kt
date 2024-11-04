@@ -5,6 +5,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.yl.wanandroid.R
 import com.yl.wanandroid.ui.custom.MultiplyStateView
 
@@ -19,6 +20,7 @@ import com.yl.wanandroid.ui.custom.MultiplyStateView
 abstract class BaseActivity<VB : ViewDataBinding>(@LayoutRes layoutID: Int) :
     AppCompatActivity() { //此处不能将layoutId传递进去，否则会导致fragment加载但不显示
 
+    open lateinit var mRefreshLayout: SmartRefreshLayout
     open lateinit var mMultiplyStateView: MultiplyStateView
 
     //子view的布局id
@@ -30,18 +32,7 @@ abstract class BaseActivity<VB : ViewDataBinding>(@LayoutRes layoutID: Int) :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //设置基础布局
-        setContentView(R.layout.base_layout)
-        //获取加载成功DataViewBinding
-        mBinding = DataBindingUtil.inflate(
-            layoutInflater,
-            mLayoutId,
-            null,
-            false
-        )
-        //找到基础布局中的自定义多状态View控件
-        mMultiplyStateView = findViewById(R.id.multiply_state_view)
-        // 将加载成功View布局添加到自定义多状态View中
-        mMultiplyStateView.setSuccessView(mBinding.root)
+        setContentView(R.layout.base_load_more_layout)
         //初始化界面
         initView()
         //初始化数据
@@ -50,6 +41,19 @@ abstract class BaseActivity<VB : ViewDataBinding>(@LayoutRes layoutID: Int) :
 
     //初始化界面
     open fun initView() {
+        //获取加载成功DataViewBinding
+        mBinding = DataBindingUtil.inflate(
+            layoutInflater,
+            mLayoutId,
+            null,
+            false
+        )
+        //刷新框架
+        mRefreshLayout = findViewById(R.id.refreshLayout)
+        //找到基础布局中的自定义多状态View控件
+        mMultiplyStateView = findViewById(R.id.multiply_state_view)
+        // 将加载成功View布局添加到自定义多状态View中
+        mMultiplyStateView.setSuccessView(mBinding.root)
     }
 
     //初始化数据

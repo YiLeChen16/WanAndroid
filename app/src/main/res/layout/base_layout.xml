@@ -24,30 +24,6 @@
             app:msv_loadingView="@layout/view_loading">
 
         </com.yl.wanandroid.ui.custom.MultiplyStateView>
-        <!--用于填充状态视图的基础布局-->
-
-        <!--        &lt;!&ndash;  加载成功的布局&ndash;&gt;
-                <FrameLayout
-                android:id="@+id/base_frame_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="visible" />-->
-
-
-        <!--<include
-            android:id="@+id/view_error"
-            layout="@layout/view_net_error"
-            android:visibility="gone" />
-
-        <include
-            android:id="@+id/view_empty"
-            layout="@layout/view_empty"
-            android:visibility="gone" />
-
-        <include
-            android:id="@+id/view_loading"
-            layout="@layout/view_loading"
-            android:visibility="gone" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

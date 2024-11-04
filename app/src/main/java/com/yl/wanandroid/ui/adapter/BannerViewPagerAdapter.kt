@@ -23,7 +23,6 @@ import javax.inject.Inject
 open class BannerViewPagerAdapter @Inject constructor() : PagerAdapter() {
 
     private var mBannerData: MutableList<BannerDataBean> = mutableListOf()
-    private var listener: OnItemListener? = null
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         LogUtils.d(this@BannerViewPagerAdapter, "instantiateItem...")
@@ -82,20 +81,4 @@ open class BannerViewPagerAdapter @Inject constructor() : PagerAdapter() {
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
         container.removeView(`object` as View)
     }
-
-    //提供设置监听回调接口的方法
-    open fun setOnItemListener(listener: OnItemListener) {
-        this.listener = listener
-    }
-
-
-    //定义回调接口
-    interface OnItemListener {
-        /**
-         * 条目被点击
-         * @param toUrl String 条目的跳转url
-         */
-        fun onItemClick(toUrl: String)
-    }
-
 }

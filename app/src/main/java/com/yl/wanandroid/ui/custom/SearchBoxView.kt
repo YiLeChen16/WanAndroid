@@ -34,7 +34,7 @@ class SearchBoxView : LinearLayout {
         initView(context, attrs)
     }
 
-    private var mCurrentSearchHotKeyOrder: Int = 1
+    private lateinit var mCurrentSearchHotKey: String
     private  var job: Job? = null
 
     //搜索热词数据
@@ -72,21 +72,17 @@ class SearchBoxView : LinearLayout {
             val intent = Intent(context, SearchActivity::class.java)
             val bundle = Bundle()
             bundle.putBoolean(Constant.isSearch,false)//表示从搜索框跳转过去
-            bundle.putInt(Constant.currentSearchHotKeyOrder,mCurrentSearchHotKeyOrder)//当前推荐搜索关键词的order
+            bundle.putString(Constant.currentSearchHotKey,mCurrentSearchHotKey)//当前推荐搜索关键词的order
             intent.putExtras(bundle)
             context.startActivity(intent)
         }
 
         searchButton.setOnClickListener{
             LogUtils.d(this@SearchBoxView,"searchButton.setOnClickListener")
-
-            //TODO:搜索搜索框中的热词并跳转到搜索列表
-            //获取搜索框中的关键词
-            //val currentSearchKey = mDatas[mCurrentSearchHotKeyOrder].name
             val intent = Intent(context, SearchActivity::class.java)
             val bundle = Bundle()
             bundle.putBoolean(Constant.isSearch,true)//表示从搜索按钮跳转过去
-            bundle.putInt(Constant.currentSearchHotKeyOrder,mCurrentSearchHotKeyOrder)//当前推荐搜索关键词的order
+            bundle.putString(Constant.currentSearchHotKey,mCurrentSearchHotKey)//当前推荐搜索关键词
             intent.putExtras(bundle)
             context.startActivity(intent)
         }
@@ -105,8 +101,8 @@ class SearchBoxView : LinearLayout {
             while (true) {
                 mDatas.forEach {
                     editSearchBox.hint = it.name
-                    //记录当前轮播的热词id
-                    mCurrentSearchHotKeyOrder = it.order
+                    //记录当前轮播的热词
+                    mCurrentSearchHotKey = it.name
                     delay(mDuration.toLong())
                 }
             }

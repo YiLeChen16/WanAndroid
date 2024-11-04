@@ -2,13 +2,11 @@ package com.yl.wanandroid.model
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import com.yl.wanandroid.R
 import com.yl.wanandroid.utils.LogUtils
 
-
-data class RecommendBlogDataBean(
+data class SearchResultDataBean(
     val curPage: Int,
-    val datas: List<RecommendBlogData>,
+    val datas: List<SearchData>,
     val offset: Int,
     val over: Boolean,
     val pageCount: Int,
@@ -16,7 +14,12 @@ data class RecommendBlogDataBean(
     val total: Int
 )
 
-data class RecommendBlogData(
+data class SearchTag(
+    val name: String,
+    val url: String
+)
+
+data class SearchData(
     val adminAdd: Boolean,
     val apkLink: String,
     val audit: Int,
@@ -24,7 +27,7 @@ data class RecommendBlogData(
     val canEdit: Boolean,
     val chapterId: Int,
     val chapterName: String,
-    var collect: Boolean,
+    val collect: Boolean,
     val courseId: Int,
     val desc: String,
     val descMd: String,
@@ -46,22 +49,14 @@ data class RecommendBlogData(
     val shareUser: String,
     val superChapterId: Int,
     val superChapterName: String,
-    val tags: List<RecommendBlogTag>,
+    val tags: List<SearchTag>,
     val title: String,
     val type: Int,
     val userId: Int,
     val visible: Int,
     val zan: Int
-) {
-
-    private val collectImg: Int = R.drawable.iv_collection
-    private val noCollectImg: Int = R.drawable.iv_no_collection
-
-    companion object {
-        //ImageView的src属性
-        //必须加@JvmStatic注解,否则会导致databinding绑定失效
-        //ImageView本身的src属性并不能直接在xml布局中进行绑定,可能是因为它没有setSrc方法? 所以需要我们自定义setSrc方法并使用@BindingAdapter("android:src")注解告诉DataBInding
-        // 当找不到ImageView中自带的setSrc方法时绑定到此自定义方法
+){
+    companion object{
         @JvmStatic
         @BindingAdapter("android:src")
         fun setSrc(view: ImageView, resId: Int) {
@@ -69,16 +64,9 @@ data class RecommendBlogData(
         }
     }
 
-
     //TODO::
     //条目收藏按钮被点击
     fun onCollectClick(view: ImageView, collect: Boolean,id:Int) {
-        LogUtils.d(this,"RecommendBlogData-->onCollectClick----")
+        LogUtils.d(this,"SearchData-->onCollectClick----")
     }
 }
-
-data class RecommendBlogTag(
-    val name: String,
-    val url: String
-)
-

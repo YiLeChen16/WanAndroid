@@ -14,12 +14,12 @@ import com.yl.wanandroid.repository.base.BaseRepository
 class RecommendRepository:BaseRepository() {
     /**
      * 网络请求首页推荐博客数据
-     * @param pageSize Int
+     * @param page Int
      * @return RecommendBlogDataBean?
      */
-    suspend fun getRecommendBlogData(pageSize:Int): RecommendBlogDataBean?{
+    suspend fun getRecommendBlogData(page:Int): RecommendBlogDataBean?{
         return requestResponse {
-            WanAndroidApiInterface.api.getRecommendBlog(pageSize)
+            WanAndroidApiInterface.api.getRecommendBlog(page)
         }
     }
 

@@ -1,5 +1,6 @@
 package com.yl.wanandroid.viewmodel
 
+import androidx.lifecycle.MutableLiveData
 import com.yl.wanandroid.base.BaseViewModel
 
 /**
@@ -9,8 +10,11 @@ import com.yl.wanandroid.base.BaseViewModel
  * @version 1.0
  */
 class WebActivityViewModel:BaseViewModel() {
-    override fun onReload() {
+    //网页加载url
+    var url = MutableLiveData<String>()
 
+    override fun onReload() {
+        url.value = url.value
     }
 
 }

@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="searchActivityViewModel"
-            type="com.yl.wanandroid.viewmodel.search.SearchActivityViewModel" />
+            name="searchShareViewModel"
+            type="com.yl.wanandroid.viewmodel.search.SearchShareViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,7 +34,7 @@
                 android:scaleType="fitCenter"
                 app:layout_constraintEnd_toStartOf="@id/ed_search_box"
                 android:src="@drawable/back"
-                android:onClick="@{()->searchActivityViewModel.onBackClick()}"
+                android:onClick="@{()->searchShareViewModel.onBackClick()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintVertical_bias="0.01" />
@@ -71,7 +71,7 @@
                 android:textColor="@color/md_theme_primary"
                 android:textSize="@dimen/sp_16"
                 android:textStyle="bold"
-                android:onClick="@{()->searchActivityViewModel.onSearchClick()}"
+                android:onClick="@{()->searchShareViewModel.onSearchClick()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guild_line1"
@@ -88,36 +88,21 @@
         <!--嵌套Fragment  显示多布局      -->
         <!--        Fragment不支持直接使用DataBinding-->
         <!--搜索界面Fragment        -->
-        <FrameLayout
-            android:id="@+id/search_fragment_layout"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/search_fragment"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_0"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:name="com.yl.wanandroid.ui.fragment.search.SearchFragment"
             app:layout_constraintTop_toBottomOf="@id/guild_line1"
-            android:visibility="gone">
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/search_fragment"
-                android:name="com.yl.wanandroid.ui.fragment.search.SearchFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </FrameLayout>
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
-        <FrameLayout
-            android:id="@+id/search_result_fragment_layout"
+        <!--搜索结果Fragment-->
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/search_result_fragment"
+            android:name="com.yl.wanandroid.ui.fragment.search.SearchResultFragment"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_0"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/guild_line1"
-            android:visibility="gone">
-            <!--搜索结果Fragment-->
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/search_result_fragment"
-                android:name="com.yl.wanandroid.ui.fragment.search.SearchResultFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </FrameLayout>
-
-
-
+            app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

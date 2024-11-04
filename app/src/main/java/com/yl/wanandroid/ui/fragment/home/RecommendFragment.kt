@@ -34,11 +34,6 @@ class RecommendFragment :
 
     @Inject lateinit var recommendListAdapter:RecommendListAdapter
 
-    override fun initView() {
-        super.initView()
-
-    }
-
     override fun initVMData() {
         //获取推荐博客数据
         mViewModel.getRecommendBlogData()

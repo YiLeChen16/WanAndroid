@@ -3,12 +3,16 @@ package com.yl.wanandroid.network
 import com.yl.wanandroid.model.BannerDataBean
 import com.yl.wanandroid.model.RecommendBlogDataBean
 import com.yl.wanandroid.model.SearchHotKeyDataBean
+import com.yl.wanandroid.model.SearchResultDataBean
 import com.yl.wanandroid.network.result.BaseResult
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -60,6 +64,13 @@ interface WanAndroidApiInterface {
      * @return BaseResult<MutableList<SearchHotKeyDataBean>>?
      */
     @GET("/hotkey/json")
-    suspend fun getSearchHotkey():BaseResult<MutableList<SearchHotKeyDataBean>>?
+    suspend fun getSearchHotkey(): BaseResult<MutableList<SearchHotKeyDataBean>>?
+
+    @POST("/article/query/{page}/json")
+    @FormUrlEncoded
+    suspend fun getSearchResult(
+        @Path("page") page: Int,
+        @Field("k") k: String
+    ): BaseResult<SearchResultDataBean>?
 
 }

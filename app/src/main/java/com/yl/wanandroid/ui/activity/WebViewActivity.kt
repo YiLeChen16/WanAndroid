@@ -1,6 +1,11 @@
 package com.yl.wanandroid.ui.activity
 
+import android.os.Build
+import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebResourceError
+import android.webkit.WebResourceRequest
+import android.webkit.WebResourceResponse
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -25,10 +30,22 @@ class WebViewActivity :
 
     override fun initView() {
         super.initView()
+        //禁止下拉上拉加载
+        mRefreshLayout.setEnableLoadMore(false)
+        mRefreshLayout.setEnableRefresh(false)
         mWebView = mBinding.webView
         val webSettings = mWebView?.settings
         webSettings?.javaScriptEnabled = true
         webSettings?.loadsImagesAutomatically = true
+        webSettings?.domStorageEnabled = true;//不设置会导致微信公众号图片资源无法加载
+        //允许该网页中http和https混合使用，Android 5之后默认不允许https安全站点去加载http不安全的资源
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            webSettings?.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        }
+        webSettings?.setBlockNetworkImage(false);
+
+
+
 
         //设置自适应屏幕，两者合用
         webSettings?.useWideViewPort = true //将图片调整到适合webview的大小
@@ -58,21 +75,34 @@ class WebViewActivity :
             //加载空界面
             mViewModel.changeStateView(ViewStateEnum.VIEW_EMPTY)
         } else {
+            //将跳转过来的url数据存储到ViewModel中
+            mViewModel.url.value = url
             //加载网页
-            LogUtils.d(this, "mWebView-->$mWebView")
             mWebView?.loadUrl(url)
         }
         mWebView?.webViewClient = object : WebViewClient() {
-            override fun onPageFinished(view: WebView, url: String) {
+
+            //设置在webView点击打开的新网页在当前界面显示,而不跳转到新的浏览器中
+            /*            override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
+                            view?.loadUrl(url!!)
+                            return true
+                        }*/
+
+            //在页面加载完毕且用户可见后才更换视图状态
+            override fun onPageCommitVisible(view: WebView?, url: String?) {
                 //更改视图状态
-                LogUtils.d(this@WebViewActivity, "onPageFinished---")
                 mViewModel.changeStateView(ViewStateEnum.VIEW_LOAD_SUCCESS)
             }
+
         }
     }
 
     override fun initVMData() {
-
+        /*        mViewModel.url.observe(this) {
+                    if (it != null) {
+                        mWebView?.loadUrl(it)
+                    }
+                }*/
     }
 
     //在 Activity 销毁（ WebView ）的时候，先让 WebView 加载null内容，然后移除 WebView，再销毁 WebView，最后置空。避免WebView内存泄漏

@@ -21,8 +21,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class HomeFragment :
     BaseVMFragment<FragmentHomeBinding, HomeFragmentViewModel>(R.layout.fragment_home) {
-
-
     companion object {
         private var homeFragment: HomeFragment? = null
         fun newInstance(): HomeFragment {
@@ -38,6 +36,8 @@ class HomeFragment :
 
     override fun initView() {
         super.initView()
+        //禁止下拉刷新
+        mRefreshLayout.setEnableLoadMore(false)
         //绑定tabLayout和ViewPager2
         homeTabViewPagerAdapter = HomeTabViewPagerAdapter(this)
         mBinding.tabViewPager.adapter = homeTabViewPagerAdapter

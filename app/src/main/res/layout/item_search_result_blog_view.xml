@@ -1,96 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/dp_2"
-    android:layout_marginBottom="@dimen/dp_2"
-    android:background="@color/md_theme_surfaceContainer"
-    android:padding="@dimen/dp_10">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/publish_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2024-10-13 22:56"
-        android:textSize="@dimen/sp_12"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/collection" />
+    <data>
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="@dimen/dp_10"
+        <import type="android.text.Html" />
 
-        android:paddingTop="@dimen/dp_8"
-        android:paddingEnd="@dimen/dp_8"
-        android:paddingBottom="@dimen/dp_10"
-        android:text="大前端：如何突破动态化容器的天花板？"
-        android:textSize="@dimen/sp_16"
-        android:textStyle="bold"
-        app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <import
+            alias="textUtlis"
+            type="android.text.TextUtils" />
 
-    <LinearLayout
-        android:id="@+id/layout1"
+        <import type="com.yl.wanandroid.R" />
+
+        <import type="android.widget.ImageView" />
+        <!--使用databinding绑定-->
+        <variable
+            name="searchData"
+            type="com.yl.wanandroid.model.SearchData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="@dimen/dp_5"
-        android:paddingTop="@dimen/dp_10"
-        android:paddingBottom="@dimen/dp_5"
-        app:layout_constraintTop_toBottomOf="@id/title">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="@dimen/dp_0"
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3">
+            android:layout_marginStart="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_5"
+            app:cardBackgroundColor="@color/md_theme_surfaceContainer"
+            app:cardCornerRadius="@dimen/dp_10"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/tv_author_or_shareUser"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="作者："
-                android:textSize="@dimen/sp_12" />
+                android:layout_marginTop="@dimen/dp_2"
+                android:layout_marginBottom="@dimen/dp_2"
+                android:background="@color/md_theme_surfaceContainer"
+                android:padding="@dimen/dp_10">
 
-            <TextView
-                android:id="@+id/author"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="美团技术团队"
-                android:textSize="@dimen/sp_12" />
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/publish_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{searchData.niceShareDate}"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/collection" />
 
-        <LinearLayout
-            android:layout_width="@dimen/dp_0"
-            android:layout_height="wrap_content"
-            android:layout_weight="3">
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:letterSpacing="0.15"
+                    android:paddingStart="@dimen/dp_10"
+                    android:paddingTop="@dimen/dp_8"
+                    android:paddingEnd="@dimen/dp_8"
+                    android:paddingBottom="@dimen/dp_10"
+                    android:lineSpacingExtra="@dimen/dp_5"
+                    android:text="@{Html.fromHtml(searchData.title,Html.FROM_HTML_MODE_COMPACT).toString()}"
+                    android:textSize="@dimen/sp_16"
+                    android:textStyle="bold"
+                    app:layout_constraintHorizontal_bias="0.8"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="分类："
-                android:textSize="@dimen/sp_12" />
+                <LinearLayout
+                    android:id="@+id/layout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/dp_5"
+                    android:paddingTop="@dimen/dp_10"
+                    android:paddingBottom="@dimen/dp_5"
+                    app:layout_constraintTop_toBottomOf="@id/title">
 
-            <TextView
-                android:id="@+id/classify"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="公众号"
-                android:textSize="@dimen/sp_12" />
-        </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3">
 
-    </LinearLayout>
+                        <TextView
+                            android:id="@+id/tv_author_or_shareUser"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text='@{textUtlis.isEmpty(searchData.author)?"分享者: ":"作者: "}'
+                            android:textSize="@dimen/sp_12" />
 
-    <ImageView
-        android:id="@+id/collection"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingEnd="@dimen/dp_5"
-        android:src="@drawable/iv_collection"
-        app:layout_constraintBottom_toBottomOf="@id/layout1"
-        app:layout_constraintEnd_toEndOf="parent" />
+                        <TextView
+                            android:id="@+id/author"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:letterSpacing="0.15"
+                            android:text="@{searchData.author.isBlank()?searchData.shareUser:searchData.author}"
+                            android:textSize="@dimen/sp_12" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="分类："
+                            android:textSize="@dimen/sp_12" />
+
+                        <TextView
+                            android:id="@+id/classify"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{searchData.superChapterName}"
+                            android:letterSpacing="0.15"
+                            android:textSize="@dimen/sp_12" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/collection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{(view)->searchData.onCollectClick((ImageView)view,searchData.collect,searchData.id)}"
+                    android:paddingEnd="@dimen/dp_5"
+                    android:src="@{searchData.collect?R.drawable.iv_collection:R.drawable.iv_no_collection}"
+                    app:layout_constraintBottom_toBottomOf="@id/layout1"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

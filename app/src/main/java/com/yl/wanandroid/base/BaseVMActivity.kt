@@ -24,9 +24,10 @@ abstract class BaseVMActivity<VB : ViewDataBinding, VM : BaseViewModel>(@LayoutR
      * 获取对应的ViewModel，并初始化数据
      */
     override fun initData() {
-        dataLoading()
+        //dataLoading()
         mViewModel = getViewModel()!!
         //将子类的ViewModel和dataBinding联系起来，实现界面数据的自动更新
+        //将xml布局对应的viewModel对象赋值到xml布局中声明的viewModel变量 即实现如:mBinding.viewModel = ViewModel() 的效果
         val variableId = getVariableId()
         if (variableId != -1) {
             mBinding.setVariable(variableId, mViewModel)
@@ -34,14 +35,14 @@ abstract class BaseVMActivity<VB : ViewDataBinding, VM : BaseViewModel>(@LayoutR
             //即Data Binding 会立即将 ViewModel 的属性和方法更新到布局文件中
             mBinding.executePendingBindings()
         }
+        //初始化视图状态
+        initViewState()
         //初始化ViewModel数据
         initVMData()
         //监听liveData
         observeLiveData()
         //监听View类生命周期
         lifecycle.addObserver(mViewModel)
-        //初始化视图状态
-        initViewState()
         //设置状态页点击重新加载监听
         mMultiplyStateView.setOnReLodListener(mViewModel)
     }
@@ -126,6 +127,7 @@ abstract class BaseVMActivity<VB : ViewDataBinding, VM : BaseViewModel>(@LayoutR
      * 获取xml绑定的variable
      * @return Int
      */
+    //子类通过重写此方法返回子类对应xml文件中绑定的viewModel变量的id
     open fun getVariableId(): Int {
         return -1
     }

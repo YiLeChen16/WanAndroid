@@ -23,6 +23,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
      * 初始化界面
      */
     override fun initView() {
+        super.initView()
+        //静止上拉刷新和下拉刷新
+        mRefreshLayout.setEnableRefresh(false)
+        mRefreshLayout.setEnableLoadMore(false)
         //导航
         val homeFragment = HomeFragment.newInstance()
         val projectFragment = ProjectFragment.newInstance()
@@ -82,8 +86,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         })
         //禁用viewPager的滑动，避免和首页的viewpager滑动冲突
         mBinding.fragmentContainer.isUserInputEnabled = false
-        super.initView()
         mMultiplyStateView.showSuccess()
+
     }
 
 
