@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import com.yl.wanandroid.R
 import com.yl.wanandroid.utils.LogUtils
@@ -153,6 +152,12 @@ class FlowLayoutView(
 
     //暴露方法给外界设置数据
     fun setData(data: List<String>) {
+        if(data.isNotEmpty()){
+            visibility = VISIBLE
+        }else{
+            //表示当前没有历史搜索记录
+            visibility = GONE
+        }
         LogUtils.d(this,"last_data-->${mSearchHistoriesData}")
         mSearchHistoriesData.clear()
         //移除全部历史记录view
@@ -224,10 +229,6 @@ class FlowLayoutView(
         //测量子View
         mSearchHistoriesHead = getChildAt(0)
         measureChild(mSearchHistoriesHead, widthMeasureSpec, heightMeasureSpec)
-        if(childCount == 1){
-            //表示当前没有历史搜索记录
-            isGone = true
-        }
         //测量存放区子View的大小并计算共占多少行
         for (i in 1 until childCount) {//从1开始
             //获取子View视图

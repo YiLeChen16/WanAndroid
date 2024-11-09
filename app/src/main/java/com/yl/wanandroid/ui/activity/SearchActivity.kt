@@ -1,21 +1,25 @@
 package com.yl.wanandroid.ui.activity
 
+import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import androidx.core.view.isVisible
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import android.widget.TextView.OnEditorActionListener
 import com.yl.wanandroid.BR
 import com.yl.wanandroid.Constant
 import com.yl.wanandroid.R
 import com.yl.wanandroid.base.BaseVMActivity
-import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.databinding.ActivitySearchBinding
+import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.ui.adapter.SearchResultListAdapter
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.viewmodel.search.SearchShareViewModel
 import com.yl.wanandroid.viewmodel.search.SearchShareViewModel.search_fragment_visibility
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+
 
 /**
  * @description: 搜索界面Activity
@@ -39,28 +43,7 @@ class SearchActivity :
         mRefreshLayout.setEnableRefresh(false)
         mRefreshLayout.setEnableLoadMore(false)
 
-        //为输入框设置监听事件
-        //TODO::
-        mBinding.edSearchBox.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                mViewModel.editData.value = s.toString()//更新当前搜索关键词
-                if (s.toString().isNotEmpty()) {
-                    //当前搜索框有输入数据
-                    mBinding.btnCancelSearch.visibility = View.VISIBLE//取消搜索按钮 可见
-                } else {
-                    //当前搜索框没有输入数据
-                    mBinding.btnCancelSearch.visibility = View.INVISIBLE//取消搜索按钮 不可见
-                }
-            }
-        })
     }
 
     override fun initData() {
@@ -82,6 +65,41 @@ class SearchActivity :
         mViewModel.mCurrentSearchKeyWord.value = defaultHintKeyword
         mViewModel.searchHintKeyWord = defaultHintKeyword.toString()
         mViewModel.changeStateView(ViewStateEnum.VIEW_LOAD_SUCCESS)
+
+        //为输入框设置监听事件
+        mBinding.edSearchBox.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                mViewModel.editData.value = s.toString()//更新当前搜索关键词
+                if (s.toString().isNotEmpty()) {
+                    //当前搜索框有输入数据
+                    mBinding.btnCancelSearch.visibility = View.VISIBLE//取消搜索按钮 可见
+                } else {
+                    //当前搜索框没有输入数据
+                    mBinding.btnCancelSearch.visibility = View.INVISIBLE//取消搜索按钮 不可见
+                }
+            }
+        })
+        //在该Editview获得焦点的时候将键盘的“回车”键改为“搜索”
+        mBinding.edSearchBox.imeOptions = EditorInfo.IME_ACTION_SEARCH
+        mBinding.edSearchBox.setSingleLine(true)
+
+        mBinding.edSearchBox.setOnEditorActionListener(OnEditorActionListener { textView, actionId, keyEvent ->
+            if ((actionId == EditorInfo.IME_ACTION_UNSPECIFIED || actionId == EditorInfo.IME_ACTION_SEARCH) && keyEvent != null) {
+                //点击搜索要做的操作
+                mViewModel.search_fragment_visibility.value = true
+                return@OnEditorActionListener true
+            }
+            false
+        })
+
     }
 
     override fun observeLiveData() {
@@ -100,6 +118,10 @@ class SearchActivity :
             LogUtils.d(this, "it-->$it")
             //显示搜索结果列表fragment
             if (it) {
+                //收起键盘
+                val inputMethodManager =
+                    getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(window.decorView.windowToken,0)
                 //显示搜索结果列表
                 showSearchResult()
                 //将当前搜索关键词装载到搜索框中

@@ -79,7 +79,7 @@ class SearchResultFragment :
                 }
                 //监听当前搜索词
                 mViewModel.mCurrentSearchKeyWord.observe(this){
-                    //设置视图加载状态
+                    //设置视图加载状态:解决列表闪烁问题
                     mViewModel.changeStateView(ViewStateEnum.VIEW_LOADING)
                     mViewModel.getSearchResultData(it)//搜索
                 }
