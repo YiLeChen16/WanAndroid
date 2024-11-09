@@ -2,7 +2,7 @@ package com.yl.wanandroid.ui.fragment.home
 
 import com.yl.wanandroid.R
 import com.yl.wanandroid.base.BaseVMFragment
-import com.yl.wanandroid.base.ViewStateEnum
+import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.databinding.FragmentWendaBinding
 import com.yl.wanandroid.viewmodel.home.WendaFragmentViewModel
 import kotlinx.coroutines.CoroutineScope

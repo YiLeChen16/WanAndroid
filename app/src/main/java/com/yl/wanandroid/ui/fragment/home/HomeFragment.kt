@@ -4,7 +4,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.yl.wanandroid.R
 import com.yl.wanandroid.base.BaseVMFragment
-import com.yl.wanandroid.base.ViewStateEnum
+import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.databinding.FragmentHomeBinding
 import com.yl.wanandroid.ui.adapter.HomeTabViewPagerAdapter
 import com.yl.wanandroid.ui.custom.BannerView

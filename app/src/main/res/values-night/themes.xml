@@ -1,7 +1,7 @@
 <resources>
     <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="colorPrimary">@color/md_theme_primary</item>
-        <item name="android:statusBarColor">@color/night_md_theme_background</item>
+        <item name="android:statusBarColor">@color/md_theme_background</item>
         <!-- 默认 Button,TextView的文字颜色 -->
         <item name="android:textColor">@color/md_theme_onSurface</item>
         <item name="colorOnPrimary">@color/md_theme_onPrimary</item>

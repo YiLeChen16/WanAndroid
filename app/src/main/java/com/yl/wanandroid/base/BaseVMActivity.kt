@@ -5,6 +5,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.yl.wanandroid.R
+import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.ui.custom.MyLoadingView
 import com.yl.wanandroid.utils.LogUtils
 import java.lang.reflect.ParameterizedType

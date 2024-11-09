@@ -21,7 +21,8 @@ import javax.inject.Inject
  * @date 2024/11/1 11:18
  * @version 1.0
  */
-class SearchResultListAdapter @Inject constructor(@ActivityContext val context: Context) : RecyclerView.Adapter<SearchResultListAdapter.MyViewHolder>() {
+class SearchResultListAdapter @Inject constructor(@ActivityContext val context: Context) :
+    RecyclerView.Adapter<SearchResultListAdapter.MyViewHolder>() {
     //搜索结果数据
     var mSearchResultListDatas: MutableList<SearchData> = mutableListOf()
 
@@ -50,10 +51,18 @@ class SearchResultListAdapter @Inject constructor(@ActivityContext val context: 
         notifyDataSetChanged()
     }
 
+    //暴露方法给外界清空数据
+    fun clearData(){
+        mSearchResultListDatas.clear()
+
+        notifyDataSetChanged()
+    }
+
     //暴露方法给外界添加数据
     fun addData(data: List<SearchData>) {
+        val oldIndex = mSearchResultListDatas.size - 1
         this.mSearchResultListDatas.addAll(data)
-        notifyDataSetChanged()
+        notifyItemRangeChanged(oldIndex,mSearchResultListDatas.size)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
@@ -62,7 +71,7 @@ class SearchResultListAdapter @Inject constructor(@ActivityContext val context: 
         binding?.searchData = mSearchResultListDatas[position]
         binding?.executePendingBindings()//需执行此句以更新界面,否则界面会闪烁
         //设置条目点击跳转
-        holder.itemView.setOnClickListener{
+        holder.itemView.setOnClickListener {
             //跳转到webViewActivity界面
             val intent = Intent(context, WebViewActivity::class.java)
             intent.putExtra(Constant.toWebUrlKey, mSearchResultListDatas[position].link)//携带数据跳转

@@ -127,11 +127,11 @@
     </style>-->
 
     <!--    夜间主题-->
-    <style name="Theme.WanAndroid.Night" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+<!--    <style name="Theme.WanAndroid.Night" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/night_md_theme_primary</item>
         <item name="colorOnPrimary">@color/night_md_theme_onPrimary</item>
         <item name="android:statusBarColor">@color/night_md_theme_background</item>
-        <!-- 默认 Button,TextView的文字颜色 -->
+        &lt;!&ndash; 默认 Button,TextView的文字颜色 &ndash;&gt;
         <item name="android:textColor">@color/md_theme_onPrimary_highContrast</item>
         <item name="colorPrimaryContainer">@color/night_md_theme_primaryContainer</item>
         <item name="colorOnPrimaryContainer">@color/night_md_theme_onPrimaryContainer</item>
@@ -177,6 +177,6 @@
         <item name="colorSurfaceContainer">@color/night_md_theme_surfaceContainer</item>
         <item name="colorSurfaceContainerHigh">@color/night_md_theme_surfaceContainerHigh</item>
         <item name="colorSurfaceContainerHighest">@color/night_md_theme_surfaceContainerHighest</item>
-    </style>
+    </style>-->
 
 </resources>

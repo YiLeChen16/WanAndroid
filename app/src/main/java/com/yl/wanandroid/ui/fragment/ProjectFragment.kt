@@ -2,7 +2,7 @@ package com.yl.wanandroid.ui.fragment
 
 import com.yl.wanandroid.R
 import com.yl.wanandroid.base.BaseVMFragment
-import com.yl.wanandroid.base.ViewStateEnum
+import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.databinding.FragmentProjectBinding
 import com.yl.wanandroid.viewmodel.ProjectFragmentViewModel
 import kotlinx.coroutines.CoroutineScope

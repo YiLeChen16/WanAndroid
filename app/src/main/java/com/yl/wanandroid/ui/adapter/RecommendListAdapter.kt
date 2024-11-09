@@ -41,8 +41,9 @@ class RecommendListAdapter @Inject constructor(@ActivityContext val context: Con
 
     //暴露方法给外界添加数据
     fun addData(recommendBlogDatas: List<RecommendBlogData>){
+        val oldIndex = mRecommendBlogDatas.size - 1
         this.mRecommendBlogDatas.addAll(recommendBlogDatas)
-        notifyDataSetChanged()
+        notifyItemRangeChanged(oldIndex,recommendBlogDatas.size)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {

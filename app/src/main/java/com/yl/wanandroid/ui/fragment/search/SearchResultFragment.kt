@@ -4,9 +4,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.yl.wanandroid.BR
 import com.yl.wanandroid.R
 import com.yl.wanandroid.base.BaseVMFragment
-import com.yl.wanandroid.base.ViewStateEnum
+import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.databinding.FragmentSearchResultBinding
-import com.yl.wanandroid.model.SearchResultDataBean
 import com.yl.wanandroid.ui.adapter.SearchResultListAdapter
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.viewmodel.search.SearchShareViewModel
@@ -43,7 +42,6 @@ class SearchResultFragment :
         mBinding.searchResultList.adapter = mSearchResultListAdapter
         //为列表设置布局管理器
         mBinding.searchResultList.layoutManager = LinearLayoutManager(context)
-
         //设置刷新框架监听事件
         mRefreshLayout.setOnRefreshListener {
             //刷新监听事件
@@ -51,15 +49,14 @@ class SearchResultFragment :
         }
         mRefreshLayout.setOnLoadMoreListener {
             //加载更多监听事件
-            mViewModel.loadMoreSearchResultData(mViewModel.mCurrentSearchKeyWord.value!!)
+            mViewModel.loadMoreSearchResultData()
         }
     }
 
     override fun initVMData() {
-        if (mViewModel.recommendSearchKey != null) {
+        if (mViewModel.searchHintKeyWord.isNotEmpty()) {
             //将跳转获取到的关键词赋值到当前搜索关键词
-            mViewModel.mCurrentSearchKeyWord.value = mViewModel.recommendSearchKey
-            mViewModel.getSearchResultData(mViewModel.recommendSearchKey!!)
+            mViewModel.getSearchResultData(mViewModel.searchHintKeyWord)
         }
     }
 
@@ -76,7 +73,15 @@ class SearchResultFragment :
                         //改变当前视图状态
                         mViewModel.changeStateView(ViewStateEnum.VIEW_LOAD_SUCCESS)
                         mRefreshLayout.finishRefresh()
+                    }else{
+                        mViewModel.changeStateView(ViewStateEnum.VIEW_EMPTY)
                     }
+                }
+                //监听当前搜索词
+                mViewModel.mCurrentSearchKeyWord.observe(this){
+                    //设置视图加载状态
+                    mViewModel.changeStateView(ViewStateEnum.VIEW_LOADING)
+                    mViewModel.getSearchResultData(it)//搜索
                 }
             } else {
                 //此视图不可见

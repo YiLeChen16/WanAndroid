@@ -24,4 +24,11 @@
     <declare-styleable name="ImageView">
         <attr name="imgSrc" format="integer"/><!--图像资源-->
     </declare-styleable>
+    
+    <declare-styleable name="FlowLayoutView">
+        <attr name="lineSpac" format="integer"/><!--行间距-->
+        <attr name="columnSpac" format="integer"/><!--列间距-->
+        <attr name="maxLines" format="integer"/><!--显示最大行数-->
+        <attr name="realMaxLines" format="integer"/><!--实际最大行数,即展开后达到的最大行数-->
+    </declare-styleable>
 </resources>

@@ -66,6 +66,7 @@ class SearchBoxView : LinearLayout {
         searchButton = this.findViewById(R.id.btn_search)
 
         //设置监听事件
+        //此按钮被点击: 跳转到SearchActivity界面,展示SearchFragment界面 + 将携带的数据设置为hint
         editSearchBox.setOnClickListener{
             //将目前搜索框显示的数据也一并传递给搜索界面
             LogUtils.d(this@SearchBoxView,"editSearchBox.setOnClickListener")
@@ -77,6 +78,7 @@ class SearchBoxView : LinearLayout {
             context.startActivity(intent)
         }
 
+        //此按钮被点击: 跳转到SearchActivity界面,展示SearchResultFragment界面 + 将携带的数据设置为hint + 搜索携带的数据
         searchButton.setOnClickListener{
             LogUtils.d(this@SearchBoxView,"searchButton.setOnClickListener")
             val intent = Intent(context, SearchActivity::class.java)

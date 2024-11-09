@@ -3,6 +3,7 @@ package com.yl.wanandroid.base
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.network.exeception.ExceptionHandler
 import com.yl.wanandroid.ui.custom.MultiplyStateView
 import com.yl.wanandroid.utils.LogUtils

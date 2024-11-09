@@ -1,4 +1,4 @@
-package com.yl.wanandroid.base
+package com.yl.wanandroid.model
 
 /**
  * @description: 视图状态枚举类

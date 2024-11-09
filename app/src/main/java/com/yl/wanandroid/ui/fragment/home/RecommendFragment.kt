@@ -4,7 +4,7 @@ package com.yl.wanandroid.ui.fragment.home
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yl.wanandroid.R
 import com.yl.wanandroid.base.BaseVMFragment
-import com.yl.wanandroid.base.ViewStateEnum
+import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.databinding.FragmentRecommendBinding
 import com.yl.wanandroid.ui.adapter.RecommendListAdapter
 import com.yl.wanandroid.ui.custom.SearchBoxView
@@ -91,9 +91,15 @@ class RecommendFragment :
         //观察并设置加载更多博客数据
         mViewModel.loadMoreRecommendBlogData.observe(viewLifecycleOwner) { loadMoreRecommendBlogData ->
             if (loadMoreRecommendBlogData != null) {
-                recommendListAdapter.addData(loadMoreRecommendBlogData.datas)
                 mRefreshLayout.finishLoadMore()
-                TipsToast.showTips("加载成功~")
+                if (loadMoreRecommendBlogData.curPage == loadMoreRecommendBlogData.pageCount + 1){
+                    //没有数据的一页
+                    TipsToast.showTips("当前页为最后一页啦~")
+                    mRefreshLayout.finishLoadMoreWithNoMoreData()//标记当前没有更多数据了
+                }else{
+                    recommendListAdapter.addData(loadMoreRecommendBlogData.datas)
+                    TipsToast.showTips("加载成功~")
+                }
             }
         }
     }

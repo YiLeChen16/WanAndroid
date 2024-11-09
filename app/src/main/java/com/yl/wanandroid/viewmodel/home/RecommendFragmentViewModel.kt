@@ -1,10 +1,9 @@
 package com.yl.wanandroid.viewmodel.home
 
-import android.widget.ImageView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.yl.wanandroid.base.BaseViewModel
-import com.yl.wanandroid.base.ViewStateEnum
+import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.model.RecommendBlogDataBean
 import com.yl.wanandroid.model.SearchHotKeyDataBean
 import com.yl.wanandroid.repository.RecommendRepository
@@ -31,10 +30,10 @@ class RecommendFragmentViewModel : BaseViewModel() {
     var searchHotKeyData = MutableLiveData<MutableList<SearchHotKeyDataBean>?>()
 
     //默认加载第一页
-    val mDefaultPageSize = 0
+    val mDefaultPage = 0
 
     //记录当前推荐博客加载页数
-    private var mCurrentPageSize = MutableLiveData(mDefaultPageSize)//初始化为0
+    var mCurrentPage = MutableLiveData(mDefaultPage)//初始化为0
 
     /**
      * 获取首页推荐博客数据
@@ -42,6 +41,8 @@ class RecommendFragmentViewModel : BaseViewModel() {
      * @return LiveData<RecommendBlogDataBean?>
      */
     fun getRecommendBlogData(): LiveData<RecommendBlogDataBean?> {
+        //将当前加载页数也重置为0
+        mCurrentPage.value = mDefaultPage
         launchUI(
             errorCallback = { errorCode, errorMsg ->
                 TipsToast.showTips(errorMsg)
@@ -51,7 +52,7 @@ class RecommendFragmentViewModel : BaseViewModel() {
             },
             requestCall = {
                 recommendBlogData.value =
-                    recommendRepository?.getRecommendBlogData(mDefaultPageSize)
+                    recommendRepository?.getRecommendBlogData(mDefaultPage)
             }
         )
         return recommendBlogData
@@ -75,7 +76,7 @@ class RecommendFragmentViewModel : BaseViewModel() {
     //TODO::加载更多推荐博客数据
     fun loadMoreRecommendBlogData() {
         //当前页码数+1
-        mCurrentPageSize.value = mCurrentPageSize.value?.plus(1)
+        mCurrentPage.value = mCurrentPage.value?.plus(1)
 
         launchUI(
             errorCallback = { errorCode, errorMsg ->
@@ -84,12 +85,12 @@ class RecommendFragmentViewModel : BaseViewModel() {
                 //changeStateView(ViewStateEnum.VIEW_NET_ERROR)
                 loadMoreRecommendBlogData.value = null
                 //请求失败将页码数-1
-                mCurrentPageSize.value = mCurrentPageSize.value?.minus(1)
+                mCurrentPage.value = mCurrentPage.value?.minus(1)
             },
             requestCall = {
                 //网络请求数据
                 loadMoreRecommendBlogData.value =
-                    recommendRepository?.getRecommendBlogData(mCurrentPageSize.value!!)
+                    recommendRepository?.getRecommendBlogData(mCurrentPage.value!!)
             }
         )
     }

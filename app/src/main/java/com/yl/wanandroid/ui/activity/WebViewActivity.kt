@@ -1,18 +1,14 @@
 package com.yl.wanandroid.ui.activity
 
 import android.os.Build
-import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebResourceError
-import android.webkit.WebResourceRequest
-import android.webkit.WebResourceResponse
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.yl.wanandroid.Constant
 import com.yl.wanandroid.R
 import com.yl.wanandroid.base.BaseVMActivity
-import com.yl.wanandroid.base.ViewStateEnum
+import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.databinding.ActivityWebBinding
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.viewmodel.WebActivityViewModel

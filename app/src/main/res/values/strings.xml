@@ -7,5 +7,11 @@
     <string name="tips_system">体系</string>
     <string name="tips_my">我的</string>
     <string name="loading">正在玩命加载中~</string>
+    <string name="fold">展开或折叠历史记录</string>
+    <string name="delete">删除历史记录</string>
+    <string name="histories_title">历史搜索</string>
+    <string name="tip_all_delete">全部删除</string>
+    <string name="tip_delete_ok">完成</string>
+    <string name="tip_search_text">搜索</string>
 
 </resources>
