@@ -11,6 +11,8 @@ import com.yl.wanandroid.ui.custom.BannerView
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.viewmodel.home.HomeFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import com.yl.wanandroid.BR
+
 
 /**
  * @description: 首页
@@ -85,4 +87,7 @@ class HomeFragment :
         }
     }
 
+    override fun getVariableId(): Int {
+        return BR.homeViewModel
+    }
 }

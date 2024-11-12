@@ -1,5 +1,6 @@
 package com.yl.wanandroid.ui.fragment.search
 
+import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import com.yl.wanandroid.BR
 import com.yl.wanandroid.R
@@ -41,9 +42,13 @@ class SearchFragment :
 
     override fun initView() {
         super.initView()
-        //禁止刷新和加载
+        //禁止加载
         mRefreshLayout.setEnableLoadMore(false)
-        mRefreshLayout.setEnableRefresh(false)
+
+        //设置刷新监听
+        mRefreshLayout.setOnRefreshListener{
+            mViewModel.getSearchHotkeyData()
+        }
 
         //初始化历史搜索记录自定义View
         mSearchHistories = mBinding.root.findViewById(R.id.search_histories)
@@ -81,9 +86,15 @@ class SearchFragment :
                 //只在可见时对值进行设置
                 LogUtils.d(this, "mViewModel.searchHotKeyData-->$searchHotKeyDataBeans")
                 if (searchHotKeyDataBeans != null) {
+                    mBinding.recommendSearch.visibility = View.VISIBLE
+                    mViewModel.isNoNetWork = false
                     mRecommendSearchListAdapter.setData(searchHotKeyDataBeans)
-                    mViewModel.changeStateView(ViewStateEnum.VIEW_LOAD_SUCCESS)//切换视图状态为成功状态
+                }else{
+                    //隐藏推荐搜索列表
+                    mBinding.recommendSearch.visibility = View.INVISIBLE
                 }
+                mRefreshLayout.finishRefresh()
+                mViewModel.changeStateView(ViewStateEnum.VIEW_LOAD_SUCCESS)//切换视图状态为成功状态
             }
         }
         //历史搜索关键词数据

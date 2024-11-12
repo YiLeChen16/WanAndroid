@@ -4,6 +4,8 @@ import com.yl.wanandroid.room.WanAndroidDataBase
 import com.yl.wanandroid.room.dao.SearchHistoryDao
 import com.yl.wanandroid.room.entity.SearchHistoryItem
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 
 /**
@@ -13,27 +15,36 @@ import kotlinx.coroutines.withContext
  * @version 1.0
  */
 class SearchHistoryRepository(private val db: WanAndroidDataBase) {
+    private val mutex = Mutex()
+
 
     suspend fun getSearchHistoryItems(): List<SearchHistoryItem> =
         withContext(Dispatchers.IO) {
             db.searchHistoryDao().getAll()
         }
 
-    suspend fun insertSearchHistoryItem(query: String,time:Long) =
-        withContext(Dispatchers.IO) {
-            val searchHistoryItems = db.searchHistoryDao().getAll()
-            var sameId = -1
-            searchHistoryItems.forEach { item ->
-                // 记录相同id
-                if(item.query == query){
-                    sameId = item.id
+    suspend fun insertSearchHistoryItem(query: String, time: Long) =
+        mutex.withLock {//保证同时只有一个协程可操作此函数:避免数据重复添加
+            withContext(Dispatchers.IO) {
+                db.runInTransaction {//将多个数据库操作包装为一个事务,要么同时成功,要么同时失败
+                    val searchHistoryItems = db.searchHistoryDao().getAll()
+                    val sameId = mutableListOf<Int>()
+                    searchHistoryItems.forEach { item ->
+                        // 记录相同id
+                        if (item.query == query) {
+                            sameId.add(item.id)
+                        }
+                    }
+                    if (sameId.size > 0) {
+                        for (id in sameId) {
+                            db.searchHistoryDao().delete(id)
+                        }
+                    }
+                    db.searchHistoryDao().insert(SearchHistoryItem(query = query, timestamp = time))
                 }
             }
-            if (sameId != -1){
-                db.searchHistoryDao().delete(sameId)
-            }
-            db.searchHistoryDao().insert(SearchHistoryItem(query = query, timestamp = time))
         }
+
 
     suspend fun deleteSearchHistoryItem(id: Int) =
         withContext(Dispatchers.IO) {

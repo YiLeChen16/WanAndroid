@@ -8,7 +8,7 @@ import com.yl.wanandroid.base.BaseViewModel
  * @date 2024/10/20 16:10
  * @version 1.0
  */
-class KnowledgeColumnFragmentViewModel:BaseViewModel() {
+class HarmonyFragmentViewModel:BaseViewModel() {
     override fun onReload() {
 
     }

@@ -159,11 +159,11 @@ class FlowLayoutView(
     //暴露方法给外界设置数据
     fun setData(data: List<SearchHistoryItem>) {
         LogUtils.d(this,"data-->$data")
-        if(data.isNotEmpty()){
-            visibility = VISIBLE
+        visibility = if(data.isNotEmpty()){
+            VISIBLE
         }else{
             //表示当前没有历史搜索记录
-            visibility = GONE
+            GONE
         }
         mSearchHistoriesData.clear()
         for (line in lines) {

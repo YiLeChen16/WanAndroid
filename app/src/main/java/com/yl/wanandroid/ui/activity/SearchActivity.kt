@@ -93,7 +93,7 @@ class SearchActivity :
 
         mBinding.edSearchBox.setOnEditorActionListener(OnEditorActionListener { textView, actionId, keyEvent ->
             if ((actionId == EditorInfo.IME_ACTION_UNSPECIFIED || actionId == EditorInfo.IME_ACTION_SEARCH) && keyEvent != null) {
-                //点击搜索要做的操作
+                //点击回车要做的操作
                 mViewModel.search_fragment_visibility.value = true
                 return@OnEditorActionListener true
             }
@@ -136,7 +136,6 @@ class SearchActivity :
 
 
         //取消搜索按钮
-        //TODO::
         mViewModel.cancelSearch.observe(this) {
             if (it) {
                 //取消搜索

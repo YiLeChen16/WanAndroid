@@ -21,7 +21,7 @@ abstract class BaseViewModel : ViewModel(), BaseLifeCycleObserver,MultiplyStateV
     /**
      * 控制状态视图的LiveData
      */
-    val mStateViewLiveData = MutableLiveData<ViewStateEnum>(ViewStateEnum.VIEW_LOADING)
+    val mStateViewLiveData = MutableLiveData(ViewStateEnum.VIEW_LOADING)
 
     /**
      * 切换到UI线程

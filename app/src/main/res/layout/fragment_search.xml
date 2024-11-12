@@ -19,12 +19,12 @@
            android:layout_height="wrap_content"
            app:layout_constraintTop_toTopOf="parent"
            app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintBottom_toTopOf="@id/recommend_search_head"
+           app:layout_constraintBottom_toTopOf="@id/recommend_search"
            android:layout_marginTop="@dimen/dp_5"/>
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/recommend_search_head"
+            android:id="@+id/recommend_search"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_0"
             android:padding="@dimen/dp_10"

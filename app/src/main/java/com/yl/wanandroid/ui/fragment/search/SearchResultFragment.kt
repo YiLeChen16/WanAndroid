@@ -65,27 +65,35 @@ class SearchResultFragment :
         mViewModel.search_fragment_visibility.observe(this) {
             if (it) {
                 //此视图可见
-                mViewModel.searchResultListData.observe(this) { searchResultDataBean ->
-                    if (searchResultDataBean != null) {
-                        LogUtils.d(this, "mViewModel.searchResultListData-->$searchResultDataBean")
-                        //为适配器装载数据
-                        mSearchResultListAdapter.setData(searchResultDataBean.datas)
-                        //改变当前视图状态
-                        mViewModel.changeStateView(ViewStateEnum.VIEW_LOAD_SUCCESS)
-                        mRefreshLayout.finishRefresh()
-                    }else{
-                        mViewModel.changeStateView(ViewStateEnum.VIEW_EMPTY)
-                    }
-                }
-                //监听当前搜索词
-                mViewModel.mCurrentSearchKeyWord.observe(this){
-                    //设置视图加载状态:解决列表闪烁问题
-                    mViewModel.changeStateView(ViewStateEnum.VIEW_LOADING)
-                    mViewModel.getSearchResultData(it)//搜索
-                }
+                //触发更新
+                mViewModel.mCurrentSearchKeyWord.value = mViewModel.mCurrentSearchKeyWord.value
+                //mViewModel.searchResultListData.value = mViewModel.searchResultListData.value
             } else {
                 //此视图不可见
                 mViewModel.changeStateView(ViewStateEnum.VIEW_NONE)//将视图状态设为NONE
+            }
+        }
+        mViewModel.searchResultListData.observe(this) { searchResultDataBean ->
+            if(mViewModel.search_fragment_visibility.value == true){
+                if (searchResultDataBean != null) {
+                    LogUtils.d(this, "mViewModel.searchResultListData-->$searchResultDataBean")
+                    //为适配器装载数据
+                    mSearchResultListAdapter.setData(searchResultDataBean.datas)
+                    //改变当前视图状态
+                    mViewModel.changeStateView(ViewStateEnum.VIEW_LOAD_SUCCESS)
+                    mRefreshLayout.finishRefresh()
+                }else{
+                    mViewModel.changeStateView(ViewStateEnum.VIEW_NET_ERROR)
+                }
+            }
+
+        }
+        //监听当前搜索词
+        mViewModel.mCurrentSearchKeyWord.observe(this){
+            if(mViewModel.search_fragment_visibility.value == true){
+                //设置视图加载状态:解决列表闪烁问题
+                mViewModel.changeStateView(ViewStateEnum.VIEW_LOADING)
+                mViewModel.getSearchResultData(it)//搜索
             }
         }
 

@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
         <variable
-            name="homeViewModel"
-            type="com.yl.wanandroid.viewmodel.home.HomeFragmentViewModel" />
+            name="harmonyFragmentViewModel"
+            type="com.yl.wanandroid.viewmodel.home.HarmonyFragmentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

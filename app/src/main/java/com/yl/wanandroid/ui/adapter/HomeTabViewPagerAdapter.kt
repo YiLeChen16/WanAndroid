@@ -1,12 +1,10 @@
 package com.yl.wanandroid.ui.adapter
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.yl.wanandroid.ui.fragment.home.KnowledgeColumnFragment
+import com.yl.wanandroid.ui.fragment.home.HarmonyFragment
 import com.yl.wanandroid.ui.fragment.home.RecommendFragment
 import com.yl.wanandroid.ui.fragment.home.WendaFragment
-import javax.inject.Inject
 
 /**
  * @description: 首页一级Tab的ViewPager适配器
@@ -21,7 +19,7 @@ class HomeTabViewPagerAdapter (fragment: Fragment) : FragmentStateAdapter(fragme
     init {
         //创建所需Fragment
         val recommendFragment = RecommendFragment.newInstance()
-        val knowledgeColumnFragment = KnowledgeColumnFragment.newInstance()
+        val knowledgeColumnFragment = HarmonyFragment.newInstance()
         val wendaFragment = WendaFragment.newInstance()
 
         fragmentList.add(knowledgeColumnFragment)

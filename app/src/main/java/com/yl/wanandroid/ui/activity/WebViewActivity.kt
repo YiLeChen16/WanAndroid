@@ -12,6 +12,7 @@ import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.databinding.ActivityWebBinding
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.viewmodel.WebActivityViewModel
+import com.yl.wanandroid.BR
 
 
 /**
@@ -39,8 +40,6 @@ class WebViewActivity :
             webSettings?.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
         webSettings?.setBlockNetworkImage(false);
-
-
 
 
         //设置自适应屏幕，两者合用
@@ -94,11 +93,6 @@ class WebViewActivity :
     }
 
     override fun initVMData() {
-        /*        mViewModel.url.observe(this) {
-                    if (it != null) {
-                        mWebView?.loadUrl(it)
-                    }
-                }*/
     }
 
     //在 Activity 销毁（ WebView ）的时候，先让 WebView 加载null内容，然后移除 WebView，再销毁 WebView，最后置空。避免WebView内存泄漏
@@ -112,5 +106,9 @@ class WebViewActivity :
             mWebView = null
         }
         super.onDestroy()
+    }
+
+    override fun getVariableId(): Int {
+        return BR.webActivityViewModel
     }
 }
