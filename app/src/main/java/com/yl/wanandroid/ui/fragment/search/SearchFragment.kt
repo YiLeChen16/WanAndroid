@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 
 /**
- * @description: 搜索记录和推荐搜索fragment  TODO::自定义View
+ * @description: 搜索记录和推荐搜索fragment
  * @author YL Chen
  * @date 2024/10/25 20:14
  * @version 1.0
@@ -67,24 +67,35 @@ class SearchFragment :
         mViewModel.search_fragment_visibility.observe(this) {
             if (!it) {
                 //此视图可见
-                //推荐搜索关键词数据
-                mViewModel.searchHotKeyData.observe(this) { searchHotKeyDataBeans ->
-                    LogUtils.d(this, "mViewModel.searchHotKeyData-->$searchHotKeyDataBeans")
-                    if (searchHotKeyDataBeans != null) {
-                        mRecommendSearchListAdapter.setData(searchHotKeyDataBeans)
-                        mViewModel.changeStateView(ViewStateEnum.VIEW_LOAD_SUCCESS)//切换视图状态为成功状态
-                    }
-                }
-                //历史搜索关键词数据
-                mViewModel.searchHistoriesList.observe(this) { searchHistoriesData ->
-                    LogUtils.d(this, "mViewModel.searchHistoriesList-->$searchHistoriesData")
-                    if (searchHistoriesData != null) {
-                        mSearchHistories.setData(searchHistoriesData)
-                    }
-                }
+                //触发更新
+                mViewModel.searchHotKeyData.value = mViewModel.searchHotKeyData.value
+                mViewModel.searchHistoriesList.value = mViewModel.searchHistoriesList.value
             } else {
                 //此视图不可见
                 mViewModel.changeStateView(ViewStateEnum.VIEW_NONE)//将视图状态设为NONE
+            }
+        }
+        //推荐搜索关键词数据
+        mViewModel.searchHotKeyData.observe(this) { searchHotKeyDataBeans ->
+            if(mViewModel.search_fragment_visibility.value == false){
+                //只在可见时对值进行设置
+                LogUtils.d(this, "mViewModel.searchHotKeyData-->$searchHotKeyDataBeans")
+                if (searchHotKeyDataBeans != null) {
+                    mRecommendSearchListAdapter.setData(searchHotKeyDataBeans)
+                    mViewModel.changeStateView(ViewStateEnum.VIEW_LOAD_SUCCESS)//切换视图状态为成功状态
+                }
+            }
+        }
+        //历史搜索关键词数据
+        //不可将此部分代码嵌套在mViewModel.search_fragment_visibility.observe(this) {
+        //            if (!it) {..}..}中,因为会导致mSearchHistories.setData(searchHistoriesData)被反复调用,导致历史记录自定义View重复绘制子View
+        mViewModel.searchHistoriesList.observe(this) { searchHistoriesData ->
+            if(mViewModel.search_fragment_visibility.value == false){
+                //只在可见时对值进行设置
+                LogUtils.d(this, "mViewModel.searchHistoriesList-->$searchHistoriesData")
+                if (searchHistoriesData != null) {
+                    mSearchHistories.setData(searchHistoriesData)
+                }
             }
         }
     }
@@ -111,16 +122,16 @@ class SearchFragment :
         mViewModel.search_fragment_visibility.value = true
     }
 
-    override fun onDeleteButtonClick(k: String) {
+    override fun onDeleteButtonClick(id: Int) {
         //某历史记录删除按钮被点击
         //通知viewModel删除对应数据
-        mViewModel.searchHistoriesList.value?.remove(k)
+        mViewModel.deleteSearchHistory(id)
     }
 
     override fun onAllHistoriesDelete() {
         //全部删除按钮被点击
         //通知viewModel删除全部历史数据
-        mViewModel.searchHistoriesList.value?.clear()
+        mViewModel.deleteAllSearchHistory()
     }
 
     /**

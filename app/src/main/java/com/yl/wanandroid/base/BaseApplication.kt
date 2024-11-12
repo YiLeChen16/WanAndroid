@@ -1,6 +1,7 @@
 package com.yl.wanandroid.base
 
 import android.app.Application
+import android.content.Context
 import com.yl.wanandroid.utils.TipsToast
 import dagger.hilt.android.HiltAndroidApp
 
@@ -13,8 +14,12 @@ import dagger.hilt.android.HiltAndroidApp
 //初始化Hilt框架
 @HiltAndroidApp
 class BaseApplication:Application(){
+    companion object{
+        lateinit var context: Context
+    }
     override fun onCreate() {
         TipsToast.init(this)
         super.onCreate()
+        context = applicationContext
     }
 }

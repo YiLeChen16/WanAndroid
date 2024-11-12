@@ -7,7 +7,7 @@ import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeout
 
 /**
- * @description: 基础仓库
+ * @description: 网络请求基础仓库
  * @author YL Chen
  * @date 2024/9/10 17:06
  * @version 1.0

@@ -6,10 +6,12 @@ import com.yl.wanandroid.base.BaseViewModel
 import com.yl.wanandroid.model.SearchHotKeyDataBean
 import com.yl.wanandroid.model.SearchResultDataBean
 import com.yl.wanandroid.model.ViewStateEnum
+import com.yl.wanandroid.repository.SearchHistoryRepository
 import com.yl.wanandroid.repository.SearchRepository
+import com.yl.wanandroid.room.DBInstance
+import com.yl.wanandroid.room.entity.SearchHistoryItem
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast
-import kotlin.properties.Delegates
 
 
 /**
@@ -19,6 +21,8 @@ import kotlin.properties.Delegates
  * @version 1.0
  */
 object SearchShareViewModel : BaseViewModel() {
+    val dataBase = DBInstance.getDatabase()
+    val repository = SearchHistoryRepository(dataBase)
 
     //是否取消搜索
     var cancelSearch = MutableLiveData(false)
@@ -30,8 +34,15 @@ object SearchShareViewModel : BaseViewModel() {
     var editData = MutableLiveData("")
 
     //历史搜索过的关键词集合
-    var searchHistoriesList =
-        MutableLiveData<MutableList<String>>().apply { value = mutableListOf() }
+    //TODO::初始化从本地数据库中加载历史搜索记录
+    // 初始化时从数据库加载历史记录
+    //MutableLiveData，可以修改其值。
+    val searchHistoriesList: MutableLiveData<MutableList<SearchHistoryItem>> =
+        MutableLiveData<MutableList<SearchHistoryItem>>().apply {
+            // 可以在这里添加一些初始化逻辑，如设置默认值等
+            getAllSearchHistory()
+        }
+
 
     private val searchActivityRepository: SearchRepository? = getRepository()
 
@@ -87,6 +98,46 @@ object SearchShareViewModel : BaseViewModel() {
         cancelSearch.value = true
     }
 
+    // 从数据库中获取所有搜索历史记录
+    fun getAllSearchHistory() {
+        launchUI(errorCallback = { _, _ ->
+            searchHistoriesList.value = mutableListOf()
+        }, requestCall = {
+            searchHistoriesList.value = repository.getSearchHistoryItems().toMutableList()
+        })
+    }
+
+    //根据id删除数据库中的历史记录
+    fun deleteSearchHistory(id: Int) {
+        launchUI(errorCallback = { _, _ ->
+
+        }, requestCall = {
+            repository.deleteSearchHistoryItem(id)
+            searchHistoriesList.value = repository.getSearchHistoryItems().toMutableList()//触发更新
+        })
+    }
+
+    //添加历史记录
+    fun insertSearchHistory(searchHistoryItem: SearchHistoryItem) {
+        launchUI(errorCallback = { _, _ ->
+            searchHistoriesList.value = mutableListOf()
+        }, requestCall = {
+            repository.insertSearchHistoryItem(searchHistoryItem.query,searchHistoryItem.timestamp)
+            searchHistoriesList.value = repository.getSearchHistoryItems().toMutableList()//触发更新
+        })
+    }
+
+    // 清空所有历史记录
+    fun deleteAllSearchHistory() {
+        launchUI(errorCallback = { _, _ ->
+            searchHistoriesList.value = mutableListOf()
+        }, requestCall = {
+            repository.deleteAllSearchHistory()
+            searchHistoriesList.value = repository.getSearchHistoryItems().toMutableList()//触发更新
+        })
+    }
+
+
     /**
      * 获取搜索结果列表数据
      * @param k String 搜索关键词
@@ -98,30 +149,18 @@ object SearchShareViewModel : BaseViewModel() {
         if (search_fragment_visibility.value == true) {//当搜索结果界面可见才进行搜索
             //将搜索的关键词存入历史搜索记录集合中
             //去除重复词
-            val iterator = searchHistoriesList.value?.iterator()
-            while (iterator!!.hasNext()) {
-                val oldKey = iterator.next()
-                if (oldKey == k) {
-                    // 将历史记录中的 key 移除
-                    iterator.remove()
-                    //跳出循环
-                    break
-                }
-            }
-            /*searchHistoriesList.value?.forEachIndexed { index, key ->
-                if (key == k) {
-                    // 将历史记录中的 key 移除
-                    searchHistoriesList.value?.removeAt(index)
-                    return@forEachIndexed//跳出循环
-                }
-            }*///不可直接这样写,会报java.util.ConcurrentModificationException 不允许在集合遍历时修改集合
-            //将当前 k 添加到末尾
-            searchHistoriesList.value?.add(k)
+            //将历史记录插入到末尾
+            insertSearchHistory(
+                SearchHistoryItem(
+                    query = k,
+                    timestamp = System.currentTimeMillis()
+                )
+            )
             //将当前搜索页面置为第一页
             mCurrentPage.value = mDefaultPage
             LogUtils.d(this, "searchHistoriesList.value-->${searchHistoriesList.value}")
             launchUI(
-                errorCallback = { errorCode, errorMsg ->
+                errorCallback = { _, errorMsg ->
                     TipsToast.showTips(errorMsg)
                     LogUtils.d(this@SearchShareViewModel, "errorCallback-->$errorMsg")
                     changeStateView(ViewStateEnum.VIEW_NET_ERROR)

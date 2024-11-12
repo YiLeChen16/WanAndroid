@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.isVisible
 import com.yl.wanandroid.R
+import com.yl.wanandroid.room.entity.SearchHistoryItem
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.SizeUtils
 
@@ -29,7 +30,7 @@ class FlowLayoutView(
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
 
-
+    private var isDeleteOk: Boolean = true
     private lateinit var mSearchHistoriesHead: View
     private var mItemHeight: Int = 0
     private var mHeight: Int = 0
@@ -53,7 +54,7 @@ class FlowLayoutView(
 
 
     //历史搜索数据
-    private var mSearchHistoriesData = mutableListOf<String>()
+    private var mSearchHistoriesData = mutableListOf<SearchHistoryItem>()
 
     private var listener: OnItemClickListener? = null
 
@@ -92,14 +93,19 @@ class FlowLayoutView(
         mDelete.setOnClickListener {
             //展示详细删除操作,并隐藏删除图标,展示每个条目后面的删除按钮并显示所有条目
             showAllDeleteButton()
+            //设置删除记录变量
+            isDeleteOk = false
         }
         mDeleteOk.setOnClickListener{
             //隐藏详细删除操作,并显示删除图标,隐藏每个条目后面的删除按钮并显示所有条目
             hideAllDeleteButton()
+            isDeleteOk = true
         }
         mAllDelete.setOnClickListener{
             //将历史记录全部删除
             deleteAllHistories()
+
+            isDeleteOk = true
         }
     }
 
@@ -151,24 +157,21 @@ class FlowLayoutView(
     }
 
     //暴露方法给外界设置数据
-    fun setData(data: List<String>) {
+    fun setData(data: List<SearchHistoryItem>) {
+        LogUtils.d(this,"data-->$data")
         if(data.isNotEmpty()){
             visibility = VISIBLE
         }else{
             //表示当前没有历史搜索记录
             visibility = GONE
         }
-        LogUtils.d(this,"last_data-->${mSearchHistoriesData}")
         mSearchHistoriesData.clear()
-        //移除全部历史记录view
         for (line in lines) {
             for (view in line) {
                 removeView(view)
             }
         }
-        LogUtils.d(this,"clear_data-->${mSearchHistoriesData}")
         mSearchHistoriesData.addAll(data)
-        LogUtils.d(this,"new_data-->${mSearchHistoriesData}")
         //根据设置进来的数据数目动态创建子View
         createChildView()
     }
@@ -182,7 +185,7 @@ class FlowLayoutView(
                 .inflate(R.layout.item_flow_layout_view, this, false)//载入布局
             val keyword = itemView.findViewById<TextView>(R.id.keyword)
             val deleteItem = itemView.findViewById<ImageView>(R.id.delete_item)
-            keyword.text = mSearchHistoriesData[index]
+            keyword.text = mSearchHistoriesData[index].query
 
             //给每个ItemView设置监听事件
             keyword.setOnClickListener {
@@ -191,7 +194,7 @@ class FlowLayoutView(
             deleteItem.setOnClickListener {
                 removeView(itemView)//移除当前itemView
                 //通知监听者删除ViewModel中的数据源
-                listener?.onDeleteButtonClick(mSearchHistoriesData[index])//将要删除的数据传回
+                listener?.onDeleteButtonClick(mSearchHistoriesData[index].id)//将要删除的数据传回
                 //从本地数据源中删除
                 mSearchHistoriesData.removeAt(index)
                 // 通知布局刷新
@@ -220,12 +223,7 @@ class FlowLayoutView(
         //测量当前父布局的大小
         mWidth = MeasureSpec.getSize(widthMeasureSpec)
 
-        //measureChild(mSearchHistoriesHead, widthMeasureSpec, heightMeasureSpec)
-
         LogUtils.d(this, "mWidth==$mWidth")
-        /*if(childCount < 2){
-            return
-        }*/
         //测量子View
         mSearchHistoriesHead = getChildAt(0)
         measureChild(mSearchHistoriesHead, widthMeasureSpec, heightMeasureSpec)
@@ -233,6 +231,13 @@ class FlowLayoutView(
         for (i in 1 until childCount) {//从1开始
             //获取子View视图
             val itemView = getChildAt(i)
+            if(!isDeleteOk){
+                //还未完成删除
+                //继续展示每个条目后面的删除图标
+                //防止想同时删除多个时,出现删除一个后,其他记录后的删除图标因为删除操作导致界面重绘默认又变回不可见状态
+                val deleteItemButton = itemView.findViewById<ImageView>(R.id.delete_item)
+                deleteItemButton.visibility = VISIBLE
+            }
             //测量子View
             measureChild(itemView, widthMeasureSpec, heightMeasureSpec)
             //将子View添加到集合中
@@ -368,7 +373,7 @@ class FlowLayoutView(
 
     interface OnItemClickListener {
         fun onKeyWordClick(k: String)
-        fun onDeleteButtonClick(k: String)//删除按钮点击事件
+        fun onDeleteButtonClick(id: Int)//删除按钮点击事件
         fun onAllHistoriesDelete()//删除全部历史记录
     }
 }
