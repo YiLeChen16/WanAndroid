@@ -1,14 +1,10 @@
 package com.yl.wanandroid.model
 
-import android.widget.ImageView
-import androidx.databinding.BindingAdapter
-import com.yl.wanandroid.R
-import com.yl.wanandroid.utils.LogUtils
 
 
 data class RecommendBlogDataBean(
     val curPage: Int,
-    val datas: List<RecommendBlogData>,
+    val datas: List<ItemData>,
     val offset: Int,
     val over: Boolean,
     val pageCount: Int,
@@ -16,69 +12,9 @@ data class RecommendBlogDataBean(
     val total: Int
 )
 
-data class RecommendBlogData(
-    val adminAdd: Boolean,
-    val apkLink: String,
-    val audit: Int,
-    val author: String,
-    val canEdit: Boolean,
-    val chapterId: Int,
-    val chapterName: String,
-    var collect: Boolean,
-    val courseId: Int,
-    val desc: String,
-    val descMd: String,
-    val envelopePic: String,
-    val fresh: Boolean,
-    val host: String,
-    val id: Int,
-    val isAdminAdd: Boolean,
-    val link: String,
-    val niceDate: String,
-    val niceShareDate: String,
-    val origin: String,
-    val prefix: String,
-    val projectLink: String,
-    val publishTime: Long,
-    val realSuperChapterId: Int,
-    val selfVisible: Int,
-    val shareDate: Long,
-    val shareUser: String,
-    val superChapterId: Int,
-    val superChapterName: String,
-    val tags: List<RecommendBlogTag>,
-    val title: String,
-    val type: Int,
-    val userId: Int,
-    val visible: Int,
-    val zan: Int
-) {
 
-    private val collectImg: Int = R.drawable.iv_collection
-    private val noCollectImg: Int = R.drawable.iv_no_collection
-
-    companion object {
-        //ImageView的src属性
-        //必须加@JvmStatic注解,否则会导致databinding绑定失效
-        //ImageView本身的src属性并不能直接在xml布局中进行绑定,可能是因为它没有setSrc方法? 所以需要我们自定义setSrc方法并使用@BindingAdapter("android:src")注解告诉DataBInding
-        // 当找不到ImageView中自带的setSrc方法时绑定到此自定义方法
-        @JvmStatic
-        @BindingAdapter("android:src")
-        fun setSrc(view: ImageView, resId: Int) {
-            view.setImageResource(resId)
-        }
-    }
-
-
-    //TODO::
-    //条目收藏按钮被点击
-    fun onCollectClick(view: ImageView, collect: Boolean,id:Int) {
-        LogUtils.d(this,"RecommendBlogData-->onCollectClick----")
-    }
-}
-
-data class RecommendBlogTag(
-    val name: String,
-    val url: String
-)
+//data class RecommendBlogTag(
+//    val name: String,
+//    val url: String
+//)
 

@@ -1,6 +1,8 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="harmonyFragmentViewModel"
             type="com.yl.wanandroid.viewmodel.home.HarmonyFragmentViewModel" />
@@ -10,5 +12,58 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <LinearLayout
+            android:id="@+id/left_navigation"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_0"
+            android:background="@color/md_theme_surfaceContainer"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/content_list"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_15"
+                android:background="@drawable/selector_harmony_navigation"
+                android:onClick="@{()->harmonyFragmentViewModel.onTvLinkClick()}"
+                android:padding="@dimen/dp_20"
+                android:text="@string/tip_harmony_link"
+                android:textSize="@dimen/sp_15" />
+
+            <TextView
+                android:id="@+id/tv_project"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:background="@drawable/selector_harmony_navigation"
+                android:onClick="@{()->harmonyFragmentViewModel.onTvProjectClick()}"
+                android:padding="@dimen/dp_20"
+                android:text="@string/tip_harmony_project"
+                android:textSize="@dimen/sp_15" />
+
+            <TextView
+                android:id="@+id/tv_tool"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:background="@drawable/selector_harmony_navigation"
+                android:onClick="@{()->harmonyFragmentViewModel.onTvToolClick()}"
+                android:padding="@dimen/dp_20"
+                android:text="@string/tip_harmony_tool"
+                android:textSize="@dimen/sp_15" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/content_list"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:padding="@dimen/dp_10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/left_navigation"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

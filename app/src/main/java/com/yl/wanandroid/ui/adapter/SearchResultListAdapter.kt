@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.yl.wanandroid.Constant
 import com.yl.wanandroid.R
 import com.yl.wanandroid.databinding.ItemSearchResultBlogViewBinding
-import com.yl.wanandroid.model.SearchData
+import com.yl.wanandroid.model.ItemData
 import com.yl.wanandroid.ui.activity.WebViewActivity
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
@@ -24,7 +24,7 @@ import javax.inject.Inject
 class SearchResultListAdapter @Inject constructor(@ActivityContext val context: Context) :
     RecyclerView.Adapter<SearchResultListAdapter.MyViewHolder>() {
     //搜索结果数据
-    var mSearchResultListDatas: MutableList<SearchData> = mutableListOf()
+    var mSearchResultListDatas: MutableList<ItemData> = mutableListOf()
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -45,7 +45,7 @@ class SearchResultListAdapter @Inject constructor(@ActivityContext val context: 
     }
 
     //暴露方法给外界设置数据
-    fun setData(data: List<SearchData>) {
+    fun setData(data: List<ItemData>) {
         this.mSearchResultListDatas.clear()
         this.mSearchResultListDatas.addAll(data)
         notifyDataSetChanged()
@@ -59,7 +59,7 @@ class SearchResultListAdapter @Inject constructor(@ActivityContext val context: 
     }
 
     //暴露方法给外界添加数据
-    fun addData(data: List<SearchData>) {
+    fun addData(data: List<ItemData>) {
         val oldIndex = mSearchResultListDatas.size - 1
         this.mSearchResultListDatas.addAll(data)
         notifyItemRangeChanged(oldIndex,mSearchResultListDatas.size)

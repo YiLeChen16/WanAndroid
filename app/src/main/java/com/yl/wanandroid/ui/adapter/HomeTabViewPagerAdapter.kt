@@ -2,7 +2,7 @@ package com.yl.wanandroid.ui.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.yl.wanandroid.ui.fragment.home.HarmonyFragment
+import com.yl.wanandroid.ui.fragment.home.harmony.HarmonyFragment
 import com.yl.wanandroid.ui.fragment.home.RecommendFragment
 import com.yl.wanandroid.ui.fragment.home.WendaFragment
 

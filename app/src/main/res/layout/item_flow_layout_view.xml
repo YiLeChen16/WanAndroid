@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/keyword"
-        android:src="@drawable/baseline_close_24"
+        android:src="@drawable/baseline_close1_24"
         android:layout_marginStart="@dimen/dp_5"
         android:visibility="gone"
         android:padding="@dimen/dp_5"

@@ -1,6 +1,7 @@
 package com.yl.wanandroid.network
 
 import com.yl.wanandroid.model.BannerDataBean
+import com.yl.wanandroid.model.HarmonyColumnDataBean
 import com.yl.wanandroid.model.RecommendBlogDataBean
 import com.yl.wanandroid.model.SearchHotKeyDataBean
 import com.yl.wanandroid.model.SearchResultDataBean
@@ -14,7 +15,6 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
-import retrofit2.http.Query
 
 /**
  * 网络请求接口
@@ -73,4 +73,11 @@ interface WanAndroidApiInterface {
         @Field("k") k: String
     ): BaseResult<SearchResultDataBean>?
 
+
+    /**
+     * 获取鸿蒙专栏数据
+     * @return BaseResult<HarmonyColumnDataBean>?
+     */
+    @GET("/harmony/index/json")
+    suspend fun getHarmonyColumnData():BaseResult<HarmonyColumnDataBean>?
 }

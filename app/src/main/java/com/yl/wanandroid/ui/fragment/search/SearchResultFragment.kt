@@ -77,10 +77,15 @@ class SearchResultFragment :
             if(mViewModel.search_fragment_visibility.value == true){
                 if (searchResultDataBean != null) {
                     LogUtils.d(this, "mViewModel.searchResultListData-->$searchResultDataBean")
-                    //为适配器装载数据
-                    mSearchResultListAdapter.setData(searchResultDataBean.datas)
-                    //改变当前视图状态
-                    mViewModel.changeStateView(ViewStateEnum.VIEW_LOAD_SUCCESS)
+                    if(searchResultDataBean.datas.isNotEmpty()){
+                        //为适配器装载数据
+                        mSearchResultListAdapter.setData(searchResultDataBean.datas)
+                        //改变当前视图状态
+                        mViewModel.changeStateView(ViewStateEnum.VIEW_LOAD_SUCCESS)
+                    }else{
+                        //数据为空
+                        mViewModel.changeStateView(ViewStateEnum.VIEW_EMPTY)
+                    }
                     mRefreshLayout.finishRefresh()
                 }else{
                     mViewModel.changeStateView(ViewStateEnum.VIEW_NET_ERROR)
