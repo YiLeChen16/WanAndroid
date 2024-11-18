@@ -30,10 +30,6 @@
                 android:id="@+id/multiply_state_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 app:msv_emptyView="@layout/view_empty"
                 app:msv_loadingView="@layout/view_loading"
                 app:msv_netErrorView="@layout/view_net_error">

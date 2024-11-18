@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:yl="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -10,77 +10,88 @@
             name="homeViewModel"
             type="com.yl.wanandroid.viewmodel.home.HomeFragmentViewModel" />
     </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+<!--使用CoordinatorLayout替代NestScrollView实现多个子View之间的滑动-->
+<!--    此处使用NestScrollView会导致无法下拉刷新.可能因为刷新框架中实现了NestedScrollingParent接口,
+而ViewPager中又嵌套了一层SmartRefreshLayout-->
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.fragment.home.HomeFragment">
 
-        <com.yl.wanandroid.ui.custom.BannerView
-            android:id="@+id/banner_view"
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            yl:indicatorSelectedColor="@color/teal_200"
-            app:layout_constraintBottom_toTopOf="@id/guild_line"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            yl:loop="true"/>
+            android:layout_height="wrap_content">
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll">
+                <com.yl.wanandroid.ui.custom.BannerView
+                    android:id="@+id/banner_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_150"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                    yl:indicatorSelectedColor="@color/md_theme_primary"
+                    yl:loop="true" />
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guild_line"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.2" />
+        </com.google.android.material.appbar.AppBarLayout>
 
         <LinearLayout
-            android:id="@+id/search_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/guild_line"
-            app:layout_constraintStart_toStartOf="parent"
-            android:orientation="horizontal"
-            android:padding="@dimen/dp_4">
-            <ImageView
-                android:id="@+id/iv_set_theme"
-                android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <LinearLayout
+                android:id="@+id/search_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/iv_change_theme"/>
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tab"
-                android:layout_width="@dimen/dp_0"
-                android:layout_height="40dp"
-                android:layout_weight="8"
-                android:padding="@dimen/dp_5">
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_4">
+
+                <ImageView
+                    android:id="@+id/iv_set_theme"
+                    android:layout_width="@dimen/dp_0"
                     android:layout_height="wrap_content"
-                    android:text="@string/home_title1"/>
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/iv_change_theme" />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tab"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="40dp"
+                    android:layout_weight="8"
+                    android:padding="@dimen/dp_5">
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_title1" />
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_title2" />
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_title3" />
+                </com.google.android.material.tabs.TabLayout>
+
+                <ImageView
+                    android:id="@+id/iv_my_collection"
+                    android:layout_width="@dimen/dp_0"
                     android:layout_height="wrap_content"
-                    android:text="@string/home_title2"/>
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/home_title3"/>
-            </com.google.android.material.tabs.TabLayout>
-            <ImageView
-                android:id="@+id/iv_my_collection"
-                android:layout_width="@dimen/dp_0"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/iv_collection"/>
+                    android:layout_weight="1"
+                    android:src="@drawable/iv_collection" />
+            </LinearLayout>
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/tab_view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/tab_view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_0"
-            app:layout_constraintTop_toBottomOf="@id/search_layout"
-            app:layout_constraintBottom_toBottomOf="parent"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

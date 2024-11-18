@@ -1,4 +1,4 @@
-package com.yl.wanandroid.ui.fragment.home.harmony
+package com.yl.wanandroid.ui.fragment.home
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yl.wanandroid.R
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 
 /**
- * @description: 首页鸿蒙Fragment TODO
+ * @description: 首页鸿蒙Fragment
  * @author YL Chen
  * @date 2024/10/20 16:08
  * @version 1.0
