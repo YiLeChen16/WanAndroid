@@ -48,7 +48,7 @@ class HarmonyContentListAdapter @Inject constructor(@ActivityContext val context
         holder.itemView.setOnClickListener {
             //点击跳转到WebActivity
             val intent = Intent(context, WebViewActivity::class.java)
-            intent.putExtra(Constant.toWebUrlKey, data[position].link)//携带数据跳转
+            intent.putExtra(Constant.TO_WEB_URL, data[position].link)//携带数据跳转
             context.startActivity(intent)
         }
     }

@@ -10,9 +10,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.yl.wanandroid.R
-import com.yl.wanandroid.databinding.BaseLayoutBinding
 import com.yl.wanandroid.ui.custom.MultiplyStateView
-import com.yl.wanandroid.utils.LogUtils
 
 /**
  * @description: 普通Fragment基类，不带ViewModel
@@ -26,7 +24,7 @@ abstract class BaseFragment<VB : ViewDataBinding>(@LayoutRes layoutId: Int = 0) 
     open lateinit var mMultiplyStateView: MultiplyStateView
 
     //子类的布局id
-    val mLayoutId: Int = layoutId
+    private val mLayoutId: Int = layoutId
 
     //子View的dataBinding
     lateinit var mBinding: VB
@@ -42,7 +40,6 @@ abstract class BaseFragment<VB : ViewDataBinding>(@LayoutRes layoutId: Int = 0) 
         mRootView = layoutInflater.inflate(R.layout.base_load_more_layout, container, false)
         return mRootView
     }
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

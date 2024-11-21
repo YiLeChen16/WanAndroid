@@ -81,7 +81,7 @@ abstract class BaseVMFragment<VB : ViewDataBinding, VM : BaseViewModel>(@LayoutR
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        LogUtils.d(this, "onViewCreated-->dataLoading")
+        LogUtils.d(this, "onViewCreated")
     }
 
     /**

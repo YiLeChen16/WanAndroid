@@ -13,36 +13,34 @@ import com.yl.wanandroid.databinding.ItemBlogViewBinding
 import com.yl.wanandroid.model.ItemData
 import com.yl.wanandroid.ui.activity.WebViewActivity
 import dagger.hilt.android.qualifiers.ActivityContext
-import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 /**
- * @description: 首页推荐列表适配器 使用DataBinding绑定条目
+ * @description: 博客列表适配器 使用DataBinding绑定条目
  * @author YL Chen
  * @date 2024/10/20 18:33
  * @version 1.0
  */
-class RecommendListAdapter @Inject constructor(@ActivityContext val context: Context) :
-    RecyclerView.Adapter<RecommendListAdapter.MyViewHolder>() {
-
-    //private var listener: OnItemListener? = null
+class BlogListAdapter @Inject constructor(@ActivityContext val context: Context) :
+    RecyclerView.Adapter<BlogListAdapter.MyViewHolder>() {
 
 
-    private var mRecommendBlogDatas: MutableList<ItemData> = mutableListOf()
+
+    private var datas: MutableList<ItemData> = mutableListOf()
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     //暴露方法给外界设置数据
     fun setData(recommendBlogDatas: List<ItemData>) {
-        this.mRecommendBlogDatas.clear()//清空数据
-        this.mRecommendBlogDatas.addAll(recommendBlogDatas)
+        this.datas.clear()//清空数据
+        this.datas.addAll(recommendBlogDatas)
         notifyDataSetChanged()
     }
 
     //暴露方法给外界添加数据
     fun addData(recommendBlogDatas: List<ItemData>){
-        val oldIndex = mRecommendBlogDatas.size - 1
-        this.mRecommendBlogDatas.addAll(recommendBlogDatas)
+        val oldIndex = datas.size - 1
+        this.datas.addAll(recommendBlogDatas)
         notifyItemRangeChanged(oldIndex,recommendBlogDatas.size)
     }
 
@@ -59,18 +57,18 @@ class RecommendListAdapter @Inject constructor(@ActivityContext val context: Con
     }
 
     override fun getItemCount(): Int {
-        return mRecommendBlogDatas.size
+        return datas.size
     }
 
     //使用DataBinding绑定数据
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val binding = DataBindingUtil.getBinding<ItemBlogViewBinding>(holder.itemView)
-        binding?.recommendBlogData = mRecommendBlogDatas[position]
+        binding?.itemData = datas[position]
         binding?.executePendingBindings()
         //设置条目点击跳转
         holder.itemView.setOnClickListener {
             val intent = Intent(context, WebViewActivity::class.java)
-            intent.putExtra(Constant.toWebUrlKey, mRecommendBlogDatas[position].link)//携带数据跳转
+            intent.putExtra(Constant.TO_WEB_URL, datas[position].link)//携带数据跳转
             context.startActivity(intent)
         }
     }

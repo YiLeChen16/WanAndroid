@@ -49,10 +49,10 @@ class SearchActivity :
     override fun initData() {
         //获取推荐页搜索框搜索按钮跳转传递过来的数据
         val extras = intent.extras
-        isSearch = extras?.getBoolean(Constant.isSearch, false)//是否由搜索按钮跳转过来
+        isSearch = extras?.getBoolean(Constant.IS_SEARCH, false)//是否由搜索按钮跳转过来
         defaultHintKeyword =
             extras?.getString(
-                Constant.currentSearchHotKey,
+                Constant.CURRENT_SEARCH_HOTKEY,
                 ""
             )//由推荐页跳转携带过来的推荐搜索热词,作为搜索框为空时填充的提示词,若跳转展示的是搜索结果列表fragment则此词同时作为当前搜索词,
         mBinding.edSearchBox.hint = defaultHintKeyword

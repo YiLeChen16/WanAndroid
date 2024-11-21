@@ -6,7 +6,7 @@ import com.yl.wanandroid.R
 import com.yl.wanandroid.base.BaseVMFragment
 import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.databinding.FragmentRecommendBinding
-import com.yl.wanandroid.ui.adapter.RecommendListAdapter
+import com.yl.wanandroid.ui.adapter.BlogListAdapter
 import com.yl.wanandroid.ui.custom.SearchBoxView
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast
@@ -34,7 +34,7 @@ class RecommendFragment :
     }
 
     @Inject
-    lateinit var recommendListAdapter: RecommendListAdapter
+    lateinit var recommendListAdapter: BlogListAdapter
 
 
     override fun initView() {
@@ -92,14 +92,16 @@ class RecommendFragment :
         mViewModel.loadMoreRecommendBlogData.observe(viewLifecycleOwner) { loadMoreRecommendBlogData ->
             if (loadMoreRecommendBlogData != null) {
                 mRefreshLayout.finishLoadMore()
-                if (loadMoreRecommendBlogData.curPage == loadMoreRecommendBlogData.pageCount + 1){
+                if (loadMoreRecommendBlogData.curPage == loadMoreRecommendBlogData.pageCount + 1) {
                     //没有数据的一页
-                    TipsToast.showTips("当前页为最后一页啦~")
+                    TipsToast.showTips(R.string.tip_toast_last_page)
                     mRefreshLayout.finishLoadMoreWithNoMoreData()//标记当前没有更多数据了
-                }else{
+                } else {
                     recommendListAdapter.addData(loadMoreRecommendBlogData.datas)
-                    TipsToast.showTips("加载成功~")
+                    TipsToast.showTips(R.string.tip_toast_load_more_success)
                 }
+            }else{
+                mRefreshLayout.finishLoadMore()
             }
         }
     }

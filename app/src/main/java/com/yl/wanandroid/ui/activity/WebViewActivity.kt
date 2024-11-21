@@ -62,7 +62,7 @@ class WebViewActivity :
 
     override fun initData() {
         super.initData()
-        val url = intent.extras?.getString(Constant.toWebUrlKey)
+        val url = intent.extras?.getString(Constant.TO_WEB_URL)
         //加载传递过来的网页
         //判断是否为空
         LogUtils.d(this, "initData-->url-->$url")

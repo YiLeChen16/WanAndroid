@@ -72,13 +72,6 @@ open class BannerView(
         LogUtils.d(this@BannerView, "mAdapter-->${mAdapter}")
         //初始化指示器
         setUpIndicator(mAdapter.count)
-        //设置轮播图条目监听事件
-        mAdapter.setOnItemListener(object : ViewPagerAdapter.OnItemListener {
-            //条目被点击
-            override fun onItemClick(toUrl: String) {
-                //TODO：：跳转到url界面
-            }
-        })
         //设置轮播图切换监听
         mViewPager.addOnPageChangeListener(object : OnPageChangeListener {
             override fun onPageScrolled(

@@ -3,7 +3,7 @@ package com.yl.wanandroid.network.exeception
 import java.io.IOException
 
 /**
- * @description: TODO
+ * @description: 网络异常类
  * @author YL Chen
  * @date 2024/9/10 22:25
  * @version 1.0

@@ -64,6 +64,7 @@
             android:padding="@dimen/dp_10"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/left_navigation"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="@dimen/dp_5"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

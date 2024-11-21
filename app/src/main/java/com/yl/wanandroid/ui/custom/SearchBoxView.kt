@@ -72,8 +72,8 @@ class SearchBoxView : LinearLayout {
             LogUtils.d(this@SearchBoxView,"editSearchBox.setOnClickListener")
             val intent = Intent(context, SearchActivity::class.java)
             val bundle = Bundle()
-            bundle.putBoolean(Constant.isSearch,false)//表示从搜索框跳转过去
-            bundle.putString(Constant.currentSearchHotKey,mCurrentSearchHotKey)//当前推荐搜索关键词的order
+            bundle.putBoolean(Constant.IS_SEARCH,false)//表示从搜索框跳转过去
+            bundle.putString(Constant.CURRENT_SEARCH_HOTKEY,mCurrentSearchHotKey)//当前推荐搜索关键词的order
             intent.putExtras(bundle)
             context.startActivity(intent)
         }
@@ -83,8 +83,8 @@ class SearchBoxView : LinearLayout {
             LogUtils.d(this@SearchBoxView,"searchButton.setOnClickListener")
             val intent = Intent(context, SearchActivity::class.java)
             val bundle = Bundle()
-            bundle.putBoolean(Constant.isSearch,true)//表示从搜索按钮跳转过去
-            bundle.putString(Constant.currentSearchHotKey,mCurrentSearchHotKey)//当前推荐搜索关键词
+            bundle.putBoolean(Constant.IS_SEARCH,true)//表示从搜索按钮跳转过去
+            bundle.putString(Constant.CURRENT_SEARCH_HOTKEY,mCurrentSearchHotKey)//当前推荐搜索关键词
             intent.putExtras(bundle)
             context.startActivity(intent)
         }

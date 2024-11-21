@@ -86,7 +86,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         })
         //禁用viewPager的滑动，避免和首页的viewpager滑动冲突
         mBinding.fragmentContainer.isUserInputEnabled = false
-        mMultiplyStateView.showSuccess()
+        mMultiplyStateView.showSuccess()//展示成功视图
 
     }
 

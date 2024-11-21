@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.yl.wanandroid.base.BaseViewModel
 
 /**
- * @description: TODO
+ * @description: WebActivity的ViewModel
  * @author YL Chen
  * @date 2024/10/12 18:07
  * @version 1.0

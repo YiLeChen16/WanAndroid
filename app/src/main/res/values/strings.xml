@@ -19,5 +19,11 @@
     <string name="tip_harmony_link">常用链接</string>
     <string name="tip_harmony_project">开源项目</string>
     <string name="tip_harmony_tool">常用工具</string>
+    <string name="tip_search">搜索</string>
+    <string name="tip_search_hint">搜点啥捏~</string>
+    <string name="tip_toast_last_page">当前页为最后一页啦~</string>
+    <string name="tip_toast_load_more_success">加载成功~</string>
+    <string name="tip_hot_wenda">热门问答</string>
+    <string name="tip_normal_wenda">更多问答</string>
 
 </resources>

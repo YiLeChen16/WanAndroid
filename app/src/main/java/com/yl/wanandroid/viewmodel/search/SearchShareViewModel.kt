@@ -37,8 +37,6 @@ object SearchShareViewModel : BaseViewModel() {
     var editData = MutableLiveData("")
 
     //历史搜索过的关键词集合
-    //TODO::初始化从本地数据库中加载历史搜索记录
-    // 初始化时从数据库加载历史记录
     //MutableLiveData，可以修改其值。
     val searchHistoriesList: MutableLiveData<MutableList<SearchHistoryItem>> =
         MutableLiveData<MutableList<SearchHistoryItem>>().apply {
@@ -72,7 +70,7 @@ object SearchShareViewModel : BaseViewModel() {
     private var mDefaultPage = 0
 
     //当前搜索结果页数
-    private var mCurrentPage = MutableLiveData(mDefaultPage)
+    private var mCurrentPage = mDefaultPage
 
     //返回按钮点击事件
     fun onBackClick() {
@@ -165,7 +163,7 @@ object SearchShareViewModel : BaseViewModel() {
                 )
             )
             //将当前搜索页面置为第一页
-            mCurrentPage.value = mDefaultPage
+            mCurrentPage = mDefaultPage
             LogUtils.d(this, "searchHistoriesList.value-->${searchHistoriesList.value}")
             launchUI(
                 errorCallback = { _, errorMsg ->
@@ -225,20 +223,20 @@ object SearchShareViewModel : BaseViewModel() {
      */
     fun loadMoreSearchResultData(): LiveData<SearchResultDataBean?> {
         //当前页码数+1
-        mCurrentPage.value = mCurrentPage.value?.plus(1)
+        mCurrentPage++
         launchUI(
             errorCallback = { _, errorMsg ->
                 TipsToast.showTips(errorMsg)
                 LogUtils.d(this@SearchShareViewModel, "errorCallback-->$errorMsg")
                 loadMoreSearchResultListData.value = null
                 //还原页码数
-                mCurrentPage.value = mCurrentPage.value?.minus(1)
+                mCurrentPage--
             },
             requestCall = {
                 LogUtils.d(this@SearchShareViewModel, "requestCall")
                 loadMoreSearchResultListData.value =
                     searchRepository?.getSearchResultData(
-                        mCurrentPage.value!!,
+                        mCurrentPage,
                         mCurrentSearchKeyWord.value!!
                     )
             }

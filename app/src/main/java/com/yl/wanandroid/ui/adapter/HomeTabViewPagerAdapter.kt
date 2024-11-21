@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.yl.wanandroid.ui.fragment.home.HarmonyFragment
 import com.yl.wanandroid.ui.fragment.home.RecommendFragment
-import com.yl.wanandroid.ui.fragment.home.WendaFragment
+import com.yl.wanandroid.ui.fragment.home.wenda.WendaFragment
 
 /**
  * @description: 首页一级Tab的ViewPager适配器

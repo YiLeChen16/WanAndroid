@@ -50,7 +50,7 @@ open class BannerViewPagerAdapter @Inject constructor() : PagerAdapter() {
         iv.setOnClickListener {
             LogUtils.d(this@BannerViewPagerAdapter, "toUrl-->${mBannerData[realPosition].url}")
             val intent = Intent(container.context, WebViewActivity::class.java)
-            intent.putExtra(Constant.toWebUrlKey,mBannerData[realPosition].url)//携带数据跳转
+            intent.putExtra(Constant.TO_WEB_URL,mBannerData[realPosition].url)//携带数据跳转
             container.context.startActivity(intent)
         }
         container.addView(iv)

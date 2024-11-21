@@ -8,6 +8,7 @@ import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.databinding.FragmentSearchResultBinding
 import com.yl.wanandroid.ui.adapter.SearchResultListAdapter
 import com.yl.wanandroid.utils.LogUtils
+import com.yl.wanandroid.utils.TipsToast
 import com.yl.wanandroid.viewmodel.search.SearchShareViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -67,46 +68,60 @@ class SearchResultFragment :
                 //此视图可见
                 //触发更新
                 mViewModel.mCurrentSearchKeyWord.value = mViewModel.mCurrentSearchKeyWord.value
-                //mViewModel.searchResultListData.value = mViewModel.searchResultListData.value
             } else {
                 //此视图不可见
                 mViewModel.changeStateView(ViewStateEnum.VIEW_NONE)//将视图状态设为NONE
             }
         }
         mViewModel.searchResultListData.observe(this) { searchResultDataBean ->
-            if(mViewModel.search_fragment_visibility.value == true){
+            if (mViewModel.search_fragment_visibility.value == true) {
                 if (searchResultDataBean != null) {
                     LogUtils.d(this, "mViewModel.searchResultListData-->$searchResultDataBean")
-                    if(searchResultDataBean.datas.isNotEmpty()){
+                    if (searchResultDataBean.datas.isNotEmpty()) {
                         //为适配器装载数据
                         mSearchResultListAdapter.setData(searchResultDataBean.datas)
                         //改变当前视图状态
                         mViewModel.changeStateView(ViewStateEnum.VIEW_LOAD_SUCCESS)
-                    }else{
+                    } else {
                         //数据为空
                         mViewModel.changeStateView(ViewStateEnum.VIEW_EMPTY)
                     }
                     mRefreshLayout.finishRefresh()
-                }else{
+                } else {
                     mViewModel.changeStateView(ViewStateEnum.VIEW_NET_ERROR)
                 }
             }
 
         }
         //监听当前搜索词
-        mViewModel.mCurrentSearchKeyWord.observe(this){
-            if(mViewModel.search_fragment_visibility.value == true){
+        mViewModel.mCurrentSearchKeyWord.observe(this) {
+            if (mViewModel.search_fragment_visibility.value == true) {
                 //设置视图加载状态:解决列表闪烁问题
                 mViewModel.changeStateView(ViewStateEnum.VIEW_LOADING)
                 mViewModel.getSearchResultData(it)//搜索
+                //将当前刷新框架的加载更多重置
+                mRefreshLayout.setEnableLoadMore(true)
             }
         }
 
         mViewModel.loadMoreSearchResultListData.observe(viewLifecycleOwner) { loadMoreSearchResultDataBean ->
-            if(loadMoreSearchResultDataBean != null){
-                LogUtils.d(this, "mViewModel.loadMoreSearchResultListData-->$loadMoreSearchResultDataBean")
-                //为适配器添加数据
-                mSearchResultListAdapter.addData(loadMoreSearchResultDataBean.datas)
+            mRefreshLayout.finishLoadMore()
+            if (loadMoreSearchResultDataBean != null) {
+                LogUtils.d(
+                    this,
+                    "mViewModel.loadMoreSearchResultListData-->$loadMoreSearchResultDataBean"
+                )
+                if (loadMoreSearchResultDataBean.curPage == loadMoreSearchResultDataBean.pageCount + 1) {
+                    //最后一页后的一页,不包含数据
+                    TipsToast.showTips(R.string.tip_toast_last_page)
+                    mRefreshLayout.setEnableLoadMore(false)//标记当前没有更多数据了
+                } else {
+                    //为适配器添加数据
+                    mSearchResultListAdapter.addData(loadMoreSearchResultDataBean.datas)
+                    TipsToast.showTips(R.string.tip_toast_load_more_success)
+                    mRefreshLayout.finishLoadMore()
+                }
+            } else {
                 mRefreshLayout.finishLoadMore()
             }
         }

@@ -2,6 +2,8 @@ package com.yl.wanandroid.network
 
 import com.yl.wanandroid.model.BannerDataBean
 import com.yl.wanandroid.model.HarmonyColumnDataBean
+import com.yl.wanandroid.model.ItemData
+import com.yl.wanandroid.model.NormalWendaDataBean
 import com.yl.wanandroid.model.RecommendBlogDataBean
 import com.yl.wanandroid.model.SearchHotKeyDataBean
 import com.yl.wanandroid.model.SearchResultDataBean
@@ -80,4 +82,23 @@ interface WanAndroidApiInterface {
      */
     @GET("/harmony/index/json")
     suspend fun getHarmonyColumnData():BaseResult<HarmonyColumnDataBean>?
+
+
+    /**
+     * 热门问答数据
+     * @return BaseResult<MutableList<ItemData>>?
+     */
+    @GET("/popular/wenda/json")
+    suspend fun getHotWendaData():BaseResult<MutableList<ItemData>>?
+
+
+    /**
+     * 普通问答数据
+     * @param page Int
+     * @return BaseResult<MutableList<MoreWendaDataBean>>?
+     */
+    @GET("/wenda/list/{page}/json")
+    suspend fun getNormalWendaData(
+        @Path("page") page: Int
+    ):BaseResult<NormalWendaDataBean>?
 }

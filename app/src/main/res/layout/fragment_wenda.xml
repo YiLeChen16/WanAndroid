@@ -3,10 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
-        <variable
-            name="wendaFragmentViewModel"
-            type="com.yl.wanandroid.viewmodel.home.WendaFragmentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,25 +13,35 @@
         android:paddingEnd="@dimen/dp_10">
 
         <com.google.android.material.tabs.TabLayout
+            android:id="@+id/wenda_tab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:tabIndicatorFullWidth="false"
             >
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="热门问答"/>
+                android:text="@string/tip_hot_wenda"/>
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="更多问答"/>
+                android:text="@string/tip_normal_wenda"/>
         </com.google.android.material.tabs.TabLayout>
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/content_viewpager"
+        <com.yl.wanandroid.ui.custom.ViewPager2Container
+            android:id="@+id/view_pager2_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="@dimen/dp_0"
+            app:layout_constraintTop_toBottomOf="@id/wenda_tab"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/content_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.yl.wanandroid.ui.custom.ViewPager2Container>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

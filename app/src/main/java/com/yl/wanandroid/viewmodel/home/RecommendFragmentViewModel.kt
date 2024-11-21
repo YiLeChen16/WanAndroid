@@ -11,7 +11,7 @@ import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast
 
 /**
- * @description: 首页推荐页ViewModel TODO
+ * @description: 首页推荐页ViewModel
  * @author YL Chen
  * @date 2024/10/20 16:04
  * @version 1.0
@@ -33,7 +33,7 @@ class RecommendFragmentViewModel : BaseViewModel() {
     val mDefaultPage = 0
 
     //记录当前推荐博客加载页数
-    var mCurrentPage = MutableLiveData(mDefaultPage)//初始化为0
+    var mCurrentPage = mDefaultPage//初始化为0
 
     /**
      * 获取首页推荐博客数据
@@ -42,7 +42,7 @@ class RecommendFragmentViewModel : BaseViewModel() {
      */
     fun getRecommendBlogData(): LiveData<RecommendBlogDataBean?> {
         //将当前加载页数也重置为0
-        mCurrentPage.value = mDefaultPage
+        mCurrentPage = mDefaultPage
         launchUI(
             errorCallback = { errorCode, errorMsg ->
                 TipsToast.showTips(errorMsg)
@@ -73,24 +73,23 @@ class RecommendFragmentViewModel : BaseViewModel() {
         return searchHotKeyData
     }
 
-    //TODO::加载更多推荐博客数据
+    //加载更多推荐博客数据
     fun loadMoreRecommendBlogData() {
         //当前页码数+1
-        mCurrentPage.value = mCurrentPage.value?.plus(1)
+        mCurrentPage++
 
         launchUI(
             errorCallback = { errorCode, errorMsg ->
                 TipsToast.showTips(errorMsg)
                 LogUtils.d(this@RecommendFragmentViewModel, "errorCallback-->$errorMsg")
-                //changeStateView(ViewStateEnum.VIEW_NET_ERROR)
                 loadMoreRecommendBlogData.value = null
                 //请求失败将页码数-1
-                mCurrentPage.value = mCurrentPage.value?.minus(1)
+                mCurrentPage--
             },
             requestCall = {
                 //网络请求数据
                 loadMoreRecommendBlogData.value =
-                    recommendRepository?.getRecommendBlogData(mCurrentPage.value!!)
+                    recommendRepository?.getRecommendBlogData(mCurrentPage)
             }
         )
     }
