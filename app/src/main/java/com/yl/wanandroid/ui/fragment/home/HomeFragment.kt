@@ -15,7 +15,6 @@ import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.viewmodel.home.HomeFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import com.yl.wanandroid.BR
-import com.yl.wanandroid.ui.custom.ViewPager2Container
 
 
 /**

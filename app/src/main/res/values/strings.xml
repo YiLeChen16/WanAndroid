@@ -25,5 +25,7 @@
     <string name="tip_toast_load_more_success">加载成功~</string>
     <string name="tip_hot_wenda">热门问答</string>
     <string name="tip_normal_wenda">更多问答</string>
+    <string name="tip_back">返回按钮</string>
+    <string name="tip_search_hint1">搜点啥捏~</string>
 
 </resources>

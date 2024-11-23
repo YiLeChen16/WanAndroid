@@ -29,7 +29,7 @@
                 android:id="@+id/iv_back"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:contentDescription="返回按钮"
+                android:contentDescription="@string/tip_back"
                 android:onClick="@{()->searchShareViewModel.onBackClick()}"
                 android:paddingStart="@dimen/dp_5"
                 android:paddingEnd="@dimen/dp_8"
@@ -61,7 +61,7 @@
                     android:background="@null"
                     android:drawableStart="@drawable/icon_search"
                     android:drawablePadding="@dimen/dp_6"
-                    android:hint="搜点啥捏~"
+                    android:hint="@string/tip_search_hint1"
                     android:maxLines="1"
                     android:padding="@dimen/dp_5"
                     android:textSize="@dimen/sp_16" />
