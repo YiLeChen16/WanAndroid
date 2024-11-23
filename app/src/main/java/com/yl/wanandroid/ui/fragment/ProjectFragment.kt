@@ -19,15 +19,7 @@ import javax.inject.Inject
  * @version 1.0
  */
 class ProjectFragment:BaseVMFragment<FragmentProjectBinding,ProjectFragmentViewModel>(R.layout.fragment_project) {
-    companion object{
-        private var projectFragment:ProjectFragment? = null
-        fun newInstance() :ProjectFragment{
-            if(projectFragment == null){
-                projectFragment = ProjectFragment()
-            }
-            return projectFragment!!
-        }
-    }
+
 
     @Inject lateinit var projectFragmentViewModel: ProjectFragmentViewModel
 

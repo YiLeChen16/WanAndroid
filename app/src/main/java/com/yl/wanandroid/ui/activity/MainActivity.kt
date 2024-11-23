@@ -28,10 +28,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         mRefreshLayout.setEnableRefresh(false)
         mRefreshLayout.setEnableLoadMore(false)
         //导航
-        val homeFragment = HomeFragment.newInstance()
-        val projectFragment = ProjectFragment.newInstance()
-        val systemFragment = SystemFragment.newInstance()
-        val myFragment = MyFragment.newInstance()
+        val homeFragment = HomeFragment()
+        val projectFragment = ProjectFragment()
+        val systemFragment = SystemFragment()
+        val myFragment = MyFragment()
         val fragmentList = arrayOf(homeFragment, projectFragment, systemFragment, myFragment)
         mBinding.fragmentContainer.setAdapter(
             object : FragmentStateAdapter(this) {
@@ -104,7 +104,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
             Configuration.UI_MODE_NIGHT_YES->{
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }
         }
     }

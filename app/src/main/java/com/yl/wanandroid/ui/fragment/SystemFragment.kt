@@ -18,15 +18,7 @@ import kotlinx.coroutines.launch
  * @version 1.0
  */
 class SystemFragment:BaseVMFragment<FragmentSystemBinding,SystemFragmentViewModel>(R.layout.fragment_system) {
-    companion object{
-        private var systemFragment:SystemFragment? = null
-        fun newInstance() :SystemFragment{
-            if(systemFragment == null){
-                systemFragment = SystemFragment()
-            }
-            return systemFragment!!
-        }
-    }
+
     override fun initVMData() {
         val scope = CoroutineScope(Job() + Dispatchers.Main)
         scope.launch {

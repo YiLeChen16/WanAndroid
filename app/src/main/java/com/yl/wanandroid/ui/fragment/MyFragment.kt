@@ -18,15 +18,7 @@ import kotlinx.coroutines.launch
  * @version 1.0
  */
 class MyFragment: BaseVMFragment<FragmentMyBinding, MyFragmentViewModel>(R.layout.fragment_my)  {
-    companion object{
-        private var myFragment:MyFragment? = null
-        fun newInstance() :MyFragment{
-            if(myFragment == null){
-                myFragment = MyFragment()
-            }
-            return myFragment!!
-        }
-    }
+
     override fun initVMData() {
         val scope = CoroutineScope(Job() + Dispatchers.Main)
         scope.launch {

@@ -16,13 +16,14 @@ import com.yl.wanandroid.ui.custom.ViewPager2Container
  */
 class WendaFragment : BaseFragment<FragmentWendaBinding>(R.layout.fragment_wenda) {
     companion object {
-        private var wendaFragment: WendaFragment? = null
-        fun newInstance(): WendaFragment {
-            if (wendaFragment == null) {
-                wendaFragment = WendaFragment()
-            }
-            return wendaFragment!!
-        }
+       // private var wendaFragment: WendaFragment? = null
+//        fun newInstance(): WendaFragment {
+////            if (wendaFragment == null) {
+////                wendaFragment = WendaFragment()
+////            }
+//            //return wendaFragment!!
+//
+//        }
     }
 
     override fun initView() {

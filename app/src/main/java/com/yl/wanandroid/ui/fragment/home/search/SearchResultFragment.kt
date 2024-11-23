@@ -1,4 +1,4 @@
-package com.yl.wanandroid.ui.fragment.search
+package com.yl.wanandroid.ui.fragment.home.search
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yl.wanandroid.BR
@@ -24,15 +24,6 @@ class SearchResultFragment :
     BaseVMFragment<FragmentSearchResultBinding, SearchShareViewModel>(
         R.layout.fragment_search_result
     ) {
-    companion object {
-        private var searchResultFragment: SearchResultFragment? = null
-        fun newInstance(): SearchResultFragment {
-            if (searchResultFragment == null) {
-                searchResultFragment = SearchResultFragment()
-            }
-            return searchResultFragment!!
-        }
-    }
 
     @Inject
     lateinit var mSearchResultListAdapter: SearchResultListAdapter

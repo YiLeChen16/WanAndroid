@@ -1,7 +1,8 @@
 package com.yl.wanandroid.ui.activity
 
-import android.os.Build
+import android.annotation.SuppressLint
 import android.view.ViewGroup
+import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -25,6 +26,7 @@ class WebViewActivity :
     BaseVMActivity<ActivityWebBinding, WebActivityViewModel>(R.layout.activity_web) {
     private var mWebView: WebView? = null
 
+    @SuppressLint("SetJavaScriptEnabled")
     override fun initView() {
         super.initView()
         //禁止下拉上拉加载
@@ -34,12 +36,10 @@ class WebViewActivity :
         val webSettings = mWebView?.settings
         webSettings?.javaScriptEnabled = true
         webSettings?.loadsImagesAutomatically = true
-        webSettings?.domStorageEnabled = true;//不设置会导致微信公众号图片资源无法加载
+        webSettings?.domStorageEnabled = true//不设置会导致微信公众号图片资源无法加载
         //允许该网页中http和https混合使用，Android 5之后默认不允许https安全站点去加载http不安全的资源
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            webSettings?.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-        }
-        webSettings?.setBlockNetworkImage(false);
+        webSettings?.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+        webSettings?.blockNetworkImage = false
 
 
         //设置自适应屏幕，两者合用
@@ -78,10 +78,12 @@ class WebViewActivity :
         mWebView?.webViewClient = object : WebViewClient() {
 
             //设置在webView点击打开的新网页在当前界面显示,而不跳转到新的浏览器中
-            /*            override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
-                            view?.loadUrl(url!!)
-                            return true
-                        }*/
+            override fun shouldOverrideUrlLoading(
+                view: WebView?, request: WebResourceRequest?
+            ): Boolean {
+                view?.loadUrl(request?.url.toString())
+                return true
+            }
 
             //在页面加载完毕且用户可见后才更换视图状态
             override fun onPageCommitVisible(view: WebView?, url: String?) {

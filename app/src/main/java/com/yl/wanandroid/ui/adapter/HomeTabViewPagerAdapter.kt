@@ -18,9 +18,12 @@ class HomeTabViewPagerAdapter (fragment: Fragment) : FragmentStateAdapter(fragme
 
     init {
         //创建所需Fragment
-        val recommendFragment = RecommendFragment.newInstance()
-        val knowledgeColumnFragment = HarmonyFragment.newInstance()
-        val wendaFragment = WendaFragment.newInstance()
+//        val recommendFragment = RecommendFragment.newInstance()
+//        val knowledgeColumnFragment = HarmonyFragment.newInstance()
+//        val wendaFragment = WendaFragment.newInstance()
+        val recommendFragment = RecommendFragment()
+        val knowledgeColumnFragment = HarmonyFragment()
+        val wendaFragment = WendaFragment()
 
         fragmentList.add(knowledgeColumnFragment)
         fragmentList.add(recommendFragment)

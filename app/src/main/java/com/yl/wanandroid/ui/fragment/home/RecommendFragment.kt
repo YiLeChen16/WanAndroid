@@ -23,15 +23,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class RecommendFragment :
     BaseVMFragment<FragmentRecommendBinding, RecommendFragmentViewModel>(R.layout.fragment_recommend) {
-    companion object {
-        private var recommendFragment: RecommendFragment? = null
-        fun newInstance(): RecommendFragment {
-            if (recommendFragment == null) {
-                recommendFragment = RecommendFragment()
-            }
-            return recommendFragment!!
-        }
-    }
+
 
     @Inject
     lateinit var recommendListAdapter: BlogListAdapter

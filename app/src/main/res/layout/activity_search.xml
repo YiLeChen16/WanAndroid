@@ -115,7 +115,7 @@
         <!--搜索界面Fragment        -->
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/search_fragment"
-            android:name="com.yl.wanandroid.ui.fragment.search.SearchFragment"
+            android:name="com.yl.wanandroid.ui.fragment.home.search.SearchFragment"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_0"
             android:layout_marginTop="@dimen/dp_5"
@@ -125,7 +125,7 @@
         <!--搜索结果Fragment-->
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/search_result_fragment"
-            android:name="com.yl.wanandroid.ui.fragment.search.SearchResultFragment"
+            android:name="com.yl.wanandroid.ui.fragment.home.search.SearchResultFragment"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_0"
             android:layout_marginTop="@dimen/dp_5"

@@ -1,4 +1,4 @@
-package com.yl.wanandroid.ui.fragment.search
+package com.yl.wanandroid.ui.fragment.home.search
 
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
@@ -27,15 +27,6 @@ class SearchFragment :
     FlowLayoutView.OnItemClickListener, RecommendSearchListAdapter.OnItemClickListener {
     private lateinit var mSearchHistories: FlowLayoutView
 
-    companion object {
-        private var searchFragment: SearchFragment? = null
-        fun newInstance(): SearchFragment {
-            if (searchFragment == null) {
-                searchFragment = SearchFragment()
-            }
-            return searchFragment!!
-        }
-    }
 
     @Inject
     lateinit var mRecommendSearchListAdapter: RecommendSearchListAdapter

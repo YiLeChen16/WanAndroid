@@ -23,15 +23,6 @@ import javax.inject.Inject
 class HarmonyFragment : BaseVMFragment<FragmentHarmonyBinding, HarmonyFragmentViewModel>(
     R.layout.fragment_harmony
 ) {
-    companion object {
-        private var knowledgeColumnFragment: HarmonyFragment? = null
-        fun newInstance(): HarmonyFragment {
-            if (knowledgeColumnFragment == null) {
-                knowledgeColumnFragment = HarmonyFragment()
-            }
-            return knowledgeColumnFragment!!
-        }
-    }
 
 
     @Inject

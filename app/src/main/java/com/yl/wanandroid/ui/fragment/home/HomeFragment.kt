@@ -27,15 +27,7 @@ import com.yl.wanandroid.ui.custom.ViewPager2Container
 @AndroidEntryPoint
 class HomeFragment :
     BaseVMFragment<FragmentHomeBinding, HomeFragmentViewModel>(R.layout.fragment_home) {
-    companion object {
-        private var homeFragment: HomeFragment? = null
-        fun newInstance(): HomeFragment {
-            if (homeFragment == null) {
-                homeFragment = HomeFragment()
-            }
-            return homeFragment!!
-        }
-    }
+
 
     private lateinit var homeTabViewPagerAdapter: HomeTabViewPagerAdapter
 
