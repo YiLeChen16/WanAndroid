@@ -6,7 +6,7 @@ data class HarmonyColumnDataBean(
     val tools: Tools
 )
 data class Links(
-    val articleList: List<ItemData>,
+    val articleList: List<ArticleItemData>,
     val author: String,
     val children: List<Any>,
     val courseId: Int,
@@ -24,7 +24,7 @@ data class Links(
 )
 
 data class OpenSources(
-    val articleList: List<ItemData>,
+    val articleList: List<ArticleItemData>,
     val author: String,
     val children: List<Any>,
     val courseId: Int,
@@ -42,7 +42,7 @@ data class OpenSources(
 )
 
 data class Tools(
-    val articleList: List<ItemData>,
+    val articleList: List<ArticleItemData>,
     val author: String,
     val children: List<Any>,
     val courseId: Int,

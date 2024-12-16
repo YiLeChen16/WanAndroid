@@ -3,7 +3,7 @@ package com.yl.wanandroid.viewmodel.home
 import androidx.lifecycle.MutableLiveData
 import com.yl.wanandroid.Constant
 import com.yl.wanandroid.base.BaseViewModel
-import com.yl.wanandroid.model.ItemData
+import com.yl.wanandroid.model.ArticleItemData
 import com.yl.wanandroid.model.NormalWendaDataBean
 import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.repository.WendaRepository
@@ -20,7 +20,7 @@ class HotOrMoreWendaFragmentViewModel : BaseViewModel() {
     private val wendaRepository = getRepository<WendaRepository>()
 
     //热门问答数据
-    val hotWendaData = MutableLiveData<MutableList<ItemData>?>()
+    val hotWendaData = MutableLiveData<MutableList<ArticleItemData>?>()
 
     //普通问答数据
     val normalWendaData = MutableLiveData<NormalWendaDataBean?>()

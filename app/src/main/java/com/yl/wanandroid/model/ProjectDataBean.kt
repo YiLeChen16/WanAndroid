@@ -1,6 +1,6 @@
 package com.yl.wanandroid.model
 
-data class SearchResultDataBean(
+data class ProjectDataBean(
     val curPage: Int,
     val datas: List<ArticleItemData>,
     val offset: Int,
@@ -9,7 +9,3 @@ data class SearchResultDataBean(
     val size: Int,
     val total: Int
 )
-
-
-
-

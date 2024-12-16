@@ -2,8 +2,10 @@ package com.yl.wanandroid.network
 
 import com.yl.wanandroid.model.BannerDataBean
 import com.yl.wanandroid.model.HarmonyColumnDataBean
-import com.yl.wanandroid.model.ItemData
+import com.yl.wanandroid.model.ArticleItemData
 import com.yl.wanandroid.model.NormalWendaDataBean
+import com.yl.wanandroid.model.ProjectCategoryDataBeanItem
+import com.yl.wanandroid.model.ProjectDataBean
 import com.yl.wanandroid.model.RecommendBlogDataBean
 import com.yl.wanandroid.model.SearchHotKeyDataBean
 import com.yl.wanandroid.model.SearchResultDataBean
@@ -17,6 +19,7 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 /**
  * 网络请求接口
@@ -68,6 +71,12 @@ interface WanAndroidApiInterface {
     @GET("/hotkey/json")
     suspend fun getSearchHotkey(): BaseResult<MutableList<SearchHotKeyDataBean>>?
 
+    /**
+     * 获取搜索关键词数据
+     * @param page Int
+     * @param k String
+     * @return BaseResult<SearchResultDataBean>?
+     */
     @POST("/article/query/{page}/json")
     @FormUrlEncoded
     suspend fun getSearchResult(
@@ -89,7 +98,7 @@ interface WanAndroidApiInterface {
      * @return BaseResult<MutableList<ItemData>>?
      */
     @GET("/popular/wenda/json")
-    suspend fun getHotWendaData():BaseResult<MutableList<ItemData>>?
+    suspend fun getHotWendaData():BaseResult<MutableList<ArticleItemData>>?
 
 
     /**
@@ -101,4 +110,23 @@ interface WanAndroidApiInterface {
     suspend fun getNormalWendaData(
         @Path("page") page: Int
     ):BaseResult<NormalWendaDataBean>?
+
+
+    /**
+     * 获取项目分类数据
+     * @return BaseResult<MutableList<ProjectCategoryDataBeanItem>>?
+     */
+    @GET("/project/tree/json")
+    suspend fun getProjectCategory():BaseResult<MutableList<ProjectCategoryDataBeanItem>>?
+
+    /**
+     * 获取对应分类项目的数据
+     * @param page Int
+     * @param cid Int
+     * @return BaseResult<ProjectItemDataBean>?
+     */
+    @GET("/project/list/{page}/json")
+    suspend fun getProjectDataByCid(
+        @Path("page") page:Int,
+        @Query("cid") cid:Int):BaseResult<ProjectDataBean>?
 }

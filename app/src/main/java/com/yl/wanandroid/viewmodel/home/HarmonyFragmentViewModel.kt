@@ -3,7 +3,7 @@ package com.yl.wanandroid.viewmodel.home
 import androidx.lifecycle.MutableLiveData
 import com.yl.wanandroid.base.BaseViewModel
 import com.yl.wanandroid.model.HarmonyColumnDataBean
-import com.yl.wanandroid.model.ItemData
+import com.yl.wanandroid.model.ArticleItemData
 import com.yl.wanandroid.repository.HarmonyRepository
 import com.yl.wanandroid.utils.TipsToast
 
@@ -21,13 +21,13 @@ class HarmonyFragmentViewModel:BaseViewModel() {
     val harmonyColumnDataBean = MutableLiveData<HarmonyColumnDataBean?>()
 
     //常用链接数据
-    val linkData = MutableLiveData<MutableList<ItemData>>()
+    val linkData = MutableLiveData<MutableList<ArticleItemData>>()
 
     //开源项目数据
-    val projectData = MutableLiveData<MutableList<ItemData>>()
+    val projectData = MutableLiveData<MutableList<ArticleItemData>>()
 
     //常用工具数据
-    val toolData = MutableLiveData<MutableList<ItemData>>()
+    val toolData = MutableLiveData<MutableList<ArticleItemData>>()
 
     //默认展示数据
     //0:常用链接

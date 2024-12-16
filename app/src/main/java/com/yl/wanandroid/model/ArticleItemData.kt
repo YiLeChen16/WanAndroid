@@ -10,7 +10,7 @@ import com.yl.wanandroid.utils.LogUtils
  * @date 2024/11/16 17:58
  * @version 1.0
  */
-data class ItemData(
+data class ArticleItemData(
     val adminAdd: Boolean,
     val apkLink: String,
     val audit: Int,
@@ -40,7 +40,7 @@ data class ItemData(
     val shareUser: String,
     val superChapterId: Int,
     val superChapterName: String,
-    val tags: List<SearchTag>,
+    val tags: List<Tag>,
     val title: String,
     val type: Int,
     val userId: Int,
@@ -61,3 +61,8 @@ data class ItemData(
         LogUtils.d(this,"SearchData-->onCollectClick----")
     }
 }
+
+data class Tag(
+    val name: String,
+    val url: String
+)

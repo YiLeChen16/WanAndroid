@@ -113,6 +113,7 @@ class SearchResultFragment :
                     mRefreshLayout.finishLoadMore()
                 }
             } else {
+                TipsToast.showTips(R.string.tip_null)
                 mRefreshLayout.finishLoadMore()
             }
         }

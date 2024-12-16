@@ -10,7 +10,7 @@ import androidx.viewbinding.ViewBinding
 import com.yl.wanandroid.Constant
 import com.yl.wanandroid.R
 import com.yl.wanandroid.databinding.ItemHarmonyViewBinding
-import com.yl.wanandroid.model.ItemData
+import com.yl.wanandroid.model.ArticleItemData
 import com.yl.wanandroid.ui.activity.WebViewActivity
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
@@ -22,7 +22,7 @@ import javax.inject.Inject
  * @version 1.0
  */
 class HarmonyContentListAdapter @Inject constructor(@ActivityContext val context: Context) :RecyclerView.Adapter<HarmonyContentListAdapter.MyViewHolder>(){
-    private val data: MutableList<ItemData> = mutableListOf()
+    private val data: MutableList<ArticleItemData> = mutableListOf()
 
     class MyViewHolder(binding:ViewBinding) :RecyclerView.ViewHolder(binding.root)
 
@@ -58,7 +58,7 @@ class HarmonyContentListAdapter @Inject constructor(@ActivityContext val context
     }
 
     //暴露方法给外界设置数据
-    fun setData(data: List<ItemData>) {
+    fun setData(data: List<ArticleItemData>) {
         this.data.clear()//清空数据
         this.data.addAll(data)
         notifyDataSetChanged()

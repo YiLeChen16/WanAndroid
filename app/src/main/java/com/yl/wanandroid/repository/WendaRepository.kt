@@ -1,6 +1,6 @@
 package com.yl.wanandroid.repository
 
-import com.yl.wanandroid.model.ItemData
+import com.yl.wanandroid.model.ArticleItemData
 import com.yl.wanandroid.model.NormalWendaDataBean
 import com.yl.wanandroid.network.WanAndroidApiInterface
 import com.yl.wanandroid.repository.base.BaseRepository
@@ -12,12 +12,21 @@ import com.yl.wanandroid.repository.base.BaseRepository
  * @version 1.0
  */
 class WendaRepository : BaseRepository() {
-    suspend fun getHotWendaData(): MutableList<ItemData>? {
+    /**
+     * 获取热门问答数据
+     * @return MutableList<ArticleItemData>?
+     */
+    suspend fun getHotWendaData(): MutableList<ArticleItemData>? {
         return requestResponse {
             WanAndroidApiInterface.api.getHotWendaData()
         }
     }
 
+    /**
+     * 获取普通问答数据
+     * @param page Int
+     * @return NormalWendaDataBean?
+     */
     suspend fun getNormalWendaData(page: Int): NormalWendaDataBean? {
         return requestResponse {
             WanAndroidApiInterface.api.getNormalWendaData(page)

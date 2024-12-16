@@ -16,7 +16,7 @@
         <!--使用databinding绑定-->
         <variable
             name="searchData"
-            type="com.yl.wanandroid.model.ItemData" />
+            type="com.yl.wanandroid.model.ArticleItemData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

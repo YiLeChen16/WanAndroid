@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.yl.wanandroid.Constant
 import com.yl.wanandroid.R
 import com.yl.wanandroid.databinding.ItemBlogViewBinding
-import com.yl.wanandroid.model.ItemData
+import com.yl.wanandroid.model.ArticleItemData
 import com.yl.wanandroid.ui.activity.WebViewActivity
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
@@ -26,19 +26,19 @@ class BlogListAdapter @Inject constructor(@ActivityContext val context: Context)
 
 
 
-    private var datas: MutableList<ItemData> = mutableListOf()
+    private var datas: MutableList<ArticleItemData> = mutableListOf()
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     //暴露方法给外界设置数据
-    fun setData(recommendBlogDatas: List<ItemData>) {
+    fun setData(recommendBlogDatas: List<ArticleItemData>) {
         this.datas.clear()//清空数据
         this.datas.addAll(recommendBlogDatas)
         notifyDataSetChanged()
     }
 
     //暴露方法给外界添加数据
-    fun addData(recommendBlogDatas: List<ItemData>){
+    fun addData(recommendBlogDatas: List<ArticleItemData>){
         val oldIndex = datas.size - 1
         this.datas.addAll(recommendBlogDatas)
         notifyItemRangeChanged(oldIndex,recommendBlogDatas.size)

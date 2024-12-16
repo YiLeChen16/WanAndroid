@@ -49,7 +49,6 @@ class HomeFragment :
                 tabSelected.textSize = 18f
                 tabSelected.setTextColor(context!!.getColor(R.color.md_theme_primary))
                 tabSelected.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD))
-                tabSelected.text = tab.text
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {
@@ -58,7 +57,6 @@ class HomeFragment :
                 tabSelected.textSize = 14f
                 tabSelected.setTextColor(context!!.getColor(R.color.md_theme_onSurface))
                 tabSelected.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL))
-                tabSelected.text = tab.text
             }
 
             override fun onTabReselected(tab: TabLayout.Tab) {}

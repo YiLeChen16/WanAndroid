@@ -4,7 +4,7 @@ package com.yl.wanandroid.model
 
 data class RecommendBlogDataBean(
     val curPage: Int,
-    val datas: List<ItemData>,
+    val datas: List<ArticleItemData>,
     val offset: Int,
     val over: Boolean,
     val pageCount: Int,
