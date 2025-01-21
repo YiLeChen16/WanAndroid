@@ -1,9 +1,8 @@
-package com.yl.wanandroid.viewmodel
+package com.yl.wanandroid.viewmodel.project
 
 import androidx.lifecycle.MutableLiveData
 import com.yl.wanandroid.base.BaseViewModel
 import com.yl.wanandroid.model.ProjectCategoryDataBeanItem
-import com.yl.wanandroid.model.ProjectDataBean
 import com.yl.wanandroid.repository.ProjectRepository
 import com.yl.wanandroid.utils.TipsToast
 import javax.inject.Inject

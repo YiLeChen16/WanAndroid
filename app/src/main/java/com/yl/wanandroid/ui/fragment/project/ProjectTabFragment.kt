@@ -1,6 +1,5 @@
-package com.yl.wanandroid.ui.fragment
+package com.yl.wanandroid.ui.fragment.project
 
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.yl.wanandroid.R
 import com.yl.wanandroid.base.BaseVMFragment
@@ -9,13 +8,8 @@ import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.ui.adapter.ProjectListAdapter
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast
-import com.yl.wanandroid.viewmodel.ProjectTabFragmentViewModel
+import com.yl.wanandroid.viewmodel.project.ProjectTabFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**

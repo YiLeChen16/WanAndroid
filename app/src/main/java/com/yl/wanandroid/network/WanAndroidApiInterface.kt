@@ -9,6 +9,8 @@ import com.yl.wanandroid.model.ProjectDataBean
 import com.yl.wanandroid.model.RecommendBlogDataBean
 import com.yl.wanandroid.model.SearchHotKeyDataBean
 import com.yl.wanandroid.model.SearchResultDataBean
+import com.yl.wanandroid.model.SystemArticleDataBean
+import com.yl.wanandroid.model.SystemDataBeanItem
 import com.yl.wanandroid.network.result.BaseResult
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -90,7 +92,7 @@ interface WanAndroidApiInterface {
      * @return BaseResult<HarmonyColumnDataBean>?
      */
     @GET("/harmony/index/json")
-    suspend fun getHarmonyColumnData():BaseResult<HarmonyColumnDataBean>?
+    suspend fun getHarmonyColumnData(): BaseResult<HarmonyColumnDataBean>?
 
 
     /**
@@ -98,7 +100,7 @@ interface WanAndroidApiInterface {
      * @return BaseResult<MutableList<ItemData>>?
      */
     @GET("/popular/wenda/json")
-    suspend fun getHotWendaData():BaseResult<MutableList<ArticleItemData>>?
+    suspend fun getHotWendaData(): BaseResult<MutableList<ArticleItemData>>?
 
 
     /**
@@ -109,7 +111,7 @@ interface WanAndroidApiInterface {
     @GET("/wenda/list/{page}/json")
     suspend fun getNormalWendaData(
         @Path("page") page: Int
-    ):BaseResult<NormalWendaDataBean>?
+    ): BaseResult<NormalWendaDataBean>?
 
 
     /**
@@ -117,7 +119,7 @@ interface WanAndroidApiInterface {
      * @return BaseResult<MutableList<ProjectCategoryDataBeanItem>>?
      */
     @GET("/project/tree/json")
-    suspend fun getProjectCategory():BaseResult<MutableList<ProjectCategoryDataBeanItem>>?
+    suspend fun getProjectCategory(): BaseResult<MutableList<ProjectCategoryDataBeanItem>>?
 
     /**
      * 获取对应分类项目的数据
@@ -127,6 +129,27 @@ interface WanAndroidApiInterface {
      */
     @GET("/project/list/{page}/json")
     suspend fun getProjectDataByCid(
-        @Path("page") page:Int,
-        @Query("cid") cid:Int):BaseResult<ProjectDataBean>?
+        @Path("page") page: Int,
+        @Query("cid") cid: Int
+    ): BaseResult<ProjectDataBean>?
+
+
+    /**
+     * 获取体系数据
+     * @return BaseResult<MutableList<SystemDataBeanItem>>?
+     */
+    @GET("/tree/json")
+    suspend fun getSystemData():BaseResult<MutableList<SystemDataBeanItem>>?
+
+    /**
+     * 获取知识体系下的文章
+     * @param page Int
+     * @param cid Int
+     * @return BaseResult<SystemArticleDataBean>?
+     */
+    @GET("/article/list/{page}/json")
+    suspend fun getSystemArticleDataByCid(
+        @Path("page") page: Int,
+        @Query("cid") cid: Int
+    ):BaseResult<SystemArticleDataBean>?
 }

@@ -1,10 +1,10 @@
-package com.yl.wanandroid.ui.fragment
+package com.yl.wanandroid.ui.fragment.system
 
 import com.yl.wanandroid.R
 import com.yl.wanandroid.base.BaseVMFragment
+import com.yl.wanandroid.databinding.FragmentSystemCourseBinding
 import com.yl.wanandroid.model.ViewStateEnum
-import com.yl.wanandroid.databinding.FragmentSystemBinding
-import com.yl.wanandroid.viewmodel.SystemFragmentViewModel
+import com.yl.wanandroid.viewmodel.system.SystemCourseFragmentViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -12,13 +12,13 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 /**
- * @description: 体系
+ * @description: 体系下的课程子页面
  * @author YL Chen
- * @date 2024/9/7 16:02
+ * @date 2024/12/18 21:58
  * @version 1.0
  */
-class SystemFragment:BaseVMFragment<FragmentSystemBinding,SystemFragmentViewModel>(R.layout.fragment_system) {
-
+class SystemCourseFragment:BaseVMFragment<FragmentSystemCourseBinding,SystemCourseFragmentViewModel>(
+    R.layout.fragment_system_course) {
     override fun initVMData() {
         val scope = CoroutineScope(Job() + Dispatchers.Main)
         scope.launch {

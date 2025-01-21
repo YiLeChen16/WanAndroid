@@ -11,11 +11,11 @@
         tools:layout="@layout/fragment_home"/>
     <fragment
         android:id="@+id/project"
-        android:name="com.yl.wanandroid.ui.fragment.ProjectFragment"
+        android:name="com.yl.wanandroid.ui.fragment.project.ProjectFragment"
         tools:layout="@layout/fragment_project"/>
     <fragment
         android:id="@+id/system"
-        android:name="com.yl.wanandroid.ui.fragment.SystemFragment"
+        android:name="com.yl.wanandroid.ui.fragment.system.SystemFragment"
         tools:layout="@layout/fragment_system"/>
     <fragment
         android:id="@+id/my"

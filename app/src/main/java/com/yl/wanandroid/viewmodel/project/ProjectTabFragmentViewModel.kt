@@ -1,4 +1,4 @@
-package com.yl.wanandroid.viewmodel
+package com.yl.wanandroid.viewmodel.project
 
 import androidx.lifecycle.MutableLiveData
 import com.yl.wanandroid.base.BaseViewModel
@@ -42,7 +42,7 @@ class ProjectTabFragmentViewModel:BaseViewModel() {
         )
     }
 
-    //TODO::加载更多
+    //加载更多
     fun getMoreProjectDataByCid(cid:Int){
         currentPage++
         launchUI(

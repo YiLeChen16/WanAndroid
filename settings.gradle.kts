@@ -8,6 +8,12 @@ pluginManagement {
             }
         }
         mavenCentral()
+        mavenLocal()
+        maven {
+            url = uri("https://google.bintray.com/flexbox-layout")
+        }
+        maven { url = uri("https://repo.grails.org/grails/core/") }
+
         gradlePluginPortal()
     }
 }

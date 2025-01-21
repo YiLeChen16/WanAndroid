@@ -10,8 +10,8 @@ import com.yl.wanandroid.R
 import com.yl.wanandroid.base.BaseActivity
 import com.yl.wanandroid.databinding.ActivityMainBinding
 import com.yl.wanandroid.ui.fragment.MyFragment
-import com.yl.wanandroid.ui.fragment.ProjectFragment
-import com.yl.wanandroid.ui.fragment.SystemFragment
+import com.yl.wanandroid.ui.fragment.project.ProjectFragment
+import com.yl.wanandroid.ui.fragment.system.SystemFragment
 import com.yl.wanandroid.ui.fragment.home.HomeFragment
 import com.yl.wanandroid.utils.LogUtils
 import dagger.hilt.android.AndroidEntryPoint

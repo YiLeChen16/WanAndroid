@@ -3,7 +3,7 @@ package com.yl.wanandroid.ui.adapter
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.yl.wanandroid.model.ProjectCategoryDataBeanItem
-import com.yl.wanandroid.ui.fragment.ProjectTabFragment
+import com.yl.wanandroid.ui.fragment.project.ProjectTabFragment
 
 /**
  * @description: ProjectFragment的ViewPager适配器

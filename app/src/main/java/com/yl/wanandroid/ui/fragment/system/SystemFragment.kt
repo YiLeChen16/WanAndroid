@@ -1,0 +1,86 @@
+package com.yl.wanandroid.ui.fragment.system
+
+import android.graphics.Typeface
+import android.view.LayoutInflater
+import android.widget.TextView
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import com.google.android.material.tabs.TabLayout
+import com.yl.wanandroid.R
+import com.yl.wanandroid.base.BaseApplication
+import com.yl.wanandroid.base.BaseVMFragment
+import com.yl.wanandroid.databinding.FragmentSystemBinding
+import com.yl.wanandroid.model.ViewStateEnum
+import com.yl.wanandroid.ui.adapter.SystemViewPagerAdapter
+import com.yl.wanandroid.utils.LogUtils
+import com.yl.wanandroid.viewmodel.system.SystemFragmentViewModel
+
+/**
+ * @description: 体系
+ * @author YL Chen
+ * @date 2024/9/7 16:02
+ * @version 1.0
+ */
+class SystemFragment :
+    BaseVMFragment<FragmentSystemBinding, SystemFragmentViewModel>(R.layout.fragment_system) {
+
+    private var systemViewPagerAdapter: SystemViewPagerAdapter? = null
+
+    override fun initView() {
+        super.initView()
+        val selectedTypeface =
+            Typeface.createFromAsset(BaseApplication.context.assets, "fonts/good_balck.ttf");//下载的字体
+        //禁用刷新布局
+        mRefreshLayout.setEnableRefresh(false)
+        mRefreshLayout.setEnableLoadMore(false)
+        initTab()
+        systemViewPagerAdapter = SystemViewPagerAdapter(this)
+        mBinding.viewpager.adapter = systemViewPagerAdapter
+        mBinding.viewpager.registerOnPageChangeCallback(object : OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                mBinding.tabLayout.getTabAt(position)?.select()
+            }
+        })
+        mBinding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                if(tab == null)
+                    return
+                mBinding.viewpager.currentItem = tab.position
+                //选中.字体加粗
+                val tabSelected = tab.customView as TextView
+                tabSelected.textSize = 18f
+                tabSelected.setTextColor(context!!.getColor(R.color.md_theme_primary))
+                tabSelected.setTypeface(selectedTypeface)
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                if(tab == null)
+                    return
+                //未选中
+                val tabSelected = tab.customView as TextView
+                tabSelected.textSize = 14f
+                tabSelected.setTextColor(context!!.getColor(R.color.md_theme_onSurface))
+                tabSelected.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL))
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+        })
+    }
+
+    //初始化tab条目的样式
+    private fun initTab() {
+        val initData = listOf("体系", "课程")
+        LogUtils.d(this, "initTab-->mBinding.tab.tabCount==${mBinding.tabLayout.tabCount}")
+        for (i in initData.indices) {
+            val view = LayoutInflater.from(context).inflate(R.layout.item_tab, null) as TextView
+            view.text = initData[i]
+            val tab: TabLayout.Tab = mBinding.tabLayout.newTab().setCustomView(view)
+            mBinding.tabLayout.addTab(tab,false)
+        }
+    }
+
+
+    override fun initVMData() {
+        mViewModel.changeStateView(ViewStateEnum.VIEW_LOAD_SUCCESS)
+    }
+}

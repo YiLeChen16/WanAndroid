@@ -6,7 +6,7 @@
 
         <variable
             name="projectViewModel"
-            type="com.yl.wanandroid.viewmodel.ProjectFragmentViewModel" />
+            type="com.yl.wanandroid.viewmodel.project.ProjectFragmentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

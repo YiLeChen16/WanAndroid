@@ -1,4 +1,4 @@
-package com.yl.wanandroid.ui.fragment
+package com.yl.wanandroid.ui.fragment.project
 
 import android.graphics.Typeface
 import android.view.LayoutInflater
@@ -13,7 +13,7 @@ import com.yl.wanandroid.model.ProjectCategoryDataBeanItem
 import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.ui.adapter.ProjectTabViewPagerAdapter
 import com.yl.wanandroid.utils.LogUtils
-import com.yl.wanandroid.viewmodel.ProjectFragmentViewModel
+import com.yl.wanandroid.viewmodel.project.ProjectFragmentViewModel
 import javax.inject.Inject
 
 /**
