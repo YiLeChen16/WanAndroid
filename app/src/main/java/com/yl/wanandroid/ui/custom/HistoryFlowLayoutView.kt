@@ -3,7 +3,6 @@ package com.yl.wanandroid.ui.custom
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -21,7 +20,7 @@ import com.yl.wanandroid.utils.SizeUtils
  * @date 2024/11/5 16:41
  * @version 1.0
  */
-class FlowLayoutView(
+class HistoryFlowLayoutView(
     val mContext: Context,
     val attrs: AttributeSet?,
     defStyleAttr: Int
@@ -183,13 +182,14 @@ class FlowLayoutView(
     private fun createChildView() {
         for ((index) in mSearchHistoriesData.withIndex()) {
             val itemView = LayoutInflater.from(mContext)
-                .inflate(R.layout.item_flow_layout_view, this, false)//载入布局
+                .inflate(R.layout.item_history_flow_layout_view, this, false)//载入布局
             val keyword = itemView.findViewById<TextView>(R.id.keyword)
             val deleteItem = itemView.findViewById<ImageView>(R.id.delete_item)
             keyword.text = mSearchHistoriesData[index].query
 
             //给每个ItemView设置监听事件
-            keyword.setOnClickListener {
+            //必须给itemView设置不能给keyword设置,否则没有点击效果
+            itemView.setOnClickListener {
                 listener?.onKeyWordClick(keyword.text.toString())
             }
             deleteItem.setOnClickListener {

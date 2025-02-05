@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
 
-       <com.yl.wanandroid.ui.custom.FlowLayoutView
+       <com.yl.wanandroid.ui.custom.HistoryFlowLayoutView
            android:id="@+id/search_histories"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"

@@ -8,15 +8,16 @@ import com.yl.wanandroid.model.SystemDataBeanItem
 import com.yl.wanandroid.repository.SystemRepository
 import com.yl.wanandroid.ui.adapter.SystemChildLeftListAdapter
 import com.yl.wanandroid.utils.TipsToast
+import com.yl.wanandroid.viewmodel.search.SearchShareViewModel.launchUI
 
 /**
- * @description: TODO
+ * @description: 体系ViewModel
  * @author YL Chen
  * @date 2024/12/18 22:03
  * @version 1.0
  */
-class  SystemChildFragmentViewModel:BaseViewModel(),SystemChildLeftListAdapter.OnTabTitleClickListener {
-    val systemRepository:SystemRepository? = getRepository<SystemRepository>()
+class SystemChildFragmentViewModel : BaseViewModel() {
+    val systemRepository: SystemRepository? = getRepository<SystemRepository>()
 
     val systemData = MutableLiveData<MutableList<SystemDataBeanItem>?>()
 
@@ -31,17 +32,14 @@ class  SystemChildFragmentViewModel:BaseViewModel(),SystemChildLeftListAdapter.O
     /**
      * 获取体系数据
      */
-    fun getSystemData(){
+    fun getSystemData() {
         launchUI(
-            errorCallback = {
-                    _,errorMSg->
+            errorCallback = { _, errorMSg ->
                 TipsToast.showTips(errorMSg)
                 systemData.value = null
             },
             requestCall = {
-                if (systemData.value == null){
-                    systemData.value = systemRepository?.getSystemData()
-                }
+                systemData.value = systemRepository?.getSystemData()
             }
         )
     }
@@ -50,29 +48,22 @@ class  SystemChildFragmentViewModel:BaseViewModel(),SystemChildLeftListAdapter.O
      *获取对应cid的system下的文章
      * @param cid Int
      */
-    fun getSystemArticleDataByCid(cid:Int){
+    fun getSystemArticleDataByCid(cid: Int) {
         launchUI(
-            errorCallback = {
-                    _,errorMSg->
+            errorCallback = { _, errorMSg ->
                 TipsToast.showTips(errorMSg)
                 systemArticleData.value = null
             },
             requestCall = {
-                systemArticleData.value = systemRepository?.getSystemArticleDataByCid(DEFAULT_PAGE,cid)
+                systemArticleData.value =
+                    systemRepository?.getSystemArticleDataByCid(DEFAULT_PAGE, cid)
             }
         )
     }
 
-    //TODO::获取更多
-
-
-
     override fun onReload() {
-        TODO("Not yet implemented")
+        getSystemData()
     }
 
-    //左侧标题被点击,返回数据
-    override fun onTabTitleClick(children: List<Children>) {
 
-    }
 }

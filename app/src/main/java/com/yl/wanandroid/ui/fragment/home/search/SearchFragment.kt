@@ -8,7 +8,7 @@ import com.yl.wanandroid.base.BaseVMFragment
 import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.databinding.FragmentSearchBinding
 import com.yl.wanandroid.ui.adapter.RecommendSearchListAdapter
-import com.yl.wanandroid.ui.custom.FlowLayoutView
+import com.yl.wanandroid.ui.custom.HistoryFlowLayoutView
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.viewmodel.search.SearchShareViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,8 +24,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SearchFragment :
     BaseVMFragment<FragmentSearchBinding, SearchShareViewModel>(R.layout.fragment_search),
-    FlowLayoutView.OnItemClickListener, RecommendSearchListAdapter.OnItemClickListener {
-    private lateinit var mSearchHistories: FlowLayoutView
+    HistoryFlowLayoutView.OnItemClickListener, RecommendSearchListAdapter.OnItemClickListener {
+    private lateinit var mSearchHistories: HistoryFlowLayoutView
 
 
     @Inject

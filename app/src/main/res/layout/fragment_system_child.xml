@@ -28,8 +28,8 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.35" />
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/verticalViewpager"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/content_list"
             android:layout_width="@dimen/dp_0"
             android:layout_height="@dimen/dp_0"
             android:padding="@dimen/dp_10"

@@ -31,4 +31,9 @@
         <attr name="maxLines" format="integer"/><!--显示最大行数-->
         <attr name="realMaxLines" format="integer"/><!--实际最大行数,即展开后达到的最大行数-->
     </declare-styleable>
+
+    <declare-styleable name="CommonFlowLayoutView">
+        <attr name="line_spac" format="integer"/><!--行间距-->
+        <attr name="column_spac" format="integer"/><!--列间距-->
+    </declare-styleable>
 </resources>
