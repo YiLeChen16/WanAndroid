@@ -95,11 +95,15 @@ class HistoryFlowLayoutView(
             showAllDeleteButton()
             //设置删除记录变量
             isDeleteOk = false
+            //锁定mIsFold按钮
+            mIsFold.isEnabled = false
         }
         mDeleteOk.setOnClickListener{
             //隐藏详细删除操作,并显示删除图标,隐藏每个条目后面的删除按钮并显示所有条目
             hideAllDeleteButton()
             isDeleteOk = true
+            //解除锁定mIsFold按钮
+            mIsFold.isEnabled = true
         }
         mAllDelete.setOnClickListener{
             //将历史记录全部删除
@@ -110,6 +114,7 @@ class HistoryFlowLayoutView(
     }
 
     private fun deleteAllHistories() {
+        hideAllDeleteButton()
         //移除全部历史记录
         for (line in lines) {
             for (view in line) {
@@ -126,6 +131,7 @@ class HistoryFlowLayoutView(
 
     private fun hideAllDeleteButton() {
         isExpanded = false
+        changeFlowDrawable()
         //将删除图标隐藏,显示详细删除操作
         mDelete.isVisible = true
         mDetailDelete.isVisible = false
@@ -142,6 +148,7 @@ class HistoryFlowLayoutView(
 
     private fun showAllDeleteButton() {
         isExpanded = true
+        changeFlowDrawable()
         //将删除图标隐藏显示详细删除操作
         mDelete.isVisible = false
         mDetailDelete.isVisible = true
@@ -300,8 +307,18 @@ class HistoryFlowLayoutView(
      */
     private fun toggle() {
         isExpanded = !isExpanded
-        mIsFold.isSelected = isExpanded
+        changeFlowDrawable()
         requestLayout()
+    }
+
+    private fun changeFlowDrawable() {
+        if (isExpanded) {
+            //展开
+            mIsFold.setImageResource(R.drawable.expand_less)
+        } else {
+            //收缩
+            mIsFold.setImageResource(R.drawable.expand_more)
+        }
     }
 
     /**

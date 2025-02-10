@@ -93,8 +93,8 @@ class SearchActivity :
 
         mBinding.edSearchBox.setOnEditorActionListener(OnEditorActionListener { textView, actionId, keyEvent ->
             if ((actionId == EditorInfo.IME_ACTION_UNSPECIFIED || actionId == EditorInfo.IME_ACTION_SEARCH) && keyEvent != null) {
-                //点击回车要做的操作
-                mViewModel.search_fragment_visibility.value = true
+                //点击回车要做的操作,与点击搜索按钮一样回调onSearchClick此方法
+                mViewModel.onSearchClick()
                 return@OnEditorActionListener true
             }
             false

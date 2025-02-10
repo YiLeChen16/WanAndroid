@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/baseline_expand_less_24" android:state_selected="true"/>
-    <item android:drawable="@drawable/baseline_expand_more_24" android:state_selected="false"/>
+    <item android:state_selected="true" android:drawable="@drawable/expand_less" />
+    <item android:state_focused="true"  android:drawable="@drawable/expand_less" />
+    <item android:drawable="@drawable/expand_more"/>
 </selector>

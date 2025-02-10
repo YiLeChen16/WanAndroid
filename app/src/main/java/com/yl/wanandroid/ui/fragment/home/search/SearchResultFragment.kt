@@ -46,7 +46,7 @@ class SearchResultFragment :
     }
 
     override fun initVMData() {
-        if (mViewModel.searchHintKeyWord.isNotEmpty()) {
+        if (mViewModel.searchHintKeyWord.isNotEmpty() && mViewModel.editData.value.isNullOrEmpty()) {
             //将跳转获取到的关键词赋值到当前搜索关键词
             mViewModel.getSearchResultData(mViewModel.searchHintKeyWord)
         }
@@ -58,6 +58,7 @@ class SearchResultFragment :
             if (it) {
                 //此视图可见
                 //触发更新
+                LogUtils.d(this@SearchResultFragment,"触发更新")
                 mViewModel.mCurrentSearchKeyWord.value = mViewModel.mCurrentSearchKeyWord.value
             } else {
                 //此视图不可见

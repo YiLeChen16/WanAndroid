@@ -39,16 +39,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/fold"
+            android:focusable="true"
             app:layout_constraintStart_toEndOf="@id/tv1"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/line"
-            android:src="@drawable/selector_btn_is_fold"
+            android:src="@drawable/expand_more"
             android:layout_marginStart="@dimen/dp_10"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             android:paddingStart="@dimen/dp_5"
             android:paddingBottom="@dimen/dp_5"
-            android:paddingEnd="@dimen/dp_5"/>
+            android:paddingEnd="@dimen/dp_5"
+            android:clickable="true"/>
 
         <ImageView
             android:id="@+id/delete"
