@@ -33,6 +33,7 @@
         <activity
             android:name=".ui.activity.SearchActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name=".ui.activity.SystemActivity" />
     </application>
 
 </manifest>

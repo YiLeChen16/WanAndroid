@@ -1,19 +1,21 @@
 package com.yl.wanandroid.ui.activity
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import android.view.ViewGroup
 import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import com.yl.wanandroid.BR
 import com.yl.wanandroid.Constant
 import com.yl.wanandroid.R
 import com.yl.wanandroid.base.BaseVMActivity
-import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.databinding.ActivityWebBinding
+import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.viewmodel.WebActivityViewModel
-import com.yl.wanandroid.BR
 
 
 /**
@@ -24,9 +26,13 @@ import com.yl.wanandroid.BR
  */
 class WebViewActivity :
     BaseVMActivity<ActivityWebBinding, WebActivityViewModel>(R.layout.activity_web) {
+    private var mLastUrl: String? = null
+    private var url: String? = null
     private var mWebView: WebView? = null
+    private var previous:MutableList<String>  =  mutableListOf()
 
-    @SuppressLint("SetJavaScriptEnabled")
+
+    @SuppressLint("SetJavaScriptEnabled", "ClickableViewAccessibility")
     override fun initView() {
         super.initView()
         //禁止下拉上拉加载
@@ -58,11 +64,73 @@ class WebViewActivity :
         webSettings?.loadsImagesAutomatically = true //支持自动加载图片
         webSettings?.defaultTextEncodingName = "utf-8"//设置编码格式
 
+        mWebView?.setOnTouchListener { v, _ ->
+            val hr = (v as WebView).hitTestResult
+            if (mLastUrl != null) {
+                if (previous.isEmpty() || previous[previous.size - 1] != mLastUrl) {
+                    previous.add(mLastUrl!!)
+                }
+                LogUtils.i(this, "getExtra = " + hr.extra + "\t\t Type = " + hr.type)
+            }
+            false
+        }
+
+
     }
+
+    override fun onBackPressed() {
+        LogUtils.i(this, "onBackPressed")
+        val size: Int = previous.size
+        if (size > 0) {
+            mWebView?.loadUrl(previous[size - 1])
+            previous.removeAt(size - 1)
+            LogUtils.i(this, "size-->$size")
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+
+
 
     override fun initData() {
         super.initData()
-        val url = intent.extras?.getString(Constant.TO_WEB_URL)
+        url = intent.extras?.getString(Constant.TO_WEB_URL)
+        mWebView?.webViewClient = object : WebViewClient() {
+
+            //设置在webView点击打开的新网页在当前界面显示,而不跳转到新的浏览器中
+            override fun shouldOverrideUrlLoading(
+                view: WebView?, request: WebResourceRequest?
+            ): Boolean {
+                try {
+                    if (!request?.url.toString().startsWith("http://") && !request?.url.toString()
+                            .startsWith("https://")
+                    ) {
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(request?.url.toString()))
+                        startActivity(intent)
+                        return true
+                    }
+                } catch (e: Exception) {//防止crash (如果手机上没有安装处理某个scheme开头的url的APP, 会导致crash)
+                    LogUtils.d(this@WebViewActivity, "此APP未安装")
+                    return true//没有安装该app时，返回true，表示拦截自定义链接，但不跳转，避免弹出ERR_UNKNOWN_URL_SCHEME的错误页面
+                }
+                //返回值是true的时候控制去WebView打开，为false调用系统浏览器或第三方浏览器
+                view?.loadUrl(request?.url.toString())
+                return true
+            }
+
+            //在页面加载完毕且用户可见后才更换视图状态
+            override fun onPageCommitVisible(view: WebView?, url: String?) {
+                //更改视图状态
+                mViewModel.changeStateView(ViewStateEnum.VIEW_LOAD_SUCCESS)
+                mLastUrl = url
+            }
+
+            override fun doUpdateVisitedHistory(view: WebView?, url: String?, isReload: Boolean) {
+                view?.clearHistory()
+            }
+
+        }
         //加载传递过来的网页
         //判断是否为空
         LogUtils.d(this, "initData-->url-->$url")
@@ -73,25 +141,9 @@ class WebViewActivity :
             //将跳转过来的url数据存储到ViewModel中
             mViewModel.url.value = url
             //加载网页
-            mWebView?.loadUrl(url)
+            mWebView?.loadUrl(url!!)
         }
-        mWebView?.webViewClient = object : WebViewClient() {
 
-            //设置在webView点击打开的新网页在当前界面显示,而不跳转到新的浏览器中
-            override fun shouldOverrideUrlLoading(
-                view: WebView?, request: WebResourceRequest?
-            ): Boolean {
-                view?.loadUrl(request?.url.toString())
-                return true
-            }
-
-            //在页面加载完毕且用户可见后才更换视图状态
-            override fun onPageCommitVisible(view: WebView?, url: String?) {
-                //更改视图状态
-                mViewModel.changeStateView(ViewStateEnum.VIEW_LOAD_SUCCESS)
-            }
-
-        }
     }
 
     override fun initVMData() {
@@ -101,6 +153,7 @@ class WebViewActivity :
     override fun onDestroy() {
         if (mWebView != null) {
             mWebView!!.loadDataWithBaseURL(null, "", "text/html", "utf-8", null)
+            mWebView!!.clearCache(true)
             mWebView!!.clearHistory()
 
             (mWebView!!.parent as ViewGroup).removeView(mWebView)

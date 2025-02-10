@@ -30,5 +30,6 @@
     <string name="tip_null">后方服务器好似出了一些问题,加载失败!</string>
     <string name="tip_system">体系</string>
     <string name="tip_course">课程</string>
+    <string name="tip_app_not_install">此APP还未安装,无法跳转哦~</string>
 
 </resources>

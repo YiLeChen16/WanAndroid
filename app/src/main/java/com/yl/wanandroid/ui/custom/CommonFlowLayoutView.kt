@@ -159,11 +159,11 @@ class CommonFlowLayoutView(
     }
 
     //暴露方法给外界设置接口
-    fun setListener(listener: OnItemClickListener) {
+    fun setOnItemClickListener(listener: OnItemClickListener) {
         this.listener = listener
     }
 
     interface OnItemClickListener {
-        fun onKeyWordClick(data: Children)
+        fun onKeyWordClick(child: Children)
     }
 }

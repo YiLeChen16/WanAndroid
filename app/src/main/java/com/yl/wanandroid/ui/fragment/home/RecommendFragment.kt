@@ -85,7 +85,7 @@ class RecommendFragment :
             if (loadMoreRecommendBlogData != null) {
                 mRefreshLayout.finishLoadMore()
                 if (loadMoreRecommendBlogData.curPage == loadMoreRecommendBlogData.pageCount + 1) {
-                    //没有数据的一页
+                    //没有数据的一页==最后一页的下一页
                     TipsToast.showTips(R.string.tip_toast_last_page)
                     mRefreshLayout.finishLoadMoreWithNoMoreData()//标记当前没有更多数据了
                 } else {

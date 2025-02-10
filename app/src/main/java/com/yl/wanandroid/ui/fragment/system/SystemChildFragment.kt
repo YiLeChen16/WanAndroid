@@ -1,17 +1,21 @@
 package com.yl.wanandroid.ui.fragment.system
 
+import android.content.Intent
+import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
-import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING
 import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE
+import com.yl.wanandroid.Constant
 import com.yl.wanandroid.R
 import com.yl.wanandroid.base.BaseVMFragment
 import com.yl.wanandroid.databinding.FragmentSystemChildBinding
 import com.yl.wanandroid.model.ViewStateEnum
+import com.yl.wanandroid.ui.activity.SystemActivity
 import com.yl.wanandroid.ui.adapter.SystemChildContentListAdapter
 import com.yl.wanandroid.ui.adapter.SystemChildLeftListAdapter
 import com.yl.wanandroid.ui.custom.LinearLayoutManagerWithScrollTop
+import com.yl.wanandroid.ui.custom.NoScrollLayoutManager
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.viewmodel.system.SystemChildFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,7 +50,7 @@ class SystemChildFragment :
         mBinding.leftTab.itemAnimator = null
         //左侧列表设置适配器
         mBinding.leftTab.adapter = systemChildLeftListAdapter
-        val linearLayoutManager = LinearLayoutManager(context)
+        val linearLayoutManager = LinearLayoutManager(requireContext())
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         mBinding.leftTab.layoutManager = linearLayoutManager
         systemChildLeftListAdapter.setOnTabTitleClickListener(this)
@@ -63,25 +67,27 @@ class SystemChildFragment :
                     //当前右侧列表停止滑动
                     //还原左侧列表点击状态,等待下次监听
                     systemChildLeftListAdapter.setClickState(false)
+                    mBinding.leftTab.isNestedScrollingEnabled = true
                 }
             }
+
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 //判断是否为左侧列表条目点击导致的右侧列表滑动
-                synchronized(this){
-                    if (!systemChildLeftListAdapter.isClickState()) {//不是,则为右侧列表被拖拽导致的自身滑动,左侧列表需自动更新滑动
-                        //第一个条目
-                        val layoutManager = mBinding.contentList.layoutManager as LinearLayoutManager
-                        val firstVisibleItemPosition = layoutManager.findFirstCompletelyVisibleItemPosition()
-                        if (firstVisibleItemPosition >= 0 && firstVisibleItemPosition < systemChildContentListAdapter.itemCount) {
-                            //更新左侧列表
-                            //在leftTab渲染完毕后再进行滑动
-                            mBinding.leftTab.post {
-                                updateLeft(firstVisibleItemPosition)
-                            }
+                if (!systemChildLeftListAdapter.isClickState()) {//不是,则为右侧列表被拖拽导致的自身滑动,左侧列表需自动更新滑动
+                    //获取第一个完全可见条目
+                    val layoutManager =
+                        mBinding.contentList.layoutManager as LinearLayoutManager
+                    val firstVisibleItemPosition =
+                        layoutManager.findFirstCompletelyVisibleItemPosition()
+                    if (firstVisibleItemPosition >= 0 && firstVisibleItemPosition < systemChildContentListAdapter.itemCount) {
+                        //更新左侧列表
+                        //在leftTab渲染完毕后再进行滑动
+                        mBinding.leftTab.post {
+                            updateLeft(firstVisibleItemPosition)
                         }
                     }
-                }
 
+                }
                 super.onScrolled(recyclerView, dx, dy)
             }
         })
@@ -117,6 +123,7 @@ class SystemChildFragment :
 
     override fun initVMData() {
         mViewModel.getSystemData()
+        systemChildContentListAdapter.setOnKeyWordClickListener(mViewModel)
     }
 
     override fun observeLiveData() {
@@ -132,14 +139,35 @@ class SystemChildFragment :
                 mViewModel.changeStateView(ViewStateEnum.VIEW_NET_ERROR)
             }
         }
+        //监听跳转
+        mViewModel.isGo.observe(viewLifecycleOwner) {
+            if (it) {
+                //跳转到SystemActivity
+                mViewModel.isGo.value = false//重置此值
+                val intent = Intent(context, SystemActivity::class.java)
+                //携带数据跳转
+                val bundle = Bundle()
+                bundle.putIntegerArrayList(
+                    Constant.SYSTEM_ALL_KEYWORD_CID,
+                    mViewModel.keyWordIdList
+                )
+                bundle.putStringArrayList(Constant.SYSTEM_ALL_KEYWORD, mViewModel.keyWordList)
+                bundle.putInt(Constant.SYSTEM_CHOOSE_KEYWORD_CID, mViewModel.chooseCid)
+                intent.putExtra(Constant.TO_SYSTEM_URL, bundle)
+                startActivity(intent)
+            }
+        }
 
     }
 
     //左侧标题被点击
     override fun onTabTitleClick(position: Int) {
         LogUtils.d(this@SystemChildFragment, "currentPosition-->$position")
+        //禁用左侧列表滑动
+        mBinding.leftTab.isNestedScrollingEnabled = false
         //监听当前位置，联动右侧RecyclerView
         mBinding.contentList.smoothScrollToPosition(position)
+
     }
 
 }

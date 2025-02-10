@@ -1,5 +1,6 @@
 package com.yl.wanandroid.ui.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -7,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.yl.wanandroid.R
 import com.yl.wanandroid.databinding.ItemSystemBinding
+import com.yl.wanandroid.model.Children
 import com.yl.wanandroid.model.SystemDataBeanItem
 import com.yl.wanandroid.ui.custom.CommonFlowLayoutView
-import com.yl.wanandroid.utils.LogUtils
 import javax.inject.Inject
 
 /**
@@ -33,6 +34,7 @@ class SystemChildContentListAdapter @Inject constructor():RecyclerView.Adapter<S
         return MyViewHolder(binding)
     }
 
+    private  var listener: OnKeyWordClickListener? = null
     private var data: MutableList<SystemDataBeanItem> = mutableListOf()
 
 
@@ -45,14 +47,18 @@ class SystemChildContentListAdapter @Inject constructor():RecyclerView.Adapter<S
 
     override fun onBindViewHolder(
         holder: MyViewHolder,
-        position: Int
+        @SuppressLint("RecyclerView") position: Int
     ) {
         val binding = DataBindingUtil.getBinding<ItemSystemBinding>(holder.itemView)
         binding?.systemDataBeanItem = data[position]
         holder.flowLayout?.setData(data[position].children)
-        holder.itemView.setOnClickListener {
-            LogUtils.d(this,"flow item is clicked!")
-        }
+        //为item中的每个关键词设置点击事件
+        holder.flowLayout?.setOnItemClickListener(object :CommonFlowLayoutView.OnItemClickListener{
+            override fun onKeyWordClick(child: Children) {
+                listener?.onKeyWordClick(child.id,data[position].children)
+            }
+
+        })
     }
 
     override fun getItemCount(): Int {
@@ -62,5 +68,21 @@ class SystemChildContentListAdapter @Inject constructor():RecyclerView.Adapter<S
     //暴露接口给外界设置数据
     fun setData(data: MutableList<SystemDataBeanItem>) {
         this.data = data
+    }
+
+
+    //暴露方法给外界设置监听回调接口
+    fun setOnKeyWordClickListener(listener: OnKeyWordClickListener){
+        this.listener = listener
+    }
+
+
+    interface OnKeyWordClickListener{
+        /**
+         * 关键词被点击时回调
+         * @param id Int 关键词对应的页面id
+         * @param children List<Children> 全部页面的数据
+         */
+        fun onKeyWordClick(id:Int,children:List<Children>)
     }
 }
