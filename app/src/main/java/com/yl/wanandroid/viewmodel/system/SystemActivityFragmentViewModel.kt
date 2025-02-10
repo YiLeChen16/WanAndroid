@@ -2,7 +2,7 @@ package com.yl.wanandroid.viewmodel.system
 
 import androidx.lifecycle.MutableLiveData
 import com.yl.wanandroid.base.BaseViewModel
-import com.yl.wanandroid.model.SystemArticleDataBean
+import com.yl.wanandroid.model.ArticleDataBean
 import com.yl.wanandroid.repository.SystemRepository
 import com.yl.wanandroid.utils.TipsToast
 
@@ -22,9 +22,9 @@ class SystemActivityFragmentViewModel : BaseViewModel() {
     private var currentPage = DEFAULT_PAGE//当前页码
 
     //页面的数据
-    var systemArticleData = MutableLiveData<SystemArticleDataBean?>()
+    var systemArticleData = MutableLiveData<ArticleDataBean?>()
     //加载更多的页面数据
-    var loadMoreSystemArticleData = MutableLiveData<SystemArticleDataBean?>()
+    var loadMoreSystemArticleData = MutableLiveData<ArticleDataBean?>()
 
 
 

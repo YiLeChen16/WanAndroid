@@ -1,11 +1,8 @@
 package com.yl.wanandroid.repository
 
-import androidx.lifecycle.LiveData
 import com.yl.wanandroid.model.BannerDataBean
-import com.yl.wanandroid.model.RecommendBlogDataBean
 import com.yl.wanandroid.network.WanAndroidApiInterface
 import com.yl.wanandroid.repository.base.BaseRepository
-import dagger.hilt.android.scopes.FragmentScoped
 import javax.inject.Inject
 
 /**

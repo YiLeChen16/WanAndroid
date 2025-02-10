@@ -3,8 +3,8 @@ package com.yl.wanandroid.viewmodel.search
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.yl.wanandroid.base.BaseViewModel
+import com.yl.wanandroid.model.ArticleDataBean
 import com.yl.wanandroid.model.SearchHotKeyDataBean
-import com.yl.wanandroid.model.SearchResultDataBean
 import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.repository.SearchHistoryRepository
 import com.yl.wanandroid.repository.SearchRepository
@@ -61,10 +61,10 @@ object SearchShareViewModel : BaseViewModel() {
     var mCurrentSearchKeyWord = MutableLiveData<String>()
 
     //搜索结果列表数据
-    var searchResultListData = MutableLiveData<SearchResultDataBean?>()
+    var searchResultListData = MutableLiveData<ArticleDataBean?>()
 
     //加载更多搜索结果列表数据
-    var loadMoreSearchResultListData = MutableLiveData<SearchResultDataBean?>()
+    var loadMoreSearchResultListData = MutableLiveData<ArticleDataBean?>()
 
     //默认搜索页数
     private var mDefaultPage = 0
@@ -149,7 +149,7 @@ object SearchShareViewModel : BaseViewModel() {
      * @param k String 搜索关键词
      * @return LiveData<SearchResultDataBean?> 结果数据
      */
-    fun getSearchResultData(k: String): LiveData<SearchResultDataBean?> {
+    fun getSearchResultData(k: String): LiveData<ArticleDataBean?> {
         LogUtils.d(this, "getSearchResultData-->k-->$k")
         //不能对要装载的值进行空判断,否则会导致只搜索第一次设置进来的值
         if (search_fragment_visibility.value == true) {//当搜索结果界面可见才进行搜索
@@ -221,7 +221,7 @@ object SearchShareViewModel : BaseViewModel() {
     /**
      * 加载更多搜索结果数据
      */
-    fun loadMoreSearchResultData(): LiveData<SearchResultDataBean?> {
+    fun loadMoreSearchResultData(): LiveData<ArticleDataBean?> {
         //当前页码数+1
         mCurrentPage++
         launchUI(

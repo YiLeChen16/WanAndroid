@@ -1,9 +1,15 @@
 package com.yl.wanandroid.model
-//体系数据模型和课程数据模型
-data class SystemDataBeanItem(
-    val articleList: List<Any>,
+
+/**
+ * @description: TODO
+ * @author YL Chen
+ * @date 2025/2/10 18:20
+ * @version 1.0
+ */
+data class Children(
+    val articleList: List<ArticleItemData>,
     val author: String,
-    val children: List<Children>,
+    val children: List<Any>,
     val courseId: Int,
     val cover: String,
     val desc: String,
@@ -17,7 +23,3 @@ data class SystemDataBeanItem(
     val userControlSetTop: Boolean,
     val visible: Int
 )
-
-
-
-

@@ -1,7 +1,7 @@
 package com.yl.wanandroid.repository
 
+import com.yl.wanandroid.model.ArticleDataBean
 import com.yl.wanandroid.model.ProjectCategoryDataBeanItem
-import com.yl.wanandroid.model.ProjectDataBean
 import com.yl.wanandroid.network.WanAndroidApiInterface
 import com.yl.wanandroid.repository.base.BaseRepository
 
@@ -29,7 +29,7 @@ class ProjectRepository: BaseRepository(){
      * @param cid Int
      * @return MutableList<ProjectItemDataBean>?
      */
-    suspend fun getProjectDataByCid(page:Int,cid:Int):ProjectDataBean?{
+    suspend fun getProjectDataByCid(page:Int,cid:Int):ArticleDataBean?{
         return requestResponse {
             WanAndroidApiInterface.api.getProjectDataByCid(page,cid)
         }

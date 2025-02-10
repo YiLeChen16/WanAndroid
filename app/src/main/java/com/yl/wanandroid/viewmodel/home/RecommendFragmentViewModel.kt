@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.yl.wanandroid.base.BaseViewModel
 import com.yl.wanandroid.model.ViewStateEnum
-import com.yl.wanandroid.model.RecommendBlogDataBean
+import com.yl.wanandroid.model.ArticleDataBean
 import com.yl.wanandroid.model.SearchHotKeyDataBean
 import com.yl.wanandroid.repository.RecommendRepository
 import com.yl.wanandroid.utils.LogUtils
@@ -21,10 +21,10 @@ class RecommendFragmentViewModel : BaseViewModel() {
     private var recommendRepository: RecommendRepository? = getRepository()
 
     //推荐博客数据
-    var recommendBlogData = MutableLiveData<RecommendBlogDataBean?>()
+    var recommendBlogData = MutableLiveData<ArticleDataBean?>()
 
     //加载更多推荐博客数据
-    var loadMoreRecommendBlogData = MutableLiveData<RecommendBlogDataBean?>()
+    var loadMoreRecommendBlogData = MutableLiveData<ArticleDataBean?>()
 
     //搜索热词数据
     var searchHotKeyData = MutableLiveData<MutableList<SearchHotKeyDataBean>?>()
@@ -40,7 +40,7 @@ class RecommendFragmentViewModel : BaseViewModel() {
      *
      * @return LiveData<RecommendBlogDataBean?>
      */
-    fun getRecommendBlogData(): LiveData<RecommendBlogDataBean?> {
+    fun getRecommendBlogData(): LiveData<ArticleDataBean?> {
         //将当前加载页数也重置为0
         mCurrentPage = mDefaultPage
         launchUI(

@@ -1,6 +1,6 @@
 package com.yl.wanandroid.repository
 
-import com.yl.wanandroid.model.SystemArticleDataBean
+import com.yl.wanandroid.model.ArticleDataBean
 import com.yl.wanandroid.model.SystemDataBeanItem
 import com.yl.wanandroid.network.WanAndroidApiInterface
 import com.yl.wanandroid.repository.base.BaseRepository
@@ -19,7 +19,7 @@ class SystemRepository : BaseRepository() {
         }
     }
 
-    suspend fun getSystemArticleDataByCid(page:Int, cid:Int):SystemArticleDataBean?{
+    suspend fun getSystemArticleDataByCid(page:Int, cid:Int): ArticleDataBean?{
         return requestResponse {
             WanAndroidApiInterface.api.getSystemArticleDataByCid(page,cid)
         }

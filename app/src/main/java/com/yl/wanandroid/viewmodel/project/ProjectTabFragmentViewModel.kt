@@ -2,7 +2,7 @@ package com.yl.wanandroid.viewmodel.project
 
 import androidx.lifecycle.MutableLiveData
 import com.yl.wanandroid.base.BaseViewModel
-import com.yl.wanandroid.model.ProjectDataBean
+import com.yl.wanandroid.model.ArticleDataBean
 import com.yl.wanandroid.repository.ProjectRepository
 import com.yl.wanandroid.utils.TipsToast
 
@@ -19,7 +19,7 @@ class ProjectTabFragmentViewModel:BaseViewModel() {
     private val projectRepository = getRepository<ProjectRepository>()
 
     //项目数据
-    val projectData = MutableLiveData<ProjectDataBean?>()
+    val projectData = MutableLiveData<ArticleDataBean?>()
 
     private val DEFAULT_PAGE: Int = 0//默认加载页码
 
@@ -27,7 +27,7 @@ class ProjectTabFragmentViewModel:BaseViewModel() {
     private var currentPage = DEFAULT_PAGE//初始为0
 
     //更多项目数据
-    val moreProjectData = MutableLiveData<ProjectDataBean?>()
+    val moreProjectData = MutableLiveData<ArticleDataBean?>()
 
     fun getProjectDataByCid(cid:Int){
         launchUI(

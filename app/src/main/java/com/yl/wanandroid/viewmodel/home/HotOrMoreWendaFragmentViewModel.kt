@@ -3,8 +3,8 @@ package com.yl.wanandroid.viewmodel.home
 import androidx.lifecycle.MutableLiveData
 import com.yl.wanandroid.Constant
 import com.yl.wanandroid.base.BaseViewModel
+import com.yl.wanandroid.model.ArticleDataBean
 import com.yl.wanandroid.model.ArticleItemData
-import com.yl.wanandroid.model.NormalWendaDataBean
 import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.repository.WendaRepository
 import com.yl.wanandroid.utils.TipsToast
@@ -23,13 +23,13 @@ class HotOrMoreWendaFragmentViewModel : BaseViewModel() {
     val hotWendaData = MutableLiveData<MutableList<ArticleItemData>?>()
 
     //普通问答数据
-    val normalWendaData = MutableLiveData<NormalWendaDataBean?>()
+    val normalWendaData = MutableLiveData<ArticleDataBean?>()
 
     //当前加载页码
     private var currentPage = DEFAULT_PAGE//初始为0
 
     //更多普通问答数据
-    val moreNormalWendaData = MutableLiveData<NormalWendaDataBean?>()
+    val moreNormalWendaData = MutableLiveData<ArticleDataBean?>()
 
     //fragment的类型
     var type: String = ""

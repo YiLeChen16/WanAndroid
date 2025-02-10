@@ -1,7 +1,7 @@
 package com.yl.wanandroid.repository
 
+import com.yl.wanandroid.model.ArticleDataBean
 import com.yl.wanandroid.model.ArticleItemData
-import com.yl.wanandroid.model.NormalWendaDataBean
 import com.yl.wanandroid.network.WanAndroidApiInterface
 import com.yl.wanandroid.repository.base.BaseRepository
 
@@ -27,7 +27,7 @@ class WendaRepository : BaseRepository() {
      * @param page Int
      * @return NormalWendaDataBean?
      */
-    suspend fun getNormalWendaData(page: Int): NormalWendaDataBean? {
+    suspend fun getNormalWendaData(page: Int): ArticleDataBean? {
         return requestResponse {
             WanAndroidApiInterface.api.getNormalWendaData(page)
         }

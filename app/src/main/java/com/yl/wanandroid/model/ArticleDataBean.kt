@@ -1,6 +1,6 @@
 package com.yl.wanandroid.model
 
-data class ProjectDataBean(
+data class ArticleDataBean(
     val curPage: Int,
     val datas: List<ArticleItemData>,
     val offset: Int,
@@ -9,3 +9,4 @@ data class ProjectDataBean(
     val size: Int,
     val total: Int
 )
+

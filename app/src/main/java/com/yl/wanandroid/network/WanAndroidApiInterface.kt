@@ -3,13 +3,9 @@ package com.yl.wanandroid.network
 import com.yl.wanandroid.model.BannerDataBean
 import com.yl.wanandroid.model.HarmonyColumnDataBean
 import com.yl.wanandroid.model.ArticleItemData
-import com.yl.wanandroid.model.NormalWendaDataBean
 import com.yl.wanandroid.model.ProjectCategoryDataBeanItem
-import com.yl.wanandroid.model.ProjectDataBean
-import com.yl.wanandroid.model.RecommendBlogDataBean
+import com.yl.wanandroid.model.ArticleDataBean
 import com.yl.wanandroid.model.SearchHotKeyDataBean
-import com.yl.wanandroid.model.SearchResultDataBean
-import com.yl.wanandroid.model.SystemArticleDataBean
 import com.yl.wanandroid.model.SystemDataBeanItem
 import com.yl.wanandroid.network.result.BaseResult
 import okhttp3.OkHttpClient
@@ -63,7 +59,7 @@ interface WanAndroidApiInterface {
      * @return BaseResult<MutableList<RecommendBlogDataBean>>?
      */
     @GET("/article/list/{page}/json")
-    suspend fun getRecommendBlog(@Path("page") page: Int): BaseResult<RecommendBlogDataBean>?
+    suspend fun getRecommendBlog(@Path("page") page: Int): BaseResult<ArticleDataBean>?
 
 
     /**
@@ -84,7 +80,7 @@ interface WanAndroidApiInterface {
     suspend fun getSearchResult(
         @Path("page") page: Int,
         @Field("k") k: String
-    ): BaseResult<SearchResultDataBean>?
+    ): BaseResult<ArticleDataBean>?
 
 
     /**
@@ -106,12 +102,12 @@ interface WanAndroidApiInterface {
     /**
      * 普通问答数据
      * @param page Int
-     * @return BaseResult<MutableList<MoreWendaDataBean>>?
+     * @return BaseResult<MutableList<ArticleDataBean>>?
      */
     @GET("/wenda/list/{page}/json")
     suspend fun getNormalWendaData(
         @Path("page") page: Int
-    ): BaseResult<NormalWendaDataBean>?
+    ): BaseResult<ArticleDataBean>?
 
 
     /**
@@ -131,7 +127,7 @@ interface WanAndroidApiInterface {
     suspend fun getProjectDataByCid(
         @Path("page") page: Int,
         @Query("cid") cid: Int
-    ): BaseResult<ProjectDataBean>?
+    ): BaseResult<ArticleDataBean>?
 
 
     /**
@@ -139,7 +135,7 @@ interface WanAndroidApiInterface {
      * @return BaseResult<MutableList<SystemDataBeanItem>>?
      */
     @GET("/tree/json")
-    suspend fun getSystemData():BaseResult<MutableList<SystemDataBeanItem>>?
+    suspend fun getSystemData(): BaseResult<MutableList<SystemDataBeanItem>>?
 
     /**
      * 获取知识体系下的文章
@@ -151,5 +147,16 @@ interface WanAndroidApiInterface {
     suspend fun getSystemArticleDataByCid(
         @Path("page") page: Int,
         @Query("cid") cid: Int
-    ):BaseResult<SystemArticleDataBean>?
+    ): BaseResult<ArticleDataBean>?
+
+
+    /**
+     * 获取课程数据
+     * @return BaseResult<MutableList<SystemDataBeanItem>>?
+     */
+    @GET("/chapter/547/sublist/json")
+    suspend fun getSystemCourseData(): BaseResult<MutableList<SystemDataBeanItem>>?
+
+    @GET("/article/list/0/json")
+    suspend fun getSystemCourseArticleDataByCid():BaseResult<ArticleDataBean>?
 }

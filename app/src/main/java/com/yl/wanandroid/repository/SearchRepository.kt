@@ -1,7 +1,7 @@
 package com.yl.wanandroid.repository
 
+import com.yl.wanandroid.model.ArticleDataBean
 import com.yl.wanandroid.model.SearchHotKeyDataBean
-import com.yl.wanandroid.model.SearchResultDataBean
 import com.yl.wanandroid.network.WanAndroidApiInterface
 import com.yl.wanandroid.repository.base.BaseRepository
 
@@ -20,7 +20,7 @@ class SearchRepository:BaseRepository() {
     }
 
     //获取搜索结果列表数据
-    suspend fun getSearchResultData(page:Int,k:String):SearchResultDataBean?{
+    suspend fun getSearchResultData(page:Int,k:String): ArticleDataBean?{
         return requestResponse {
             WanAndroidApiInterface.api.getSearchResult(page,k)
         }

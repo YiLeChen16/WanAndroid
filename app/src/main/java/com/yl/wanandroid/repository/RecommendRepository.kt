@@ -1,6 +1,6 @@
 package com.yl.wanandroid.repository
 
-import com.yl.wanandroid.model.RecommendBlogDataBean
+import com.yl.wanandroid.model.ArticleDataBean
 import com.yl.wanandroid.model.SearchHotKeyDataBean
 import com.yl.wanandroid.network.WanAndroidApiInterface
 import com.yl.wanandroid.repository.base.BaseRepository
@@ -17,7 +17,7 @@ class RecommendRepository:BaseRepository() {
      * @param page Int
      * @return RecommendBlogDataBean?
      */
-    suspend fun getRecommendBlogData(page:Int): RecommendBlogDataBean?{
+    suspend fun getRecommendBlogData(page:Int): ArticleDataBean?{
         return requestResponse {
             WanAndroidApiInterface.api.getRecommendBlog(page)
         }
