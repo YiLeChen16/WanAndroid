@@ -15,7 +15,6 @@ import com.yl.wanandroid.ui.activity.SystemActivity
 import com.yl.wanandroid.ui.adapter.SystemChildContentListAdapter
 import com.yl.wanandroid.ui.adapter.SystemChildLeftListAdapter
 import com.yl.wanandroid.ui.custom.LinearLayoutManagerWithScrollTop
-import com.yl.wanandroid.ui.custom.NoScrollLayoutManager
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.viewmodel.system.SystemChildFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -153,7 +152,7 @@ class SystemChildFragment :
                 )
                 bundle.putStringArrayList(Constant.SYSTEM_ALL_KEYWORD, mViewModel.keyWordList)
                 bundle.putInt(Constant.SYSTEM_CHOOSE_KEYWORD_CID, mViewModel.chooseCid)
-                intent.putExtra(Constant.TO_SYSTEM_URL, bundle)
+                intent.putExtra(Constant.TO_SYSTEM, bundle)
                 startActivity(intent)
             }
         }

@@ -6,7 +6,6 @@ import android.widget.TextView
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.google.android.material.tabs.TabLayout
 import com.yl.wanandroid.R
-import com.yl.wanandroid.base.BaseApplication
 import com.yl.wanandroid.base.BaseVMFragment
 import com.yl.wanandroid.databinding.FragmentSystemBinding
 import com.yl.wanandroid.model.ViewStateEnum
@@ -27,8 +26,6 @@ class SystemFragment :
 
     override fun initView() {
         super.initView()
-        val selectedTypeface =
-            Typeface.createFromAsset(BaseApplication.context.assets, "fonts/good_balck.ttf");//下载的字体
         //禁用刷新布局
         mRefreshLayout.setEnableRefresh(false)
         mRefreshLayout.setEnableLoadMore(false)
@@ -49,7 +46,7 @@ class SystemFragment :
                 val tabSelected = tab.customView as TextView
                 tabSelected.textSize = 18f
                 tabSelected.setTextColor(context!!.getColor(R.color.md_theme_primary))
-                tabSelected.setTypeface(selectedTypeface)
+                tabSelected.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD))
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {

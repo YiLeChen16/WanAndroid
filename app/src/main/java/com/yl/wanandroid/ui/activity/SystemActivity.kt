@@ -84,7 +84,7 @@ class SystemActivity : BaseActivity<ActivitySystemBinding>(R.layout.activity_sys
     override fun initData() {
         //接受跳转的传递过来的数据,并存入ViewModel中
         val extras = intent.extras
-        val bundle = extras?.getBundle(Constant.TO_SYSTEM_URL)
+        val bundle = extras?.getBundle(Constant.TO_SYSTEM)
         this.cids = bundle?.getIntegerArrayList(Constant.SYSTEM_ALL_KEYWORD_CID)
         this.keywords = bundle?.getStringArrayList(Constant.SYSTEM_ALL_KEYWORD)
         this.chooseCid = bundle?.getInt(Constant.SYSTEM_CHOOSE_KEYWORD_CID)

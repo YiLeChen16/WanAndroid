@@ -31,5 +31,6 @@
     <string name="tip_system">体系</string>
     <string name="tip_course">课程</string>
     <string name="tip_app_not_install">此APP还未安装,无法跳转哦~</string>
+    <string name="tip_order">排序</string>
 
 </resources>

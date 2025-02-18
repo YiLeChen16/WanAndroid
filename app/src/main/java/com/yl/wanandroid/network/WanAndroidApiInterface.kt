@@ -157,6 +157,10 @@ interface WanAndroidApiInterface {
     @GET("/chapter/547/sublist/json")
     suspend fun getSystemCourseData(): BaseResult<MutableList<SystemDataBeanItem>>?
 
-    @GET("/article/list/0/json")
-    suspend fun getSystemCourseArticleDataByCid():BaseResult<ArticleDataBean>?
+    @GET("/article/list/{page}/json")
+    suspend fun getSystemCourseArticleDataByCid(
+        @Path("page") page: Int,
+        @Query("cid") cid: Int,
+        @Query("order_type") orderType: Int = 1//1默认为正序
+    ): BaseResult<ArticleDataBean>?
 }

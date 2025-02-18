@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data >
+        <variable
+            name="systemCourseActivityViewModel"
+            type="com.yl.wanandroid.viewmodel.system.SystemCourseActivityViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent "
+            android:background="@color/md_theme_primary"
+            app:navigationIcon="@drawable/back_toolbar"
+            app:title="@{systemCourseActivityViewModel.courseName}"
+            app:titleCentered="true"
+            app:titleTextColor="@color/md_theme_onPrimary"
+            >
+            <ImageView
+                android:id="@+id/sort"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/tip_order"
+                android:focusable="true"
+                android:src="@drawable/selector_sort"
+                android:layout_gravity="end"
+                android:padding="8dp"
+                android:clickable="true"
+                android:onClick="@{()->systemCourseActivityViewModel.onSortClick()}"/>
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/article_list"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:padding="@dimen/dp_10"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

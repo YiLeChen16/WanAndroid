@@ -25,7 +25,7 @@
             android:maxLines="1"
             android:padding="@dimen/dp_10"
             android:gravity="center"
-            />
+            android:textColor="@color/md_theme_onSecondaryFixed"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

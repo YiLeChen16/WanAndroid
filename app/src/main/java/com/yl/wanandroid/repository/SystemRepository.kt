@@ -24,4 +24,5 @@ class SystemRepository : BaseRepository() {
             WanAndroidApiInterface.api.getSystemArticleDataByCid(page,cid)
         }
     }
+
 }
