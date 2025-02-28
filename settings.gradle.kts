@@ -14,6 +14,8 @@ pluginManagement {
         }
         maven { url = uri("https://repo.grails.org/grails/core/") }
 
+//        maven { url = uri("https://jitpack.io") }
+
         gradlePluginPortal()
     }
 }

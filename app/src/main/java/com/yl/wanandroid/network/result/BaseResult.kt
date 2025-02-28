@@ -9,8 +9,8 @@ package com.yl.wanandroid.network.result
  * @constructor
  */
 
-data class BaseResult<T>(val errCode: Int, val errMsg: String, val data: T) {
+data class BaseResult<T>(val data: T,val errorCode: Int, val errorMsg: String, ) {
     fun isFailed(): Boolean {
-        return errCode!=0
+        return errorCode != 0
     }
 }

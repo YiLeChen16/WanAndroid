@@ -6,6 +6,8 @@ import com.yl.wanandroid.base.BaseViewModel
 import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.model.BannerDataBean
 import com.yl.wanandroid.repository.HomeRepository
+import com.yl.wanandroid.repository.LoginAndRegisterRepository
+import com.yl.wanandroid.room.DBInstance
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast
 
@@ -15,7 +17,7 @@ import com.yl.wanandroid.utils.TipsToast
  * @date 2024/9/7 15:45
  * @version 1.0
  */
-class HomeFragmentViewModel : BaseViewModel(){
+class HomeFragmentViewModel : BaseViewModel() {
 
     //获取仓库模型
     private var homeRepository: HomeRepository? = getRepository()
@@ -23,6 +25,11 @@ class HomeFragmentViewModel : BaseViewModel(){
     //Banner数据
     var bannerDatas = MutableLiveData<MutableList<BannerDataBean>?>()
 
+
+    private val loginRepository = LoginAndRegisterRepository(DBInstance.getDatabase())
+
+    //用户登录标志
+    val isUserLogin = MutableLiveData<Boolean>()
 
 
     /**
@@ -49,6 +56,24 @@ class HomeFragmentViewModel : BaseViewModel(){
     }
 
 
+    //首页Tab收藏按钮被点击
+    fun onCollectClick() {
+        //判断有无登录
+        launchUI(errorCallback = { _, errMsg ->
+            TipsToast.showTips(errMsg)
+            //未登录
+            isUserLogin.value = false
+        }, requestCall = {
+            if (loginRepository.isUserLogin()) {
+                //已登录
+                //跳转到收藏界面
+                isUserLogin.value = true
+            } else {
+                //未登录
+                isUserLogin.value = false
+            }
+        })
+    }
 
 
     //错误状态视图点击回调函数

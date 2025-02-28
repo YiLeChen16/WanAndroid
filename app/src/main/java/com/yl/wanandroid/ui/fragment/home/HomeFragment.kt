@@ -1,5 +1,6 @@
 package com.yl.wanandroid.ui.fragment.home
 
+import android.content.Intent
 import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.widget.TextView
@@ -15,6 +16,10 @@ import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.viewmodel.home.HomeFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import com.yl.wanandroid.BR
+import com.yl.wanandroid.ui.activity.CollectActivity
+import com.yl.wanandroid.ui.activity.LoginActivity
+import com.yl.wanandroid.utils.TipsToast
+import com.yl.wanandroid.utils.getStringFromResource
 
 
 /**
@@ -40,6 +45,12 @@ class HomeFragment :
         //绑定tabLayout和ViewPager2
         homeTabViewPagerAdapter = HomeTabViewPagerAdapter(this)
         mBinding.tabViewPager.adapter = homeTabViewPagerAdapter
+        initListener()
+        //设置默认选中第二页
+        mBinding.tabViewPager.setCurrentItem(1, false)
+    }
+
+    fun initListener(){
         // 联动 Tab 和 ViewPager2
         mBinding.tab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
@@ -69,8 +80,10 @@ class HomeFragment :
                 mBinding.tab.getTabAt(position)?.select() // 更新 Tab 选中状态
             }
         })
-        //设置默认选中第二页
-        mBinding.tabViewPager.setCurrentItem(1, false)
+        //收藏点击监听
+        mBinding.ivMyCollection.setOnClickListener {
+
+        }
     }
 
     //初始化tab条目的样式
@@ -101,6 +114,18 @@ class HomeFragment :
                 val bannerView = mBinding.root.findViewById<BannerView>(R.id.banner_view)
                 LogUtils.d(this@HomeFragment, "initVMData-->$bannerView")
                 bannerView.setData(bannerData)
+            }
+        }
+        mViewModel.isUserLogin.observe(viewLifecycleOwner){
+            if (it){
+                //已登录
+                //跳转到收藏页面
+                startActivity(Intent(context,CollectActivity::class.java))
+            }else{
+                //未登录
+                //跳转到登录界面
+                TipsToast.showTips(getStringFromResource(R.string.tip_no_login))
+                startActivity(Intent(context,LoginActivity::class.java))
             }
         }
     }

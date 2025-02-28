@@ -28,6 +28,7 @@ refreshHeaderMaterial = "2.1.0"
 refreshHeaderTwoLevel = "2.1.0"
 refreshFooterClassics = "2.1.0"
 refreshFooterBall = "2.1.0"
+mmkv = "2.1.0"
 
 [libraries]
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
@@ -64,6 +65,7 @@ refresh-header-material = { group = "io.github.scwang90", name = "refresh-header
 refresh-header-two-level = { group = "io.github.scwang90", name = "refresh-header-two-level", version.ref = "refreshHeaderTwoLevel" }
 refresh-footer-classics = { group = "io.github.scwang90", name = "refresh-footer-classics", version.ref = "refreshFooterClassics" }
 refresh-footer-ball = { group = "io.github.scwang90", name = "refresh-footer-ball", version.ref = "refreshFooterBall" }
+mmkv = { group = "com.tencent", name = "mmkv", version.ref = "mmkv" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

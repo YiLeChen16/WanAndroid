@@ -2,6 +2,7 @@ package com.yl.wanandroid.base
 
 import android.app.Application
 import android.content.Context
+import com.tencent.mmkv.MMKV
 import com.yl.wanandroid.utils.TipsToast
 import dagger.hilt.android.HiltAndroidApp
 
@@ -21,5 +22,6 @@ class BaseApplication:Application(){
         TipsToast.init(this)
         super.onCreate()
         context = applicationContext
+        MMKV.initialize(context)//初始化MMKV
     }
 }

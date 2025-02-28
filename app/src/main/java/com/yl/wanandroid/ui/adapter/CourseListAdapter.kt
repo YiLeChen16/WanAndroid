@@ -76,7 +76,6 @@ class CourseListAdapter @Inject constructor(@ActivityContext val context: Contex
             context.startActivity(intent)
             LogUtils.d(this,"id->${data[position].id}")
             LogUtils.d(this,"name->${data[position].name}")
-            //TODO::DataBinding无法绑定title
         }
     }
 

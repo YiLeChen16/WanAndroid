@@ -46,7 +46,6 @@
                     android:id="@+id/collection"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="@{(view)->searchData.onCollectClick((ImageView)view,searchData.collect,searchData.id)}"
                     android:src="@{searchData.collect?R.drawable.iv_collection:R.drawable.iv_no_collection}"
                     app:layout_constraintBottom_toTopOf="@id/title"
                     app:layout_constraintEnd_toEndOf="parent" />

@@ -1,0 +1,48 @@
+package com.yl.wanandroid.viewmodel
+
+import androidx.lifecycle.MutableLiveData
+import com.yl.wanandroid.base.BaseViewModel
+import com.yl.wanandroid.model.User
+import com.yl.wanandroid.repository.LoginAndRegisterRepository
+import com.yl.wanandroid.room.DBInstance
+import com.yl.wanandroid.utils.LogUtils
+import com.yl.wanandroid.utils.TipsToast
+import kotlinx.coroutines.runBlocking
+
+/**
+ * @description: 登录界面ViewModel
+ * @author YL Chen
+ * @date 2025/2/18 15:52
+ * @version 1.0
+ */
+class LoginActivityViewModel : BaseViewModel() {
+    //数据库对象
+    private val database = DBInstance.getDatabase()
+
+    val user = MutableLiveData<User?>()//登录返回的用户信息
+    val repository = LoginAndRegisterRepository(database)
+
+
+    /**
+     * 登录
+     * @param userName String
+     * @param password String
+     */
+    fun login(userName: String, password: String) {
+        launchUI(errorCallback = { _, errMsg ->
+            TipsToast.showTips(errMsg)
+            user.value = null
+        }, requestCall = {
+            user.value = repository.login(userName, password)
+            //将用户数据保存到本地
+            repository.clearUser()//清除本地数据
+            repository.saveUser(userName)//存储新数据
+        })
+    }
+
+
+
+    override fun onReload() {
+
+    }
+}

@@ -1,15 +1,19 @@
 package com.yl.wanandroid.ui.fragment.home.wenda
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import com.yl.wanandroid.Constant
 import com.yl.wanandroid.R
+import com.yl.wanandroid.app.AppViewModel
 import com.yl.wanandroid.base.BaseVMFragment
 import com.yl.wanandroid.databinding.FragmentWendaHotOrNormalBinding
 import com.yl.wanandroid.model.ViewStateEnum
+import com.yl.wanandroid.ui.activity.LoginActivity
 import com.yl.wanandroid.ui.adapter.BlogListAdapter
+import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast
 import com.yl.wanandroid.viewmodel.home.HotOrMoreWendaFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,6 +43,9 @@ class HotOrNormalWendaFragment :
 
     @Inject
     lateinit var listAdapter: BlogListAdapter
+
+    @Inject
+    lateinit var appViewModel: AppViewModel
 
     override fun initView() {
         super.initView()
@@ -70,6 +77,9 @@ class HotOrNormalWendaFragment :
         mViewModel.type = type!!
         //根据传递的type加载不同的列表数据
         loadData()
+
+        //设置收藏监听事件
+        listAdapter.setOnCollectionEventListener(appViewModel)
     }
 
     //根据传递的type加载不同的列表数据
@@ -120,6 +130,18 @@ class HotOrNormalWendaFragment :
                     mRefreshLayout.finishLoadMore()
                 }
             }
+        }
+        appViewModel.isUserLogin.observe(viewLifecycleOwner) {
+            if (!it) {
+                //跳转到登录页面
+                startActivity(Intent(context, LoginActivity::class.java))
+            }
+        }
+
+        //实现收藏页面取消收藏时此界面的列表收藏状态也能实时更新
+        appViewModel.event.observe(viewLifecycleOwner) {
+            LogUtils.d(this@HotOrNormalWendaFragment, "appViewModel.event-->${it}")
+            listAdapter.updateCollectionState(it.originId)//收藏页面的originId对应此页面的id
         }
     }
 }

@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <!--条目使用Databinding        -->
         <!--使用Java某些类都要通过import导入才能正常使用-->
-        <import type="android.text.Html"/>
-        <import type="android.text.TextUtils" alias="textUtlis" />
-        <import type="com.yl.wanandroid.R"/>
-        <import type="android.widget.ImageView"/>
+        <import type="android.text.Html" />
+
+        <import
+            alias="textUtlis"
+            type="android.text.TextUtils" />
+
+        <import type="com.yl.wanandroid.R" />
+
+        <import type="android.widget.ImageView" />
 
         <variable
             name="itemData"
@@ -26,10 +32,10 @@
             android:layout_marginTop="@dimen/dp_15"
             android:layout_marginEnd="@dimen/dp_5"
             android:layout_marginBottom="@dimen/dp_8"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless"
             app:cardBackgroundColor="@color/md_theme_surfaceContainer"
             app:cardCornerRadius="@dimen/dp_10"
-            app:layout_constraintTop_toTopOf="parent"
-            android:foreground="?android:attr/selectableItemBackgroundBorderless">
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -40,7 +46,7 @@
                     android:id="@+id/publish_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{itemData.niceShareDate}"
+                    android:text="@{textUtlis.isEmpty(itemData.niceShareDate)?itemData.niceDate:itemData.niceShareDate}"
                     android:textSize="@dimen/sp_12"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -49,16 +55,16 @@
                     android:id="@+id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="@dimen/dp_10"
                     android:letterSpacing="0.15"
                     android:lineSpacingExtra="@dimen/dp_5"
+                    android:paddingStart="@dimen/dp_10"
                     android:paddingTop="@dimen/dp_8"
                     android:paddingEnd="@dimen/dp_8"
                     android:paddingBottom="@dimen/dp_10"
+                    android:searchResultHighlightColor="@color/md_theme_primary"
                     android:text="@{Html.fromHtml(itemData.title,Html.FROM_HTML_MODE_COMPACT).toString()}"
                     android:textSize="@dimen/sp_16"
                     android:textStyle="bold"
-                    android:searchResultHighlightColor="@color/md_theme_primary"
                     app:layout_constraintHorizontal_bias="0.8"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/publish_time" />
@@ -67,10 +73,12 @@
                     android:id="@+id/layout1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:baselineAligned="false"
                     android:paddingStart="@dimen/dp_5"
                     android:paddingTop="@dimen/dp_10"
                     android:paddingBottom="@dimen/dp_5"
-                    app:layout_constraintTop_toBottomOf="@id/title">
+                    app:layout_constraintTop_toBottomOf="@id/title"
+                    tools:ignore="RtlSymmetry">
 
                     <LinearLayout
                         android:layout_width="@dimen/dp_0"
@@ -81,7 +89,7 @@
                             android:id="@+id/tv_author_or_shareUser"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text='@{textUtlis.isEmpty(itemData.author)?"分享者: ":"作者: "}'
+                            android:text='@{textUtlis.isEmpty(itemData.author) &amp;&amp; !textUtlis.isEmpty(itemData.shareUser) ? "分享者: " : (textUtlis.isEmpty(itemData.author) &amp;&amp; textUtlis.isEmpty(itemData.shareUser) ? "" : "作者: ")}'
                             android:textSize="@dimen/sp_12" />
 
                         <TextView
@@ -101,29 +109,34 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="分类："
+                            android:text="@string/tip_classify"
                             android:textSize="@dimen/sp_12" />
 
                         <TextView
                             android:id="@+id/classify"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{itemData.superChapterName}"
                             android:letterSpacing="0.15"
+                            android:text="@{textUtlis.isEmpty(itemData.superChapterName)?itemData.chapterName:itemData.superChapterName}"
                             android:textSize="@dimen/sp_12" />
                     </LinearLayout>
-
+                    <ImageView
+                        android:id="@+id/collection"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:contentDescription="@string/tip_collection"
+                        android:focusable="true"
+                        android:paddingEnd="@dimen/dp_5"
+                        android:src="@drawable/no_star"
+                        app:layout_constraintBottom_toBottomOf="@id/layout1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/layout1"
+                        tools:ignore="RtlSymmetry" />
                 </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/collection"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingEnd="@dimen/dp_5"
-                    android:src="@{itemData.collect?R.drawable.iv_collection:R.drawable.iv_no_collection}"
-                    android:onClick="@{(view)->itemData.onCollectClick((ImageView)view,itemData.collect,itemData.id)}"
-                    app:layout_constraintBottom_toBottomOf="@id/layout1"
-                    app:layout_constraintEnd_toEndOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 

@@ -1,11 +1,14 @@
 package com.yl.wanandroid.ui.fragment.home
 
 
+import android.content.Intent
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yl.wanandroid.R
+import com.yl.wanandroid.app.AppViewModel
 import com.yl.wanandroid.base.BaseVMFragment
 import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.databinding.FragmentRecommendBinding
+import com.yl.wanandroid.ui.activity.LoginActivity
 import com.yl.wanandroid.ui.adapter.BlogListAdapter
 import com.yl.wanandroid.ui.custom.SearchBoxView
 import com.yl.wanandroid.utils.LogUtils
@@ -27,6 +30,9 @@ class RecommendFragment :
 
     @Inject
     lateinit var recommendListAdapter: BlogListAdapter
+
+    @Inject
+    lateinit var appViewModel: AppViewModel
 
 
     override fun initView() {
@@ -54,12 +60,18 @@ class RecommendFragment :
         mViewModel.getRecommendBlogData()
         //获取搜索热词
         mViewModel.getSearchHotkeyData()
+
+        //设置收藏监听事件
+        recommendListAdapter.setOnCollectionEventListener(appViewModel)
+
+        LogUtils.d(this, "appViewModel-->$appViewModel")
     }
 
     override fun observeLiveData() {
         super.observeLiveData()
         //观察并设置推荐博客数据
         mViewModel.recommendBlogData.observe(viewLifecycleOwner) { recommendBlogData ->
+            LogUtils.d(this@RecommendFragment, "recommendBlogData-->${recommendBlogData?.datas}")
             //将数据装载到列表中
             if (recommendBlogData != null) {
                 recommendListAdapter.setData(recommendBlogData.datas)
@@ -92,9 +104,22 @@ class RecommendFragment :
                     recommendListAdapter.addData(loadMoreRecommendBlogData.datas)
                     TipsToast.showTips(R.string.tip_toast_load_more_success)
                 }
-            }else{
+            } else {
                 mRefreshLayout.finishLoadMore()
             }
+        }
+
+        appViewModel.isUserLogin.observe(viewLifecycleOwner) {
+            if (!it) {
+                //跳转到登录页面
+                startActivity(Intent(context, LoginActivity::class.java))
+            }
+        }
+
+        //实现收藏页面取消收藏时此界面的列表收藏状态也能实时更新
+        appViewModel.event.observe(viewLifecycleOwner) {
+            LogUtils.d(this@RecommendFragment, "appViewModel.event-->${it}")
+            recommendListAdapter.updateCollectionState(it.originId)//收藏页面的originId对应此页面的id
         }
     }
 }

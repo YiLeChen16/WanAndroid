@@ -35,6 +35,10 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".ui.activity.SystemActivity" />
         <activity android:name=".ui.activity.SystemCourseActivity" />
+        <activity android:name=".ui.activity.LoginActivity"/>
+        <activity android:name=".ui.activity.PrivacyPolicyActivity" />
+        <activity android:name=".ui.activity.RegisterActivity" />
+        <activity android:name=".ui.activity.CollectActivity" />
     </application>
 
 </manifest>

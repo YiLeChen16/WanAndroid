@@ -1,10 +1,13 @@
 package com.yl.wanandroid.ui.fragment.system
 
+import android.content.Intent
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yl.wanandroid.R
+import com.yl.wanandroid.app.AppViewModel
 import com.yl.wanandroid.base.BaseVMFragment
 import com.yl.wanandroid.databinding.FragmentSystemActivityBinding
 import com.yl.wanandroid.model.ViewStateEnum
+import com.yl.wanandroid.ui.activity.LoginActivity
 import com.yl.wanandroid.ui.adapter.BlogListAdapter
 import com.yl.wanandroid.utils.TipsToast
 import com.yl.wanandroid.viewmodel.system.SystemActivityFragmentViewModel
@@ -31,6 +34,9 @@ class SystemActivityFragment() :
     @Inject
     lateinit var articleListAdapter: BlogListAdapter
 
+    @Inject
+    lateinit var appViewModel: AppViewModel
+
     override fun initView() {
         super.initView()
         //为RecyclerView设置适配器
@@ -48,6 +54,8 @@ class SystemActivityFragment() :
     override fun initVMData() {
         mViewModel.cid = cid
         mViewModel.getSystemArticleDataByCid(cid)
+        //为appViewModel设置收藏监听事件
+        articleListAdapter.setOnCollectionEventListener(appViewModel)
     }
 
     override fun observeLiveData() {
@@ -75,6 +83,13 @@ class SystemActivityFragment() :
                 }
             }else{
                 mRefreshLayout.finishLoadMore()
+            }
+        }
+
+        appViewModel.isUserLogin.observe(this) {
+            if (!it) {
+                //跳转到登录页面
+                startActivity(Intent(context, LoginActivity::class.java))
             }
         }
     }

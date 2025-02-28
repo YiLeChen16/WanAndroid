@@ -87,6 +87,7 @@ dependencies {
     implementation(libs.refresh.header.two.level)
     implementation(libs.refresh.footer.classics)
     implementation(libs.refresh.footer.ball)
+    implementation(libs.mmkv)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -113,5 +114,7 @@ dependencies {
     implementation ("com.google.android.flexbox:flexbox:3.0.0")
 
 
+//    //电话号码前缀选择器
+//    implementation ("com.github.sahooz:country-region-picker-android:3.1.0")
 
 }

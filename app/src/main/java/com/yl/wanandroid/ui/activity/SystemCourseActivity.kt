@@ -1,9 +1,11 @@
 package com.yl.wanandroid.ui.activity
 
+import android.content.Intent
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yl.wanandroid.BR
 import com.yl.wanandroid.Constant
 import com.yl.wanandroid.R
+import com.yl.wanandroid.app.AppViewModel
 import com.yl.wanandroid.base.BaseVMActivity
 import com.yl.wanandroid.databinding.ActivitySystemCourseBinding
 import com.yl.wanandroid.model.ViewStateEnum
@@ -30,6 +32,9 @@ class SystemCourseActivity :
     BaseVMActivity<ActivitySystemCourseBinding, SystemCourseActivityViewModel>(R.layout.activity_system_course) {
     @Inject
     lateinit var courseArticleAdapter: BlogListAdapter
+
+    @Inject
+    lateinit var appViewModel: AppViewModel
 
     override fun initView() {
         super.initView()
@@ -66,6 +71,8 @@ class SystemCourseActivity :
         LogUtils.d(this, "mViewModel.courseId-->${mViewModel.courseId}")
         LogUtils.d(this, "mViewModel.courseName-->${mViewModel.courseName}")
         mViewModel.getSystemCourseArticleDataByCid(mViewModel.courseId)
+        //设置收藏监听事件
+        courseArticleAdapter.setOnCollectionEventListener(appViewModel)
     }
 
     //观察数据
@@ -98,6 +105,13 @@ class SystemCourseActivity :
                 //为适配器添加数据
                 courseArticleAdapter.addData(it.datas)
                 TipsToast.showTips(R.string.tip_toast_load_more_success)
+            }
+        }
+
+        appViewModel.isUserLogin.observe(this) {
+            if (!it) {
+                //跳转到登录页面
+                startActivity(Intent(this@SystemCourseActivity, LoginActivity::class.java))
             }
         }
     }

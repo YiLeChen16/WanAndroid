@@ -2,6 +2,7 @@ package com.yl.wanandroid.repository.base
 
 import com.yl.wanandroid.network.exeception.ApiException
 import com.yl.wanandroid.network.result.BaseResult
+import com.yl.wanandroid.utils.LogUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeout
@@ -26,9 +27,10 @@ open class BaseRepository {
                 requestCall()
             }
         } ?: return null
+        LogUtils.e(this@BaseRepository,"result-->$result")
 
         if (result.isFailed()) {
-            throw ApiException(result.errCode, result.errMsg)
+            throw ApiException(result.errorCode, result.errorMsg)
         }
         return result.data
     }
