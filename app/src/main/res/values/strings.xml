@@ -53,6 +53,7 @@
     <string name="tip_success_cancel_collect">取消收藏成功</string>
     <string name="tip_success_collect">收藏成功</string>
     <string name="tip_img">图片</string>
+    <string name="tip_collections">收藏夹</string>
 
 
 </resources>

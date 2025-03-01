@@ -9,6 +9,7 @@ import com.yl.wanandroid.databinding.ActivityCollectBinding
 import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.ui.adapter.BlogListAdapter
 import com.yl.wanandroid.utils.LogUtils
+import com.yl.wanandroid.utils.TipsToast
 import com.yl.wanandroid.viewmodel.home.CollectViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -33,6 +34,16 @@ class CollectActivity :
         //设置适配器和布局管理器
         mBinding.collectList.adapter = listAdapter
         mBinding.collectList.layoutManager = LinearLayoutManager(this)
+        //禁止刷新
+        mRefreshLayout.setEnableRefresh(false)
+        //返回键监听
+        mBinding.toolbar.setNavigationOnClickListener {
+            finish()
+        }
+        //加载更多监听
+        mRefreshLayout.setOnLoadMoreListener {
+            mViewModel.getMoreAllCollectArticle()
+        }
     }
 
     override fun initVMData() {
@@ -51,6 +62,22 @@ class CollectActivity :
             LogUtils.d(this@CollectActivity, "data-->${it.datas}")
             listAdapter.setData(it.datas)
             mViewModel.changeStateView(ViewStateEnum.VIEW_LOAD_SUCCESS)
+        }
+
+        mViewModel.moreCollectArticles.observe(this){
+            mRefreshLayout.finishLoadMore()
+            if (it == null)
+                return@observe
+            LogUtils.d(this@CollectActivity, "data-->${it.datas}")
+            if (it.curPage == it.pageCount + 1) {
+                //最后一页
+                TipsToast.showTips(R.string.tip_toast_last_page)
+                mRefreshLayout.finishLoadMoreWithNoMoreData()
+            } else {
+                //为适配器添加数据
+                listAdapter.addData(it.datas)
+                TipsToast.showTips(R.string.tip_toast_load_more_success)
+            }
         }
 
         appViewModel.isUserLogin.observe(this) {

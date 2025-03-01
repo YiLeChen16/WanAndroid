@@ -17,6 +17,7 @@ import com.yl.wanandroid.utils.getStringFromResource
 class CollectViewModel : BaseViewModel() {
 
     var collectArticles = MutableLiveData<ArticleDataBean?>()
+    var moreCollectArticles = MutableLiveData<ArticleDataBean?>()//更多数据
     val repository = getRepository<CollectRepository>()
     private val DEFAULT_PAGE: Int = 0//默认加载页码
 
@@ -24,6 +25,7 @@ class CollectViewModel : BaseViewModel() {
 
     //获取所有收藏文章
     fun getAllCollectArticle() {
+        currentPage = DEFAULT_PAGE//重置页面
         launchUI(
             errorCallback = { _, errMsg ->
                 TipsToast.showTips(errMsg)
@@ -40,8 +42,17 @@ class CollectViewModel : BaseViewModel() {
     }
 
 
-
-    //TODO::加载更多
+    //加载更多
+    fun getMoreAllCollectArticle() {
+        currentPage++
+        launchUI(errorCallback = { _, errMsg ->
+            TipsToast.showTips(errMsg)
+            currentPage--
+            moreCollectArticles.value = null
+        }, requestCall = {
+            moreCollectArticles.value = repository?.getAllCollectArticle(currentPage)
+        })
+    }
 
     override fun onReload() {
         getAllCollectArticle()

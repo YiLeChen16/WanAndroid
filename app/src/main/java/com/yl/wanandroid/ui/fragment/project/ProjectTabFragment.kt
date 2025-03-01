@@ -100,7 +100,9 @@ class ProjectTabFragment() :
         }
         appViewModel.isUserLogin.observe(this){
             //跳转到登录页面
-            startActivity(Intent(context, LoginActivity::class.java))
+            if (!it){
+                startActivity(Intent(context, LoginActivity::class.java))
+            }
         }
         //实现收藏页面取消收藏时此界面的列表收藏状态也能实时更新
         appViewModel.event.observe(viewLifecycleOwner) {

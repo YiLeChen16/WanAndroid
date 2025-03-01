@@ -1,5 +1,6 @@
 package com.yl.wanandroid.base
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -9,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.viewbinding.ViewBinding
 
 /**
- * @description: RecyclerView适配器基类//TODO:
+ * @description: RecyclerView适配器基类
  * @author YL Chen
  * @date 2025/2/28 22:40
  * @version 1.0
@@ -52,6 +53,7 @@ abstract class BaseRecyclerViewAdapter<ItemData,ItemViewBinding:ViewDataBinding>
     abstract fun setViewBindingVariable(binding: ItemViewBinding?,position: Int)
 
     //暴露方法给外界设置数据
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(itemDatas: List<ItemData>) {
         this.datas.clear()//清空数据
         this.datas.addAll(itemDatas)

@@ -129,7 +129,9 @@ class SearchResultFragment :
 
         appViewModel.isUserLogin.observe(this){
             //跳转到登录页面
-            startActivity(Intent(context,LoginActivity::class.java))
+            if (!it){
+                startActivity(Intent(context,LoginActivity::class.java))
+            }
         }
     }
 
