@@ -2,13 +2,6 @@ package com.yl.wanandroid.ui.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.yl.wanandroid.Constant
 import com.yl.wanandroid.R
 import com.yl.wanandroid.base.BaseRecyclerViewAdapter
@@ -16,7 +9,6 @@ import com.yl.wanandroid.databinding.ItemSearchResultBlogViewBinding
 import com.yl.wanandroid.model.ArticleItemData
 import com.yl.wanandroid.model.CollectionEvent
 import com.yl.wanandroid.ui.activity.WebViewActivity
-import com.yl.wanandroid.utils.LogUtils
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
 
@@ -73,16 +65,6 @@ class SearchResultListAdapter @Inject constructor(@ActivityContext val context: 
                     where
                 )
             )
-        }
-    }
-
-    fun updateCollectionState(id: Int) {
-        for ((index, data) in datas.withIndex()) {
-            if (data.id == id) {
-                datas[index].collect = !datas[index].collect
-                notifyItemChanged(index)
-                return
-            }
         }
     }
 
