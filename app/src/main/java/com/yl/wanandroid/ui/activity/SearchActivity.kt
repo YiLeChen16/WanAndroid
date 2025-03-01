@@ -10,10 +10,10 @@ import android.widget.TextView.OnEditorActionListener
 import com.yl.wanandroid.BR
 import com.yl.wanandroid.Constant
 import com.yl.wanandroid.R
+import com.yl.wanandroid.app.AppViewModel
 import com.yl.wanandroid.base.BaseVMActivity
 import com.yl.wanandroid.databinding.ActivitySearchBinding
 import com.yl.wanandroid.model.ViewStateEnum
-import com.yl.wanandroid.ui.adapter.SearchResultListAdapter
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.viewmodel.search.SearchShareViewModel
 import com.yl.wanandroid.viewmodel.search.SearchShareViewModel.search_fragment_visibility
@@ -34,8 +34,8 @@ class SearchActivity :
     private var defaultHintKeyword: String? = null
     private var isSearch: Boolean? = false
 
-    @Inject
-    lateinit var searchResultListAdapter: SearchResultListAdapter//搜索结果列表适配器
+//    @Inject
+//    lateinit var searchResultListAdapter: SearchResultListAdapter//搜索结果列表适配器
 
     override fun initView() {
         super.initView()
@@ -121,7 +121,7 @@ class SearchActivity :
                 //收起键盘
                 val inputMethodManager =
                     getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                inputMethodManager.hideSoftInputFromWindow(window.decorView.windowToken,0)
+                inputMethodManager.hideSoftInputFromWindow(window.decorView.windowToken, 0)
                 //显示搜索结果列表
                 showSearchResult()
                 //将当前搜索关键词装载到搜索框中

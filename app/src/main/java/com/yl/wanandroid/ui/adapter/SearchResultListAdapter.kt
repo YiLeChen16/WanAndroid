@@ -7,11 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.yl.wanandroid.Constant
 import com.yl.wanandroid.R
+import com.yl.wanandroid.base.BaseRecyclerViewAdapter
 import com.yl.wanandroid.databinding.ItemSearchResultBlogViewBinding
 import com.yl.wanandroid.model.ArticleItemData
+import com.yl.wanandroid.model.CollectionEvent
 import com.yl.wanandroid.ui.activity.WebViewActivity
+import com.yl.wanandroid.utils.LogUtils
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
 
@@ -22,54 +27,72 @@ import javax.inject.Inject
  * @version 1.0
  */
 class SearchResultListAdapter @Inject constructor(@ActivityContext val context: Context) :
-    RecyclerView.Adapter<SearchResultListAdapter.MyViewHolder>() {
-    //搜索结果数据
-    private var mSearchResultListDatas: MutableList<ArticleItemData> = mutableListOf()
+    BaseRecyclerViewAdapter<ArticleItemData, ItemSearchResultBlogViewBinding>(R.layout.item_search_result_blog_view) {
 
-    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        //list条目绑定databinding
-        val inflater = LayoutInflater.from(parent.context)
-        val binding = DataBindingUtil.inflate<ItemSearchResultBlogViewBinding>(
-            inflater,
-            R.layout.item_search_result_blog_view,
-            parent,
-            false
-        )
-        return MyViewHolder(binding.root)
+    override fun setViewBindingVariable(binding: ItemSearchResultBlogViewBinding?, position: Int) {
+        binding?.searchData = datas[position]
     }
 
-    override fun getItemCount(): Int {
-        return mSearchResultListDatas.size
-    }
-
-    //暴露方法给外界设置数据
-    fun setData(data: List<ArticleItemData>) {
-        this.mSearchResultListDatas.clear()
-        this.mSearchResultListDatas.addAll(data)
-        notifyDataSetChanged()
-    }
-
-
-    //暴露方法给外界添加数据
-    fun addData(data: List<ArticleItemData>) {
-        val oldIndex = mSearchResultListDatas.size - 1
-        this.mSearchResultListDatas.addAll(data)
-        notifyItemRangeChanged(oldIndex,mSearchResultListDatas.size)
-    }
-
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        //Databinding绑定数据
-        val binding = DataBindingUtil.getBinding<ItemSearchResultBlogViewBinding>(holder.itemView)
-        binding?.searchData = mSearchResultListDatas[position]
-        binding?.executePendingBindings()//需执行此句以更新界面,否则界面会闪烁
+    override fun setListener(
+        holder: MyViewHolder,
+        binding: ItemSearchResultBlogViewBinding?,
+        position: Int
+    ) {
         //设置条目点击跳转
         holder.itemView.setOnClickListener {
             //跳转到webViewActivity界面
             val intent = Intent(context, WebViewActivity::class.java)
-            intent.putExtra(Constant.TO_WEB_URL, mSearchResultListDatas[position].link)//携带数据跳转
+            intent.putExtra(Constant.TO_WEB_URL, datas[position].link)//携带数据跳转
             context.startActivity(intent)
         }
+        //收藏按钮初始化
+        if (datas[position].collect) {
+            //已收藏
+            binding?.collection?.setImageResource(R.drawable.star)
+        } else {
+            //未收藏
+            binding?.collection?.setImageResource(R.drawable.no_star)
+        }
+        //收藏按钮点击事件
+        binding?.collection?.setOnClickListener {
+            var originId = datas[position].originId
+            if (originId == 0) {
+                originId = -1
+            }
+            val where =
+                (datas[position].adminAdd == null) && (datas[position].apkLink == null)//因为收藏页面返回的json数据没有这两个字段
+            //先进行伪更新.更新界面收藏状态(注意: 必须先进行此操作再通知监听者,否则removeItemByOriginId方法的使用会有问题,会导致移除最后一个条目时此处索引越界)
+            datas[position].collect = !datas[position].collect
+            notifyItemChanged(position)//更新界面
+            //通知监听者
+            onCollectionEventListener?.onCollectionEvent(
+                CollectionEvent(
+                    datas[position].id,
+                    originId,
+                    !datas[position].collect,
+                    where
+                )
+            )
+        }
     }
+
+    fun updateCollectionState(id: Int) {
+        for ((index, data) in datas.withIndex()) {
+            if (data.id == id) {
+                datas[index].collect = !datas[index].collect
+                notifyItemChanged(index)
+                return
+            }
+        }
+    }
+
+    /**
+     * 对外界提供设置接口的方法
+     * @param listener OnCollectionEventListener
+     */
+    fun setOnCollectionEventListener(listener: OnCollectionEventListener) {
+        onCollectionEventListener = listener
+    }
+
+    private var onCollectionEventListener: OnCollectionEventListener? = null
 }

@@ -2,13 +2,9 @@ package com.yl.wanandroid.ui.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.RecyclerView
 import com.yl.wanandroid.Constant
 import com.yl.wanandroid.R
+import com.yl.wanandroid.base.BaseRecyclerViewAdapter
 import com.yl.wanandroid.databinding.ItemBlogViewBinding
 import com.yl.wanandroid.model.ArticleItemData
 import com.yl.wanandroid.model.CollectionEvent
@@ -24,50 +20,17 @@ import javax.inject.Inject
  * @version 1.0
  */
 class BlogListAdapter @Inject constructor(@ActivityContext val context: Context) :
-    RecyclerView.Adapter<BlogListAdapter.MyViewHolder>() {
+    BaseRecyclerViewAdapter<ArticleItemData, ItemBlogViewBinding>(R.layout.item_blog_view) {
 
-
-    private var datas: MutableList<ArticleItemData> = mutableListOf()
-
-    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     private var onCollectionEventListener: OnCollectionEventListener? = null
 
-    //暴露方法给外界设置数据
-    fun setData(recommendBlogDatas: List<ArticleItemData>) {
-        this.datas.clear()//清空数据
-        this.datas.addAll(recommendBlogDatas)
-        notifyDataSetChanged()
-    }
 
-    //暴露方法给外界添加数据
-    fun addData(recommendBlogDatas: List<ArticleItemData>) {
-        val oldIndex = datas.size - 1
-        this.datas.addAll(recommendBlogDatas)
-        notifyItemRangeChanged(oldIndex, recommendBlogDatas.size)
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        //list条目绑定databinding
-        val inflater = LayoutInflater.from(parent.context)
-        val binding = DataBindingUtil.inflate<ItemBlogViewBinding>(
-            inflater,
-            R.layout.item_blog_view,
-            parent,
-            false
-        )
-        return MyViewHolder(binding.root)
-    }
-
-    override fun getItemCount(): Int {
-        return datas.size
-    }
-
-    //使用DataBinding绑定数据
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val binding = DataBindingUtil.getBinding<ItemBlogViewBinding>(holder.itemView)
-        binding?.itemData = datas[position]
-        binding?.executePendingBindings()
+    override fun setListener(
+        holder: MyViewHolder,
+        binding: ItemBlogViewBinding?,
+        position: Int
+    ) {
         //设置条目点击跳转
         holder.itemView.setOnClickListener {
             val intent = Intent(context, WebViewActivity::class.java)
@@ -103,9 +66,13 @@ class BlogListAdapter @Inject constructor(@ActivityContext val context: Context)
                     where
                 )
             )
-
         }
     }
+
+    override fun setViewBindingVariable(binding: ItemBlogViewBinding?, position: Int) {
+        binding?.itemData = datas[position]
+    }
+
 
     /**
      * 用于我的收藏页面取消收藏时更新页面
@@ -123,10 +90,10 @@ class BlogListAdapter @Inject constructor(@ActivityContext val context: Context)
     }
 
 
-    fun updateCollectionState(id:Int){
+    fun updateCollectionState(id: Int) {
         for ((index, data) in datas.withIndex()) {
             if (data.id == id) {
-                LogUtils.d(this,"data.id == id")
+                LogUtils.d(this, "data.id == id")
                 datas[index].collect = !datas[index].collect
                 notifyItemChanged(index)
                 return
@@ -134,7 +101,6 @@ class BlogListAdapter @Inject constructor(@ActivityContext val context: Context)
         }
     }
 
-    //TODO::
     //自定义收藏事件监听接口:方法(收藏事件id)
     //在AppViewModel中注册监听事件,因为收藏是一个全局事件!一旦有一个适配器发生收藏事件,就将通知CollectViewModel
     //在CollectViewModel中定义一个对应的LiveData属性对象,监听收藏事件,一旦发生则修改属性对象
@@ -149,7 +115,5 @@ class BlogListAdapter @Inject constructor(@ActivityContext val context: Context)
         onCollectionEventListener = listener
     }
 
-    interface OnCollectionEventListener {
-        fun onCollectionEvent(event: CollectionEvent)
-    }
+
 }

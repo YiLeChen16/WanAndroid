@@ -8,6 +8,7 @@ import com.yl.wanandroid.repository.CollectRepository
 import com.yl.wanandroid.repository.LoginAndRegisterRepository
 import com.yl.wanandroid.room.DBInstance
 import com.yl.wanandroid.ui.adapter.BlogListAdapter
+import com.yl.wanandroid.ui.adapter.OnCollectionEventListener
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast
 import com.yl.wanandroid.utils.getStringFromResource
@@ -24,7 +25,7 @@ import javax.inject.Singleton
  */
 @Singleton//单例
 class AppViewModel @Inject constructor() :
-    BlogListAdapter.OnCollectionEventListener, BaseViewModel() {
+    OnCollectionEventListener, BaseViewModel() {
 
     //数据库对象
     private val database = DBInstance.getDatabase()

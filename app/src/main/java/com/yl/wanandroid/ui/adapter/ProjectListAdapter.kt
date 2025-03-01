@@ -2,18 +2,14 @@ package com.yl.wanandroid.ui.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.yl.wanandroid.Constant
 import com.yl.wanandroid.R
+import com.yl.wanandroid.base.BaseRecyclerViewAdapter
 import com.yl.wanandroid.databinding.ItemProjectViewBinding
 import com.yl.wanandroid.model.ArticleItemData
+import com.yl.wanandroid.model.CollectionEvent
 import com.yl.wanandroid.ui.activity.WebViewActivity
 import com.yl.wanandroid.utils.LogUtils
 import dagger.hilt.android.qualifiers.ActivityContext
@@ -26,37 +22,34 @@ import javax.inject.Inject
  * @version 1.0
  */
 class ProjectListAdapter @Inject constructor(@ActivityContext val context: Context) :
-    RecyclerView.Adapter<ProjectListAdapter.MyViewHolder>() {
-    private var data: MutableList<ArticleItemData> = mutableListOf()
+    BaseRecyclerViewAdapter<ArticleItemData, ItemProjectViewBinding>(R.layout.item_project_view) {
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): MyViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val binding = DataBindingUtil.inflate<ItemProjectViewBinding>(
-            inflater,
-            R.layout.item_project_view,
-            parent,
-            false
-        )
-        return MyViewHolder(binding)
+    override fun setViewBindingVariable(binding: ItemProjectViewBinding?, position: Int) {
+        binding?.itemData = datas[position]//为布局声明变量绑定数据
     }
 
-
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val binding = DataBindingUtil.getBinding<ItemProjectViewBinding>(holder.itemView)
-        binding?.itemData = data[position]//为布局声明变量绑定数据
-        binding?.executePendingBindings()//通知更新
+    override fun setListener(
+        holder: MyViewHolder,
+        binding: ItemProjectViewBinding?,
+        position: Int
+    ) {
+        //收藏按钮初始化
+        if (datas[position].collect) {
+            //已收藏
+            binding?.collection?.setImageResource(R.drawable.star)
+        } else {
+            //未收藏
+            binding?.collection?.setImageResource(R.drawable.no_star)
+        }
         //设置条目点击事件
         holder.itemView.setOnClickListener {
             //点击跳转到WebActivity
             val intent = Intent(context, WebViewActivity::class.java)
-            intent.putExtra(Constant.TO_WEB_URL, data[position].link)//携带数据跳转
+            intent.putExtra(Constant.TO_WEB_URL, datas[position].link)//携带数据跳转
             context.startActivity(intent)
         }
         //设置加载网络图片
-        val picUrl: String = data[position].envelopePic
+        val picUrl: String = datas[position].envelopePic
         LogUtils.d(this, "picUrl-->$picUrl")
         if (binding?.img != null) {
             val options: RequestOptions = RequestOptions()
@@ -65,24 +58,48 @@ class ProjectListAdapter @Inject constructor(@ActivityContext val context: Conte
                 .error(R.drawable.img_load_failure)//图片加载失败后，显示的图片
             Glide.with(context).load(picUrl).apply(options).into(binding.img)
         }
+
+
+        //收藏按钮点击事件
+        binding?.collection?.setOnClickListener {
+            var originId = datas[position].originId
+            if (originId == 0) {
+                originId = -1
+            }
+            val where =
+                (datas[position].adminAdd == null) && (datas[position].apkLink == null)//因为收藏页面返回的json数据没有这两个字段
+            //先进行伪更新.更新界面收藏状态(注意: 必须先进行此操作再通知监听者,否则removeItemByOriginId方法的使用会有问题,会导致移除最后一个条目时此处索引越界)
+            datas[position].collect = !datas[position].collect
+            notifyItemChanged(position)//更新界面
+            //通知监听者
+            onCollectionEventListener?.onCollectionEvent(
+                CollectionEvent(
+                    datas[position].id,
+                    originId,
+                    !datas[position].collect,
+                    where
+                )
+            )
+        }
     }
 
-    override fun getItemCount(): Int {
-        return data.size
+    fun updateCollectionState(id: Int) {
+        for ((index, data) in datas.withIndex()) {
+            if (data.id == id) {
+                datas[index].collect = !datas[index].collect
+                notifyItemChanged(index)
+                return
+            }
+        }
     }
 
-    //暴露方法给外界设置数据
-    fun setData(data: List<ArticleItemData>) {
-        this.data = data.toMutableList()
-        notifyDataSetChanged()
+    /**
+     * 对外界提供设置接口的方法
+     * @param listener OnCollectionEventListener
+     */
+    fun setOnCollectionEventListener(listener: OnCollectionEventListener) {
+        onCollectionEventListener = listener
     }
 
-    //暴露方法给外界添加数据
-    fun addData(newData: List<ArticleItemData>){
-        val oldIndex = this.data.size - 1
-        this.data.addAll(newData)
-        notifyItemRangeChanged(oldIndex,data.size)
-    }
-
-    class MyViewHolder(binding: ViewBinding) : RecyclerView.ViewHolder(binding.root)
+    private var onCollectionEventListener: OnCollectionEventListener? = null
 }

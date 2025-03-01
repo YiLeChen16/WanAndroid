@@ -1,12 +1,7 @@
 package com.yl.wanandroid.ui.adapter
 
-import android.annotation.SuppressLint
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewbinding.ViewBinding
 import com.yl.wanandroid.R
+import com.yl.wanandroid.base.BaseRecyclerViewAdapter
 import com.yl.wanandroid.databinding.ItemSystemBinding
 import com.yl.wanandroid.model.Children
 import com.yl.wanandroid.model.SystemDataBeanItem
@@ -19,70 +14,47 @@ import javax.inject.Inject
  * @date 2025/1/23 14:56
  * @version 1.0
  */
-class SystemChildContentListAdapter @Inject constructor():RecyclerView.Adapter<SystemChildContentListAdapter.MyViewHolder>() {
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): MyViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val binding = DataBindingUtil.inflate<ItemSystemBinding>(
-            inflater,
-            R.layout.item_system,
-            parent,
-            false
-        )
-        return MyViewHolder(binding)
+class SystemChildContentListAdapter @Inject constructor() :
+    BaseRecyclerViewAdapter<SystemDataBeanItem, ItemSystemBinding>(R.layout.item_system) {
+
+
+    private var listener: OnKeyWordClickListener? = null
+    private var flowLayout: CommonFlowLayoutView? = null
+
+
+    override fun setViewBindingVariable(binding: ItemSystemBinding?, position: Int) {
+        binding?.systemDataBeanItem = datas[position]
+        flowLayout = binding?.root?.findViewById(R.id.flow_layout)
+        flowLayout?.setData(datas[position].children)
     }
 
-    private  var listener: OnKeyWordClickListener? = null
-    private var data: MutableList<SystemDataBeanItem> = mutableListOf()
-
-
-    class MyViewHolder(binding: ViewBinding):RecyclerView.ViewHolder(binding.root){
-        var flowLayout:CommonFlowLayoutView? = null
-        init {
-            flowLayout = binding.root.findViewById(R.id.flow_layout)
-        }
-    }
-
-    override fun onBindViewHolder(
+    override fun setListener(
         holder: MyViewHolder,
-        @SuppressLint("RecyclerView") position: Int
+        binding: ItemSystemBinding?,
+        position: Int
     ) {
-        val binding = DataBindingUtil.getBinding<ItemSystemBinding>(holder.itemView)
-        binding?.systemDataBeanItem = data[position]
-        holder.flowLayout?.setData(data[position].children)
         //为item中的每个关键词设置点击事件
-        holder.flowLayout?.setOnItemClickListener(object :CommonFlowLayoutView.OnItemClickListener{
+        flowLayout?.setOnItemClickListener(object :
+            CommonFlowLayoutView.OnItemClickListener {
             override fun onKeyWordClick(child: Children) {
-                listener?.onKeyWordClick(child.id,data[position].children)
+                listener?.onKeyWordClick(child.id, datas[position].children)
             }
-
         })
-    }
-
-    override fun getItemCount(): Int {
-        return data.size
-    }
-
-    //暴露接口给外界设置数据
-    fun setData(data: MutableList<SystemDataBeanItem>) {
-        this.data = data
     }
 
 
     //暴露方法给外界设置监听回调接口
-    fun setOnKeyWordClickListener(listener: OnKeyWordClickListener){
+    fun setOnKeyWordClickListener(listener: OnKeyWordClickListener) {
         this.listener = listener
     }
 
 
-    interface OnKeyWordClickListener{
+    interface OnKeyWordClickListener {
         /**
          * 关键词被点击时回调
          * @param id Int 关键词对应的页面id
          * @param children List<Children> 全部页面的数据
          */
-        fun onKeyWordClick(id:Int,children:List<Children>)
+        fun onKeyWordClick(id: Int, children: List<Children>)
     }
 }

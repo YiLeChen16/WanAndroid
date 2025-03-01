@@ -1,11 +1,14 @@
 package com.yl.wanandroid.ui.fragment.home.search
 
+import android.content.Intent
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yl.wanandroid.BR
 import com.yl.wanandroid.R
+import com.yl.wanandroid.app.AppViewModel
 import com.yl.wanandroid.base.BaseVMFragment
 import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.databinding.FragmentSearchResultBinding
+import com.yl.wanandroid.ui.activity.LoginActivity
 import com.yl.wanandroid.ui.adapter.SearchResultListAdapter
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast
@@ -27,6 +30,9 @@ class SearchResultFragment :
 
     @Inject
     lateinit var mSearchResultListAdapter: SearchResultListAdapter
+
+    @Inject
+    lateinit var appViewModel: AppViewModel
 
     override fun initView() {
         super.initView()
@@ -50,6 +56,8 @@ class SearchResultFragment :
             //将跳转获取到的关键词赋值到当前搜索关键词
             mViewModel.getSearchResultData(mViewModel.searchHintKeyWord)
         }
+        //设置收藏监听事件
+        mSearchResultListAdapter.setOnCollectionEventListener(appViewModel)
     }
 
     override fun observeLiveData() {
@@ -119,6 +127,10 @@ class SearchResultFragment :
             }
         }
 
+        appViewModel.isUserLogin.observe(this){
+            //跳转到登录页面
+            startActivity(Intent(context,LoginActivity::class.java))
+        }
     }
 
     //重写此方法,获取xml布局中声明的变量id,以为xml布局中声明的变量赋值
