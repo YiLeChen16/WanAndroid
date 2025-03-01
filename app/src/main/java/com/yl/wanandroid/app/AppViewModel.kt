@@ -7,7 +7,6 @@ import com.yl.wanandroid.model.CollectionEvent
 import com.yl.wanandroid.repository.CollectRepository
 import com.yl.wanandroid.repository.LoginAndRegisterRepository
 import com.yl.wanandroid.room.DBInstance
-import com.yl.wanandroid.ui.adapter.BlogListAdapter
 import com.yl.wanandroid.ui.adapter.OnCollectionEventListener
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast

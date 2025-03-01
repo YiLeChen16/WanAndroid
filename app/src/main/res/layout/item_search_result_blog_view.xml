@@ -46,6 +46,7 @@
                     android:id="@+id/collection"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:contentDescription="@string/tip_collection"
                     android:src="@drawable/no_star"
                     app:layout_constraintBottom_toTopOf="@id/title"
                     app:layout_constraintEnd_toEndOf="parent" />
@@ -117,7 +118,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="分类："
+                            android:text="@string/tip_classify"
                             android:textSize="@dimen/sp_12" />
 
                         <TextView

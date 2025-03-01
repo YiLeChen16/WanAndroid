@@ -10,7 +10,6 @@ import android.widget.TextView.OnEditorActionListener
 import com.yl.wanandroid.BR
 import com.yl.wanandroid.Constant
 import com.yl.wanandroid.R
-import com.yl.wanandroid.app.AppViewModel
 import com.yl.wanandroid.base.BaseVMActivity
 import com.yl.wanandroid.databinding.ActivitySearchBinding
 import com.yl.wanandroid.model.ViewStateEnum
@@ -18,7 +17,6 @@ import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.viewmodel.search.SearchShareViewModel
 import com.yl.wanandroid.viewmodel.search.SearchShareViewModel.search_fragment_visibility
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 
 /**
