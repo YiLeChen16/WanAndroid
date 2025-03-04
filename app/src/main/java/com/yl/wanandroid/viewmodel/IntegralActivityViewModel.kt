@@ -3,12 +3,13 @@ package com.yl.wanandroid.viewmodel
 import com.yl.wanandroid.base.BaseViewModel
 
 /**
- * @description: TODO
+ * @description: 积分界面ViewModel
  * @author YL Chen
- * @date 2024/9/7 16:05
+ * @date 2025/3/3 20:57
  * @version 1.0
  */
-class MyFragmentViewModel:BaseViewModel() {
+class IntegralActivityViewModel:BaseViewModel() {
+
     override fun onReload() {
 
     }

@@ -6,7 +6,6 @@ import com.yl.wanandroid.base.BaseViewModel
 import com.yl.wanandroid.model.CollectionEvent
 import com.yl.wanandroid.repository.CollectRepository
 import com.yl.wanandroid.repository.LoginAndRegisterRepository
-import com.yl.wanandroid.room.DBInstance
 import com.yl.wanandroid.ui.adapter.OnCollectionEventListener
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast
@@ -26,11 +25,9 @@ import javax.inject.Singleton
 class AppViewModel @Inject constructor() :
     OnCollectionEventListener, BaseViewModel() {
 
-    //数据库对象
-    private val database = DBInstance.getDatabase()
-    val loginAndRegisterRepository = LoginAndRegisterRepository(database)
 
-    val collectRepository = CollectRepository()
+
+/*    val collectRepository = CollectRepository()*/
 
     val isUserLogin = MutableLiveData<Boolean>()
 
@@ -67,7 +64,7 @@ class AppViewModel @Inject constructor() :
             errorCallback = { _, errMsg ->
                 TipsToast.showTips(errMsg)
             }, requestCall = {
-                collectRepository.collectArticle(collectId)
+                CollectRepository.collectArticle(collectId)
                 TipsToast.showTips(getStringFromResource(R.string.tip_success_collect))
             }
         )
@@ -78,7 +75,7 @@ class AppViewModel @Inject constructor() :
             errorCallback = { _, errMsg ->
                 TipsToast.showTips(errMsg)
             }, requestCall = {
-                collectRepository.collectOutsideArticle(title, author, link)
+                CollectRepository.collectOutsideArticle(title, author, link)
                 TipsToast.showTips(getStringFromResource(R.string.tip_success_collect))
             }
         )
@@ -90,7 +87,7 @@ class AppViewModel @Inject constructor() :
             errorCallback = { _, errMsg ->
                 TipsToast.showTips(errMsg)
             }, requestCall = {
-                collectRepository.cancelCollectArticle(id)
+                CollectRepository.cancelCollectArticle(id)
                 TipsToast.showTips(getStringFromResource(R.string.tip_success_cancel_collect))
             }
         )
@@ -105,7 +102,7 @@ class AppViewModel @Inject constructor() :
         launchUI(
             errorCallback = { _, errMsg -> TipsToast.showTips(errMsg) },
             requestCall = {
-                collectRepository.cancelMyCollectArticle(id, originId)
+                CollectRepository.cancelMyCollectArticle(id, originId)
                 TipsToast.showTips(getStringFromResource(R.string.tip_success_cancel_collect))
             }
         )
@@ -115,7 +112,7 @@ class AppViewModel @Inject constructor() :
     //判断有无登录
     fun isUserLogin(): Boolean {
         runBlocking {
-            if (loginAndRegisterRepository.isUserLogin()) {
+            if (LoginAndRegisterRepository.isUserLogin()) {
                 //已登录
                 LogUtils.d(this@AppViewModel, "isLogin1-->")
                 true

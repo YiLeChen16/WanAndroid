@@ -3,7 +3,6 @@ package com.yl.wanandroid.repository
 import com.yl.wanandroid.model.BannerDataBean
 import com.yl.wanandroid.network.WanAndroidApiInterface
 import com.yl.wanandroid.repository.base.BaseRepository
-import javax.inject.Inject
 
 /**
  * @description: 首页仓库
@@ -11,7 +10,7 @@ import javax.inject.Inject
  * @date 2024/9/10 16:32
  * @version 1.0
  */
-class HomeRepository @Inject constructor() : BaseRepository() {
+object HomeRepository : BaseRepository() {
 
     /**
      * 网络请求Banner数据

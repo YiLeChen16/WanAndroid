@@ -11,7 +11,7 @@ import com.yl.wanandroid.repository.base.BaseRepository
  * @date 2024/10/21 19:32
  * @version 1.0
  */
-class SearchRepository:BaseRepository() {
+object SearchRepository:BaseRepository() {
     //获取搜索热词数据
     suspend fun getSearchHotKeyData():MutableList<SearchHotKeyDataBean>?{
         return requestResponse {

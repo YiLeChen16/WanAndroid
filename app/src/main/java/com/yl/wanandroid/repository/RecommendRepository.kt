@@ -11,7 +11,7 @@ import com.yl.wanandroid.repository.base.BaseRepository
  * @date 2024/10/20 21:55
  * @version 1.0
  */
-class RecommendRepository:BaseRepository() {
+object RecommendRepository:BaseRepository() {
     /**
      * 网络请求首页推荐博客数据
      * @param page Int

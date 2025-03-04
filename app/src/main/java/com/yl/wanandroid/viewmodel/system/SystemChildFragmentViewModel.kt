@@ -17,7 +17,6 @@ import com.yl.wanandroid.utils.TipsToast
  */
 class SystemChildFragmentViewModel : BaseViewModel(),
     SystemChildContentListAdapter.OnKeyWordClickListener {
-    private val systemRepository: SystemRepository? = getRepository<SystemRepository>()
 
     //体系数据
     val systemData = MutableLiveData<MutableList<SystemDataBeanItem>?>()
@@ -44,7 +43,7 @@ class SystemChildFragmentViewModel : BaseViewModel(),
                 systemData.value = null
             },
             requestCall = {
-                systemData.value = systemRepository?.getSystemData()
+                systemData.value = SystemRepository.getSystemData()
             }
         )
     }

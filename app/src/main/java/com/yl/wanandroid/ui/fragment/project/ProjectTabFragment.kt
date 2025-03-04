@@ -17,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 /**
- * @description: 项目页面的ViewPager条目Fragment TODO::
+ * @description: 项目页面的ViewPager条目Fragment
  * @author YL Chen
  * @date 2024/12/1 22:15
  * @version 1.0

@@ -15,16 +15,13 @@ import com.yl.wanandroid.utils.TipsToast
 class ProjectTabFragmentViewModel:BaseViewModel() {
     var cid: Int = 0
 
-    //获取对应仓库
-    private val projectRepository = getRepository<ProjectRepository>()
-
     //项目数据
     val projectData = MutableLiveData<ArticleDataBean?>()
 
-    private val DEFAULT_PAGE: Int = 0//默认加载页码
+    private val DEFAULT_PAGE: Int = 1//默认加载页码
 
     //当前加载页码
-    private var currentPage = DEFAULT_PAGE//初始为0
+    private var currentPage = DEFAULT_PAGE//初始为1
 
     //更多项目数据
     val moreProjectData = MutableLiveData<ArticleDataBean?>()
@@ -37,7 +34,7 @@ class ProjectTabFragmentViewModel:BaseViewModel() {
                 projectData.value = null
             },
             requestCall = {
-                projectData.value = projectRepository?.getProjectDataByCid(DEFAULT_PAGE,cid)
+                projectData.value = ProjectRepository.getProjectDataByCid(DEFAULT_PAGE,cid)
             }
         )
     }
@@ -52,7 +49,7 @@ class ProjectTabFragmentViewModel:BaseViewModel() {
                 currentPage--
             },
             requestCall = {
-                moreProjectData.value = projectRepository?.getProjectDataByCid(currentPage,cid)
+                moreProjectData.value = ProjectRepository.getProjectDataByCid(currentPage,cid)
             }
         )
     }

@@ -10,7 +10,7 @@ import com.yl.wanandroid.repository.base.BaseRepository
  * @date 2024/11/12 21:45
  * @version 1.0
  */
-class HarmonyRepository:BaseRepository() {
+object HarmonyRepository:BaseRepository() {
 
     /**
      * 获取鸿蒙专栏数据

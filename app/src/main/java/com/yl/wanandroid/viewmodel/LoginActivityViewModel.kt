@@ -4,10 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.yl.wanandroid.base.BaseViewModel
 import com.yl.wanandroid.model.User
 import com.yl.wanandroid.repository.LoginAndRegisterRepository
-import com.yl.wanandroid.room.DBInstance
-import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast
-import kotlinx.coroutines.runBlocking
 
 /**
  * @description: 登录界面ViewModel
@@ -17,10 +14,10 @@ import kotlinx.coroutines.runBlocking
  */
 class LoginActivityViewModel : BaseViewModel() {
     //数据库对象
-    private val database = DBInstance.getDatabase()
+    /*private val database = DBInstance.getDatabase()*/
 
     val user = MutableLiveData<User?>()//登录返回的用户信息
-    val repository = LoginAndRegisterRepository(database)
+/*    val repository = LoginAndRegisterRepository()*/
 
 
     /**
@@ -33,10 +30,10 @@ class LoginActivityViewModel : BaseViewModel() {
             TipsToast.showTips(errMsg)
             user.value = null
         }, requestCall = {
-            user.value = repository.login(userName, password)
+            user.value = LoginAndRegisterRepository.login(userName, password)
             //将用户数据保存到本地
-            repository.clearUser()//清除本地数据
-            repository.saveUser(userName)//存储新数据
+            LoginAndRegisterRepository.clearUser()//清除本地数据
+            LoginAndRegisterRepository.saveUser(userName)//存储新数据
         })
     }
 

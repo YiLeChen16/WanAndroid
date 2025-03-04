@@ -1,11 +1,5 @@
 package com.yl.wanandroid.model
 
-import android.widget.ImageView
-import androidx.databinding.BindingAdapter
-import com.yl.wanandroid.R
-import com.yl.wanandroid.utils.LogUtils
-import com.yl.wanandroid.viewmodel.home.CollectViewModel
-
 /**
  * @description: 通用列表条目数据
  * @author YL Chen
@@ -49,51 +43,7 @@ data class ArticleItemData(
     val userId: Int,
     val visible: Int,
     val zan: Int
-) {
-    companion object {
-        /* @JvmStatic
-         @BindingAdapter("android:src")
-         fun setSrc(view: ImageView, resId: Int) {
-             view.setImageResource(resId)
-         }*/
-
-        /*   @BindingAdapter("app:imgUrl")
-           @JvmStatic
-           fun load(imageView: ImageView, collect: Boolean) {
-               if (collect){
-                   imageView.setImageResource(R.drawable.star)
-               }else{
-                   imageView.setImageResource(R.drawable.no_star)
-               }
-           }*/
-    }
-
-
-    //TODO::写到适配器中
-    //条目收藏按钮被点击
-    /*    fun onCollectClick(view: ImageView, collect: Boolean, id:Int) {
-            val collectActivityViewModel = CollectViewModel()
-            //view.setImageResource()
-            if (!collect){
-                //收藏
-                view.setImageResource(R.drawable.star)
-                collectActivityViewModel.collectArticle(id)
-            }else{
-                //取消收藏
-                view.setImageResource(R.drawable.no_star)
-                //判断来自哪个页面
-                if (this.niceShareDate.isNullOrEmpty()){
-                    //来自"我的收藏"页面
-                    collectActivityViewModel.cancelMyCollectArticle(id)
-                }else{
-                    //来自"文章列表"
-                    collectActivityViewModel.cancelCollectArticle(id)
-                }
-            }
-            this.collect = !collect
-            LogUtils.d(this,"SearchData-->onCollectClick----")
-        }*/
-}
+)
 
 data class Tag(
     val name: String,

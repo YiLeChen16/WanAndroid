@@ -11,7 +11,7 @@ import com.yl.wanandroid.repository.base.BaseRepository
  * @date 2025/2/26 14:55
  * @version 1.0
  */
-class CollectRepository : BaseRepository() {
+object CollectRepository : BaseRepository() {
     suspend fun getAllCollectArticle(page: Int): ArticleDataBean? {
         return requestResponse { WanAndroidApiInterface.api.getAllCollectArticle(page) }
     }

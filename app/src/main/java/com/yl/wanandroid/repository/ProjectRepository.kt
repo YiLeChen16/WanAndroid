@@ -11,7 +11,7 @@ import com.yl.wanandroid.repository.base.BaseRepository
  * @date 2024/11/24 22:43
  * @version 1.0
  */
-class ProjectRepository: BaseRepository(){
+object ProjectRepository: BaseRepository(){
 
     /**
      * 获取项目分类数据

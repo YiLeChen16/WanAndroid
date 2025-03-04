@@ -11,7 +11,7 @@ import com.yl.wanandroid.repository.base.BaseRepository
  * @date 2024/11/19 22:08
  * @version 1.0
  */
-class WendaRepository : BaseRepository() {
+object WendaRepository : BaseRepository() {
     /**
      * 获取热门问答数据
      * @return MutableList<ArticleItemData>?

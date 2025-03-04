@@ -3,6 +3,7 @@ package com.yl.wanandroid.repository
 import com.yl.wanandroid.model.User
 import com.yl.wanandroid.network.WanAndroidApiInterface
 import com.yl.wanandroid.repository.base.BaseRepository
+import com.yl.wanandroid.room.DBInstance
 import com.yl.wanandroid.room.WanAndroidDataBase
 import com.yl.wanandroid.room.entity.UserItem
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +15,10 @@ import kotlinx.coroutines.withContext
  * @date 2025/2/22 17:32
  * @version 1.0
  */
-class LoginAndRegisterRepository(val db: WanAndroidDataBase) : BaseRepository() {
+object LoginAndRegisterRepository : BaseRepository() {
+    private val db = DBInstance.getDatabase()
+
+
     /**
      * 登录
      * @param userName String

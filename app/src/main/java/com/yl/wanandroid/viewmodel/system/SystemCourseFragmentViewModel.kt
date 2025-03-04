@@ -16,9 +16,6 @@ class SystemCourseFragmentViewModel : BaseViewModel() {
 
     val systemCourse = MutableLiveData<MutableList<SystemDataBeanItem>?>()
 
-    //仓库对象
-    private val systemCourseRepository: SystemCourseRepository? =
-        getRepository<SystemCourseRepository>()
 
     /**
      * 获取课程列表数据
@@ -28,7 +25,7 @@ class SystemCourseFragmentViewModel : BaseViewModel() {
             TipsToast.showTips(errMsg)
             systemCourse.value = null
         }, requestCall = {
-            systemCourse.value = systemCourseRepository?.getSystemCourseData()
+            systemCourse.value = SystemCourseRepository.getSystemCourseData()
         })
     }
 

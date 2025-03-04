@@ -8,7 +8,6 @@ import com.yl.wanandroid.model.SearchHotKeyDataBean
 import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.repository.SearchHistoryRepository
 import com.yl.wanandroid.repository.SearchRepository
-import com.yl.wanandroid.room.DBInstance
 import com.yl.wanandroid.room.entity.SearchHistoryItem
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast
@@ -21,8 +20,6 @@ import com.yl.wanandroid.utils.TipsToast
  * @version 1.0
  */
 object SearchShareViewModel : BaseViewModel() {
-    private val dataBase = DBInstance.getDatabase()
-    private val searchHistoryRepository = SearchHistoryRepository(dataBase)
 
     //标记当前是否有网络
     var isNoNetWork = false
@@ -44,8 +41,6 @@ object SearchShareViewModel : BaseViewModel() {
             getAllSearchHistory()
         }
 
-
-    private val searchRepository: SearchRepository? = getRepository()
 
     //此变量用于控制searchFragment与searchResultFragment的可见性
     //true:表示searchResultFragment界面可见
@@ -109,7 +104,7 @@ object SearchShareViewModel : BaseViewModel() {
         launchUI(errorCallback = { _, _ ->
             searchHistoriesList.value = mutableListOf()
         }, requestCall = {
-            searchHistoriesList.value = searchHistoryRepository.getSearchHistoryItems().toMutableList()
+            searchHistoriesList.value = SearchHistoryRepository.getSearchHistoryItems().toMutableList()
         })
     }
 
@@ -118,8 +113,8 @@ object SearchShareViewModel : BaseViewModel() {
         launchUI(errorCallback = { _, _ ->
 
         }, requestCall = {
-            searchHistoryRepository.deleteSearchHistoryItem(id)
-            searchHistoriesList.value = searchHistoryRepository.getSearchHistoryItems().toMutableList()//触发更新
+            SearchHistoryRepository.deleteSearchHistoryItem(id)
+            searchHistoriesList.value = SearchHistoryRepository.getSearchHistoryItems().toMutableList()//触发更新
         })
     }
 
@@ -128,8 +123,8 @@ object SearchShareViewModel : BaseViewModel() {
         launchUI(errorCallback = { _, _ ->
             searchHistoriesList.value = mutableListOf()
         }, requestCall = {
-            searchHistoryRepository.insertSearchHistoryItem(searchHistoryItem.query,searchHistoryItem.timestamp)
-            searchHistoriesList.value = searchHistoryRepository.getSearchHistoryItems().toMutableList()//触发更新
+            SearchHistoryRepository.insertSearchHistoryItem(searchHistoryItem.query,searchHistoryItem.timestamp)
+            searchHistoriesList.value = SearchHistoryRepository.getSearchHistoryItems().toMutableList()//触发更新
         })
     }
 
@@ -138,8 +133,8 @@ object SearchShareViewModel : BaseViewModel() {
         launchUI(errorCallback = { _, _ ->
             searchHistoriesList.value = mutableListOf()
         }, requestCall = {
-            searchHistoryRepository.deleteAllSearchHistory()
-            searchHistoriesList.value = searchHistoryRepository.getSearchHistoryItems().toMutableList()//触发更新
+            SearchHistoryRepository.deleteAllSearchHistory()
+            searchHistoriesList.value = SearchHistoryRepository.getSearchHistoryItems().toMutableList()//触发更新
         })
     }
 
@@ -177,7 +172,7 @@ object SearchShareViewModel : BaseViewModel() {
                 requestCall = {
                     LogUtils.d(this@SearchShareViewModel, "requestCall")
                     searchResultListData.value =
-                        searchRepository?.getSearchResultData(mDefaultPage, k)//默认搜索第一页数据
+                        SearchRepository.getSearchResultData(mDefaultPage, k)//默认搜索第一页数据
                 }
             )
         }
@@ -201,7 +196,7 @@ object SearchShareViewModel : BaseViewModel() {
                 searchHotKeyData.value = null
             },
             requestCall = {
-                searchHotKeyData.value = searchRepository?.getSearchHotKeyData()
+                searchHotKeyData.value = SearchRepository.getSearchHotKeyData()
             }
         )
         return searchHotKeyData
@@ -235,7 +230,7 @@ object SearchShareViewModel : BaseViewModel() {
             requestCall = {
                 LogUtils.d(this@SearchShareViewModel, "requestCall")
                 loadMoreSearchResultListData.value =
-                    searchRepository?.getSearchResultData(
+                    SearchRepository.getSearchResultData(
                         mCurrentPage,
                         mCurrentSearchKeyWord.value!!
                     )

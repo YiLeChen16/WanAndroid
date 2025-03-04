@@ -18,8 +18,6 @@ import com.yl.wanandroid.utils.TipsToast
  */
 class RecommendFragmentViewModel : BaseViewModel() {
 
-    private var recommendRepository: RecommendRepository? = getRepository()
-
     //推荐博客数据
     var recommendBlogData = MutableLiveData<ArticleDataBean?>()
 
@@ -30,10 +28,10 @@ class RecommendFragmentViewModel : BaseViewModel() {
     var searchHotKeyData = MutableLiveData<MutableList<SearchHotKeyDataBean>?>()
 
     //默认加载第一页
-    val mDefaultPage = 0
+    private val mDefaultPage = 0
 
     //记录当前推荐博客加载页数
-    var mCurrentPage = mDefaultPage//初始化为0
+    private var mCurrentPage = mDefaultPage//初始化为0
 
     /**
      * 获取首页推荐博客数据
@@ -44,7 +42,7 @@ class RecommendFragmentViewModel : BaseViewModel() {
         //将当前加载页数也重置为0
         mCurrentPage = mDefaultPage
         launchUI(
-            errorCallback = { errorCode, errorMsg ->
+            errorCallback = { _, errorMsg ->
                 TipsToast.showTips(errorMsg)
                 LogUtils.d(this@RecommendFragmentViewModel, "errorCallback-->$errorMsg")
                 changeStateView(ViewStateEnum.VIEW_NET_ERROR)
@@ -52,7 +50,7 @@ class RecommendFragmentViewModel : BaseViewModel() {
             },
             requestCall = {
                 recommendBlogData.value =
-                    recommendRepository?.getRecommendBlogData(mDefaultPage)
+                    RecommendRepository.getRecommendBlogData(mDefaultPage)
             }
         )
         return recommendBlogData
@@ -60,14 +58,14 @@ class RecommendFragmentViewModel : BaseViewModel() {
 
     fun getSearchHotkeyData(): LiveData<MutableList<SearchHotKeyDataBean>?> {
         launchUI(
-            errorCallback = { errorCode, errorMsg ->
+            errorCallback = { _, errorMsg ->
                 TipsToast.showTips(errorMsg)
                 LogUtils.d(this@RecommendFragmentViewModel, "errorCallback-->$errorMsg")
                 changeStateView(ViewStateEnum.VIEW_NET_ERROR)
                 searchHotKeyData.value = null
             },
             requestCall = {
-                searchHotKeyData.value = recommendRepository?.getSearchHotKeyData()
+                searchHotKeyData.value = RecommendRepository.getSearchHotKeyData()
             }
         )
         return searchHotKeyData
@@ -79,7 +77,7 @@ class RecommendFragmentViewModel : BaseViewModel() {
         mCurrentPage++
 
         launchUI(
-            errorCallback = { errorCode, errorMsg ->
+            errorCallback = { _, errorMsg ->
                 TipsToast.showTips(errorMsg)
                 LogUtils.d(this@RecommendFragmentViewModel, "errorCallback-->$errorMsg")
                 loadMoreRecommendBlogData.value = null
@@ -89,7 +87,7 @@ class RecommendFragmentViewModel : BaseViewModel() {
             requestCall = {
                 //网络请求数据
                 loadMoreRecommendBlogData.value =
-                    recommendRepository?.getRecommendBlogData(mCurrentPage)
+                    RecommendRepository.getRecommendBlogData(mCurrentPage)
             }
         )
     }

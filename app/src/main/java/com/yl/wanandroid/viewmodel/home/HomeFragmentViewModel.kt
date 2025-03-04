@@ -7,7 +7,6 @@ import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.model.BannerDataBean
 import com.yl.wanandroid.repository.HomeRepository
 import com.yl.wanandroid.repository.LoginAndRegisterRepository
-import com.yl.wanandroid.room.DBInstance
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast
 
@@ -19,14 +18,8 @@ import com.yl.wanandroid.utils.TipsToast
  */
 class HomeFragmentViewModel : BaseViewModel() {
 
-    //获取仓库模型
-    private var homeRepository: HomeRepository? = getRepository()
-
     //Banner数据
     var bannerDatas = MutableLiveData<MutableList<BannerDataBean>?>()
-
-
-    private val loginRepository = LoginAndRegisterRepository(DBInstance.getDatabase())
 
     //用户登录标志
     val isUserLogin = MutableLiveData<Boolean>()
@@ -40,7 +33,7 @@ class HomeFragmentViewModel : BaseViewModel() {
         if (bannerDatas.value.isNullOrEmpty()) {
             launchUI(
                 //请求失败回调
-                errorCallback = { errorCode, errorMsg ->
+                errorCallback = { _, errorMsg ->
                     TipsToast.showTips(errorMsg)
                     LogUtils.d(this@HomeFragmentViewModel, "errorCallback-->$errorMsg")
                     changeStateView(ViewStateEnum.VIEW_NET_ERROR)
@@ -48,7 +41,7 @@ class HomeFragmentViewModel : BaseViewModel() {
                 },
                 //网络请求
                 requestCall = {
-                    bannerDatas.value = homeRepository?.getBannerData()
+                    bannerDatas.value = HomeRepository.getBannerData()
                 }
             )
         }
@@ -64,7 +57,7 @@ class HomeFragmentViewModel : BaseViewModel() {
             //未登录
             isUserLogin.value = false
         }, requestCall = {
-            if (loginRepository.isUserLogin()) {
+            if (LoginAndRegisterRepository.isUserLogin()) {
                 //已登录
                 //跳转到收藏界面
                 isUserLogin.value = true

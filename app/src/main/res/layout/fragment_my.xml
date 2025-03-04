@@ -1,18 +1,310 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
+        <import
+            alias="textUtlis"
+            type="android.text.TextUtils" />
+
+        <variable
+            name="myFragmentViewModel"
+            type="com.yl.wanandroid.viewmodel.my.MyFragmentViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
+        android:layout_height="match_parent"
+        android:background="@color/md_theme_background">
 
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/md_theme_background"
+            android:fadingEdge="none"
+            app:elevation="@dimen/dp_0">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/layout1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/iv_search"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@string/tip_search"
+                            android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                            android:onClick="@{()->myFragmentViewModel.onSearchClick()}"
+                            android:padding="@dimen/dp_10"
+                            android:src="@drawable/search_24px"
+                            app:layout_constraintEnd_toEndOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/iv_theme_mode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@string/tip_theme"
+                            android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                            android:onClick="@{()->myFragmentViewModel.onChangeThemeClick()}"
+                            android:padding="@dimen/dp_10"
+                            android:src="@drawable/dark_mode_24px"
+                            app:layout_constraintEnd_toEndOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/iv_setting"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@string/tip_setting"
+                            android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                            android:onClick="@{()->myFragmentViewModel.onSettingClick()}"
+                            android:padding="@dimen/dp_10"
+                            android:src="@drawable/settings_24px"
+                            app:layout_constraintEnd_toEndOf="parent" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                        android:onClick="@{()->myFragmentViewModel.onMyInfoClick()}"
+                        android:padding="@dimen/dp_10"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/layout1">
+
+                        <LinearLayout
+                            android:layout_width="@dimen/dp_0"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="8"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/iv_img"
+                                android:layout_width="@dimen/dp_65"
+                                android:layout_height="@dimen/dp_65"
+                                android:padding="2dp"
+                                android:src="@mipmap/ic_launcher"
+                                app:shapeAppearanceOverlay="@style/circleImageStyle"
+                                app:strokeColor="@color/md_theme_onBackground"
+                                app:strokeWidth="4dp" />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/dp_15"
+                                android:paddingTop="@dimen/dp_5"
+                                android:text="@={myFragmentViewModel.userName}"
+                                android:textColor="@color/md_theme_onBackground"
+                                android:textSize="@dimen/sp_20"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_0"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/dp_5"
+                            android:layout_weight="1"
+                            android:src="@drawable/chevron_right_24px" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_10"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                        android:onClick="@{()->myFragmentViewModel.onRankLayoutClick()}"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/dp_10"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/layout2">
+
+                        <LinearLayout
+                            android:layout_width="@dimen/dp_0"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/grade"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dp_5"
+                                android:text="@={myFragmentViewModel.level}"
+                                android:textColor="@color/md_theme_onBackground"
+                                android:textSize="@dimen/sp_16"
+                                android:textStyle="italic" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/tips_grade"
+                                android:textSize="@dimen/sp_12" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="@dimen/dp_0"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/integral"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dp_5"
+                                android:text="@={myFragmentViewModel.integral}"
+                                android:textColor="@color/md_theme_onBackground"
+                                android:textSize="@dimen/sp_16"
+                                android:textStyle="italic" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/tips_integral"
+                                android:textSize="@dimen/sp_12" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="@dimen/dp_0"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/rank"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dp_5"
+                                android:text="@={myFragmentViewModel.rank}"
+                                android:textColor="@color/md_theme_onBackground"
+                                android:textSize="@dimen/sp_16"
+                                android:textStyle="italic" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/tips_rank"
+                                android:textSize="@dimen/sp_12" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/layout4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_15"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:layout_marginEnd="@dimen/dp_15"
+                        android:layout_marginBottom="@dimen/dp_30"
+                        app:cardBackgroundColor="@color/md_theme_surfaceContainerLow"
+                        app:cardCornerRadius="@dimen/dp_5"
+                        app:layout_constraintTop_toBottomOf="@id/layout3">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/dp_15">
+
+
+                            <TextView
+                                android:id="@+id/my_message"
+                                android:layout_width="@dimen/dp_0"
+                                android:layout_height="match_parent"
+                                android:layout_weight="2"
+                                android:clickable="true"
+                                android:drawablePadding="@dimen/dp_5"
+                                android:focusable="true"
+                                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                                android:gravity="center"
+                                android:onClick="@{()->myFragmentViewModel.onMyMessageClick()}"
+                                android:text="@string/tips_my_message"
+                                android:textColor="@color/md_theme_onBackground"
+                                app:drawableTopCompat="@drawable/mail_my" />
+
+                            <TextView
+                                android:id="@+id/my_collection"
+                                android:layout_width="@dimen/dp_0"
+                                android:layout_height="match_parent"
+                                android:layout_weight="2"
+                                android:clickable="true"
+                                android:drawablePadding="@dimen/dp_5"
+                                android:focusable="true"
+                                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                                android:gravity="center"
+                                android:onClick="@{()->myFragmentViewModel.onMyCollectionClick()}"
+                                android:text="@string/tip_collection"
+                                android:textColor="@color/md_theme_onBackground"
+                                app:drawableTopCompat="@drawable/star_my" />
+
+                            <TextView
+                                android:id="@+id/my_share"
+                                android:layout_width="@dimen/dp_0"
+                                android:layout_height="match_parent"
+                                android:layout_weight="2"
+                                android:clickable="true"
+                                android:drawablePadding="@dimen/dp_5"
+                                android:focusable="true"
+                                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                                android:gravity="center"
+                                android:onClick="@{()->myFragmentViewModel.onMyShareClick()}"
+                                android:text="@string/tips_my_share"
+                                android:textColor="@color/md_theme_onBackground"
+                                app:drawableTopCompat="@drawable/share_my" />
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/tips_my"/>
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/recommend_tab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/tips_WxNames"
+                android:textSize="@dimen/sp_14"
+                app:tabMode="scrollable"
+                app:tabTextColor="@color/md_theme_primary" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/tab_view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+        </LinearLayout>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

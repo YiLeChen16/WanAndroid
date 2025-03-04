@@ -15,7 +15,7 @@ import com.yl.wanandroid.utils.TipsToast
  */
 class HarmonyFragmentViewModel:BaseViewModel() {
     //获取仓库对象
-    val harmonyRepository = getRepository<HarmonyRepository>()
+/*    val harmonyRepository = getRepository<HarmonyRepository>()*/
 
     //鸿蒙专栏全部数据
     val harmonyColumnDataBean = MutableLiveData<HarmonyColumnDataBean?>()
@@ -44,7 +44,7 @@ class HarmonyFragmentViewModel:BaseViewModel() {
                 harmonyColumnDataBean.value = null
             },
             requestCall = {
-                harmonyColumnDataBean.value = harmonyRepository?.getHarmonyColumnData()
+                harmonyColumnDataBean.value = HarmonyRepository.getHarmonyColumnData()
             }
         )
     }

@@ -19,6 +19,6 @@
         tools:layout="@layout/fragment_system"/>
     <fragment
         android:id="@+id/my"
-        android:name="com.yl.wanandroid.ui.fragment.MyFragment"
+        android:name="com.yl.wanandroid.ui.fragment.my.MyFragment"
         tools:layout="@layout/fragment_my"/>
 </navigation>

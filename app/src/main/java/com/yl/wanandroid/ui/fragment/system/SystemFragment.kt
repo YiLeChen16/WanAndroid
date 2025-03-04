@@ -6,12 +6,12 @@ import android.widget.TextView
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.google.android.material.tabs.TabLayout
 import com.yl.wanandroid.R
+import com.yl.wanandroid.base.BaseFragment
 import com.yl.wanandroid.base.BaseVMFragment
 import com.yl.wanandroid.databinding.FragmentSystemBinding
 import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.ui.adapter.SystemViewPagerAdapter
 import com.yl.wanandroid.utils.LogUtils
-import com.yl.wanandroid.viewmodel.system.SystemFragmentViewModel
 
 /**
  * @description: 体系
@@ -20,7 +20,7 @@ import com.yl.wanandroid.viewmodel.system.SystemFragmentViewModel
  * @version 1.0
  */
 class SystemFragment :
-    BaseVMFragment<FragmentSystemBinding, SystemFragmentViewModel>(R.layout.fragment_system) {
+    BaseFragment<FragmentSystemBinding>(R.layout.fragment_system) {
 
     private var systemViewPagerAdapter: SystemViewPagerAdapter? = null
 
@@ -64,6 +64,10 @@ class SystemFragment :
         })
     }
 
+    override fun initData() {
+        mMultiplyStateView.showSuccess()
+    }
+
     //初始化tab条目的样式
     private fun initTab() {
         val initData = listOf("体系", "课程")
@@ -76,8 +80,4 @@ class SystemFragment :
         }
     }
 
-
-    override fun initVMData() {
-        mViewModel.changeStateView(ViewStateEnum.VIEW_LOAD_SUCCESS)
-    }
 }

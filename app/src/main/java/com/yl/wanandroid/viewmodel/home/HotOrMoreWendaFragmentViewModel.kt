@@ -16,8 +16,7 @@ import com.yl.wanandroid.utils.TipsToast
  * @version 1.0
  */
 class HotOrMoreWendaFragmentViewModel : BaseViewModel() {
-    private val DEFAULT_PAGE: Int = 0//默认加载页码
-    private val wendaRepository = getRepository<WendaRepository>()
+    private val DEFAULT_PAGE: Int = 1//默认加载页码
 
     //热门问答数据
     val hotWendaData = MutableLiveData<MutableList<ArticleItemData>?>()
@@ -26,7 +25,7 @@ class HotOrMoreWendaFragmentViewModel : BaseViewModel() {
     val normalWendaData = MutableLiveData<ArticleDataBean?>()
 
     //当前加载页码
-    private var currentPage = DEFAULT_PAGE//初始为0
+    private var currentPage = DEFAULT_PAGE//初始为1
 
     //更多普通问答数据
     val moreNormalWendaData = MutableLiveData<ArticleDataBean?>()
@@ -36,18 +35,18 @@ class HotOrMoreWendaFragmentViewModel : BaseViewModel() {
 
     fun getHotWendaData() {
         launchUI(
-            errorCallback = { errorCode, errorMsg ->
+            errorCallback = { _, errorMsg ->
                 TipsToast.showTips(errorMsg)
                 hotWendaData.value = null
                 changeStateView(ViewStateEnum.VIEW_NET_ERROR)
             },
-            requestCall = { hotWendaData.value = wendaRepository?.getHotWendaData() }
+            requestCall = { hotWendaData.value = WendaRepository.getHotWendaData() }
         )
     }
 
     fun getNormalWendaData() {
         launchUI(
-            errorCallback = { errorCode, errorMsg ->
+            errorCallback = { _, errorMsg ->
                 TipsToast.showTips(errorMsg)
                 normalWendaData.value = null
                 changeStateView(ViewStateEnum.VIEW_NET_ERROR)
@@ -55,7 +54,7 @@ class HotOrMoreWendaFragmentViewModel : BaseViewModel() {
             requestCall = {
                 //重置当前页码数
                 currentPage = DEFAULT_PAGE
-                normalWendaData.value = wendaRepository?.getNormalWendaData(DEFAULT_PAGE)
+                normalWendaData.value = WendaRepository.getNormalWendaData(DEFAULT_PAGE)
             }
         )
     }
@@ -64,13 +63,13 @@ class HotOrMoreWendaFragmentViewModel : BaseViewModel() {
         //页码+1
         currentPage++
         launchUI(
-            errorCallback = { errorCode, errorMsg ->
+            errorCallback = { _, errorMsg ->
                 TipsToast.showTips(errorMsg)
                 moreNormalWendaData.value = null
                 currentPage--//页码数-1
             },
             requestCall = {
-                moreNormalWendaData.value = wendaRepository?.getNormalWendaData(currentPage)
+                moreNormalWendaData.value = WendaRepository.getNormalWendaData(currentPage)
             }
         )
     }

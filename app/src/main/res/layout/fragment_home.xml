@@ -10,9 +10,9 @@
             name="homeViewModel"
             type="com.yl.wanandroid.viewmodel.home.HomeFragmentViewModel" />
     </data>
-<!--使用CoordinatorLayout替代NestScrollView实现多个子View之间的滑动-->
-<!--    此处使用NestScrollView会导致无法下拉刷新.可能因为刷新框架中实现了NestedScrollingParent接口,
-而ViewPager中又嵌套了一层SmartRefreshLayout-->
+    <!--使用CoordinatorLayout替代NestScrollView实现多个子View之间的滑动-->
+    <!--    此处使用NestScrollView会导致无法下拉刷新.可能因为刷新框架中实现了NestedScrollingParent接口,
+    而ViewPager中又嵌套了一层SmartRefreshLayout-->
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,10 +21,12 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_scrollFlags="scroll">
+
                 <com.yl.wanandroid.ui.custom.BannerView
                     android:id="@+id/banner_view"
                     android:layout_width="match_parent"
@@ -41,6 +43,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
             <LinearLayout
                 android:id="@+id/search_layout"
                 android:layout_width="match_parent"
@@ -53,6 +56,7 @@
                     android:layout_width="@dimen/dp_0"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:contentDescription="@string/tip_theme"
                     android:src="@drawable/iv_change_theme" />
 
                 <com.google.android.material.tabs.TabLayout
@@ -83,15 +87,16 @@
                     android:layout_width="@dimen/dp_0"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:contentDescription="@string/tip_collection"
                     android:onClick="@{()->homeViewModel.onCollectClick()}"
                     android:src="@drawable/iv_collection" />
             </LinearLayout>
+
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/tab_view_pager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
-
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

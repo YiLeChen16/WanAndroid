@@ -11,7 +11,7 @@ import com.yl.wanandroid.repository.base.BaseRepository
  * @date 2025/2/12 16:42
  * @version 1.0
  */
-class SystemCourseRepository:BaseRepository() {
+object SystemCourseRepository:BaseRepository() {
 
     suspend fun getSystemCourseData():MutableList<SystemDataBeanItem>?{
         return requestResponse {

@@ -6,9 +6,11 @@ import com.yl.wanandroid.model.HarmonyColumnDataBean
 import com.yl.wanandroid.model.ArticleItemData
 import com.yl.wanandroid.model.ProjectCategoryDataBeanItem
 import com.yl.wanandroid.model.ArticleDataBean
+import com.yl.wanandroid.model.Children
 import com.yl.wanandroid.model.SearchHotKeyDataBean
 import com.yl.wanandroid.model.SystemDataBeanItem
 import com.yl.wanandroid.model.User
+import com.yl.wanandroid.model.UserDataBean
 import com.yl.wanandroid.network.interceptor.CookiesInterceptor
 import com.yl.wanandroid.network.interceptor.HeaderInterceptor
 import com.yl.wanandroid.network.result.BaseResult
@@ -258,4 +260,34 @@ interface WanAndroidApiInterface {
         @Path("id") id: Int,
         @Query("originId") originId: Int = -1
     ): BaseResult<Any>?
+
+
+    /**
+     * 获取微信公众号名称列表
+     * @return BaseResult<MutableList<Children>>?
+     */
+    @GET("/wxarticle/chapters/json")
+    suspend fun getWxArticleTabs(): BaseResult<MutableList<Children>>?
+
+
+    /**
+     * 查看某个公众号历史数据
+     * @param id Int
+     * @param page Int
+     * @return BaseResult<ArticleDataBean>
+     */
+    @GET("/wxarticle/list/{id}/{page}/json")
+    suspend fun getWxArticlesByWxId(
+        @Path("id") id: Int,
+        @Path("page") page: Int
+    ): BaseResult<ArticleDataBean>?
+
+
+    /**
+     * 获取用户信息
+     * @return BaseResult<UserDataBean>?
+     */
+    @GET("/user/lg/userinfo/json")
+    suspend fun getUserInfo():BaseResult<UserDataBean>?
+
 }

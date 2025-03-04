@@ -32,19 +32,11 @@ class SearchActivity :
     private var defaultHintKeyword: String? = null
     private var isSearch: Boolean? = false
 
-//    @Inject
-//    lateinit var searchResultListAdapter: SearchResultListAdapter//搜索结果列表适配器
-
     override fun initView() {
         super.initView()
         //禁止刷新和加载
         mRefreshLayout.setEnableRefresh(false)
         mRefreshLayout.setEnableLoadMore(false)
-
-
-    }
-
-    override fun initData() {
         //获取推荐页搜索框搜索按钮跳转传递过来的数据
         val extras = intent.extras
         isSearch = extras?.getBoolean(Constant.IS_SEARCH, false)//是否由搜索按钮跳转过来
@@ -52,9 +44,11 @@ class SearchActivity :
             extras?.getString(
                 Constant.CURRENT_SEARCH_HOTKEY,
                 ""
-            )//由推荐页跳转携带过来的推荐搜索热词,作为搜索框为空时填充的提示词,若跳转展示的是搜索结果列表fragment则此词同时作为当前搜索词,
+            )//由推荐页跳转携带过来的推荐搜索热词,作为搜索框为空时填充的提示词,若跳转展示的是搜索结果列表fragment则此词同时作为当前搜索词
+        if (defaultHintKeyword.isNullOrEmpty())
+            return
         mBinding.edSearchBox.hint = defaultHintKeyword
-        super.initData()
+
     }
 
 
@@ -89,7 +83,7 @@ class SearchActivity :
         mBinding.edSearchBox.imeOptions = EditorInfo.IME_ACTION_SEARCH
         mBinding.edSearchBox.setSingleLine(true)
 
-        mBinding.edSearchBox.setOnEditorActionListener(OnEditorActionListener { textView, actionId, keyEvent ->
+        mBinding.edSearchBox.setOnEditorActionListener(OnEditorActionListener { _, actionId, keyEvent ->
             if ((actionId == EditorInfo.IME_ACTION_UNSPECIFIED || actionId == EditorInfo.IME_ACTION_SEARCH) && keyEvent != null) {
                 //点击回车要做的操作,与点击搜索按钮一样回调onSearchClick此方法
                 mViewModel.onSearchClick()

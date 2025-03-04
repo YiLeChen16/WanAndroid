@@ -21,10 +21,6 @@ class SystemCourseActivityViewModel : BaseViewModel() {
         ObservableField<String>()//ObservableField此种类型的变量才可被xml中的变量绑定!!不可用MutableLiveData!!!
     val sortState = MutableLiveData(false)
 
-    //仓库对象
-    private val systemCourseRepository: SystemCourseRepository? =
-        getRepository<SystemCourseRepository>()
-
     val courseArticleData = MutableLiveData<ArticleDataBean?>()
     //加载更多数据
     val loadMoreCourseArticleData = MutableLiveData<ArticleDataBean?>()
@@ -62,7 +58,7 @@ class SystemCourseActivityViewModel : BaseViewModel() {
             courseArticleData.value = null
         }, requestCall = {
             courseArticleData.value =
-                systemCourseRepository?.getSystemCourseArticleDataByCid(DEFAULT_PAGE,cid, order)
+                SystemCourseRepository.getSystemCourseArticleDataByCid(DEFAULT_PAGE,cid, order)
         })
     }
 
@@ -77,7 +73,7 @@ class SystemCourseActivityViewModel : BaseViewModel() {
             currentPage--
         }, requestCall = {
             loadMoreCourseArticleData.value =
-                systemCourseRepository?.getSystemCourseArticleDataByCid(currentPage,cid, order)
+                SystemCourseRepository.getSystemCourseArticleDataByCid(currentPage,cid, order)
         })
     }
 

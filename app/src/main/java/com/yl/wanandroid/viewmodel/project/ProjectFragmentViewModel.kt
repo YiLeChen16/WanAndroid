@@ -14,8 +14,6 @@ import javax.inject.Inject
  * @version 1.0
  */
 class ProjectFragmentViewModel @Inject constructor():BaseViewModel() {
-    //获取对应仓库
-    private val projectRepository = getRepository<ProjectRepository>()
 
     //项目分类数据
     val projectCategoriesData = MutableLiveData<MutableList<ProjectCategoryDataBeanItem>?>()
@@ -32,7 +30,7 @@ class ProjectFragmentViewModel @Inject constructor():BaseViewModel() {
                 projectCategoriesData.value = null
             },
             requestCall = {
-                projectCategoriesData.value = projectRepository?.getProjectCategory()
+                projectCategoriesData.value = ProjectRepository.getProjectCategory()
             }
         )
     }

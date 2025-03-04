@@ -9,7 +9,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.yl.wanandroid.R
 import com.yl.wanandroid.base.BaseActivity
 import com.yl.wanandroid.databinding.ActivityMainBinding
-import com.yl.wanandroid.ui.fragment.MyFragment
+import com.yl.wanandroid.ui.fragment.my.MyFragment
 import com.yl.wanandroid.ui.fragment.project.ProjectFragment
 import com.yl.wanandroid.ui.fragment.system.SystemFragment
 import com.yl.wanandroid.ui.fragment.home.HomeFragment

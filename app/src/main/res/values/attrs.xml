@@ -36,4 +36,11 @@
         <attr name="line_spac" format="integer"/><!--行间距-->
         <attr name="column_spac" format="integer"/><!--列间距-->
     </declare-styleable>
+
+    <!-- 圆形图片 -->
+    <style name="circleImageStyle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
 </resources>

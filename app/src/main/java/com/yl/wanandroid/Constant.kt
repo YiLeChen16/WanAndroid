@@ -24,6 +24,7 @@ object Constant {
     const val COIN_URL = "/lg/coin" //积分接口
     const val NOT_COLLECTION_URL = "/lg/uncollect"//取消收藏接口
     const val ARTICLE_URL = "/article"//文章接口
+    const val USER_INFO_URL = "/user/lg"//用户信息接口
     const val KEY_COOKIE = "Cookie"
     const val FORGET_PASSWORD_URL = "https://www.wanandroid.com/blog/show/2947"
 

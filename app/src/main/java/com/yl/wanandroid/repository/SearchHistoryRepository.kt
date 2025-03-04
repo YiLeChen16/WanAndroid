@@ -1,7 +1,7 @@
 package com.yl.wanandroid.repository
 
-import com.yl.wanandroid.room.WanAndroidDataBase
-import com.yl.wanandroid.room.dao.SearchHistoryDao
+import com.yl.wanandroid.repository.base.BaseRepository
+import com.yl.wanandroid.room.DBInstance
 import com.yl.wanandroid.room.entity.SearchHistoryItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.sync.Mutex
@@ -14,8 +14,9 @@ import kotlinx.coroutines.withContext
  * @date 2024/11/10 16:27
  * @version 1.0
  */
-class SearchHistoryRepository(private val db: WanAndroidDataBase) {
+object SearchHistoryRepository : BaseRepository() {
     private val mutex = Mutex()
+    private val db = DBInstance.getDatabase()
 
 
     suspend fun getSearchHistoryItems(): List<SearchHistoryItem> =

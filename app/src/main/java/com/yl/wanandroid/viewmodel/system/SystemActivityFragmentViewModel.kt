@@ -15,7 +15,6 @@ import com.yl.wanandroid.utils.TipsToast
 class SystemActivityFragmentViewModel : BaseViewModel() {
 
     var cid = 0
-    private val systemRepository: SystemRepository? = getRepository<SystemRepository>()
 
     private val DEFAULT_PAGE: Int = 0//默认加载页码
 
@@ -30,7 +29,7 @@ class SystemActivityFragmentViewModel : BaseViewModel() {
 
     /**
      *获取对应cid的system下的文章
-     * @param cids Int
+     * @param cid Int
      */
     fun getSystemArticleDataByCid(cid: Int) {
         this.cid = cid
@@ -44,7 +43,7 @@ class SystemActivityFragmentViewModel : BaseViewModel() {
             requestCall = {
                 //将获取到的数据存入map集合中
                 systemArticleData.value =
-                    systemRepository?.getSystemArticleDataByCid(DEFAULT_PAGE, cid)
+                    SystemRepository.getSystemArticleDataByCid(DEFAULT_PAGE, cid)
             }
         )
     }
@@ -61,7 +60,7 @@ class SystemActivityFragmentViewModel : BaseViewModel() {
                 //页数回退
                 currentPage--
             }, requestCall = {
-                loadMoreSystemArticleData.value = systemRepository?.getSystemArticleDataByCid(currentPage,cid)
+                loadMoreSystemArticleData.value = SystemRepository.getSystemArticleDataByCid(currentPage,cid)
             }
         )
     }
