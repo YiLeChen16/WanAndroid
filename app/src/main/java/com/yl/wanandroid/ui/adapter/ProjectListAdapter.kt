@@ -44,9 +44,7 @@ class ProjectListAdapter @Inject constructor(@ActivityContext val context: Conte
         //设置条目点击事件
         holder.itemView.setOnClickListener {
             //点击跳转到WebActivity
-            val intent = Intent(context, WebViewActivity::class.java)
-            intent.putExtra(Constant.TO_WEB_URL, datas[position].link)//携带数据跳转
-            context.startActivity(intent)
+            WebViewActivity.start(context,datas[position].link)
         }
         //设置加载网络图片
         val picUrl: String = datas[position].envelopePic

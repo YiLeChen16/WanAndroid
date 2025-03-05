@@ -8,10 +8,10 @@ import com.yl.wanandroid.model.CoinData
 import com.yl.wanandroid.model.HarmonyColumnDataBean
 import com.yl.wanandroid.model.PageResponse
 import com.yl.wanandroid.model.ProjectCategoryDataBeanItem
+import com.yl.wanandroid.model.RankItemData
 import com.yl.wanandroid.model.SearchHotKeyDataBean
 import com.yl.wanandroid.model.SystemDataBeanItem
 import com.yl.wanandroid.model.User
-import com.yl.wanandroid.model.UserCoinDataBean
 import com.yl.wanandroid.model.UserDataBean
 import com.yl.wanandroid.network.interceptor.CookiesInterceptor
 import com.yl.wanandroid.network.interceptor.HeaderInterceptor
@@ -43,8 +43,6 @@ interface WanAndroidApiInterface {
          * @return WanAndroidApiInterface
          */
         private fun createApi(): WanAndroidApiInterface {
-            val httpLoggingInterceptor =
-                HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
             val build = OkHttpClient.Builder()
             //为OkHttp添加拦截器,以实现自动拦截存储Cookie和为需要Cookie的接口拦截添加Cookie
             build.addInterceptor(CookiesInterceptor())
@@ -300,4 +298,14 @@ interface WanAndroidApiInterface {
         @Path("page") page: Int
     ):BaseResult<PageResponse<CoinData>>
 
+
+    /**
+     * 获取积分排行榜
+     * @param page Int 从1开始
+     * @return BaseResult<PageResponse<RankItemData>>
+     */
+    @GET("/coin/rank/{page}/json")
+    suspend fun getRankListData(
+        @Path("page") page: Int
+    ):BaseResult<PageResponse<RankItemData>>
 }

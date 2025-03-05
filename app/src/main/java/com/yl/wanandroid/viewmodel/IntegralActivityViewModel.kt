@@ -23,6 +23,8 @@ class IntegralActivityViewModel : BaseViewModel() {
 
 
     val userInfo = MutableLiveData<UserDataBean?>()
+    val gotoRank = MutableLiveData<Boolean>()
+    val gotoRule = MutableLiveData<Boolean>()
 
     val level = ObservableField("0")
     val integral = ObservableField("0")
@@ -38,6 +40,16 @@ class IntegralActivityViewModel : BaseViewModel() {
             integral.set(userInfo.value?.coinInfo?.coinCount.toString())
             rank.set(userInfo.value?.coinInfo?.rank)
         })
+    }
+
+    fun onRankClick(){
+        //通知UI跳转到排名界面
+        gotoRank.value = true
+    }
+
+    fun onRule(){
+        //通知UI跳转到规则界面
+        gotoRule.value = true
     }
 
     fun getUserCoinList(): Flow<PagingData<CoinData>> {

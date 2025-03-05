@@ -21,8 +21,9 @@ abstract class BaseActivity<VB : ViewDataBinding>(@LayoutRes layoutID: Int) :
     AppCompatActivity() { //此处不能将layoutId传递进去，否则会导致fragment加载但不显示
 
     open lateinit var mRefreshLayout: SmartRefreshLayout
+    //仅供直接继承本类的子类调用,继承于BaseVMActivity的调用此对象的方法无效,
+    // 因为setSuccessView方法先于getLoadView方法执行,导致加载状态无法被移除,继承于BaseVMActivity的想改变状态需使用mViewModel调用changeStateView方法
     open lateinit var mMultiplyStateView: MultiplyStateView
-
     //子view的布局id
     private var mLayoutId: Int = layoutID
 

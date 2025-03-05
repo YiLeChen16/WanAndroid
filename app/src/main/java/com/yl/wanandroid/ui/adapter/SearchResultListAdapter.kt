@@ -33,9 +33,7 @@ class SearchResultListAdapter @Inject constructor(@ActivityContext val context: 
         //设置条目点击跳转
         holder.itemView.setOnClickListener {
             //跳转到webViewActivity界面
-            val intent = Intent(context, WebViewActivity::class.java)
-            intent.putExtra(Constant.TO_WEB_URL, datas[position].link)//携带数据跳转
-            context.startActivity(intent)
+            WebViewActivity.start(context,datas[position].link)
         }
         //收藏按钮初始化
         if (datas[position].collect) {

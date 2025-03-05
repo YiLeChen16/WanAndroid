@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="rankItemData"
+            type="com.yl.wanandroid.model.RankItemData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10">
+
+        <TextView
+            android:id="@+id/rank"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_0"
+            android:gravity="center_vertical"
+            android:padding="@dimen/dp_10"
+            android:text="@{rankItemData.rank}"
+            android:textSize="@dimen/sp_14"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@id/level"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1" />
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_10"
+            android:text="@{rankItemData.username}"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/rank"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="haissciqw" />
+
+        <TextView
+            android:id="@+id/level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/dp_10"
+            android:text="@{@string/rank_level(String.valueOf(rankItemData.level))}"
+            app:layout_constraintStart_toStartOf="@id/username"
+            app:layout_constraintTop_toBottomOf="@id/username"
+            tools:ignore="RtlSymmetry"
+            tools:text="LV: 10000" />
+
+        <TextView
+            android:id="@+id/coinCount"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_0"
+            android:gravity="center_vertical"
+            android:padding="@dimen/dp_10"
+            android:text="@{String.valueOf(rankItemData.coinCount)}"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold"
+            android:textColor="@color/md_theme_primary"
+            app:layout_constraintBottom_toBottomOf="@id/level"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/username"
+            tools:text="10000000" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

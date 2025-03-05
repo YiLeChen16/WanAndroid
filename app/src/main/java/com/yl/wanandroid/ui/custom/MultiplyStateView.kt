@@ -122,8 +122,14 @@ open class MultiplyStateView : FrameLayout {
             mSuccessView = mInflater.inflate(mSuccessViewId, null)
         }
         if (mSuccessView != null) {
+            LogUtils.d(this,"childCount-->${childCount}")
+            val loadingView = getLoadingView()
+            val myLoadingView = loadingView.findViewById<MyLoadingView>(R.id.my_loading_view)
+            myLoadingView.stopRotate()
             removeAllViews()
+            LogUtils.d(this,"childCount-->${childCount}")
             addView(mSuccessView, 0, params)
+            LogUtils.d(this,"childCount-->${childCount}")
             currentState = ViewStateEnum.VIEW_LOAD_SUCCESS
         } else {
             throw NullPointerException("you have to set success view before that")
@@ -146,6 +152,7 @@ open class MultiplyStateView : FrameLayout {
      */
     fun setSuccessView(view: View) {
         mSuccessView = view
+        LogUtils.d(this,"setSuccessView-->${view}")
     }
 
 

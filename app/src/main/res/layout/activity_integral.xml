@@ -86,6 +86,7 @@
                         android:layout_marginEnd="12dp"
                         android:contentDescription="@string/tip_rule"
                         android:src="@drawable/help_24px"
+                        android:onClick="@{()->integralActivityViewModel.onRule()}"
                         android:foreground="?android:attr/selectableItemBackgroundBorderless"
                         app:tint="?colorPrimary" />
 
@@ -96,6 +97,7 @@
                         android:layout_gravity="end"
                         android:layout_marginEnd="12dp"
                         android:padding="@dimen/dp_10"
+                        android:onClick="@{()->integralActivityViewModel.onRankClick()}"
                         android:foreground="?android:attr/selectableItemBackgroundBorderless"
                         android:contentDescription="@string/tips_rank"
                         android:src="@drawable/crown_24px"

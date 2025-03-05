@@ -1,6 +1,7 @@
 package com.yl.wanandroid.ui.activity
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.view.ViewGroup
@@ -9,7 +10,6 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.yl.wanandroid.BR
-import com.yl.wanandroid.Constant
 import com.yl.wanandroid.R
 import com.yl.wanandroid.base.BaseVMActivity
 import com.yl.wanandroid.databinding.ActivityWebBinding
@@ -27,10 +27,18 @@ import com.yl.wanandroid.viewmodel.WebActivityViewModel
 class WebViewActivity :
     BaseVMActivity<ActivityWebBinding, WebActivityViewModel>(R.layout.activity_web) {
     private var mLastUrl: String? = null
-    private var url: String? = null
     private var mWebView: WebView? = null
     private var previous:MutableList<String>  =  mutableListOf()
+    companion object {
 
+        private lateinit var url: String
+
+        fun start(context: Context, url:String) {
+            val intent = Intent(context, WebViewActivity::class.java)
+            context.startActivity(intent)
+            this.url = url
+        }
+    }
 
     @SuppressLint("SetJavaScriptEnabled", "ClickableViewAccessibility")
     override fun initView() {
@@ -95,7 +103,6 @@ class WebViewActivity :
 
     override fun initData() {
         super.initData()
-        url = intent.extras?.getString(Constant.TO_WEB_URL)
         mWebView?.webViewClient = object : WebViewClient() {
 
             //设置在webView点击打开的新网页在当前界面显示,而不跳转到新的浏览器中
@@ -134,15 +141,10 @@ class WebViewActivity :
         //加载传递过来的网页
         //判断是否为空
         LogUtils.d(this, "initData-->url-->$url")
-        if (url == null) {
-            //加载空界面
-            mViewModel.changeStateView(ViewStateEnum.VIEW_EMPTY)
-        } else {
-            //将跳转过来的url数据存储到ViewModel中
-            mViewModel.url.value = url
-            //加载网页
-            mWebView?.loadUrl(url!!)
-        }
+        //将跳转过来的url数据存储到ViewModel中
+        mViewModel.url.value = url
+        //加载网页
+        mWebView?.loadUrl(url)
 
     }
 

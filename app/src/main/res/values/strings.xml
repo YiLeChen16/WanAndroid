@@ -68,6 +68,7 @@
     <string name="user_coin_level">等级: %s</string>
     <string name="user_coin_rank">排名: %s</string>
     <string name="tip_rule">积分计算规则</string>
+    <string name="rank_level">LV: %s </string>
 
 
 </resources>

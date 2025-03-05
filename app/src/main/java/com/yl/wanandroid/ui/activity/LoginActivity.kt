@@ -86,9 +86,10 @@ class LoginActivity :
 
         mBinding.tvForgetPassword.setOnClickListener {
             //忘记密码
-            val intent = Intent(this, WebViewActivity::class.java)
+/*            val intent = Intent(this, WebViewActivity::class.java)
             intent.putExtra(Constant.TO_WEB_URL, FORGET_PASSWORD_URL)//携带数据跳转
-            startActivity(intent)
+            startActivity(intent)*/
+            WebViewActivity.start(this,FORGET_PASSWORD_URL)
         }
 
         //协议复选框监听事件,更新登录按钮状态

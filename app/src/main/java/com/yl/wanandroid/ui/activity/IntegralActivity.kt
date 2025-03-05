@@ -1,5 +1,6 @@
 package com.yl.wanandroid.ui.activity
 
+import android.content.Intent
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
@@ -9,6 +10,7 @@ import com.yl.wanandroid.base.BaseVMActivity
 import com.yl.wanandroid.databinding.ActivityIntegralBinding
 import com.yl.wanandroid.viewmodel.IntegralActivityViewModel
 import com.yl.wanandroid.BR
+import com.yl.wanandroid.Constant
 import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.ui.adapter.CoinListAdapter
 import com.yl.wanandroid.utils.LogUtils
@@ -76,6 +78,24 @@ class IntegralActivity :
                 coinListAdapter.submitData(pagingData)
             }
         }
+
+        mViewModel.gotoRule.observe(this){
+            if (it){
+                //跳转到规则界面
+                WebViewActivity.start(this@IntegralActivity,Constant.RULE_URL)
+                mViewModel.gotoRule.value = false
+            }
+
+        }
+
+        mViewModel.gotoRank.observe(this){
+            if (it){
+                startActivity(Intent(this@IntegralActivity,RankActivity::class.java))
+                mViewModel.gotoRank.value = false
+            }
+
+        }
+
 
     }
 
