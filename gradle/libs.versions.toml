@@ -29,6 +29,7 @@ refreshHeaderTwoLevel = "2.1.0"
 refreshFooterClassics = "2.1.0"
 refreshFooterBall = "2.1.0"
 mmkv = "2.1.0"
+pagingRuntime = "3.3.1"
 
 [libraries]
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
@@ -66,6 +67,7 @@ refresh-header-two-level = { group = "io.github.scwang90", name = "refresh-heade
 refresh-footer-classics = { group = "io.github.scwang90", name = "refresh-footer-classics", version.ref = "refreshFooterClassics" }
 refresh-footer-ball = { group = "io.github.scwang90", name = "refresh-footer-ball", version.ref = "refreshFooterBall" }
 mmkv = { group = "com.tencent", name = "mmkv", version.ref = "mmkv" }
+androidx-paging-runtime = { group = "androidx.paging", name = "paging-runtime", version.ref = "pagingRuntime" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

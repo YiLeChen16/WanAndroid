@@ -65,6 +65,9 @@
     <string name="tips_rank">排名</string>
     <string name="tip_my_service">我的服务</string>
     <string name="tips_WxNames">公众号名称列表</string>
+    <string name="user_coin_level">等级: %s</string>
+    <string name="user_coin_rank">排名: %s</string>
+    <string name="tip_rule">积分计算规则</string>
 
 
 </resources>

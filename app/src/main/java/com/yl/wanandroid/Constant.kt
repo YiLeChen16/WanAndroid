@@ -27,6 +27,8 @@ object Constant {
     const val USER_INFO_URL = "/user/lg"//用户信息接口
     const val KEY_COOKIE = "Cookie"
     const val FORGET_PASSWORD_URL = "https://www.wanandroid.com/blog/show/2947"
+    const val DEFAULT_PAGE_START_NO_1 = 1//默认起始页数1
+    const val DEFAULT_PAGE_START_NO_0 = 0//默认起始页数0
 
 
 

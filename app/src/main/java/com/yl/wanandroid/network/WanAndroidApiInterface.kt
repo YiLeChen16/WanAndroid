@@ -1,23 +1,23 @@
 package com.yl.wanandroid.network
 
-import com.yl.wanandroid.base.BaseApplication
-import com.yl.wanandroid.model.BannerDataBean
-import com.yl.wanandroid.model.HarmonyColumnDataBean
-import com.yl.wanandroid.model.ArticleItemData
-import com.yl.wanandroid.model.ProjectCategoryDataBeanItem
 import com.yl.wanandroid.model.ArticleDataBean
+import com.yl.wanandroid.model.ArticleItemData
+import com.yl.wanandroid.model.BannerDataBean
 import com.yl.wanandroid.model.Children
+import com.yl.wanandroid.model.CoinData
+import com.yl.wanandroid.model.HarmonyColumnDataBean
+import com.yl.wanandroid.model.PageResponse
+import com.yl.wanandroid.model.ProjectCategoryDataBeanItem
 import com.yl.wanandroid.model.SearchHotKeyDataBean
 import com.yl.wanandroid.model.SystemDataBeanItem
 import com.yl.wanandroid.model.User
+import com.yl.wanandroid.model.UserCoinDataBean
 import com.yl.wanandroid.model.UserDataBean
 import com.yl.wanandroid.network.interceptor.CookiesInterceptor
 import com.yl.wanandroid.network.interceptor.HeaderInterceptor
 import com.yl.wanandroid.network.result.BaseResult
 import com.yl.wanandroid.utils.LogUtils
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -288,6 +288,16 @@ interface WanAndroidApiInterface {
      * @return BaseResult<UserDataBean>?
      */
     @GET("/user/lg/userinfo/json")
-    suspend fun getUserInfo():BaseResult<UserDataBean>?
+    suspend fun getUserInfo(): BaseResult<UserDataBean>?
+
+    /**
+     * 获取用户积分列表
+     * @param page Int 从1开始
+     * @return BaseResult<UserCoinDataBean>?
+     */
+    @GET("/lg/coin/list/{page}/json")
+    suspend fun getUserCoinList(
+        @Path("page") page: Int
+    ):BaseResult<PageResponse<CoinData>>
 
 }

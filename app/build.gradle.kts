@@ -93,6 +93,7 @@ dependencies {
     implementation(libs.refresh.footer.classics)
     implementation(libs.refresh.footer.ball)
     implementation(libs.mmkv)
+    implementation(libs.androidx.paging.runtime)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
