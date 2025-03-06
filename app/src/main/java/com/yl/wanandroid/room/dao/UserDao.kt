@@ -20,5 +20,5 @@ interface UserDao {
     fun clearUser()
 
     @Query("SELECT * FROM users")
-    fun getUser():List<UserItem>?
+    fun getUser():List<UserItem>
 }

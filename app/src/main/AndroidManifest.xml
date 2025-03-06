@@ -35,12 +35,14 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".ui.activity.SystemActivity" />
         <activity android:name=".ui.activity.SystemCourseActivity" />
-        <activity android:name=".ui.activity.LoginActivity"/>
+        <activity android:name=".ui.activity.LoginActivity"
+            android:launchMode="singleTask"/>
         <activity android:name=".ui.activity.PrivacyPolicyActivity" />
         <activity android:name=".ui.activity.RegisterActivity" />
         <activity android:name=".ui.activity.CollectActivity" />
         <activity android:name=".ui.activity.IntegralActivity" />
         <activity android:name=".ui.activity.RankActivity" />
+        <activity android:name=".ui.activity.SettingActivity" />
     </application>
 
 </manifest>

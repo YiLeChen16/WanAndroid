@@ -66,15 +66,12 @@ class ProjectListAdapter @Inject constructor(@ActivityContext val context: Conte
             }
             val where =
                 (datas[position].adminAdd == null) && (datas[position].apkLink == null)//因为收藏页面返回的json数据没有这两个字段
-            //先进行伪更新.更新界面收藏状态(注意: 必须先进行此操作再通知监听者,否则removeItemByOriginId方法的使用会有问题,会导致移除最后一个条目时此处索引越界)
-            datas[position].collect = !datas[position].collect
-            notifyItemChanged(position)//更新界面
             //通知监听者
             onCollectionEventListener?.onCollectionEvent(
                 CollectionEvent(
                     datas[position].id,
                     originId,
-                    !datas[position].collect,
+                    datas[position].collect,
                     where
                 )
             )

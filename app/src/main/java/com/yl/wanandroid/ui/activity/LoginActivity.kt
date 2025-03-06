@@ -14,9 +14,9 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
-import com.yl.wanandroid.Constant
 import com.yl.wanandroid.Constant.FORGET_PASSWORD_URL
 import com.yl.wanandroid.R
+import com.yl.wanandroid.app.AppViewModel
 import com.yl.wanandroid.base.BaseVMActivity
 import com.yl.wanandroid.databinding.ActivityLoginBinding
 import com.yl.wanandroid.ext.textChangeFlow
@@ -26,12 +26,14 @@ import com.yl.wanandroid.utils.TipsToast
 import com.yl.wanandroid.utils.getColorFromResource
 import com.yl.wanandroid.utils.getStringFromResource
 import com.yl.wanandroid.viewmodel.LoginActivityViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 /**
  * @description: 登录页面//TODO::
@@ -39,10 +41,13 @@ import kotlinx.coroutines.withContext
  * @date 2025/2/18 15:50
  * @version 1.0
  */
+@AndroidEntryPoint
 class LoginActivity :
     BaseVMActivity<ActivityLoginBinding, LoginActivityViewModel>(R.layout.activity_login) {
     private var isShowPassword = true
 
+    @Inject
+    lateinit var appViewModel: AppViewModel
     override fun initView() {
         super.initView()
         mRefreshLayout.setEnableRefresh(false)
@@ -86,9 +91,6 @@ class LoginActivity :
 
         mBinding.tvForgetPassword.setOnClickListener {
             //忘记密码
-/*            val intent = Intent(this, WebViewActivity::class.java)
-            intent.putExtra(Constant.TO_WEB_URL, FORGET_PASSWORD_URL)//携带数据跳转
-            startActivity(intent)*/
             WebViewActivity.start(this,FORGET_PASSWORD_URL)
         }
 

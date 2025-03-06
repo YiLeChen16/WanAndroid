@@ -6,20 +6,20 @@ import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
+import com.yl.wanandroid.BR
 import com.yl.wanandroid.R
+import com.yl.wanandroid.app.AppViewModel
 import com.yl.wanandroid.base.BaseVMFragment
-import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.databinding.FragmentHomeBinding
+import com.yl.wanandroid.model.ViewStateEnum
+import com.yl.wanandroid.ui.activity.CollectActivity
+import com.yl.wanandroid.ui.activity.LoginActivity
 import com.yl.wanandroid.ui.adapter.HomeTabViewPagerAdapter
 import com.yl.wanandroid.ui.custom.BannerView
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.viewmodel.home.HomeFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import com.yl.wanandroid.BR
-import com.yl.wanandroid.ui.activity.CollectActivity
-import com.yl.wanandroid.ui.activity.LoginActivity
-import com.yl.wanandroid.utils.TipsToast
-import com.yl.wanandroid.utils.getStringFromResource
+import javax.inject.Inject
 
 
 /**
@@ -35,6 +35,8 @@ class HomeFragment :
 
     private lateinit var homeTabViewPagerAdapter: HomeTabViewPagerAdapter
 
+    @Inject
+    lateinit var appViewModel: AppViewModel
 
     override fun initView() {
         super.initView()
@@ -50,7 +52,7 @@ class HomeFragment :
         mBinding.tabViewPager.setCurrentItem(1, false)
     }
 
-    fun initListener(){
+    fun initListener() {
         // 联动 Tab 和 ViewPager2
         mBinding.tab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
@@ -116,16 +118,18 @@ class HomeFragment :
                 bannerView.setData(bannerData)
             }
         }
-        mViewModel.isUserLogin.observe(viewLifecycleOwner){
-            if (it){
-                //已登录
-                //跳转到收藏页面
-                startActivity(Intent(context,CollectActivity::class.java))
-            }else{
-                //未登录
-                //跳转到登录界面
-                TipsToast.showTips(getStringFromResource(R.string.tip_no_login))
-                startActivity(Intent(context,LoginActivity::class.java))
+        mViewModel.gotoCollection.observe(viewLifecycleOwner) {
+            if (it) {
+                //判断登录状态
+                if (appViewModel.isUserLogin()) {
+                    //跳转到收藏页面
+                    startActivity(Intent(context, CollectActivity::class.java))
+                } else {
+                    //未登录
+                    //跳转到登录界面
+                    startActivity(Intent(context, LoginActivity::class.java))
+                }
+                mViewModel.gotoCollection.value = false//重置变量
             }
         }
     }

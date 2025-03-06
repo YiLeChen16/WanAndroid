@@ -1,8 +1,6 @@
 package com.yl.wanandroid.ui.adapter
 
 import android.content.Context
-import android.content.Intent
-import com.yl.wanandroid.Constant
 import com.yl.wanandroid.R
 import com.yl.wanandroid.base.BaseRecyclerViewAdapter
 import com.yl.wanandroid.databinding.ItemBlogViewBinding
@@ -52,15 +50,12 @@ class BlogListAdapter @Inject constructor(@ActivityContext val context: Context)
             }
             val where =
                 (datas[position].adminAdd == null) && (datas[position].apkLink == null)//因为收藏页面返回的json数据没有这两个字段
-            //先进行伪更新.更新界面收藏状态(注意: 必须先进行此操作再通知监听者,否则removeItemByOriginId方法的使用会有问题,会导致移除最后一个条目时此处索引越界)
-            datas[position].collect = !datas[position].collect
-            notifyItemChanged(position)//更新界面
             //通知监听者
             onCollectionEventListener?.onCollectionEvent(
                 CollectionEvent(
                     datas[position].id,
                     originId,
-                    !datas[position].collect,
+                    datas[position].collect,
                     where
                 )
             )
@@ -88,9 +83,9 @@ class BlogListAdapter @Inject constructor(@ActivityContext val context: Context)
     }
 
 
-    fun updateCollectionState(id: Int) {
+    fun updateCollectionState(originID: Int) {
         for ((index, data) in datas.withIndex()) {
-            if (data.id == id) {
+            if (data.id == originID) {
                 LogUtils.d(this, "data.id == id")
                 datas[index].collect = !datas[index].collect
                 notifyItemChanged(index)
@@ -106,7 +101,7 @@ class BlogListAdapter @Inject constructor(@ActivityContext val context: Context)
     //对界面的列表数据进行遍历,比对其中id==收藏id的collect属性,对其进行更新
 
     /**
-     * 对外界提供设置接口的方法
+     * 对外界提供设置收藏监听接口的方法
      * @param listener OnCollectionEventListener
      */
     fun setOnCollectionEventListener(listener: OnCollectionEventListener) {

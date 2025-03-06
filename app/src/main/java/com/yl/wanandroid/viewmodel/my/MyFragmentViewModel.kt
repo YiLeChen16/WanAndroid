@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.yl.wanandroid.base.BaseViewModel
 import com.yl.wanandroid.model.Children
 import com.yl.wanandroid.model.UserDataBean
+import com.yl.wanandroid.repository.LoginAndRegisterRepository
 import com.yl.wanandroid.repository.MyRepository
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast
@@ -27,7 +28,6 @@ class MyFragmentViewModel : BaseViewModel() {
     val rank = ObservableField("0")
 
     val gotoCollection = MutableLiveData<Boolean>()
-    val gotoMyMessage = MutableLiveData<Boolean>()
     val gotoMyShare = MutableLiveData<Boolean>()
     val gotoMyIntegral = MutableLiveData<Boolean>()
     val gotoSearch = MutableLiveData<Boolean>()
@@ -54,7 +54,7 @@ class MyFragmentViewModel : BaseViewModel() {
         launchUI(
             errorCallback =
             { _, errMsg ->
-                LogUtils.d(this,"errMsg-->$errMsg")
+                LogUtils.d(this, "errMsg-->$errMsg")
                 TipsToast.showTips(errMsg)
                 userData.value = null
             },
@@ -90,11 +90,6 @@ class MyFragmentViewModel : BaseViewModel() {
     fun onMyCollectionClick() {
         //通知UI跳转到收藏界面
         gotoCollection.value = true
-    }
-
-    fun onMyMessageClick() {
-        //通知UI跳转到消息界面
-        gotoMyMessage.value = true
     }
 
 

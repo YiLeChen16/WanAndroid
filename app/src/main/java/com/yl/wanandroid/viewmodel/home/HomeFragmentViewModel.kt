@@ -22,7 +22,7 @@ class HomeFragmentViewModel : BaseViewModel() {
     var bannerDatas = MutableLiveData<MutableList<BannerDataBean>?>()
 
     //用户登录标志
-    val isUserLogin = MutableLiveData<Boolean>()
+    val gotoCollection = MutableLiveData<Boolean>()
 
 
     /**
@@ -51,21 +51,7 @@ class HomeFragmentViewModel : BaseViewModel() {
 
     //首页Tab收藏按钮被点击
     fun onCollectClick() {
-        //判断有无登录
-        launchUI(errorCallback = { _, errMsg ->
-            TipsToast.showTips(errMsg)
-            //未登录
-            isUserLogin.value = false
-        }, requestCall = {
-            if (LoginAndRegisterRepository.isUserLogin()) {
-                //已登录
-                //跳转到收藏界面
-                isUserLogin.value = true
-            } else {
-                //未登录
-                isUserLogin.value = false
-            }
-        })
+        gotoCollection.value = true
     }
 
 

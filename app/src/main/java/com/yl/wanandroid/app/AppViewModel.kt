@@ -25,37 +25,35 @@ import javax.inject.Singleton
 class AppViewModel @Inject constructor() :
     OnCollectionEventListener, BaseViewModel() {
 
+    val shouldNavigateToLogin = MutableLiveData<Boolean>()
 
-
-/*    val collectRepository = CollectRepository()*/
-
-    val isUserLogin = MutableLiveData<Boolean>()
-
-    val event = MutableLiveData<CollectionEvent>()
+    val updateItemId = MutableLiveData<Int>()
 
     //收藏事件触发
     override fun onCollectionEvent(event: CollectionEvent) {
         if (isUserLogin()) {
-            isUserLogin.value = true
+            shouldNavigateToLogin.value = false
             if (event.isCollected) {
                 //取消收藏
                 //判断是在何处取消收藏的
                 if (event.where) {
                     //2.我的收藏页面(因为收藏页面返回的json数据没有这两个字段)
                     cancelMyCollectArticle(event.id, event.originId)
-                    //更新文章列表的收藏状态(避免从我的收藏页面返回文章列表无法实现实时更新状态,此处做一个伪更新,即UI更新)
-                    this.event.value = event
+                    //更新文章列表的收藏状态
+                    this.updateItemId.value = event.originId
                 } else {
                     //1.文章列表
                     cancelCollectArticle(event.id)
+                    this.updateItemId.value = event.id
                 }
             } else {
                 //收藏
                 collectArticle(event.id)
+                this.updateItemId.value = event.id
             }
         } else {
             //通知View层跳转到登录页面
-            isUserLogin.value = false
+            shouldNavigateToLogin.value = true
         }
     }
 
@@ -118,6 +116,7 @@ class AppViewModel @Inject constructor() :
                 true
             } else {
                 //未登录
+                TipsToast.showTips(getStringFromResource(R.string.tip_no_login))
                 LogUtils.d(this@AppViewModel, "isLogin2-->")
                 false
             }

@@ -13,11 +13,8 @@ import com.yl.wanandroid.utils.TipsToast
  * @version 1.0
  */
 class LoginActivityViewModel : BaseViewModel() {
-    //数据库对象
-    /*private val database = DBInstance.getDatabase()*/
 
     val user = MutableLiveData<User?>()//登录返回的用户信息
-/*    val repository = LoginAndRegisterRepository()*/
 
 
     /**

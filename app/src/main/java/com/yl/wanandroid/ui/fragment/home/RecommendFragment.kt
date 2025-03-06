@@ -110,17 +110,20 @@ class RecommendFragment :
             }
         }
 
-        appViewModel.isUserLogin.observe(viewLifecycleOwner) {
-            if (!it) {
+        appViewModel.shouldNavigateToLogin.observe(viewLifecycleOwner) {
+            if (it) {
                 //跳转到登录页面
+                LogUtils.d(this,"appViewModel.isUserLogin.observe")
                 startActivity(Intent(context, LoginActivity::class.java))
+                //重置变量,避免多次跳转
+                appViewModel.shouldNavigateToLogin.value = false
             }
         }
 
-        //实现收藏页面取消收藏时此界面的列表收藏状态也能实时更新
-        appViewModel.event.observe(viewLifecycleOwner) {
+        //实现收藏状态实时更新
+        appViewModel.updateItemId.observe(viewLifecycleOwner) {
             LogUtils.d(this@RecommendFragment, "appViewModel.event-->${it}")
-            recommendListAdapter.updateCollectionState(it.originId)//收藏页面的originId对应此页面的id
+            recommendListAdapter.updateCollectionState(it)
         }
     }
 }

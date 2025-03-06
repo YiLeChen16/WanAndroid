@@ -1,6 +1,5 @@
 package com.yl.wanandroid.base
 
-import androidx.databinding.BaseObservable
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent

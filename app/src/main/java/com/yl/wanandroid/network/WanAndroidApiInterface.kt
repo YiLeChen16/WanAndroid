@@ -308,4 +308,7 @@ interface WanAndroidApiInterface {
     suspend fun getRankListData(
         @Path("page") page: Int
     ):BaseResult<PageResponse<RankItemData>>
+
+    @GET("/user/logout/json")
+    suspend fun logout():BaseResult<Any?>?
 }

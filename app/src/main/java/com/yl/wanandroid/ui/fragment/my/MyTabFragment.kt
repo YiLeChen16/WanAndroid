@@ -75,13 +75,15 @@ class MyTabFragment() :
 
 
         //当我的收藏页面更新时,刷新此页面的收藏状态
-        appViewModel.event.observe(viewLifecycleOwner) {
-            listAdapter.updateCollectionState(it.originId)//一定要传originId而不是id
+        appViewModel.updateItemId.observe(viewLifecycleOwner) {
+            listAdapter.updateCollectionState(it)//一定要传originId而不是id
         }
 
-        appViewModel.isUserLogin.observe(viewLifecycleOwner) {
-            if (!it) {
+        appViewModel.shouldNavigateToLogin.observe(viewLifecycleOwner) {
+            if (it) {
                 startActivity(Intent(context, LoginActivity::class.java))
+                //重置变量,避免多次跳转
+                appViewModel.shouldNavigateToLogin.value = false
             }
         }
     }

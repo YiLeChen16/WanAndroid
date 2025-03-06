@@ -98,16 +98,18 @@ class ProjectTabFragment() :
                 mRefreshLayout.finishLoadMore()
             }
         }
-        appViewModel.isUserLogin.observe(this){
+        appViewModel.shouldNavigateToLogin.observe(this){
             //跳转到登录页面
-            if (!it){
+            if (it){
                 startActivity(Intent(context, LoginActivity::class.java))
+                //重置变量,避免多次跳转
+                appViewModel.shouldNavigateToLogin.value = false
             }
         }
         //实现收藏页面取消收藏时此界面的列表收藏状态也能实时更新
-        appViewModel.event.observe(viewLifecycleOwner) {
+        appViewModel.updateItemId.observe(viewLifecycleOwner) {
             LogUtils.d(this@ProjectTabFragment, "appViewModel.event-->${it}")
-            projectListAdapter.updateCollectionState(it.originId)//收藏页面的originId对应此页面的id
+            projectListAdapter.updateCollectionState(it)//收藏页面的originId对应此页面的id
         }
     }
 

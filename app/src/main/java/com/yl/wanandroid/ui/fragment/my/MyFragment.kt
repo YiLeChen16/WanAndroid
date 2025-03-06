@@ -23,6 +23,7 @@ import com.yl.wanandroid.app.AppViewModel
 import com.yl.wanandroid.ui.activity.IntegralActivity
 import com.yl.wanandroid.ui.activity.LoginActivity
 import com.yl.wanandroid.ui.activity.SearchActivity
+import com.yl.wanandroid.ui.activity.SettingActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -127,11 +128,16 @@ class MyFragment : BaseVMFragment<FragmentMyBinding, MyFragmentViewModel>(R.layo
         }
 
         mViewModel.gotoCollection.observe(viewLifecycleOwner) {
-            if (it) {
-                //跳转到收藏界面
-                startActivity(Intent(context, CollectActivity::class.java))
+            if (it){
+                //判断登录
+                if(appViewModel.isUserLogin()){
+                    startActivity(Intent(context, CollectActivity::class.java))
+                }else{
+                    startActivity(Intent(context, LoginActivity::class.java))
+                }
                 mViewModel.gotoCollection.value = false//重置变量
             }
+
         }
 
         mViewModel.gotoSearch.observe(viewLifecycleOwner) {
@@ -149,29 +155,34 @@ class MyFragment : BaseVMFragment<FragmentMyBinding, MyFragmentViewModel>(R.layo
         mViewModel.gotoMyIntegral.observe(viewLifecycleOwner) {
             if (it) {
                 //跳转到积分页面(需登录)
-                //TODO:
                 if(appViewModel.isUserLogin()){
                     startActivity(Intent(context, IntegralActivity::class.java))
-                    mViewModel.gotoMyIntegral.value = false//重置变量
+                }else{
+                    startActivity(Intent(context, LoginActivity::class.java))
                 }
+                mViewModel.gotoMyIntegral.value = false//重置变量
             }
         }
 
-        appViewModel.isUserLogin.observe(viewLifecycleOwner){
-            if (!it){
+        appViewModel.shouldNavigateToLogin.observe(viewLifecycleOwner){
+            if (it){
                 //跳转到登录页面
                 startActivity(Intent(context,LoginActivity::class.java))
+                //重置变量,避免多次跳转
+                appViewModel.shouldNavigateToLogin.value = false
+            }
+        }
+
+        mViewModel.gotoSetting.observe(viewLifecycleOwner){
+            if (it){
+                //跳转到设置界面
+                startActivity(Intent(context,SettingActivity::class.java))
+                mViewModel.gotoSetting.value = false//重置变量
             }
         }
 
 
-        /*        mViewModel.gotoMyMessage.observe(viewLifecycleOwner) {
-                    if (it) {
-                        //跳转到消息界面
-                        startActivity(Intent(context, MessageActivity::class.java))
-                        mViewModel.gotoMyMessage.value = false//重置变量
-                    }
-                }
+        /*
 
                 mViewModel.gotoMyShare.observe(viewLifecycleOwner) {
                     if (it) {

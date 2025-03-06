@@ -80,16 +80,18 @@ class CollectActivity :
             }
         }
 
-        appViewModel.isUserLogin.observe(this) {
-            if (!it) {
+        appViewModel.shouldNavigateToLogin.observe(this) {
+            if (it) {
                 //跳转到登录页面
                 startActivity(Intent(this@CollectActivity, LoginActivity::class.java))
+                //重置变量,避免多次跳转
+                appViewModel.shouldNavigateToLogin.value = false
             }
         }
 
-        appViewModel.event.observe(this) {
+        appViewModel.updateItemId.observe(this) {
             //更新我的收藏页面的列表
-            listAdapter.removeItemByOriginId(it.originId)
+            listAdapter.removeItemByOriginId(it)
         }
     }
 

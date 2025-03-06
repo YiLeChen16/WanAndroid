@@ -127,10 +127,12 @@ class SearchResultFragment :
             }
         }
 
-        appViewModel.isUserLogin.observe(this){
+        appViewModel.shouldNavigateToLogin.observe(this){
             //跳转到登录页面
-            if (!it){
+            if (it){
                 startActivity(Intent(context,LoginActivity::class.java))
+                //重置变量,避免多次跳转
+                appViewModel.shouldNavigateToLogin.value = false
             }
         }
     }

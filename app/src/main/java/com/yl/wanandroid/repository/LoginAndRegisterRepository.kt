@@ -6,6 +6,8 @@ import com.yl.wanandroid.repository.base.BaseRepository
 import com.yl.wanandroid.room.DBInstance
 import com.yl.wanandroid.room.WanAndroidDataBase
 import com.yl.wanandroid.room.entity.UserItem
+import com.yl.wanandroid.utils.LogUtils
+import com.yl.wanandroid.utils.TipsToast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -47,9 +49,25 @@ object LoginAndRegisterRepository : BaseRepository() {
     }
 
     /**
+     * 退出登录
+     * @return Boolean
+     */
+    suspend fun logout(): Boolean {
+        withContext(Dispatchers.IO){
+            val result = WanAndroidApiInterface.api.logout()
+            if (result?.isFailed() == true){
+                TipsToast.showTips(result.errorMsg)
+                return@withContext false
+            }
+            true
+        }.let {
+            return it
+        }
+    }
+
+    /**
      * 保存用户信息到数据库
      * @param account String
-     * @param password String
      */
     suspend fun saveUser(account: String) {
         withContext(Dispatchers.IO) {
@@ -70,7 +88,7 @@ object LoginAndRegisterRepository : BaseRepository() {
      * 获取用户数据
      * @return List<UserItem>
      */
-    suspend fun getUser(): List<UserItem>? =
+    suspend fun getUser(): List<UserItem> =
         withContext(Dispatchers.IO) {
             db.userDao().getUser()
         }
@@ -79,7 +97,8 @@ object LoginAndRegisterRepository : BaseRepository() {
      * 用户是否登录
      * @return Boolean
      */
-    suspend fun isUserLogin():Boolean{
-        return getUser() != null
+    suspend fun isUserLogin(): Boolean {
+        LogUtils.d(this,"isUserLogin-->${getUser().isNotEmpty()}")
+        return getUser().isNotEmpty()
     }
 }

@@ -86,10 +86,12 @@ class SystemActivityFragment() :
             }
         }
 
-        appViewModel.isUserLogin.observe(this) {
-            if (!it) {
+        appViewModel.shouldNavigateToLogin.observe(this) {
+            if (it) {
                 //跳转到登录页面
                 startActivity(Intent(context, LoginActivity::class.java))
+                //重置变量,避免多次跳转
+                appViewModel.shouldNavigateToLogin.value = false
             }
         }
     }
