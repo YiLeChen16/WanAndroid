@@ -1,17 +1,15 @@
 package com.yl.wanandroid.ui.adapter
 
 import android.content.Context
-import android.content.Intent
-import com.yl.wanandroid.Constant
 import com.yl.wanandroid.R
 import com.yl.wanandroid.base.BaseRecyclerViewAdapter
 import com.yl.wanandroid.databinding.ItemSearchResultBlogViewBinding
 import com.yl.wanandroid.model.ArticleItemData
 import com.yl.wanandroid.model.CollectionEvent
 import com.yl.wanandroid.ui.activity.WebViewActivity
+import com.yl.wanandroid.utils.LogUtils
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
-
 /**
  * @description: 搜索结果列表适配器 使用Inject注入
  * @author YL Chen
@@ -51,18 +49,26 @@ class SearchResultListAdapter @Inject constructor(@ActivityContext val context: 
             }
             val where =
                 (datas[position].adminAdd == null) && (datas[position].apkLink == null)//因为收藏页面返回的json数据没有这两个字段
-            //先进行伪更新.更新界面收藏状态(注意: 必须先进行此操作再通知监听者,否则removeItemByOriginId方法的使用会有问题,会导致移除最后一个条目时此处索引越界)
-            datas[position].collect = !datas[position].collect
-            notifyItemChanged(position)//更新界面
             //通知监听者
             onCollectionEventListener?.onCollectionEvent(
                 CollectionEvent(
                     datas[position].id,
                     originId,
-                    !datas[position].collect,
+                    datas[position].collect,
                     where
                 )
             )
+        }
+    }
+
+    fun updateCollectionState(id: Int) {
+        for ((index, data) in datas.withIndex()) {
+            if (data.id == id) {
+                LogUtils.d(this, "data.id == id")
+                datas[index].collect = !datas[index].collect
+                notifyItemChanged(index)
+                return
+            }
         }
     }
 

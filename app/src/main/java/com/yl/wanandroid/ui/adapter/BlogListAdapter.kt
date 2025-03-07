@@ -83,9 +83,9 @@ class BlogListAdapter @Inject constructor(@ActivityContext val context: Context)
     }
 
 
-    fun updateCollectionState(originID: Int) {
+    fun updateCollectionState(id: Int) {
         for ((index, data) in datas.withIndex()) {
-            if (data.id == originID) {
+            if (data.id == id) {
                 LogUtils.d(this, "data.id == id")
                 datas[index].collect = !datas[index].collect
                 notifyItemChanged(index)

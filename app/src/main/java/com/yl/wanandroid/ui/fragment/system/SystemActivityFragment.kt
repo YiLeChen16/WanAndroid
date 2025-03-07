@@ -86,13 +86,18 @@ class SystemActivityFragment() :
             }
         }
 
-        appViewModel.shouldNavigateToLogin.observe(this) {
+        appViewModel.shouldNavigateToLogin.observe(viewLifecycleOwner) {
             if (it) {
                 //跳转到登录页面
                 startActivity(Intent(context, LoginActivity::class.java))
                 //重置变量,避免多次跳转
                 appViewModel.shouldNavigateToLogin.value = false
             }
+        }
+
+        //实时更新列表收藏状态
+        appViewModel.updateItemId.observe(viewLifecycleOwner){
+            articleListAdapter.updateCollectionState(it)
         }
     }
 }

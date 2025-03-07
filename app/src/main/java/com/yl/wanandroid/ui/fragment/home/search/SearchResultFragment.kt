@@ -135,6 +135,11 @@ class SearchResultFragment :
                 appViewModel.shouldNavigateToLogin.value = false
             }
         }
+
+        //实时更新界面收藏状态
+        appViewModel.updateItemId.observe(viewLifecycleOwner){
+            mSearchResultListAdapter.updateCollectionState(it)
+        }
     }
 
     //重写此方法,获取xml布局中声明的变量id,以为xml布局中声明的变量赋值
