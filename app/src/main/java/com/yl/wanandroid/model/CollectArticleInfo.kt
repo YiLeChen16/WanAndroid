@@ -1,5 +1,5 @@
 package com.yl.wanandroid.model
 
 data class CollectArticleInfo(
-    val count: Int
+    val count: Int = 0
 )

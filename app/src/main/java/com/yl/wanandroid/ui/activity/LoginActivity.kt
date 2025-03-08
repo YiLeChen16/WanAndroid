@@ -188,7 +188,8 @@ class LoginActivity :
                         )
                         PrivacyPolicyActivity.start(
                             this@LoginActivity,
-                            getStringFromResource(R.string.login_privacy_agreement)
+                            getStringFromResource(R.string.login_privacy_agreement),
+                            getStringFromResource(R.string.user_privacy_policy)
                         )
                     }
 
@@ -215,7 +216,8 @@ class LoginActivity :
                         )
                         PrivacyPolicyActivity.start(
                             this@LoginActivity,
-                            getStringFromResource(R.string.login_user_agreement)
+                            getStringFromResource(R.string.login_user_agreement),
+                            getStringFromResource(R.string.user_service_policy)
                         )
                     }
 

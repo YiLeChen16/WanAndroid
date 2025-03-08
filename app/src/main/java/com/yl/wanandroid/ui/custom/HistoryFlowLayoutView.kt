@@ -100,10 +100,11 @@ class HistoryFlowLayoutView(
         }
         mDeleteOk.setOnClickListener{
             //隐藏详细删除操作,并显示删除图标,隐藏每个条目后面的删除按钮并显示所有条目
-            hideAllDeleteButton()
             isDeleteOk = true
             //解除锁定mIsFold按钮
             mIsFold.isEnabled = true
+            hideAllDeleteButton()
+
         }
         mAllDelete.setOnClickListener{
             //将历史记录全部删除
@@ -130,8 +131,7 @@ class HistoryFlowLayoutView(
     }
 
     private fun hideAllDeleteButton() {
-        isExpanded = false
-        changeFlowDrawable()
+        toggle()
         //将删除图标隐藏,显示详细删除操作
         mDelete.isVisible = true
         mDetailDelete.isVisible = false
@@ -278,7 +278,7 @@ class HistoryFlowLayoutView(
                 ((lines.size * mItemHeight) + mLineSpc * (lines.size.plus(1)))
             } else {
                 // 如果是收起状态，则只测量存放区前三行搜索记录的高度
-                ((3 * mItemHeight) + mLineSpc * 3)
+                ((3 * mItemHeight) + mLineSpc * 2)
             }
         } else {
             //将展开按钮设置为不可点击状态

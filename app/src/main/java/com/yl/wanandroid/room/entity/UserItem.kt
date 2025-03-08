@@ -13,5 +13,20 @@ import androidx.room.PrimaryKey
 data class UserItem(
     @PrimaryKey
     @ColumnInfo(name = "account")
-    val account: String
+    val account: String,
+
+    @ColumnInfo(name = "headIcon")
+    val headIcon: String?,
+
+    @ColumnInfo(name = "nickName")
+    val nickName: String?,
+
+    @ColumnInfo(name = "sex")
+    val sex: String?,
+
+    @ColumnInfo(name = "birthday")
+    val birthday: String?,
+
+    @ColumnInfo(name = "email")
+    val email: String?,
 )

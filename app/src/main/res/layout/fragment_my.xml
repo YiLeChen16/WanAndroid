@@ -100,7 +100,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/dp_15"
                                 android:paddingTop="@dimen/dp_5"
-                                android:text="@={myFragmentViewModel.userName}"
+                                android:text='@{textUtlis.isEmpty(myFragmentViewModel.userData.userInfo.nickname) ? "未登录" : myFragmentViewModel.userData.userInfo.username}'
                                 android:textColor="@color/md_theme_onBackground"
                                 android:textSize="@dimen/sp_20"
                                 android:textStyle="bold" />
@@ -142,7 +142,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dp_5"
-                                android:text="@={myFragmentViewModel.level}"
+                                android:text="@{String.valueOf(myFragmentViewModel.userData.coinInfo.level)}"
                                 android:textColor="@color/md_theme_onBackground"
                                 android:textSize="@dimen/sp_16"
                                 android:textStyle="italic" />
@@ -165,7 +165,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dp_5"
-                                android:text="@={myFragmentViewModel.integral}"
+                                android:text="@{String.valueOf(myFragmentViewModel.userData.coinInfo.coinCount)}"
                                 android:textColor="@color/md_theme_onBackground"
                                 android:textSize="@dimen/sp_16"
                                 android:textStyle="italic" />
@@ -188,7 +188,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dp_5"
-                                android:text="@={myFragmentViewModel.rank}"
+                                android:text='@{textUtlis.isEmpty(myFragmentViewModel.userData.coinInfo.rank)?"0":myFragmentViewModel.userData.coinInfo.rank}'
                                 android:textColor="@color/md_theme_onBackground"
                                 android:textSize="@dimen/sp_16"
                                 android:textStyle="italic" />

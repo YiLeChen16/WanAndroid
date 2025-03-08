@@ -54,7 +54,7 @@ abstract class BaseRecyclerViewAdapter<ItemData,ItemViewBinding:ViewDataBinding>
 
     //暴露方法给外界设置数据
     @SuppressLint("NotifyDataSetChanged")
-    fun setData(itemDatas: List<ItemData>) {
+    fun  setData(itemDatas: List<ItemData>) {
         this.datas.clear()//清空数据
         this.datas.addAll(itemDatas)
         notifyDataSetChanged()

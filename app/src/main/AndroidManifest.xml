@@ -43,6 +43,7 @@
         <activity android:name=".ui.activity.IntegralActivity" />
         <activity android:name=".ui.activity.RankActivity" />
         <activity android:name=".ui.activity.SettingActivity" />
+        <activity android:name=".ui.activity.UserInfoActivity" />
     </application>
 
 </manifest>

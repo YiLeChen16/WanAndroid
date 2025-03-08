@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "8f367c6c9b9c5de1613410cbc518a0c0",
+    "identityHash": "619ba124982c3a6876fa474152977cbd",
     "entities": [
       {
         "tableName": "search_history",
@@ -38,11 +38,41 @@
       },
       {
         "tableName": "users",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`account` TEXT NOT NULL, PRIMARY KEY(`account`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`account` TEXT NOT NULL, `headIcon` TEXT NOT NULL, `nickName` TEXT NOT NULL, `sex` TEXT NOT NULL, `birthday` TEXT NOT NULL, `email` TEXT NOT NULL, PRIMARY KEY(`account`))",
         "fields": [
           {
             "fieldPath": "account",
             "columnName": "account",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "headIcon",
+            "columnName": "headIcon",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nickName",
+            "columnName": "nickName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sex",
+            "columnName": "sex",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "birthday",
+            "columnName": "birthday",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "email",
+            "columnName": "email",
             "affinity": "TEXT",
             "notNull": true
           }
@@ -60,7 +90,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8f367c6c9b9c5de1613410cbc518a0c0')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '619ba124982c3a6876fa474152977cbd')"
     ]
   }
 }

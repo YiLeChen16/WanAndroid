@@ -6,6 +6,8 @@ import com.yl.wanandroid.Constant.COLLECTION_URL
 import com.yl.wanandroid.Constant.KEY_COOKIE
 import com.yl.wanandroid.Constant.NOT_COLLECTION_URL
 import com.yl.wanandroid.Constant.USER_INFO_URL
+import com.yl.wanandroid.Constant.WEN_DA_URL
+import com.yl.wanandroid.Constant.WX_ARTICLE_URL
 import com.yl.wanandroid.network.manager.CookiesManager
 import com.yl.wanandroid.utils.LogUtils
 import okhttp3.Interceptor
@@ -31,7 +33,10 @@ class HeaderInterceptor:Interceptor {
                     || url.contains(NOT_COLLECTION_URL)
                     || url.contains(ARTICLE_URL)//用于更新点击收藏后的界面
                     || url.contains(USER_INFO_URL)
-                    || url.contains(COIN_URL))) {
+                    || url.contains(WEN_DA_URL)//用于更新点击收藏后的界面
+                    || url.contains(WX_ARTICLE_URL)//用于更新点击收藏后的界面
+                    || url.contains(COIN_URL)
+                )) {
             val cookies = CookiesManager.getCookies()
             LogUtils.e(this,"HeaderInterceptor:cookies:$cookies")
             if (!cookies.isNullOrEmpty()) {

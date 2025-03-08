@@ -24,11 +24,12 @@ import com.yl.wanandroid.ui.activity.IntegralActivity
 import com.yl.wanandroid.ui.activity.LoginActivity
 import com.yl.wanandroid.ui.activity.SearchActivity
 import com.yl.wanandroid.ui.activity.SettingActivity
+import com.yl.wanandroid.ui.activity.UserInfoActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 /**
- * @description: 我的//TODO::
+ * @description: 我的//TODO::退出登录后刷新界面状态
  * @author YL Chen
  * @date 2024/9/7 16:02
  * @version 1.0
@@ -166,8 +167,12 @@ class MyFragment : BaseVMFragment<FragmentMyBinding, MyFragmentViewModel>(R.layo
 
         appViewModel.shouldNavigateToLogin.observe(viewLifecycleOwner){
             if (it){
+                //重新请求数据
+                mViewModel.getUserInfo()
+                mViewModel.getWxArticleTabs()
                 //跳转到登录页面
-                startActivity(Intent(context,LoginActivity::class.java))
+                //startActivity(Intent(context,LoginActivity::class.java))
+
                 //重置变量,避免多次跳转
                 appViewModel.shouldNavigateToLogin.value = false
             }
@@ -178,6 +183,14 @@ class MyFragment : BaseVMFragment<FragmentMyBinding, MyFragmentViewModel>(R.layo
                 //跳转到设置界面
                 startActivity(Intent(context,SettingActivity::class.java))
                 mViewModel.gotoSetting.value = false//重置变量
+            }
+        }
+
+        mViewModel.gotoMyInfo.observe(this){
+            if (it){
+                //跳转到个人信息界面
+                startActivity(Intent(context,UserInfoActivity::class.java))
+                mViewModel.gotoMyInfo.value = false
             }
         }
 

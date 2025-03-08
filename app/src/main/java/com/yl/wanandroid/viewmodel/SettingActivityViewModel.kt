@@ -1,5 +1,6 @@
 package com.yl.wanandroid.viewmodel
 
+import androidx.lifecycle.MutableLiveData
 import com.yl.wanandroid.base.BaseViewModel
 import com.yl.wanandroid.network.manager.CookiesManager
 import com.yl.wanandroid.repository.LoginAndRegisterRepository
@@ -15,14 +16,17 @@ import okhttp3.Cookie
  */
 class SettingActivityViewModel : BaseViewModel() {
 
+    val gotoPrivacy = MutableLiveData<Boolean>()
+    val gotoUserInfo = MutableLiveData<Boolean>()
+
     //跳转到个人信息界面
     fun onUserInfoClick() {
-
+        gotoUserInfo.value = true
     }
 
     //跳转到隐私政策页面
     fun onPrivacyClick() {
-
+        gotoPrivacy.value = true
     }
 
 
@@ -34,8 +38,9 @@ class SettingActivityViewModel : BaseViewModel() {
             },
             requestCall = {
                 val logout = LoginAndRegisterRepository.logout()
-                LoginAndRegisterRepository.clearUser()
                 CookiesManager.clearCookies()
+                //清除Room中存储的用户信息
+                LoginAndRegisterRepository.clearUser()
                 LogUtils.d(this@SettingActivityViewModel,"logout-->$logout")
             }
         )

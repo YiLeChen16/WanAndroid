@@ -4,6 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import com.yl.wanandroid.base.BaseViewModel
 import com.yl.wanandroid.model.User
 import com.yl.wanandroid.repository.LoginAndRegisterRepository
+import com.yl.wanandroid.room.entity.UserItem
+import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast
 
 /**
@@ -28,9 +30,10 @@ class LoginActivityViewModel : BaseViewModel() {
             user.value = null
         }, requestCall = {
             user.value = LoginAndRegisterRepository.login(userName, password)
-            //将用户数据保存到本地
+            //将获取到的用户信息存储到Room中
+            LogUtils.d(this,"userData-->${user.value}")
             LoginAndRegisterRepository.clearUser()//清除本地数据
-            LoginAndRegisterRepository.saveUser(userName)//存储新数据
+            LoginAndRegisterRepository.saveUser(UserItem(user.value?.username!!,"",user.value?.nickname,"","",user.value?.email))
         })
     }
 

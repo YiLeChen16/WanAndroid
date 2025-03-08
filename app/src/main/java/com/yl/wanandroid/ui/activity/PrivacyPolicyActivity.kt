@@ -16,11 +16,13 @@ class PrivacyPolicyActivity:BaseActivity<ActivityPrivacyPolicyBinding>(R.layout.
     companion object {
 
         private lateinit var title: String
+        private lateinit var content: String
 
-        fun start(context: Context, title:String) {
+        fun start(context: Context, title:String,content:String) {
             val intent = Intent(context, PrivacyPolicyActivity::class.java)
             context.startActivity(intent)
             this.title = title
+            this.content = content
         }
     }
 
@@ -29,7 +31,11 @@ class PrivacyPolicyActivity:BaseActivity<ActivityPrivacyPolicyBinding>(R.layout.
         mRefreshLayout.setEnableRefresh(false)
         mRefreshLayout.setEnableLoadMore(false)
         mBinding.titleBar.title = PrivacyPolicyActivity.title//设置标题
+        mBinding.tvContent.text = content
         mMultiplyStateView.showSuccess()//展示成功视图
+        mBinding.titleBar.setNavigationOnClickListener {
+            finish()
+        }
     }
     override fun initData() {
 

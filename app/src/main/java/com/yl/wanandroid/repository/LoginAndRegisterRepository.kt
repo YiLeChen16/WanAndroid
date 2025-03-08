@@ -2,6 +2,7 @@ package com.yl.wanandroid.repository
 
 import com.yl.wanandroid.model.User
 import com.yl.wanandroid.network.WanAndroidApiInterface
+import com.yl.wanandroid.network.manager.CookiesManager
 import com.yl.wanandroid.repository.base.BaseRepository
 import com.yl.wanandroid.room.DBInstance
 import com.yl.wanandroid.room.WanAndroidDataBase
@@ -69,9 +70,9 @@ object LoginAndRegisterRepository : BaseRepository() {
      * 保存用户信息到数据库
      * @param account String
      */
-    suspend fun saveUser(account: String) {
+    suspend fun saveUser(user: UserItem) {
         withContext(Dispatchers.IO) {
-            db.userDao().saveUserInfo(UserItem(account))
+            db.userDao().saveUserInfo(user)
         }
     }
 
@@ -97,8 +98,8 @@ object LoginAndRegisterRepository : BaseRepository() {
      * 用户是否登录
      * @return Boolean
      */
-    suspend fun isUserLogin(): Boolean {
-        LogUtils.d(this,"isUserLogin-->${getUser().isNotEmpty()}")
-        return getUser().isNotEmpty()
+    fun isUserLogin(): Boolean {
+        LogUtils.d(this,"isUserLogin-->${CookiesManager.getCookies().isNullOrEmpty()}")
+        return !CookiesManager.getCookies().isNullOrEmpty()
     }
 }

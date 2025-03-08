@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -17,8 +16,10 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:navigationIcon="@drawable/back"
+            app:navigationIcon="@drawable/back_toolbar"
             app:title="隐私政策"
+            app:titleTextColor="@color/md_theme_onPrimary"
+            android:background="@color/md_theme_primary"
             app:titleCentered="true" />
 
         <androidx.core.widget.NestedScrollView
@@ -26,6 +27,7 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/dp_20"
             app:layout_constraintTop_toBottomOf="@+id/title_bar">
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -34,7 +36,7 @@
                 android:layout_height="0dp"
                 android:padding="@dimen/dp_10"
                 android:text="@string/user_privacy_policy"
-                android:textColor="@color/black"
+                android:textColor="@color/md_theme_onBackground"
                 android:textSize="@dimen/sp_14" />
         </androidx.core.widget.NestedScrollView>
 

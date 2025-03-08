@@ -7,6 +7,7 @@ import com.yl.wanandroid.model.Children
 import com.yl.wanandroid.model.UserDataBean
 import com.yl.wanandroid.repository.LoginAndRegisterRepository
 import com.yl.wanandroid.repository.MyRepository
+import com.yl.wanandroid.room.entity.UserItem
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast
 
@@ -20,12 +21,8 @@ class MyFragmentViewModel : BaseViewModel() {
 
 
     val wxArticleTabs = MutableLiveData<MutableList<Children>?>()
-    private val userData = MutableLiveData<UserDataBean?>()
+    val userData = ObservableField<UserDataBean?>()
 
-    val userName = ObservableField("未登录")
-    val level = ObservableField("0")
-    val integral = ObservableField("0")
-    val rank = ObservableField("0")
 
     val gotoCollection = MutableLiveData<Boolean>()
     val gotoMyShare = MutableLiveData<Boolean>()
@@ -56,15 +53,11 @@ class MyFragmentViewModel : BaseViewModel() {
             { _, errMsg ->
                 LogUtils.d(this, "errMsg-->$errMsg")
                 TipsToast.showTips(errMsg)
-                userData.value = null
+                userData.set(null)
             },
             requestCall = {
-                userData.value = MyRepository.getUserInfo()
-                userName.set(userData.value?.userInfo?.username)
-                level.set(userData.value?.coinInfo?.level.toString())
-                integral.set(userData.value?.coinInfo?.coinCount.toString())
-                rank.set(userData.value?.coinInfo?.rank)
-            })
+                userData.set(MyRepository.getUserInfo())
+               })
     }
 
     fun onSearchClick() {

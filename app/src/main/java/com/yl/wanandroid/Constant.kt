@@ -4,7 +4,6 @@ package com.yl.wanandroid
  * 常量值
  */
 object Constant {
-    const val TO_WEB_URL: String = "toWebUrl"
     const val CURRENT_SEARCH_HOTKEY: String = "currentSearchHotKey"
     const val IS_SEARCH: String = "isSearch"
     const val WENDA_FRAGMENT_TYPE_KEY: String = "wendaType"//问答fragment类型
@@ -25,6 +24,8 @@ object Constant {
     const val NOT_COLLECTION_URL = "/lg/uncollect"//取消收藏接口
     const val ARTICLE_URL = "/article"//文章接口
     const val USER_INFO_URL = "/user/lg"//用户信息接口
+    const val WEN_DA_URL = "/wenda"//问答接口
+    const val WX_ARTICLE_URL = "/wxarticle"//公众号文章接口
     const val KEY_COOKIE = "Cookie"
     const val FORGET_PASSWORD_URL = "https://www.wanandroid.com/blog/show/2947"
     const val RULE_URL = "https://www.wanandroid.com/blog/show/2653"

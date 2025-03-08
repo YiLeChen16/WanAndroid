@@ -3,7 +3,9 @@ package com.yl.wanandroid.room
 import androidx.room.Room
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.google.android.flexbox.FlexDirection.COLUMN
 import com.yl.wanandroid.base.BaseApplication
+
 
 /**
  * @description: 数据库的创建者 & 负责数据库版本更新的具体实现者
@@ -24,6 +26,16 @@ class DBInstance {
 
         }
 
+        private val MIGRATION_2_3: Migration = object : Migration(2, 3) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE users ADD COLUMN headIcon TEXT")
+                database.execSQL("ALTER TABLE users ADD COLUMN nickName TEXT")
+                database.execSQL("ALTER TABLE users ADD COLUMN sex TEXT")
+                database.execSQL("ALTER TABLE users ADD COLUMN birthday TEXT")
+                database.execSQL("ALTER TABLE users ADD COLUMN email TEXT")
+            }
+        }
+
         @Volatile
         private var INSTANCE: WanAndroidDataBase? = null
 
@@ -31,7 +43,7 @@ class DBInstance {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     BaseApplication.context, WanAndroidDataBase::class.java, DB_NAME
-                ).addMigrations(MIGRATION_1_2)//添加迁移
+                ).addMigrations(MIGRATION_2_3)//添加迁移
                     .build()
                 INSTANCE = instance
                 instance
