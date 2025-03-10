@@ -1,7 +1,6 @@
 package com.yl.wanandroid.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.paging.PagingDataAdapter
@@ -14,7 +13,7 @@ import com.yl.wanandroid.model.CoinData
 import javax.inject.Inject
 
 /**
- * @description: TODO
+ * @description: 积分列表Paging适配器
  * @author YL Chen
  * @date 2025/3/4 22:05
  * @version 1.0

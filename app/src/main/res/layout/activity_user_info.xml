@@ -33,8 +33,9 @@
             android:layout_marginTop="@dimen/dp_10"
             android:background="@color/md_theme_surface"
             android:foreground="?attr/selectableItemBackground"
+            android:padding="@dimen/dp_8"
             android:paddingStart="@dimen/dp_14"
-            android:paddingEnd="@dimen/dp_8">
+            tools:ignore="RtlSymmetry">
 
             <TextView
                 android:id="@+id/tv_user_info"
@@ -44,8 +45,8 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/iv_head"
-                android:layout_width="@dimen/dp_40"
-                android:layout_height="@dimen/dp_40"
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_50"
                 android:contentDescription="@null"
                 android:src="@mipmap/ic_launcher"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -53,7 +54,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearanceOverlay="@style/circleImageStyle" />
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <ImageView
                 android:id="@+id/iv_head_next"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dp_0"
@@ -69,7 +70,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_0_5"
             android:background="@color/md_theme_surfaceContainer"
-            android:paddingStart="@dimen/dp_14" />
+            android:paddingStart="@dimen/dp_14"
+            tools:ignore="RtlSymmetry" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_name"
@@ -77,8 +79,9 @@
             android:layout_height="wrap_content"
             android:background="@color/md_theme_surface"
             android:foreground="?attr/selectableItemBackground"
+            android:padding="@dimen/dp_8"
             android:paddingStart="@dimen/dp_14"
-            android:paddingEnd="@dimen/dp_8">
+            tools:ignore="RtlSymmetry">
 
             <TextView
                 android:id="@+id/tv_name_title"
@@ -86,45 +89,29 @@
                 android:text="@string/user_info_name"
                 tools:ignore="MissingConstraints" />
 
-            <com.yl.wanandroid.ui.custom.ClearEditText
+            <TextView
                 android:id="@+id/et_name"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_marginStart="@dimen/dp_10"
-                android:layout_weight="1"
-                android:background="@null"
-                android:drawablePadding="10dp"
-                android:gravity="end|center_vertical"
-                android:hint="@string/user_info_input_name"
-                android:inputType="text"
-                android:maxLength="16"
-                android:maxLines="1"
-                android:singleLine="true"
                 android:text="@{userInfoActivityViewModel.user.nickName}"
                 android:textColor="@color/md_theme_onSurface"
-                android:textSize="@dimen/sp_13"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/iv_name_next"
-                app:layout_constraintStart_toEndOf="@+id/tv_name_title"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/iv_name_next"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@null"
-                android:paddingStart="@dimen/dp_6"
-                android:src="@drawable/chevron_right_16px"
+                android:textSize="@dimen/sp_14"
+                tools:text="hhhh"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:gravity="center_vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_0_5"
             android:background="@color/md_theme_surfaceContainer"
-            android:paddingStart="@dimen/dp_14" />
+            android:paddingStart="@dimen/dp_14"
+            tools:ignore="RtlSymmetry" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_phone"
@@ -132,8 +119,9 @@
             android:layout_height="wrap_content"
             android:background="@color/md_theme_surface"
             android:foreground="?attr/selectableItemBackground"
+            android:padding="@dimen/dp_8"
             android:paddingStart="@dimen/dp_14"
-            android:paddingEnd="@dimen/dp_8">
+            tools:ignore="RtlSymmetry">
 
             <TextView
                 style="@style/userInfoLeftTextViewStyle"
@@ -143,13 +131,11 @@
             <TextView
                 android:id="@+id/tv_phone"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/dp_0"
                 android:gravity="center_vertical"
-                android:paddingTop="@dimen/dp_10"
-                android:paddingEnd="@dimen/dp_4"
-                android:paddingBottom="@dimen/dp_10"
+                android:padding="@dimen/dp_8"
                 android:text="@{userInfoActivityViewModel.user.account}"
-                android:textSize="@dimen/sp_12"
+                android:textSize="@dimen/sp_14"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -162,8 +148,9 @@
             android:layout_height="wrap_content"
             android:background="@color/md_theme_surface"
             android:foreground="?attr/selectableItemBackground"
+            android:padding="@dimen/dp_8"
             android:paddingStart="@dimen/dp_14"
-            android:paddingEnd="@dimen/dp_8">
+            tools:ignore="RtlSymmetry">
 
             <TextView
                 android:id="@+id/tv_name_email"
@@ -174,13 +161,11 @@
             <TextView
                 android:id="@+id/tv_email"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/dp_0"
                 android:gravity="center_vertical"
-                android:paddingTop="@dimen/dp_10"
-                android:paddingEnd="@dimen/dp_4"
-                android:paddingBottom="@dimen/dp_10"
+                android:padding="@dimen/dp_8"
                 android:text="@{userInfoActivityViewModel.user.email}"
-                android:textSize="@dimen/sp_12"
+                android:textSize="@dimen/sp_14"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -191,11 +176,12 @@
             android:id="@+id/cl_sex"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_20"
             android:background="@color/md_theme_surface"
             android:foreground="?attr/selectableItemBackground"
+            android:padding="@dimen/dp_8"
             android:paddingStart="@dimen/dp_14"
-            android:paddingEnd="@dimen/dp_8">
+            tools:ignore="RtlSymmetry">
 
             <TextView
                 style="@style/userInfoLeftTextViewStyle"
@@ -207,10 +193,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:paddingTop="@dimen/dp_10"
-                android:paddingBottom="@dimen/dp_10"
+                android:padding="@dimen/dp_8"
                 android:text="@{userInfoActivityViewModel.user.sex}"
-                android:textSize="@dimen/sp_12"
+                android:textSize="@dimen/sp_14"
+                android:hint="@string/user_info_sex_hint"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/iv_sex_next"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -239,8 +225,9 @@
             android:layout_height="wrap_content"
             android:background="@color/md_theme_surface"
             android:foreground="?attr/selectableItemBackground"
+            android:padding="@dimen/dp_8"
             android:paddingStart="@dimen/dp_14"
-            android:paddingEnd="@dimen/dp_8">
+            tools:ignore="RtlSymmetry">
 
             <TextView
                 style="@style/userInfoLeftTextViewStyle"
@@ -249,15 +236,14 @@
 
             <TextView
                 android:id="@+id/tv_birthday"
-                android:layout_width="@dimen/dp_100"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/dp_0"
                 android:layout_marginEnd="4dp"
                 android:gravity="center_vertical|end"
                 android:hint="@string/user_info_input_birthday"
-                android:paddingTop="@dimen/dp_10"
-                android:paddingBottom="@dimen/dp_10"
+               android:padding="@dimen/dp_8"
                 android:text="@{userInfoActivityViewModel.user.birthday}"
-                android:textSize="@dimen/sp_12"
+                android:textSize="@dimen/sp_14"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/iv_birthday_next"
                 app:layout_constraintTop_toTopOf="parent"
@@ -272,14 +258,10 @@
                 android:src="@drawable/chevron_right_16px"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="RtlSymmetry" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_0_5"
-            android:layout_marginStart="@dimen/dp_14"
-            android:background="@color/md_theme_surfaceContainer" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_save"

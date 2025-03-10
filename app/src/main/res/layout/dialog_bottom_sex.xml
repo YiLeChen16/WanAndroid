@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_bottom_sheet_dialog"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_wm"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+        android:text="@string/tips_sex_wm"
+        android:textSize="15sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/md_theme_surfaceContainer" />
+
+    <TextView
+        android:id="@+id/tv_m"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+        android:text="@string/tips_sex_m"
+        android:textSize="15sp" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/md_theme_surfaceContainer" />
+
+    <TextView
+        android:id="@+id/tv_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+        android:text="@string/tips_cancel"
+        android:textSize="15sp" />
+</LinearLayout>

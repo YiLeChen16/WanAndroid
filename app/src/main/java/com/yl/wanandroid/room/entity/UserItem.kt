@@ -15,6 +15,9 @@ data class UserItem(
     @ColumnInfo(name = "account")
     val account: String,
 
+    @ColumnInfo(name = "password")
+    val password: String,
+
     @ColumnInfo(name = "headIcon")
     val headIcon: String?,
 

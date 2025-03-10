@@ -3,7 +3,6 @@ package com.yl.wanandroid.room
 import androidx.room.Room
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.google.android.flexbox.FlexDirection.COLUMN
 import com.yl.wanandroid.base.BaseApplication
 
 
@@ -36,6 +35,13 @@ class DBInstance {
             }
         }
 
+        private val MIGRATION_3_4: Migration = object : Migration(3, 4) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE users ADD COLUMN password TEXT  NOT NULL DEFAULT '' ")
+            }
+        }
+
+
         @Volatile
         private var INSTANCE: WanAndroidDataBase? = null
 
@@ -43,7 +49,7 @@ class DBInstance {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     BaseApplication.context, WanAndroidDataBase::class.java, DB_NAME
-                ).addMigrations(MIGRATION_2_3)//添加迁移
+                ).addMigrations(MIGRATION_3_4)//添加迁移
                     .build()
                 INSTANCE = instance
                 instance

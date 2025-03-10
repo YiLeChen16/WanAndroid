@@ -2,9 +2,7 @@ package com.yl.wanandroid.viewmodel
 
 import androidx.databinding.ObservableField
 import com.yl.wanandroid.base.BaseViewModel
-import com.yl.wanandroid.model.UserInfo
-import com.yl.wanandroid.repository.LoginAndRegisterRepository
-import com.yl.wanandroid.repository.MyRepository
+import com.yl.wanandroid.repository.UserRepository
 import com.yl.wanandroid.room.entity.UserItem
 import com.yl.wanandroid.utils.TipsToast
 
@@ -14,22 +12,40 @@ import com.yl.wanandroid.utils.TipsToast
  * @date 2025/3/8 14:14
  * @version 1.0
  */
-class UserInfoActivityViewModel :BaseViewModel(){
+class UserInfoActivityViewModel : BaseViewModel() {
     val user = ObservableField<UserItem>()
 
-    fun getUserInfo(){
+    fun getUserInfo() {
         launchUI(
-            errorCallback = {
-                _,errMsg->
+            errorCallback = { _, errMsg ->
                 user.set(null)
                 TipsToast.showTips(errMsg)
             },
             requestCall = {
-                user.set(LoginAndRegisterRepository.getUser()[0])
+                user.set(UserRepository.getUser()[0])
             }
         )
     }
+
+    /**
+     * 保存用户可修改的数据
+     * @param sex String
+     * @param birthday String
+     */
+    fun saveUserInfo(sex: String?, birthday: String?) {
+        launchUI(
+            errorCallback = { _, errMsg ->
+                TipsToast.showTips(errMsg)
+            },
+            requestCall = {
+                UserRepository.updateUserSexAndBirthday(sex, birthday)
+            }
+        )
+    }
+
     override fun onReload() {
         getUserInfo()
     }
+
+
 }

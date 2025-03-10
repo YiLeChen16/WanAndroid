@@ -31,6 +31,8 @@ object Constant {
     const val RULE_URL = "https://www.wanandroid.com/blog/show/2653"
     const val DEFAULT_PAGE_START_NO_1 = 1//默认起始页数1
     const val DEFAULT_PAGE_START_NO_0 = 0//默认起始页数0
+    const val PAGE_SIZE = 50
+    const val KEY_PASSWORD = "userPassword_key"
 
 
 

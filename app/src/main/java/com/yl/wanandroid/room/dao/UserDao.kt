@@ -1,5 +1,6 @@
 package com.yl.wanandroid.room.dao
 
+import android.provider.ContactsContract.CommonDataKinds.Nickname
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -21,4 +22,10 @@ interface UserDao {
 
     @Query("SELECT * FROM users")
     fun getUser():List<UserItem>
+
+    @Query("UPDATE users SET nickName = :nickname,email = :email")
+    fun updateUserNickNameAndEmail(nickname: String,email:String)
+
+    @Query("UPDATE users SET sex = :sex,birthday = :birthday")
+    fun updateUserSexAndBirthday(sex:String?,birthday:String?)
 }

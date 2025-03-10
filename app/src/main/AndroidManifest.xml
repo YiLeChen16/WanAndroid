@@ -2,7 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+
+
     <uses-permission android:name="android.permission.INTERNET" />
+
+
+
 
     <application
         android:name=".base.BaseApplication"
@@ -44,6 +49,8 @@
         <activity android:name=".ui.activity.RankActivity" />
         <activity android:name=".ui.activity.SettingActivity" />
         <activity android:name=".ui.activity.UserInfoActivity" />
+        <activity android:name=".ui.activity.ShareActivity" />
+
     </application>
 
 </manifest>

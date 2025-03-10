@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="shareActivityViewModel"
+            type="com.yl.wanandroid.viewmodel.my.ShareActivityViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:elevation="@dimen/dp_5">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:colorBackground"
+                android:padding="@dimen/dp_10"
+                app:collapsedTitleTextColor="?colorPrimary"
+                app:contentScrim="?android:colorBackground"
+                app:expandedTitleTextColor="@color/transparent"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:title="我的分享"
+                app:titleCollapseMode="scale"
+                app:toolbarId="@id/toolbar">
+
+                <LinearLayout
+                    android:id="@+id/layout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_collapseMode="parallax">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/iv_head"
+                        android:layout_width="@dimen/dp_80"
+                        android:layout_height="@dimen/dp_80"
+                        android:padding="@dimen/dp_5"
+                        android:src="@mipmap/ic_launcher"
+                        android:layout_marginTop="@dimen/dp_50"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:shapeAppearanceOverlay="@style/circleImageStyle"
+                        app:strokeColor="@color/md_theme_onSurface"
+                        app:strokeWidth="4dp" />
+
+                    <TextView
+                        android:id="@+id/tv_username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_10"
+                        android:text="@{shareActivityViewModel.user.nickName}"
+                        android:textSize="@dimen/sp_16"
+                        android:textStyle="italic"
+                        tool:text="hhhh" />
+
+                    <TextView
+                        android:id="@+id/tv_share_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tool:text="已分享了100篇文章"
+                        android:text="@{@string/share_count(shareActivityViewModel.shareArticleCount)}"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:padding="@dimen/dp_10"/>
+
+                </LinearLayout>
+
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:navigationIcon="@drawable/back"
+                    app:navigationIconTint="?colorPrimary" />
+
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fab_to_share"
+            android:contentDescription="@string/tips_share_article"
+            android:focusable="true"
+            app:layout_anchor="@id/appbar"
+            android:clickable="true"
+            app:elevation="@dimen/dp_10"
+            android:src="@drawable/add_24px"
+            android:layout_marginEnd="@dimen/dp_10"
+            app:layout_anchorGravity="end|bottom|right"/>
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_share_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/dp_10"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

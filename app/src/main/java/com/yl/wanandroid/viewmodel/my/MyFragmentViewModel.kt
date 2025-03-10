@@ -4,10 +4,11 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import com.yl.wanandroid.base.BaseViewModel
 import com.yl.wanandroid.model.Children
+import com.yl.wanandroid.model.User
 import com.yl.wanandroid.model.UserDataBean
 import com.yl.wanandroid.repository.LoginAndRegisterRepository
 import com.yl.wanandroid.repository.MyRepository
-import com.yl.wanandroid.room.entity.UserItem
+import com.yl.wanandroid.repository.UserRepository
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast
 
@@ -22,6 +23,7 @@ class MyFragmentViewModel : BaseViewModel() {
 
     val wxArticleTabs = MutableLiveData<MutableList<Children>?>()
     val userData = ObservableField<UserDataBean?>()
+    val user = ObservableField<User?>()
 
 
     val gotoCollection = MutableLiveData<Boolean>()
@@ -47,7 +49,7 @@ class MyFragmentViewModel : BaseViewModel() {
     }
 
     //获取用户信息
-    fun getUserInfo() {
+    fun getCoinInfo() {
         launchUI(
             errorCallback =
             { _, errMsg ->
@@ -57,7 +59,25 @@ class MyFragmentViewModel : BaseViewModel() {
             },
             requestCall = {
                 userData.set(MyRepository.getUserInfo())
-               })
+            })
+    }
+
+    //由于我的信息界面的用户信息不是实时更新的,故我们此处从登录接口获取用户信息
+    fun getUserInfo(){
+        launchUI(
+            errorCallback =
+            { _, errMsg ->
+                LogUtils.d(this, "errMsg-->$errMsg")
+                TipsToast.showTips(errMsg)
+                user.set(null)
+            },
+            requestCall = {
+                user.set(LoginAndRegisterRepository.autoLogin())
+                LogUtils.d(this,"user-->${user.get()}")
+                //更新数据库中的用户信息数据
+                if (user.get() == null)return@launchUI
+                UserRepository.updateUserNickNameAndEmail(user.get()!!.nickname, user.get()!!.email)
+            })
     }
 
     fun onSearchClick() {

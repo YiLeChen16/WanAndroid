@@ -4,9 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import com.yl.wanandroid.base.BaseViewModel
 import com.yl.wanandroid.network.manager.CookiesManager
 import com.yl.wanandroid.repository.LoginAndRegisterRepository
+import com.yl.wanandroid.repository.UserRepository
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast
-import okhttp3.Cookie
 
 /**
  * @description: 设置界面ViewModel
@@ -40,7 +40,7 @@ class SettingActivityViewModel : BaseViewModel() {
                 val logout = LoginAndRegisterRepository.logout()
                 CookiesManager.clearCookies()
                 //清除Room中存储的用户信息
-                LoginAndRegisterRepository.clearUser()
+                UserRepository.clearUser()
                 LogUtils.d(this@SettingActivityViewModel,"logout-->$logout")
             }
         )

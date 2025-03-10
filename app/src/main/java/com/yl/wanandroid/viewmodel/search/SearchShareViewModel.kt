@@ -81,15 +81,23 @@ object SearchShareViewModel : BaseViewModel() {
             TipsToast.showTips("莫得网络哦~")
             return
         }
+        LogUtils.d(this,"editData.value?.isNotEmpty()!!-->${editData.value?.isNotEmpty()}")
         if (editData.value?.isNotEmpty()!!) {
+            LogUtils.d(this,"if")
             //顺序不能改变,因为搜索的动作是在搜索界面可见之后才会进行,若先进行了可见性修改,会导致搜索的词还是原来的词
             mCurrentSearchKeyWord.value = editData.value
             search_fragment_visibility.value = true
-        } else {
+        } else if (searchHintKeyWord.isNotEmpty()){
+            LogUtils.d(this,"else")
+            LogUtils.d(this,"searchHintKeyWord-->${searchHintKeyWord}")
             //搜索提示词hint
             //顺序不能改变,因为搜索的动作是在搜索界面可见之后才会进行,若先进行了可见性修改,会导致搜索的词还是原来的词
             mCurrentSearchKeyWord.value = searchHintKeyWord
             search_fragment_visibility.value = true
+        }else{
+            //搜索关键词为空，提示用户，不进行搜索
+            TipsToast.showTips("搜索内容不能为空哦~")
+            search_fragment_visibility.value = false
         }
     }
 

@@ -100,7 +100,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/dp_15"
                                 android:paddingTop="@dimen/dp_5"
-                                android:text='@{textUtlis.isEmpty(myFragmentViewModel.userData.userInfo.nickname) ? "未登录" : myFragmentViewModel.userData.userInfo.username}'
+                                android:text='@{textUtlis.isEmpty(myFragmentViewModel.user.nickname) ? "未登录" : myFragmentViewModel.user.nickname}'
                                 android:textColor="@color/md_theme_onBackground"
                                 android:textSize="@dimen/sp_20"
                                 android:textStyle="bold" />

@@ -159,6 +159,14 @@
     <string name="user_info_input_birthday">点击设置生日</string>
     <string name="default_save">保存</string>
     <string name="user_info_hint_email">点击设置邮箱</string>
+    <string name="tips_share_article">分享文章</string>
+    <string name="share_count">已分享了 %d 篇文章</string>
+    <string name="user_info_sex_hint">--</string>
+    <string name="tips_sex_m">男</string>
+    <string name="tips_sex_wm">女</string>
+    <string name="tips_cancel">取消</string>
+    <string name="tips_yes">确定</string>
+    <string name="birthday">%d-%d-%d</string>
 
 
 </resources>

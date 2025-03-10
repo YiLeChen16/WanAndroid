@@ -10,6 +10,7 @@ import com.yl.wanandroid.model.PageResponse
 import com.yl.wanandroid.model.ProjectCategoryDataBeanItem
 import com.yl.wanandroid.model.RankItemData
 import com.yl.wanandroid.model.SearchHotKeyDataBean
+import com.yl.wanandroid.model.ShareArticleDataBean
 import com.yl.wanandroid.model.SystemDataBeanItem
 import com.yl.wanandroid.model.User
 import com.yl.wanandroid.model.UserDataBean
@@ -309,6 +310,20 @@ interface WanAndroidApiInterface {
         @Path("page") page: Int
     ):BaseResult<PageResponse<RankItemData>>
 
+    /**
+     * 退出登录
+     * @return BaseResult<Any?>?
+     */
     @GET("/user/logout/json")
     suspend fun logout():BaseResult<Any?>?
+
+    /**
+     * 获取用户自己分享的文章
+     * @param page Int
+     * @return BaseResult<ShareArticleDataBean>?
+     */
+    @GET("/user/lg/private_articles/{page}/json")
+    suspend fun getMyShareArticle(
+        @Path("page") page: Int
+    ):BaseResult<ShareArticleDataBean>
 }

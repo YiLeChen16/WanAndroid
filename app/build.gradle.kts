@@ -42,8 +42,8 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class.java){
-        kotlinOptions{
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class.java) {
+        kotlinOptions {
             jvmTarget = "17"
         }
     }
@@ -107,8 +107,8 @@ dependencies {
     implementation(libs.androidx.appcompat)
 
 
-    implementation ("androidx.navigation:navigation-fragment-ktx:2.5.3")
-    implementation ("androidx.navigation:navigation-ui-ktx:2.5.3")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
+    implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
 
     implementation("com.google.dagger:hilt-android:2.44")
     kapt("com.google.dagger:hilt-android-compiler:2.44")
@@ -117,10 +117,12 @@ dependencies {
     implementation("androidx.room:room-runtime:$room_version")
     kapt("androidx.room:room-compiler:$room_version")
 
-    implementation ("com.google.android.flexbox:flexbox:3.0.0")
+    implementation("com.google.android.flexbox:flexbox:3.0.0")
+// 权限请求框架：https://github.com/getActivity/XXPermissions
+    implementation(libs.xxpermissions)
 
 
 //    //电话号码前缀选择器
-//    implementation ("com.github.sahooz:country-region-picker-android:3.1.0")
+    implementation ("com.github.sahooz:country-region-picker-android:3.1.0")
 
 }

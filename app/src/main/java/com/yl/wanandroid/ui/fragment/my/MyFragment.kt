@@ -24,6 +24,7 @@ import com.yl.wanandroid.ui.activity.IntegralActivity
 import com.yl.wanandroid.ui.activity.LoginActivity
 import com.yl.wanandroid.ui.activity.SearchActivity
 import com.yl.wanandroid.ui.activity.SettingActivity
+import com.yl.wanandroid.ui.activity.ShareActivity
 import com.yl.wanandroid.ui.activity.UserInfoActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -109,8 +110,10 @@ class MyFragment : BaseVMFragment<FragmentMyBinding, MyFragmentViewModel>(R.layo
         mViewModel.getWxArticleTabs()
 
         //判断用户是否已经登录
-        if (appViewModel.isUserLogin()){
+        if (appViewModel.isUserLogin()) {
             //已登录
+            //获取积分信息
+            mViewModel.getCoinInfo()
             //获取用户信息
             mViewModel.getUserInfo()
         }
@@ -129,11 +132,11 @@ class MyFragment : BaseVMFragment<FragmentMyBinding, MyFragmentViewModel>(R.layo
         }
 
         mViewModel.gotoCollection.observe(viewLifecycleOwner) {
-            if (it){
+            if (it) {
                 //判断登录
-                if(appViewModel.isUserLogin()){
+                if (appViewModel.isUserLogin()) {
                     startActivity(Intent(context, CollectActivity::class.java))
-                }else{
+                } else {
                     startActivity(Intent(context, LoginActivity::class.java))
                 }
                 mViewModel.gotoCollection.value = false//重置变量
@@ -156,19 +159,19 @@ class MyFragment : BaseVMFragment<FragmentMyBinding, MyFragmentViewModel>(R.layo
         mViewModel.gotoMyIntegral.observe(viewLifecycleOwner) {
             if (it) {
                 //跳转到积分页面(需登录)
-                if(appViewModel.isUserLogin()){
+                if (appViewModel.isUserLogin()) {
                     startActivity(Intent(context, IntegralActivity::class.java))
-                }else{
+                } else {
                     startActivity(Intent(context, LoginActivity::class.java))
                 }
                 mViewModel.gotoMyIntegral.value = false//重置变量
             }
         }
 
-        appViewModel.shouldNavigateToLogin.observe(viewLifecycleOwner){
-            if (it){
+        appViewModel.shouldNavigateToLogin.observe(viewLifecycleOwner) {
+            if (it) {
                 //重新请求数据
-                mViewModel.getUserInfo()
+                mViewModel.getCoinInfo()
                 mViewModel.getWxArticleTabs()
                 //跳转到登录页面
                 //startActivity(Intent(context,LoginActivity::class.java))
@@ -178,33 +181,29 @@ class MyFragment : BaseVMFragment<FragmentMyBinding, MyFragmentViewModel>(R.layo
             }
         }
 
-        mViewModel.gotoSetting.observe(viewLifecycleOwner){
-            if (it){
+        mViewModel.gotoSetting.observe(viewLifecycleOwner) {
+            if (it) {
                 //跳转到设置界面
-                startActivity(Intent(context,SettingActivity::class.java))
+                startActivity(Intent(context, SettingActivity::class.java))
                 mViewModel.gotoSetting.value = false//重置变量
             }
         }
 
-        mViewModel.gotoMyInfo.observe(this){
-            if (it){
+        mViewModel.gotoMyInfo.observe(this) {
+            if (it) {
                 //跳转到个人信息界面
-                startActivity(Intent(context,UserInfoActivity::class.java))
+                startActivity(Intent(context, UserInfoActivity::class.java))
                 mViewModel.gotoMyInfo.value = false
             }
         }
 
-
-        /*
-
-                mViewModel.gotoMyShare.observe(viewLifecycleOwner) {
-                    if (it) {
-                        //跳转到分享界面
-                        startActivity(Intent(context, ShareActivity::class.java))
-                        mViewModel.gotoMyShare.value = false//重置变量
-                    }
-                }
-        */
+        mViewModel.gotoMyShare.observe(viewLifecycleOwner) {
+            if (it) {
+                //跳转到分享界面
+                startActivity(Intent(context, ShareActivity::class.java))
+                mViewModel.gotoMyShare.value = false//重置变量
+            }
+        }
 
 
     }

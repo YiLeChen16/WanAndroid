@@ -1,12 +1,12 @@
 package com.yl.wanandroid.repository
 
+import com.yl.wanandroid.Constant
 import com.yl.wanandroid.model.User
 import com.yl.wanandroid.network.WanAndroidApiInterface
 import com.yl.wanandroid.network.manager.CookiesManager
+import com.yl.wanandroid.repository.UserRepository.getUser
 import com.yl.wanandroid.repository.base.BaseRepository
-import com.yl.wanandroid.room.DBInstance
-import com.yl.wanandroid.room.WanAndroidDataBase
-import com.yl.wanandroid.room.entity.UserItem
+import com.yl.wanandroid.utils.AESUtil
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +19,6 @@ import kotlinx.coroutines.withContext
  * @version 1.0
  */
 object LoginAndRegisterRepository : BaseRepository() {
-    private val db = DBInstance.getDatabase()
 
 
     /**
@@ -30,6 +29,23 @@ object LoginAndRegisterRepository : BaseRepository() {
      */
     suspend fun login(userName: String, password: String): User? {
         return requestResponse { WanAndroidApiInterface.api.login(userName, password) }
+    }
+
+    /**
+     * 自动登录.实时获取用户的个人信息数据
+     * @return User?
+     */
+    suspend fun autoLogin(): User? {
+        if (!isUserLogin()) return null
+        val user = getUser()
+        //对取出的用户密码进行解密
+        val decryptPassword = AESUtil.decrypt(user[0].password, Constant.KEY_PASSWORD)
+        return requestResponse {
+            WanAndroidApiInterface.api.login(
+                user[0].account,
+                decryptPassword
+            )
+        }
     }
 
     /**
@@ -54,9 +70,9 @@ object LoginAndRegisterRepository : BaseRepository() {
      * @return Boolean
      */
     suspend fun logout(): Boolean {
-        withContext(Dispatchers.IO){
+        withContext(Dispatchers.IO) {
             val result = WanAndroidApiInterface.api.logout()
-            if (result?.isFailed() == true){
+            if (result?.isFailed() == true) {
                 TipsToast.showTips(result.errorMsg)
                 return@withContext false
             }
@@ -66,40 +82,14 @@ object LoginAndRegisterRepository : BaseRepository() {
         }
     }
 
-    /**
-     * 保存用户信息到数据库
-     * @param account String
-     */
-    suspend fun saveUser(user: UserItem) {
-        withContext(Dispatchers.IO) {
-            db.userDao().saveUserInfo(user)
-        }
-    }
 
-    /**
-     * 清除用户数据
-     */
-    suspend fun clearUser() {
-        withContext(Dispatchers.IO) {
-            db.userDao().clearUser()
-        }
-    }
-
-    /**
-     * 获取用户数据
-     * @return List<UserItem>
-     */
-    suspend fun getUser(): List<UserItem> =
-        withContext(Dispatchers.IO) {
-            db.userDao().getUser()
-        }
 
     /**
      * 用户是否登录
      * @return Boolean
      */
     fun isUserLogin(): Boolean {
-        LogUtils.d(this,"isUserLogin-->${CookiesManager.getCookies().isNullOrEmpty()}")
+        LogUtils.d(this, "isUserLogin-->${CookiesManager.getCookies().isNullOrEmpty()}")
         return !CookiesManager.getCookies().isNullOrEmpty()
     }
 }
