@@ -53,6 +53,7 @@ object CookiesManager {
      */
     fun getCookies(): String? {
         val mmkv = MMKV.defaultMMKV()
+        LogUtils.d(this,"getCookies-->${mmkv.decodeString(HTTP_COOKIES_INFO, "")}")
         return mmkv.decodeString(HTTP_COOKIES_INFO, "")
     }
 

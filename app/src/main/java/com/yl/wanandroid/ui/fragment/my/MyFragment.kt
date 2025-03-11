@@ -30,7 +30,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 /**
- * @description: 我的//TODO::退出登录后刷新界面状态
+ * @description: 我的
  * @author YL Chen
  * @date 2024/9/7 16:02
  * @version 1.0
@@ -136,8 +136,6 @@ class MyFragment : BaseVMFragment<FragmentMyBinding, MyFragmentViewModel>(R.layo
                 //判断登录
                 if (appViewModel.isUserLogin()) {
                     startActivity(Intent(context, CollectActivity::class.java))
-                } else {
-                    startActivity(Intent(context, LoginActivity::class.java))
                 }
                 mViewModel.gotoCollection.value = false//重置变量
             }
@@ -161,8 +159,6 @@ class MyFragment : BaseVMFragment<FragmentMyBinding, MyFragmentViewModel>(R.layo
                 //跳转到积分页面(需登录)
                 if (appViewModel.isUserLogin()) {
                     startActivity(Intent(context, IntegralActivity::class.java))
-                } else {
-                    startActivity(Intent(context, LoginActivity::class.java))
                 }
                 mViewModel.gotoMyIntegral.value = false//重置变量
             }
@@ -174,8 +170,7 @@ class MyFragment : BaseVMFragment<FragmentMyBinding, MyFragmentViewModel>(R.layo
                 mViewModel.getCoinInfo()
                 mViewModel.getWxArticleTabs()
                 //跳转到登录页面
-                //startActivity(Intent(context,LoginActivity::class.java))
-
+                startActivity(Intent(context,LoginActivity::class.java))
                 //重置变量,避免多次跳转
                 appViewModel.shouldNavigateToLogin.value = false
             }
@@ -191,9 +186,12 @@ class MyFragment : BaseVMFragment<FragmentMyBinding, MyFragmentViewModel>(R.layo
 
         mViewModel.gotoMyInfo.observe(this) {
             if (it) {
-                //跳转到个人信息界面
-                startActivity(Intent(context, UserInfoActivity::class.java))
-                mViewModel.gotoMyInfo.value = false
+                if (appViewModel.isUserLogin()) {
+                    //跳转到个人信息界面
+                    startActivity(Intent(context, UserInfoActivity::class.java))
+                    mViewModel.gotoMyInfo.value = false
+                }
+
             }
         }
 

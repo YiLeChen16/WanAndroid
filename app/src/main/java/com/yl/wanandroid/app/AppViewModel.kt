@@ -122,6 +122,7 @@ class AppViewModel @Inject constructor() :
             }
         }.let {
             LogUtils.d(this@AppViewModel, "isLogin3-->$it")
+            shouldNavigateToLogin.value = !it
             return it
         }
     }

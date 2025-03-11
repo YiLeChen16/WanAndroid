@@ -38,7 +38,6 @@ class SettingActivityViewModel : BaseViewModel() {
             },
             requestCall = {
                 val logout = LoginAndRegisterRepository.logout()
-                CookiesManager.clearCookies()
                 //清除Room中存储的用户信息
                 UserRepository.clearUser()
                 LogUtils.d(this@SettingActivityViewModel,"logout-->$logout")

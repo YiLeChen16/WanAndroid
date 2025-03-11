@@ -17,6 +17,7 @@ object Constant {
     const val SYSTEM_COURSE_NAME: String = "system_course_name"//体系课程的标题
     const val USER_LOGIN_URL: String = "user/login"
     const val USER_REGISTER_URL: String = "user/register"
+    const val USER_LOGOUT_URL: String = "user/logout"//退出登录接口
     const val SET_COOKIE = "set-cookie"
     const val HTTP_COOKIES_INFO = "http_cookies_info" //cookies缓存
     const val COLLECTION_URL = "/lg/collect" //收藏接口

@@ -117,6 +117,8 @@
     <string name="error_phone_number">请输入正确的手机号码</string>
     <string name="tips_read_user_agreement">请阅读并勾选《隐私政策》及《用户服务协议》</string>
     <string name="error_input_password">请输入密码</string>
+    <string name="error_input_password_again">请再次输入密码</string>
+    <string name="error_input_password_not_equal">两次输入密码不一致，请重新校对!</string>
     <string name="success_login">登录成功</string>
     <string name="tip_forget_password">忘记密码</string>
     <string name="tip_no_login">登录后查看更多内容~</string>
@@ -167,6 +169,7 @@
     <string name="tips_cancel">取消</string>
     <string name="tips_yes">确定</string>
     <string name="birthday">%d-%d-%d</string>
+    <string name="tips_register">注册</string>
 
 
 </resources>
