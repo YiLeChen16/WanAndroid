@@ -32,7 +32,7 @@ class SettingActivity :
         mRefreshLayout.setEnableRefresh(false)
         mRefreshLayout.setEnableLoadMore(false)
         //初始化退出登录按钮状态
-        if (appViewModel.isUserLogin()) {
+        if (appViewModel.isUserLoginNotJump()) {
             //用户已登录
             mBinding.btnLogout.isEnabled = true
         } else {

@@ -30,7 +30,7 @@ class UserInfoActivity : BaseVMActivity<ActivityUserInfoBinding, UserInfoActivit
         mRefreshLayout.setEnableLoadMore(false)
         //头像被点击
         mBinding.ivHead.setOnClickListener {
-            TipsToast.showWarningTips("正在开发中~")
+            TipsToast.showWarningTips(R.string.tips_in_development)
         }
         //性别被点击
         mBinding.tvSex.setOnClickListener {

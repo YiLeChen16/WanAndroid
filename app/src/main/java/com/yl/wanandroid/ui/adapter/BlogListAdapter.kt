@@ -62,7 +62,7 @@ class BlogListAdapter @Inject constructor(@ActivityContext val context: Context)
         }
     }
 
-    override fun setViewBindingVariable(binding: ItemBlogViewBinding?, position: Int) {
+    override fun bindItemData(binding: ItemBlogViewBinding?, position: Int) {
         binding?.itemData = datas[position]
     }
 

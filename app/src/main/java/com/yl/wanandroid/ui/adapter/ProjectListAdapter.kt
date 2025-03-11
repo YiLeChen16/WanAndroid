@@ -24,7 +24,7 @@ import javax.inject.Inject
 class ProjectListAdapter @Inject constructor(@ActivityContext val context: Context) :
     BaseRecyclerViewAdapter<ArticleItemData, ItemProjectViewBinding>(R.layout.item_project_view) {
 
-    override fun setViewBindingVariable(binding: ItemProjectViewBinding?, position: Int) {
+    override fun bindItemData(binding: ItemProjectViewBinding?, position: Int) {
         binding?.itemData = datas[position]//为布局声明变量绑定数据
     }
 

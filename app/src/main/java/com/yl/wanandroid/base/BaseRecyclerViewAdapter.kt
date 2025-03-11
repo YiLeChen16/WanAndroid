@@ -3,6 +3,7 @@ package com.yl.wanandroid.base
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +16,7 @@ import androidx.viewbinding.ViewBinding
  * @date 2025/2/28 22:40
  * @version 1.0
  */
-abstract class BaseRecyclerViewAdapter<ItemData,ItemViewBinding:ViewDataBinding>(private var itemLayoutId: Int) : RecyclerView.Adapter<BaseRecyclerViewAdapter.MyViewHolder>() {
+abstract class BaseRecyclerViewAdapter<ItemData,ItemViewBinding:ViewDataBinding>(@LayoutRes private var itemLayoutId: Int) : RecyclerView.Adapter<BaseRecyclerViewAdapter.MyViewHolder>() {
     class MyViewHolder(binding: ViewBinding) : ViewHolder(binding.root)
 
     var datas: MutableList<ItemData> = mutableListOf()
@@ -41,7 +42,7 @@ abstract class BaseRecyclerViewAdapter<ItemData,ItemViewBinding:ViewDataBinding>
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val binding = DataBindingUtil.getBinding<ItemViewBinding>(holder.itemView)
-        setViewBindingVariable(binding,position)
+        bindItemData(binding,position)
         binding?.executePendingBindings()//需执行此句以更新界面,否则界面会闪烁
         //设置条目监听事件
         setListener(holder,binding,position)
@@ -50,7 +51,7 @@ abstract class BaseRecyclerViewAdapter<ItemData,ItemViewBinding:ViewDataBinding>
     abstract fun setListener(holder: MyViewHolder,binding: ItemViewBinding?,position:Int)
 
     //为子类的ViewBinding布局变量绑定数据
-    abstract fun setViewBindingVariable(binding: ItemViewBinding?,position: Int)
+    abstract fun bindItemData(binding: ItemViewBinding?, position: Int)
 
     //暴露方法给外界设置数据
     @SuppressLint("NotifyDataSetChanged")

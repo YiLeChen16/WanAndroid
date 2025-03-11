@@ -42,7 +42,7 @@ class SystemChildLeftListAdapter @Inject constructor() :
     }
 
 
-    override fun setViewBindingVariable(binding: ItemSystemChildLeftTabBinding?, position: Int) {
+    override fun bindItemData(binding: ItemSystemChildLeftTabBinding?, position: Int) {
         binding?.systemDataBeanItem = datas[position]
     }
 

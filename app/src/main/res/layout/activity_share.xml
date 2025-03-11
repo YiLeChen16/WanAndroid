@@ -4,6 +4,7 @@
     xmlns:tool="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="shareActivityViewModel"
             type="com.yl.wanandroid.viewmodel.my.ShareActivityViewModel" />
@@ -44,9 +45,9 @@
                         android:id="@+id/iv_head"
                         android:layout_width="@dimen/dp_80"
                         android:layout_height="@dimen/dp_80"
+                        android:layout_marginTop="@dimen/dp_50"
                         android:padding="@dimen/dp_5"
                         android:src="@mipmap/ic_launcher"
-                        android:layout_marginTop="@dimen/dp_50"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:shapeAppearanceOverlay="@style/circleImageStyle"
@@ -67,10 +68,10 @@
                         android:id="@+id/tv_share_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        tool:text="已分享了100篇文章"
-                        android:text="@{@string/share_count(shareActivityViewModel.shareArticleCount)}"
                         android:layout_marginTop="@dimen/dp_5"
-                        android:padding="@dimen/dp_10"/>
+                        android:padding="@dimen/dp_10"
+                        android:text="@{@string/share_count(shareActivityViewModel.shareArticleCount)}"
+                        tool:text="已分享了100篇文章" />
 
                 </LinearLayout>
 
@@ -86,23 +87,26 @@
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_to_share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/fab_to_share"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:clickable="true"
             android:contentDescription="@string/tips_share_article"
             android:focusable="true"
-            app:layout_anchor="@id/appbar"
-            android:clickable="true"
-            app:elevation="@dimen/dp_10"
             android:src="@drawable/add_24px"
-            android:layout_marginEnd="@dimen/dp_10"
-            app:layout_anchorGravity="end|bottom|right"/>
+            app:elevation="@dimen/dp_10"
+            app:layout_anchor="@id/appbar"
+            app:layout_anchorGravity="end|bottom|right" />
+
         <ProgressBar
             android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_share_list"
             android:layout_width="match_parent"

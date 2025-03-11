@@ -38,7 +38,7 @@ class RecommendSearchListAdapter @Inject constructor() :
         }
     }
 
-    override fun setViewBindingVariable(binding: ItemRecommendSearchViewBinding?, position: Int) {
+    override fun bindItemData(binding: ItemRecommendSearchViewBinding?, position: Int) {
         binding?.recommendSearchKeyword = datas[position].name
     }
 }

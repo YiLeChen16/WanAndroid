@@ -26,7 +26,7 @@ import javax.inject.Inject
 class CourseListAdapter @Inject constructor(@ActivityContext val context: Context) :
     BaseRecyclerViewAdapter<SystemDataBeanItem, ItemCourseListBinding>(R.layout.item_course_list) {
 
-    override fun setViewBindingVariable(binding: ItemCourseListBinding?, position: Int) {
+    override fun bindItemData(binding: ItemCourseListBinding?, position: Int) {
         binding?.itemData = datas[position]
     }
 

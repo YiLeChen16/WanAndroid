@@ -22,7 +22,7 @@ class SystemChildContentListAdapter @Inject constructor() :
     private var flowLayout: CommonFlowLayoutView? = null
 
 
-    override fun setViewBindingVariable(binding: ItemSystemBinding?, position: Int) {
+    override fun bindItemData(binding: ItemSystemBinding?, position: Int) {
         binding?.systemDataBeanItem = datas[position]
         flowLayout = binding?.root?.findViewById(R.id.flow_layout)
         flowLayout?.setData(datas[position].children)

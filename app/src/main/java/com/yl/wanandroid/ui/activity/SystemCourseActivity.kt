@@ -14,11 +14,6 @@ import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast
 import com.yl.wanandroid.viewmodel.system.SystemCourseActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -57,13 +52,6 @@ class SystemCourseActivity :
     }
 
     override fun initVMData() {
-        val scope = CoroutineScope(Job() + Dispatchers.Main)
-        scope.launch {
-            //测试模拟加载延迟
-            delay(2000)
-            //模拟加载成功
-            mViewModel.changeStateView(ViewStateEnum.VIEW_LOAD_SUCCESS)
-        }
         //获取跳转携带的数据并存储到ViewModel中
         val bundle = intent.extras ?: return
         mViewModel.courseId = bundle.getInt(Constant.SYSTEM_COURSE_ID)
@@ -115,6 +103,12 @@ class SystemCourseActivity :
                 //重置变量,避免多次跳转
                 appViewModel.shouldNavigateToLogin.value = false
             }
+        }
+
+        appViewModel.updateItemId.observe(this){
+            if (it == null)return@observe
+            //更新收藏状态
+            courseArticleAdapter.updateCollectionState(it)
         }
     }
 

@@ -143,10 +143,10 @@ abstract class BaseViewModel : ViewModel(), BaseLifeCycleObserver,MultiplyStateV
 
     //错误视图点击回调函数
     override fun onReLoad() {
-        //调用抽象方法强制子类实现
+        //调用方法由子类实现
         onReload()
     }
 
-    //强制子类实现此方法
-    abstract fun onReload()
+    //子类可实现此方法实现界面重新加载
+    open fun onReload(){}
 }

@@ -127,8 +127,22 @@ class AppViewModel @Inject constructor() :
         }
     }
 
+    //判断有无登录(不修改变量,不跳转到登录界面)
+    fun isUserLoginNotJump(): Boolean {
+        runBlocking {
+            if (LoginAndRegisterRepository.isUserLogin()) {
+                //已登录
+                true
+            } else {
+                //未登录
+                false
+            }
+        }.let {
+            return it
+        }
+    }
+
     override fun onReload() {
-        TODO("Not yet implemented")
     }
 }
 

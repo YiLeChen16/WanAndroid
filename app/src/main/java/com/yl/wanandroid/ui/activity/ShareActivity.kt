@@ -10,7 +10,9 @@ import com.yl.wanandroid.databinding.ActivityShareBinding
 import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.viewmodel.my.ShareActivityViewModel
 import com.yl.wanandroid.BR
+import com.yl.wanandroid.app.AppViewModel
 import com.yl.wanandroid.ui.adapter.ShareListAdapter
+import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -28,6 +30,9 @@ class ShareActivity :
 
     @Inject
     lateinit var shareListAdapter: ShareListAdapter
+
+    @Inject
+    lateinit var appViewModel: AppViewModel
 
     override fun initView() {
         super.initView()
@@ -57,11 +62,16 @@ class ShareActivity :
                 }
             }
         }
+        mBinding.fabToShare.setOnClickListener {
+            TipsToast.showWarningTips(R.string.tips_in_development)
+        }
 
     }
 
     override fun initVMData() {
         mViewModel.getUserShareArticleCountAndUserInfo()
+        //设置收藏监听事件
+        shareListAdapter.setOnCollectionEventListener(appViewModel)
         mViewModel.changeStateView(ViewStateEnum.VIEW_LOAD_SUCCESS)
     }
 
@@ -71,9 +81,14 @@ class ShareActivity :
             mViewModel.getShareArticleList().collect{
                 pagingData->
                 shareListAdapter.submitData(pagingData)
-                //TODO:将数据暂存到adapter中,以便设置收藏监听回调时使用
-
             }
+        }
+
+        //改变收藏状态
+        appViewModel.updateItemId.observe(this){
+            if (it == null) return@observe
+            LogUtils.d(this@ShareActivity,"updateItemId-->$it")
+            shareListAdapter.updateCollectionState(it)
         }
     }
 

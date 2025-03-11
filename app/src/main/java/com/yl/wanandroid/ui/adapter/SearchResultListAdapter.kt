@@ -19,7 +19,7 @@ import javax.inject.Inject
 class SearchResultListAdapter @Inject constructor(@ActivityContext val context: Context) :
     BaseRecyclerViewAdapter<ArticleItemData, ItemSearchResultBlogViewBinding>(R.layout.item_search_result_blog_view) {
 
-    override fun setViewBindingVariable(binding: ItemSearchResultBlogViewBinding?, position: Int) {
+    override fun bindItemData(binding: ItemSearchResultBlogViewBinding?, position: Int) {
         binding?.searchData = datas[position]
     }
 
