@@ -3,10 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
-
     <uses-permission android:name="android.permission.INTERNET" />
-
-
 
 
     <application
@@ -29,19 +26,20 @@
             android:name=".ui.activity.MainActivity"
             android:configChanges="uiMode"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
         </activity>
         <activity
             android:name=".ui.activity.SearchActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".ui.activity.SystemActivity" />
         <activity android:name=".ui.activity.SystemCourseActivity" />
-        <activity android:name=".ui.activity.LoginActivity"
-            android:launchMode="singleTask"/>
+        <activity
+            android:name=".ui.activity.LoginActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".ui.activity.PrivacyPolicyActivity" />
         <activity android:name=".ui.activity.RegisterActivity" />
         <activity android:name=".ui.activity.CollectActivity" />
@@ -50,6 +48,7 @@
         <activity android:name=".ui.activity.SettingActivity" />
         <activity android:name=".ui.activity.UserInfoActivity" />
         <activity android:name=".ui.activity.ShareActivity" />
+        <activity android:name=".ui.activity.AboutActivity" />
 
     </application>
 

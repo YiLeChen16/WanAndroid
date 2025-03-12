@@ -15,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 /**
- * @description: TODO
+ * @description: 设置界面
  * @author YL Chen
  * @date 2025/3/5 21:06
  * @version 1.0
@@ -89,6 +89,13 @@ class SettingActivity :
                 //跳转到个人信息界面
                 startActivity(Intent(this,UserInfoActivity::class.java))
                 mViewModel.gotoUserInfo.value = false
+            }
+        }
+
+        mViewModel.gotoAbout.observe(this){
+            if (it){
+                startActivity(Intent(this,AboutActivity::class.java))
+                mViewModel.gotoAbout.value = false
             }
         }
     }

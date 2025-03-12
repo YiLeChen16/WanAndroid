@@ -144,12 +144,15 @@ class MyFragment : BaseVMFragment<FragmentMyBinding, MyFragmentViewModel>(R.layo
 
         mViewModel.gotoSearch.observe(viewLifecycleOwner) {
             if (it) {
-                //跳转到搜索界面
-                val intent = Intent(context, SearchActivity::class.java)
-                val bundle = Bundle()
-                bundle.putBoolean(Constant.IS_SEARCH, false)//表示从搜索框跳转过去
-                intent.putExtras(bundle)
-                startActivity(intent)
+                //判断登录
+                if (appViewModel.isUserLogin()) {
+                    //跳转到搜索界面
+                    val intent = Intent(context, SearchActivity::class.java)
+                    val bundle = Bundle()
+                    bundle.putBoolean(Constant.IS_SEARCH, false)//表示从搜索框跳转过去
+                    intent.putExtras(bundle)
+                    startActivity(intent)
+                }
                 mViewModel.gotoSearch.value = false//重置变量
             }
         }

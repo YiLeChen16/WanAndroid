@@ -51,13 +51,13 @@ android {
         jvmTarget = "17"
     }
     buildFeatures {
-        compose = false
+        compose = true
         dataBinding = true
         viewBinding = true
 
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.4.0"
     }
     packaging {
         resources {
@@ -123,6 +123,10 @@ dependencies {
 
 
 //    //电话号码前缀选择器
-    implementation ("com.github.sahooz:country-region-picker-android:3.1.0")
+    implementation("com.github.sahooz:country-region-picker-android:3.1.0")
+
+
+    //MarkDown语法解析器
+    implementation("com.github.yydcdut.RxMarkdown:markdown-processor:v0.1.3")
 
 }

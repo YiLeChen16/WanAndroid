@@ -18,6 +18,7 @@ class SettingActivityViewModel : BaseViewModel() {
 
     val gotoPrivacy = MutableLiveData<Boolean>()
     val gotoUserInfo = MutableLiveData<Boolean>()
+    val gotoAbout = MutableLiveData<Boolean>()
 
     //跳转到个人信息界面
     fun onUserInfoClick() {
@@ -27,6 +28,11 @@ class SettingActivityViewModel : BaseViewModel() {
     //跳转到隐私政策页面
     fun onPrivacyClick() {
         gotoPrivacy.value = true
+    }
+
+    //跳转到关于页面
+    fun onAboutClick(){
+        gotoAbout.value = true
     }
 
 

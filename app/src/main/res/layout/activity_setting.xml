@@ -220,6 +220,7 @@
             android:layout_marginTop="@dimen/dp_20"
             android:foreground="?android:attr/selectableItemBackgroundBorderless"
             app:cardBackgroundColor="@color/md_theme_surface"
+            android:onClick="@{()->settingActivityViewModel.onAboutClick()}"
             app:layout_constraintTop_toBottomOf="@id/cd_current_version">
 
             <TextView
