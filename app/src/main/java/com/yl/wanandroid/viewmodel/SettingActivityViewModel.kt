@@ -1,9 +1,10 @@
 package com.yl.wanandroid.viewmodel
 
+import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import com.yl.wanandroid.base.BaseViewModel
-import com.yl.wanandroid.network.manager.CookiesManager
 import com.yl.wanandroid.repository.LoginAndRegisterRepository
+import com.yl.wanandroid.repository.SettingRepository
 import com.yl.wanandroid.repository.UserRepository
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast
@@ -20,6 +21,8 @@ class SettingActivityViewModel : BaseViewModel() {
     val gotoUserInfo = MutableLiveData<Boolean>()
     val gotoAbout = MutableLiveData<Boolean>()
 
+    val cache = ObservableField<String>()
+
     //跳转到个人信息界面
     fun onUserInfoClick() {
         gotoUserInfo.value = true
@@ -31,7 +34,7 @@ class SettingActivityViewModel : BaseViewModel() {
     }
 
     //跳转到关于页面
-    fun onAboutClick(){
+    fun onAboutClick() {
         gotoAbout.value = true
     }
 
@@ -46,7 +49,30 @@ class SettingActivityViewModel : BaseViewModel() {
                 val logout = LoginAndRegisterRepository.logout()
                 //清除Room中存储的用户信息
                 UserRepository.clearUser()
-                LogUtils.d(this@SettingActivityViewModel,"logout-->$logout")
+                LogUtils.d(this@SettingActivityViewModel, "logout-->$logout")
+            }
+        )
+    }
+
+
+    //获取缓存
+    fun getTotalCache() {
+        launchUI(errorCallback = { _, errMsg ->
+            LogUtils.d(this, "errMsg-->$errMsg")
+        }, requestCall = {
+                cache.set(SettingRepository.getTotalCache())
+            })
+    }
+
+    //清理缓存
+    fun onClearCacheClick() {
+        launchUI(
+            errorCallback =
+            { _, errMsg ->
+                TipsToast.showTips(errMsg)
+            }, requestCall = {
+                SettingRepository.clearCache()
+                cache.set(SettingRepository.getTotalCache())
             }
         )
     }

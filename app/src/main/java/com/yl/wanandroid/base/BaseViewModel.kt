@@ -92,9 +92,9 @@ abstract class BaseViewModel : ViewModel(), BaseLifeCycleObserver,MultiplyStateV
     }
 
 
-    /**
+ /*   *//**
      * 获取Repository实例
-     */
+     *//*
     inline fun <reified R> getRepository(): R? {
         try {
             val clazz = R::class.java
@@ -103,7 +103,7 @@ abstract class BaseViewModel : ViewModel(), BaseLifeCycleObserver,MultiplyStateV
             e.printStackTrace()
         }
         return null
-    }
+    }*/
 
     /**
      * View生命周期：视图创建

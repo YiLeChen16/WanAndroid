@@ -147,6 +147,7 @@
     <string name="tip_goto_change_my_info">进入修改个人信息界面图标</string>
     <string name="tips_theme_mode_follow_system">主题模式跟随系统</string>
     <string name="setting_current_version">当前版本</string>
+    <string name="current_version">V.%s</string>
     <string name="setting_user_info">个人信息</string>
     <string name="setting_privacy">隐私政策</string>
     <string name="setting_logout">退出登录</string>

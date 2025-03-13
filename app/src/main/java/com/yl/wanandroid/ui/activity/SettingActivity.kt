@@ -10,6 +10,8 @@ import com.yl.wanandroid.app.AppViewModel
 import com.yl.wanandroid.base.BaseVMActivity
 import com.yl.wanandroid.databinding.ActivitySettingBinding
 import com.yl.wanandroid.model.ViewStateEnum
+import com.yl.wanandroid.utils.APKVersionCodeUtils
+import com.yl.wanandroid.utils.CacheDataUtils
 import com.yl.wanandroid.viewmodel.SettingActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -39,6 +41,9 @@ class SettingActivity :
             //用户未登录
             mBinding.btnLogout.isEnabled = false
         }
+        //获取并设置当前版本号
+        mBinding.tvVersionCode.text =
+            getString(R.string.current_version, APKVersionCodeUtils.getVersionCode(this))
         //退出登录按钮点击
         mBinding.btnLogout.setOnClickListener {
             //弹窗提示用户是否退出登录
@@ -71,30 +76,35 @@ class SettingActivity :
     }
 
     override fun initVMData() {
+        mViewModel.getTotalCache()
         mViewModel.changeStateView(ViewStateEnum.VIEW_LOAD_SUCCESS)
     }
 
     override fun observeLiveData() {
         super.observeLiveData()
-        mViewModel.gotoPrivacy.observe(this){
-            if (it){
+        mViewModel.gotoPrivacy.observe(this) {
+            if (it) {
                 //跳转到隐私政策界面
-                PrivacyPolicyActivity.start(this,getString(R.string.login_privacy_agreement),getString(R.string.user_privacy_policy))
+                PrivacyPolicyActivity.start(
+                    this,
+                    getString(R.string.login_privacy_agreement),
+                    getString(R.string.user_privacy_policy)
+                )
                 mViewModel.gotoPrivacy.value = false
             }
         }
 
-        mViewModel.gotoUserInfo.observe(this){
-            if (it){
+        mViewModel.gotoUserInfo.observe(this) {
+            if (it) {
                 //跳转到个人信息界面
-                startActivity(Intent(this,UserInfoActivity::class.java))
+                startActivity(Intent(this, UserInfoActivity::class.java))
                 mViewModel.gotoUserInfo.value = false
             }
         }
 
-        mViewModel.gotoAbout.observe(this){
-            if (it){
-                startActivity(Intent(this,AboutActivity::class.java))
+        mViewModel.gotoAbout.observe(this) {
+            if (it) {
+                startActivity(Intent(this, AboutActivity::class.java))
                 mViewModel.gotoAbout.value = false
             }
         }
