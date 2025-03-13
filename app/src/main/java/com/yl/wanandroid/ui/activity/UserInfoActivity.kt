@@ -28,6 +28,9 @@ class UserInfoActivity : BaseVMActivity<ActivityUserInfoBinding, UserInfoActivit
         super.initView()
         mRefreshLayout.setEnableRefresh(false)
         mRefreshLayout.setEnableLoadMore(false)
+        mBinding.toolbar.setNavigationOnClickListener {
+            finish()
+        }
         //头像被点击
         mBinding.ivHead.setOnClickListener {
             TipsToast.showWarningTips(R.string.tips_in_development)

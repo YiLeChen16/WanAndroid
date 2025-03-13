@@ -7,6 +7,7 @@ import com.yl.wanandroid.utils.LogUtils
 import org.json.JSONException
 import retrofit2.HttpException
 import java.net.ConnectException
+import kotlin.coroutines.cancellation.CancellationException
 
 /**
  * 统一错误处理工具类
@@ -18,18 +19,18 @@ object ExceptionHandler {
         val ex: ApiException
         when (e) {
             is ApiException -> {
-                LogUtils.e(this,"is ApiException")
+                LogUtils.e(this, "is ApiException")
 
                 ex = ApiException(e.errCode, e.errMsg, e)
             }
 
             is NetWorkException -> {
-                LogUtils.e(this,"is NetWorkException ")
+                LogUtils.e(this, "is NetWorkException ")
                 ex = ApiException(ERROR.NETWORD_ERROR, e)
             }
 
             is HttpException -> {
-                LogUtils.e(this,"is HttpException code-->${e.code()}")
+                LogUtils.e(this, "is HttpException code-->${e.code()}")
                 ex = when (e.code()) {
                     ERROR.UNAUTHORIZED.code -> ApiException(ERROR.UNAUTHORIZED, e)
                     ERROR.FORBIDDEN.code -> ApiException(ERROR.FORBIDDEN, e)
@@ -44,36 +45,45 @@ object ExceptionHandler {
             }
 
             is JsonParseException, is JSONException, is ParseException, is MalformedJsonException -> {
-                LogUtils.e(this,"is JsonParseException, is JSONException, is ParseException, is MalformedJsonException")
+                LogUtils.e(
+                    this,
+                    "is JsonParseException, is JSONException, is ParseException, is MalformedJsonException"
+                )
                 ex = ApiException(ERROR.PARSE_ERROR, e)
             }
 
             is ConnectException -> {
-                LogUtils.e(this,"is ConnectException")
+                LogUtils.e(this, "is ConnectException")
                 ex = ApiException(ERROR.NETWORD_ERROR, e)
             }
 
             is javax.net.ssl.SSLException -> {
-                LogUtils.e(this,"is javax.net.ssl.SSLException")
+                LogUtils.e(this, "is javax.net.ssl.SSLException")
                 ex = ApiException(ERROR.SSL_ERROR, e)
             }
 
             is java.net.SocketException -> {
-                LogUtils.e(this,"is java.net.SocketException")
+                LogUtils.e(this, "is java.net.SocketException")
                 ex = ApiException(ERROR.TIMEOUT_ERROR, e)
             }
 
             is java.net.SocketTimeoutException -> {
-                LogUtils.e(this,"is java.net.SocketTimeoutException")
+                LogUtils.e(this, "is java.net.SocketTimeoutException")
                 ex = ApiException(ERROR.TIMEOUT_ERROR, e)
             }
 
             is java.net.UnknownHostException -> {
-                LogUtils.e(this,"is java.net.UnknownHostException")
+                LogUtils.e(this, "is java.net.UnknownHostException")
                 ex = ApiException(ERROR.UNKNOW_HOST, e)
             }
 
+            is CancellationException->{
+                LogUtils.e(this, "is CancellationException")
+                ex = ApiException(ERROR.JOB_CANCEL,e = null)
+            }
+
             else -> {
+                LogUtils.e(this,"e-->${e.printStackTrace()}")
                 ex = if (!e.message.isNullOrEmpty()) ApiException(1000, e.message!!, e)
                 else ApiException(ERROR.UNKNOWN, e)
             }

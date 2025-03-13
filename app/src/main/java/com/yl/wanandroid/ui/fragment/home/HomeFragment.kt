@@ -1,5 +1,6 @@
 package com.yl.wanandroid.ui.fragment.home
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Typeface
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import com.yl.wanandroid.ui.activity.LoginActivity
 import com.yl.wanandroid.ui.adapter.HomeTabViewPagerAdapter
 import com.yl.wanandroid.ui.custom.BannerView
 import com.yl.wanandroid.utils.LogUtils
+import com.yl.wanandroid.utils.TipsToast
 import com.yl.wanandroid.viewmodel.home.HomeFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -52,7 +54,7 @@ class HomeFragment :
         mBinding.tabViewPager.setCurrentItem(1, false)
     }
 
-    fun initListener() {
+    private fun initListener() {
         // 联动 Tab 和 ViewPager2
         mBinding.tab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
@@ -82,13 +84,14 @@ class HomeFragment :
                 mBinding.tab.getTabAt(position)?.select() // 更新 Tab 选中状态
             }
         })
-        //收藏点击监听
-        mBinding.ivMyCollection.setOnClickListener {
 
+        mBinding.ivChangeTheme.setOnClickListener {
+            TipsToast.showWarningTips(R.string.tips_in_development)
         }
     }
 
     //初始化tab条目的样式
+    @SuppressLint("InflateParams")
     private fun initTab() {
         val initData = listOf("鸿蒙", "推荐", "问答")
         LogUtils.d(this, "initTab-->mBinding.tab.tabCount==${mBinding.tab.tabCount}")

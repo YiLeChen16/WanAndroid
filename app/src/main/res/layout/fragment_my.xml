@@ -59,7 +59,6 @@
                             android:layout_height="wrap_content"
                             android:contentDescription="@string/tip_theme"
                             android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                            android:onClick="@{()->myFragmentViewModel.onChangeThemeClick()}"
                             android:padding="@dimen/dp_10"
                             android:src="@drawable/dark_mode_24px"
                             app:layout_constraintEnd_toEndOf="parent" />

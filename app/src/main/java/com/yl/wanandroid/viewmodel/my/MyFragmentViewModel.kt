@@ -30,7 +30,6 @@ class MyFragmentViewModel : BaseViewModel() {
     val gotoMyShare = MutableLiveData<Boolean>()
     val gotoMyIntegral = MutableLiveData<Boolean>()
     val gotoSearch = MutableLiveData<Boolean>()
-    val themeDark = MutableLiveData<Boolean>()
     val gotoMyInfo = MutableLiveData<Boolean>()
     val gotoSetting = MutableLiveData<Boolean>()
 
@@ -90,10 +89,6 @@ class MyFragmentViewModel : BaseViewModel() {
         gotoMyInfo.value = true
     }
 
-    fun onChangeThemeClick() {
-        //变化主题
-        themeDark.value = true
-    }
 
     fun onSettingClick() {
         //跳转到设置界面

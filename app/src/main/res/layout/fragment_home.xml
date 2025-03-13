@@ -52,7 +52,7 @@
                 android:padding="@dimen/dp_4">
 
                 <ImageView
-                    android:id="@+id/iv_set_theme"
+                    android:id="@+id/iv_change_theme"
                     android:layout_width="@dimen/dp_0"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

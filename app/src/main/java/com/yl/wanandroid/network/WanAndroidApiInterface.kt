@@ -1,5 +1,6 @@
 package com.yl.wanandroid.network
 
+import com.yl.wanandroid.Constant
 import com.yl.wanandroid.model.ArticleDataBean
 import com.yl.wanandroid.model.ArticleItemData
 import com.yl.wanandroid.model.BannerDataBean
@@ -28,6 +29,7 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
+import java.util.concurrent.TimeUnit
 
 /**
  * 网络请求接口
@@ -45,6 +47,8 @@ interface WanAndroidApiInterface {
          */
         private fun createApi(): WanAndroidApiInterface {
             val build = OkHttpClient.Builder()
+            build.connectTimeout(Constant.CONNECT_TIME_OUT,TimeUnit.SECONDS)
+            build.readTimeout(Constant.CONNECT_TIME_OUT,TimeUnit.SECONDS)
             //为OkHttp添加拦截器,以实现自动拦截存储Cookie和为需要Cookie的接口拦截添加Cookie
             build.addInterceptor(CookiesInterceptor())
             build.addInterceptor(HeaderInterceptor())

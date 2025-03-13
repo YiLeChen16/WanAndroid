@@ -43,7 +43,7 @@ class RecommendFragmentViewModel : BaseViewModel() {
         mCurrentPage = mDefaultPage
         launchUI(
             errorCallback = { _, errorMsg ->
-                TipsToast.showTips(errorMsg)
+               // TipsToast.showTips(errorMsg)
                 LogUtils.d(this@RecommendFragmentViewModel, "errorCallback-->$errorMsg")
                 changeStateView(ViewStateEnum.VIEW_NET_ERROR)
                 recommendBlogData.value = null
@@ -59,7 +59,7 @@ class RecommendFragmentViewModel : BaseViewModel() {
     fun getSearchHotkeyData(): LiveData<MutableList<SearchHotKeyDataBean>?> {
         launchUI(
             errorCallback = { _, errorMsg ->
-                TipsToast.showTips(errorMsg)
+                //TipsToast.showTips(errorMsg)
                 LogUtils.d(this@RecommendFragmentViewModel, "errorCallback-->$errorMsg")
                 changeStateView(ViewStateEnum.VIEW_NET_ERROR)
                 searchHotKeyData.value = null

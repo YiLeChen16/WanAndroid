@@ -8,11 +8,6 @@ import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.ui.adapter.CourseListAdapter
 import com.yl.wanandroid.viewmodel.system.SystemCourseFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**

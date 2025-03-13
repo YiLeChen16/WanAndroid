@@ -11,7 +11,8 @@ import com.yl.wanandroid.base.BaseVMActivity
 import com.yl.wanandroid.databinding.ActivitySettingBinding
 import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.utils.APKVersionCodeUtils
-import com.yl.wanandroid.utils.CacheDataUtils
+import com.yl.wanandroid.utils.ThemeChangeUtils
+import com.yl.wanandroid.utils.TipsToast
 import com.yl.wanandroid.viewmodel.SettingActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -33,6 +34,9 @@ class SettingActivity :
         super.initView()
         mRefreshLayout.setEnableRefresh(false)
         mRefreshLayout.setEnableLoadMore(false)
+        mBinding.toolbar.setNavigationOnClickListener {
+            finish()
+        }
         //初始化退出登录按钮状态
         if (appViewModel.isUserLoginNotJump()) {
             //用户已登录
@@ -44,6 +48,17 @@ class SettingActivity :
         //获取并设置当前版本号
         mBinding.tvVersionCode.text =
             getString(R.string.current_version, APKVersionCodeUtils.getVersionCode(this))
+
+        mBinding.swFollowSystemTheme.isChecked = ThemeChangeUtils.isFollowSystemMode(this)
+        //初始化主题切换开关状态
+        mBinding.swDarkMode.apply {
+            isEnabled = !mBinding.swFollowSystemTheme.isChecked
+            isChecked = ThemeChangeUtils.isDarkMode(this@SettingActivity)
+        }
+        initListener()
+    }
+
+    private fun initListener() {
         //退出登录按钮点击
         mBinding.btnLogout.setOnClickListener {
             //弹窗提示用户是否退出登录
@@ -73,6 +88,32 @@ class SettingActivity :
                 finish()//关闭当前界面
             }
         }
+        //主题切换开关监听
+        mBinding.swDarkMode.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked && buttonView.isPressed) {
+                //切换为夜晚主题
+                ThemeChangeUtils.applyNightMode(this)
+            } else if (!isChecked && buttonView.isPressed) {
+                //切换为白天主题
+                ThemeChangeUtils.applyDayMode(this)
+            }
+        }
+        //跟随系统主题开关监听
+        mBinding.swFollowSystemTheme.setOnCheckedChangeListener { buttonView, isChecked ->
+            //buttonView.isPressed表示为人为点击触发
+            if (isChecked) {
+                //跟随系统主题
+                //将夜间主题的开关设为不可点击
+                mBinding.swDarkMode.isEnabled = false
+                ThemeChangeUtils.applySystemMode(this)
+
+            } else{
+                //不跟随系统主题
+                mBinding.swDarkMode.isEnabled = true
+                ThemeChangeUtils.notApplySystemMode(this)
+
+            }
+        }
     }
 
     override fun initVMData() {
@@ -96,9 +137,11 @@ class SettingActivity :
 
         mViewModel.gotoUserInfo.observe(this) {
             if (it) {
-                //跳转到个人信息界面
-                startActivity(Intent(this, UserInfoActivity::class.java))
-                mViewModel.gotoUserInfo.value = false
+                if (appViewModel.isUserLogin()) {
+                    //跳转到个人信息界面
+                    startActivity(Intent(this, UserInfoActivity::class.java))
+                    mViewModel.gotoUserInfo.value = false
+                }
             }
         }
 

@@ -3,24 +3,18 @@ package com.yl.wanandroid.ui.custom
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
-import android.util.Log
-import androidx.appcompat.widget.*
-import androidx.core.view.isVisible
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import com.yl.wanandroid.R
 import com.yl.wanandroid.utils.LogUtils
-import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.yield
 
 //自定义正在加载控件
 class MyLoadingView(context: Context, attrs: AttributeSet?) : AppCompatImageView(context, attrs),

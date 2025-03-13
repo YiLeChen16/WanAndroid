@@ -5,6 +5,7 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
@@ -20,12 +21,14 @@ import com.yl.wanandroid.viewmodel.my.MyFragmentViewModel
 import com.yl.wanandroid.BR
 import com.yl.wanandroid.Constant
 import com.yl.wanandroid.app.AppViewModel
+import com.yl.wanandroid.base.BaseApplication
 import com.yl.wanandroid.ui.activity.IntegralActivity
 import com.yl.wanandroid.ui.activity.LoginActivity
 import com.yl.wanandroid.ui.activity.SearchActivity
 import com.yl.wanandroid.ui.activity.SettingActivity
 import com.yl.wanandroid.ui.activity.ShareActivity
 import com.yl.wanandroid.ui.activity.UserInfoActivity
+import com.yl.wanandroid.utils.ThemeChangeUtils
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -52,6 +55,16 @@ class MyFragment : BaseVMFragment<FragmentMyBinding, MyFragmentViewModel>(R.layo
         myFragmentTabViewPagerAdapter = MyFragmentTabViewPagerAdapter(this)
         //为ViewPager设置适配器
         mBinding.tabViewPager.adapter = myFragmentTabViewPagerAdapter
+        //初始化按钮图标
+        if (ThemeChangeUtils.isDarkMode(requireActivity())){
+            mBinding.ivThemeMode.setImageResource(R.drawable.light_mode_24px)
+        }else{
+            mBinding.ivThemeMode.setImageResource(R.drawable.dark_mode_24px)
+        }
+        initListener()
+    }
+
+    private fun initListener() {
         // 添加 ViewPager2 的页面变化监听
         mBinding.tabViewPager.registerOnPageChangeCallback(object : OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
@@ -90,7 +103,17 @@ class MyFragment : BaseVMFragment<FragmentMyBinding, MyFragmentViewModel>(R.layo
 
         })
 
-
+        mBinding.ivThemeMode.setOnClickListener {
+            if (ThemeChangeUtils.isDarkMode(requireActivity())) {
+                //切换为白天主题
+                ThemeChangeUtils.applyDayMode(requireActivity())
+                mBinding.ivThemeMode.setImageResource(R.drawable.dark_mode_24px)
+            } else {
+                //切换为夜间主题
+                ThemeChangeUtils.applyNightMode(requireActivity())
+                mBinding.ivThemeMode.setImageResource(R.drawable.light_mode_24px)
+            }
+        }
     }
 
     //初始化tab条目的样式和值
@@ -110,7 +133,7 @@ class MyFragment : BaseVMFragment<FragmentMyBinding, MyFragmentViewModel>(R.layo
         mViewModel.getWxArticleTabs()
 
         //判断用户是否已经登录
-        if (appViewModel.isUserLogin()) {
+        if (appViewModel.isUserLoginNotJump()) {
             //已登录
             //获取积分信息
             mViewModel.getCoinInfo()
@@ -144,15 +167,12 @@ class MyFragment : BaseVMFragment<FragmentMyBinding, MyFragmentViewModel>(R.layo
 
         mViewModel.gotoSearch.observe(viewLifecycleOwner) {
             if (it) {
-                //判断登录
-                if (appViewModel.isUserLogin()) {
-                    //跳转到搜索界面
-                    val intent = Intent(context, SearchActivity::class.java)
-                    val bundle = Bundle()
-                    bundle.putBoolean(Constant.IS_SEARCH, false)//表示从搜索框跳转过去
-                    intent.putExtras(bundle)
-                    startActivity(intent)
-                }
+                //跳转到搜索界面
+                val intent = Intent(context, SearchActivity::class.java)
+                val bundle = Bundle()
+                bundle.putBoolean(Constant.IS_SEARCH, false)//表示从搜索框跳转过去
+                intent.putExtras(bundle)
+                startActivity(intent)
                 mViewModel.gotoSearch.value = false//重置变量
             }
         }
@@ -173,7 +193,7 @@ class MyFragment : BaseVMFragment<FragmentMyBinding, MyFragmentViewModel>(R.layo
                 mViewModel.getCoinInfo()
                 mViewModel.getWxArticleTabs()
                 //跳转到登录页面
-                startActivity(Intent(context,LoginActivity::class.java))
+                startActivity(Intent(context, LoginActivity::class.java))
                 //重置变量,避免多次跳转
                 appViewModel.shouldNavigateToLogin.value = false
             }
@@ -192,16 +212,17 @@ class MyFragment : BaseVMFragment<FragmentMyBinding, MyFragmentViewModel>(R.layo
                 if (appViewModel.isUserLogin()) {
                     //跳转到个人信息界面
                     startActivity(Intent(context, UserInfoActivity::class.java))
-                    mViewModel.gotoMyInfo.value = false
                 }
-
+                mViewModel.gotoMyInfo.value = false
             }
         }
 
         mViewModel.gotoMyShare.observe(viewLifecycleOwner) {
             if (it) {
-                //跳转到分享界面
-                startActivity(Intent(context, ShareActivity::class.java))
+                if (appViewModel.isUserLogin()) {
+                    //跳转到分享界面
+                    startActivity(Intent(context, ShareActivity::class.java))
+                }
                 mViewModel.gotoMyShare.value = false//重置变量
             }
         }

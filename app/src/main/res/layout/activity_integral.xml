@@ -25,7 +25,7 @@
                 android:padding="@dimen/dp_10"
                 app:collapsedTitleTextColor="?colorPrimary"
                 app:contentScrim="?android:colorBackground"
-                app:expandedTitleTextColor="?android:colorBackground"
+                app:expandedTitleTextColor="@color/transparent"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:title="我的积分"
                 app:titleCollapseMode="scale"

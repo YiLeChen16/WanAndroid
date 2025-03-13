@@ -1,18 +1,15 @@
 package com.yl.wanandroid.ui.activity
 
-import android.content.res.Configuration
-import android.content.res.Configuration.UI_MODE_NIGHT_MASK
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.yl.wanandroid.R
 import com.yl.wanandroid.base.BaseActivity
 import com.yl.wanandroid.databinding.ActivityMainBinding
+import com.yl.wanandroid.ui.fragment.home.HomeFragment
 import com.yl.wanandroid.ui.fragment.my.MyFragment
 import com.yl.wanandroid.ui.fragment.project.ProjectFragment
 import com.yl.wanandroid.ui.fragment.system.SystemFragment
-import com.yl.wanandroid.ui.fragment.home.HomeFragment
 import com.yl.wanandroid.utils.LogUtils
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -95,19 +92,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     }
 
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-        val currentUiMode = newConfig.uiMode and UI_MODE_NIGHT_MASK
-        when(currentUiMode){
-            Configuration.UI_MODE_NIGHT_NO->{
-                //关闭夜间模式
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
-            Configuration.UI_MODE_NIGHT_YES->{
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            }
-        }
-    }
+
 
 }
 

@@ -84,6 +84,11 @@ enum class ERROR(val code: Int, val errMsg: String) {
     /**
      * 未知Host
      */
-    UNKNOW_HOST(1007, "未知Host");
+    UNKNOW_HOST(1007, "未知Host"),
+
+    /**
+     * 协程取消
+     */
+    JOB_CANCEL(1008,"")
 }
 
