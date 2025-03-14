@@ -30,7 +30,7 @@ class PrivacyPolicyActivity: BaseActivity<ActivityPrivacyPolicyBinding>(R.layout
         super.initView()
         mRefreshLayout.setEnableRefresh(false)
         mRefreshLayout.setEnableLoadMore(false)
-        mBinding.titleBar.title = Companion.title//设置标题
+        mBinding.titleBar.title = title//设置标题
         mBinding.tvContent.text = content
         mMultiplyStateView.showSuccess()//展示成功视图
         mBinding.titleBar.setNavigationOnClickListener {

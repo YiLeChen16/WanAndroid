@@ -1,8 +1,8 @@
 package com.yl.wanandroid.ui.fragment.project
 
+import android.annotation.SuppressLint
 import android.graphics.Typeface
 import android.text.Html
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.viewpager2.widget.ViewPager2
@@ -37,7 +37,7 @@ class ProjectFragment :
 
         super.initView()
         val selectedTypeface =
-            Typeface.createFromAsset(BaseApplication.context.assets, "fonts/good_balck.ttf");//下载的字体
+            Typeface.createFromAsset(BaseApplication.context.assets, "fonts/good_balck.ttf")//下载的字体
         //初始化View
         //禁用刷新布局
         mRefreshLayout.setEnableRefresh(false)
@@ -92,6 +92,7 @@ class ProjectFragment :
     }
 
     //初始化tab条目的样式和值
+    @SuppressLint("InflateParams")
     private fun initTab(projectCategoryDataBeanItems: MutableList<ProjectCategoryDataBeanItem>) {
         for (i in 0 until projectCategoryDataBeanItems.size) {
             val view = LayoutInflater.from(context).inflate(R.layout.item_tab, null) as TextView
