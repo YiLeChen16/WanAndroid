@@ -16,6 +16,7 @@
             app:navigationIcon="@drawable/back_toolbar"
             app:title="@string/tip_collections"
             app:titleCentered="true"
+            app:layout_constraintTop_toTopOf="parent"
             app:titleTextColor="@color/md_theme_onPrimary" />
 
         <androidx.recyclerview.widget.RecyclerView

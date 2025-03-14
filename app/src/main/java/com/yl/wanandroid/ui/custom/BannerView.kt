@@ -3,7 +3,6 @@ package com.yl.wanandroid.ui.custom
 import android.content.Context
 import android.graphics.Outline
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewOutlineProvider
@@ -14,7 +13,7 @@ import androidx.viewpager.widget.ViewPager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.yl.wanandroid.R
 import com.yl.wanandroid.model.BannerDataBean
-import com.yl.wanandroid.ui.adapter.BannerViewPagerAdapter
+import com.yl.wanandroid.ui.adapter.home.BannerViewPagerAdapter
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.SizeUtils
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,8 +47,8 @@ open class BannerView : ConstraintLayout {
 
     private val Default_Loop = false
     private val Default_Duration = 3000
-    private var DefaultIndicatorNormalColor: Int = resources.getColor(R.color.grey)
-    private var DefaultIndicatorSelectedColor: Int = resources.getColor(R.color.md_theme_primary)
+    private var DefaultIndicatorNormalColor: Int = resources.getColor(R.color.grey,context.theme)
+    private var DefaultIndicatorSelectedColor: Int = resources.getColor(R.color.md_theme_primary,context.theme)
     open var mDuration: Int = Default_Duration
     open var mLoop: Boolean = Default_Loop
         set(value) {

@@ -3,6 +3,7 @@ package com.yl.wanandroid.ui.fragment.home
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Typeface
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.viewpager2.widget.ViewPager2
@@ -10,12 +11,12 @@ import com.google.android.material.tabs.TabLayout
 import com.yl.wanandroid.BR
 import com.yl.wanandroid.R
 import com.yl.wanandroid.app.AppViewModel
-import com.yl.wanandroid.base.BaseVMFragment
+import com.yl.wanandroid.base.fragment.BaseVMFragment
 import com.yl.wanandroid.databinding.FragmentHomeBinding
 import com.yl.wanandroid.model.ViewStateEnum
-import com.yl.wanandroid.ui.activity.CollectActivity
-import com.yl.wanandroid.ui.activity.LoginActivity
-import com.yl.wanandroid.ui.adapter.HomeTabViewPagerAdapter
+import com.yl.wanandroid.ui.activity.collect.CollectActivity
+import com.yl.wanandroid.ui.activity.login.LoginActivity
+import com.yl.wanandroid.ui.adapter.home.HomeTabViewPagerAdapter
 import com.yl.wanandroid.ui.custom.BannerView
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast
@@ -33,7 +34,14 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class HomeFragment :
     BaseVMFragment<FragmentHomeBinding, HomeFragmentViewModel>(R.layout.fragment_home) {
-
+    companion object {
+        fun newInstance(): HomeFragment {
+            val args = Bundle()
+            val fragment = HomeFragment()
+            fragment.arguments = args
+            return fragment
+        }
+    }
 
     private lateinit var homeTabViewPagerAdapter: HomeTabViewPagerAdapter
 

@@ -5,7 +5,7 @@ import com.yl.wanandroid.Constant.HTTP_COOKIES_INFO
 import com.yl.wanandroid.utils.LogUtils
 
 /**
- * @description: Cookies管理类//TODO
+ * @description: Cookies管理类
  * @author YL Chen
  * @date 2025/2/25 18:23
  * @version 1.0
@@ -23,7 +23,7 @@ object CookiesManager {
             ?.map { cookie ->
                 cookie.split(";".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
             }
-            ?.forEach {
+            ?.forEach { it ->
                 it.filterNot { set.contains(it) }.forEach { set.add(it) }
             }
         LogUtils.e(this,"cookiesList:$cookies")
@@ -60,7 +60,6 @@ object CookiesManager {
 
     /**
      * 清除Cookies
-     * @param cookies
      */
     fun clearCookies() {
         saveCookies("")

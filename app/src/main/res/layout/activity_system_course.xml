@@ -5,7 +5,7 @@
     <data >
         <variable
             name="systemCourseActivityViewModel"
-            type="com.yl.wanandroid.viewmodel.system.SystemCourseActivityViewModel" />
+            type="com.yl.wanandroid.viewmodel.system.course.SystemCourseActivityViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

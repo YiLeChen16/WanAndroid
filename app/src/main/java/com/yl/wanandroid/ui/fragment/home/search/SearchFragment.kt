@@ -4,10 +4,10 @@ import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import com.yl.wanandroid.BR
 import com.yl.wanandroid.R
-import com.yl.wanandroid.base.BaseVMFragment
+import com.yl.wanandroid.base.fragment.BaseVMFragment
 import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.databinding.FragmentSearchBinding
-import com.yl.wanandroid.ui.adapter.RecommendSearchListAdapter
+import com.yl.wanandroid.ui.adapter.search.RecommendSearchListAdapter
 import com.yl.wanandroid.ui.custom.HistoryFlowLayoutView
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.viewmodel.search.SearchShareViewModel

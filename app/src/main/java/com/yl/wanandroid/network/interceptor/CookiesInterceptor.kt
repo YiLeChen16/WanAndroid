@@ -6,7 +6,6 @@ import com.yl.wanandroid.Constant.USER_LOGIN_URL
 import com.yl.wanandroid.Constant.USER_LOGOUT_URL
 import com.yl.wanandroid.Constant.USER_REGISTER_URL
 import com.yl.wanandroid.network.manager.CookiesManager
-import com.yl.wanandroid.repository.UserRepository
 import com.yl.wanandroid.utils.LogUtils
 import okhttp3.Interceptor
 import okhttp3.Response

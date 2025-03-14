@@ -6,11 +6,9 @@ import android.widget.TextView
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.google.android.material.tabs.TabLayout
 import com.yl.wanandroid.R
-import com.yl.wanandroid.base.BaseFragment
-import com.yl.wanandroid.base.BaseVMFragment
+import com.yl.wanandroid.base.fragment.BaseFragment
 import com.yl.wanandroid.databinding.FragmentSystemBinding
-import com.yl.wanandroid.model.ViewStateEnum
-import com.yl.wanandroid.ui.adapter.SystemViewPagerAdapter
+import com.yl.wanandroid.ui.adapter.system.course.SystemViewPagerAdapter
 import com.yl.wanandroid.utils.LogUtils
 
 /**

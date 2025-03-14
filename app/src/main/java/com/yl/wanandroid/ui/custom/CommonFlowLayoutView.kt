@@ -142,19 +142,19 @@ class CommonFlowLayoutView(
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
         //摆放存放区子View
-        var t = marginTop
+        var top = marginTop
         //遍历lines集合,将其中每行的子View摆放
         for (line in lines) {
-            var l = if ((marginLeft != 0)) marginLeft else mColumnSpc
+            var left = if ((marginLeft != 0)) marginLeft else mColumnSpc
             for (itemView in line) {
                 itemView.layout(
-                    l, t, itemView.measuredWidth + l, itemView.measuredHeight + t
+                    left, top, itemView.measuredWidth + left, itemView.measuredHeight + top
                 )
                 //更新left
-                l += itemView.measuredWidth + mColumnSpc
+                left += itemView.measuredWidth + mColumnSpc
             }
             //更新top
-            t += mItemHeight + mLineSpc
+            top += mItemHeight + mLineSpc
         }
     }
 

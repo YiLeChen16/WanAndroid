@@ -6,7 +6,7 @@
     <data>
         <variable
             name="loginActivityViewModel"
-            type="com.yl.wanandroid.viewmodel.LoginActivityViewModel" />
+            type="com.yl.wanandroid.viewmodel.login.LoginActivityViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -5,11 +5,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.yl.wanandroid.BR
 import com.yl.wanandroid.R
 import com.yl.wanandroid.app.AppViewModel
-import com.yl.wanandroid.base.BaseVMFragment
+import com.yl.wanandroid.base.fragment.BaseVMFragment
 import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.databinding.FragmentSearchResultBinding
-import com.yl.wanandroid.ui.activity.LoginActivity
-import com.yl.wanandroid.ui.adapter.SearchResultListAdapter
+import com.yl.wanandroid.ui.activity.login.LoginActivity
+import com.yl.wanandroid.ui.adapter.search.SearchResultListAdapter
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast
 import com.yl.wanandroid.viewmodel.search.SearchShareViewModel
@@ -66,7 +66,7 @@ class SearchResultFragment :
             if (it) {
                 //此视图可见
                 //触发更新
-                LogUtils.d(this@SearchResultFragment,"触发更新")
+                LogUtils.d(this@SearchResultFragment, "触发更新")
                 mViewModel.mCurrentSearchKeyWord.value = mViewModel.mCurrentSearchKeyWord.value
             } else {
                 //此视图不可见
@@ -75,21 +75,19 @@ class SearchResultFragment :
         }
         mViewModel.searchResultListData.observe(this) { searchResultDataBean ->
             if (mViewModel.search_fragment_visibility.value == true) {
-                if (searchResultDataBean != null) {
-                    LogUtils.d(this, "mViewModel.searchResultListData-->$searchResultDataBean")
-                    if (searchResultDataBean.datas.isNotEmpty()) {
-                        //为适配器装载数据
-                        mSearchResultListAdapter.setData(searchResultDataBean.datas)
-                        //改变当前视图状态
-                        mViewModel.changeStateView(ViewStateEnum.VIEW_LOAD_SUCCESS)
-                    } else {
-                        //数据为空
-                        mViewModel.changeStateView(ViewStateEnum.VIEW_EMPTY)
-                    }
-                    mRefreshLayout.finishRefresh()
+                if (searchResultDataBean == null) return@observe
+                LogUtils.d(this, "mViewModel.searchResultListData-->$searchResultDataBean")
+                if (searchResultDataBean.datas.isNotEmpty()) {
+                    //为适配器装载数据
+                    mSearchResultListAdapter.setData(searchResultDataBean.datas)
+                    //改变当前视图状态
+                    mViewModel.changeStateView(ViewStateEnum.VIEW_LOAD_SUCCESS)
                 } else {
-                    mViewModel.changeStateView(ViewStateEnum.VIEW_NET_ERROR)
+                    //数据为空
+                    mViewModel.changeStateView(ViewStateEnum.VIEW_EMPTY)
                 }
+                mRefreshLayout.finishRefresh()
+
             }
 
         }
@@ -127,17 +125,17 @@ class SearchResultFragment :
             }
         }
 
-        appViewModel.shouldNavigateToLogin.observe(this){
+        appViewModel.shouldNavigateToLogin.observe(this) {
             //跳转到登录页面
-            if (it){
-                startActivity(Intent(context,LoginActivity::class.java))
+            if (it) {
+                startActivity(Intent(context, LoginActivity::class.java))
                 //重置变量,避免多次跳转
                 appViewModel.shouldNavigateToLogin.value = false
             }
         }
 
         //实时更新界面收藏状态
-        appViewModel.updateItemId.observe(viewLifecycleOwner){
+        appViewModel.updateItemId.observe(viewLifecycleOwner) {
             mSearchResultListAdapter.updateCollectionState(it)
         }
     }

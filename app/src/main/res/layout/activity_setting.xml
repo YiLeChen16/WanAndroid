@@ -7,7 +7,7 @@
 
         <variable
             name="settingActivityViewModel"
-            type="com.yl.wanandroid.viewmodel.SettingActivityViewModel" />
+            type="com.yl.wanandroid.viewmodel.my.setting.SettingActivityViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

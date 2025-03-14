@@ -5,7 +5,6 @@ package com.yl.wanandroid.utils
 import android.app.Application
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.Toast
@@ -58,7 +57,7 @@ object TipsToast {
         showTipsImpl(
             msg,
             Toast.LENGTH_SHORT,
-            R.mipmap.widget_toast_success
+            R.drawable.success_24px
         )
     }
 
@@ -67,7 +66,7 @@ object TipsToast {
         showTipsImpl(
             msg,
             Toast.LENGTH_SHORT,
-            R.mipmap.widget_toast_success
+            R.drawable.success_24px
         )
     }
 
@@ -75,7 +74,7 @@ object TipsToast {
         showTipsImpl(
             msg,
             Toast.LENGTH_SHORT,
-            R.mipmap.widget_toast_warning
+            R.drawable.warning_24px
         )
     }
 
@@ -84,7 +83,7 @@ object TipsToast {
         showTipsImpl(
             msg,
             Toast.LENGTH_SHORT,
-            R.mipmap.widget_toast_warning
+            R.drawable.warning_24px
         )
     }
 
@@ -116,7 +115,7 @@ object TipsToast {
                 toast?.show()
             } catch (e: Exception) {
                 e.printStackTrace()
-                Log.e("show tips error", "$e")
+                LogUtils.e("show tips error", "$e")
             }
         }, 50)
     }

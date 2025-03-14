@@ -2,7 +2,7 @@ package com.yl.wanandroid.ui.adapter
 
 import android.content.Context
 import com.yl.wanandroid.R
-import com.yl.wanandroid.base.BaseRecyclerViewAdapter
+import com.yl.wanandroid.base.adapter.BaseRecyclerViewAdapter
 import com.yl.wanandroid.databinding.ItemBlogViewBinding
 import com.yl.wanandroid.model.ArticleItemData
 import com.yl.wanandroid.model.CollectionEvent

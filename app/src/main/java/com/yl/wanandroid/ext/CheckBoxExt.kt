@@ -10,7 +10,7 @@ import android.view.View
 import android.widget.CheckBox
 import android.widget.TextView
 import com.yl.wanandroid.R
-import com.yl.wanandroid.ui.activity.PrivacyPolicyActivity
+import com.yl.wanandroid.ui.activity.login.PrivacyPolicyActivity
 import com.yl.wanandroid.utils.getColorFromResource
 import com.yl.wanandroid.utils.getStringFromResource
 

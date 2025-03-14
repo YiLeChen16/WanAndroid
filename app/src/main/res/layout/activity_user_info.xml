@@ -8,7 +8,7 @@
 
         <variable
             name="userInfoActivityViewModel"
-            type="com.yl.wanandroid.viewmodel.UserInfoActivityViewModel" />
+            type="com.yl.wanandroid.viewmodel.my.UserInfoActivityViewModel" />
     </data>
 
     <LinearLayout

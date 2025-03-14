@@ -1,34 +1,33 @@
 package com.yl.wanandroid.ui.fragment.my
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
+import com.yl.wanandroid.BR
+import com.yl.wanandroid.Constant
 import com.yl.wanandroid.R
-import com.yl.wanandroid.base.BaseVMFragment
+import com.yl.wanandroid.app.AppViewModel
+import com.yl.wanandroid.base.fragment.BaseVMFragment
 import com.yl.wanandroid.databinding.FragmentMyBinding
 import com.yl.wanandroid.model.Children
 import com.yl.wanandroid.model.ViewStateEnum
-import com.yl.wanandroid.ui.activity.CollectActivity
-import com.yl.wanandroid.ui.adapter.MyFragmentTabViewPagerAdapter
+import com.yl.wanandroid.ui.activity.collect.CollectActivity
+import com.yl.wanandroid.ui.activity.my.rank.IntegralActivity
+import com.yl.wanandroid.ui.activity.login.LoginActivity
+import com.yl.wanandroid.ui.activity.search.SearchActivity
+import com.yl.wanandroid.ui.activity.my.setting.SettingActivity
+import com.yl.wanandroid.ui.activity.my.share.ShareActivity
+import com.yl.wanandroid.ui.activity.my.UserInfoActivity
+import com.yl.wanandroid.ui.adapter.my.MyFragmentTabViewPagerAdapter
 import com.yl.wanandroid.utils.LogUtils
-import com.yl.wanandroid.viewmodel.my.MyFragmentViewModel
-import com.yl.wanandroid.BR
-import com.yl.wanandroid.Constant
-import com.yl.wanandroid.app.AppViewModel
-import com.yl.wanandroid.base.BaseApplication
-import com.yl.wanandroid.ui.activity.IntegralActivity
-import com.yl.wanandroid.ui.activity.LoginActivity
-import com.yl.wanandroid.ui.activity.SearchActivity
-import com.yl.wanandroid.ui.activity.SettingActivity
-import com.yl.wanandroid.ui.activity.ShareActivity
-import com.yl.wanandroid.ui.activity.UserInfoActivity
 import com.yl.wanandroid.utils.ThemeChangeUtils
+import com.yl.wanandroid.viewmodel.my.MyFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -117,6 +116,7 @@ class MyFragment : BaseVMFragment<FragmentMyBinding, MyFragmentViewModel>(R.layo
     }
 
     //初始化tab条目的样式和值
+    @SuppressLint("InflateParams")
     private fun initTab(items: MutableList<Children>) {
         for (i in 0 until items.size) {
             val view = LayoutInflater.from(context).inflate(R.layout.item_tab, null) as TextView

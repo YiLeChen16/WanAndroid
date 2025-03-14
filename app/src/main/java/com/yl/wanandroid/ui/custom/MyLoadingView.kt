@@ -25,7 +25,7 @@ class MyLoadingView(context: Context, attrs: AttributeSet?) : AppCompatImageView
     private var mDegrees: Float = 10.0f//初始旋转角度
 
     //创建协程作用域
-    val scope = CoroutineScope(Job() + Dispatchers.Main)
+    private val scope = CoroutineScope(Job() + Dispatchers.Main)
 
     private var job: Job? = null
 
@@ -33,7 +33,7 @@ class MyLoadingView(context: Context, attrs: AttributeSet?) : AppCompatImageView
     //init相当于调用了super
     init {
         //设置加载图片
-        setImageResource(R.mipmap.loading)
+        setImageResource(R.drawable.progress_64px)
     }
 
     override fun onDraw(canvas: Canvas) {

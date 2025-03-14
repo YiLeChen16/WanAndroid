@@ -1,10 +1,10 @@
 package com.yl.wanandroid.viewmodel.home
 
 import androidx.lifecycle.MutableLiveData
-import com.yl.wanandroid.base.BaseViewModel
+import com.yl.wanandroid.base.viewModel.BaseViewModel
 import com.yl.wanandroid.model.HarmonyColumnDataBean
 import com.yl.wanandroid.model.ArticleItemData
-import com.yl.wanandroid.repository.HarmonyRepository
+import com.yl.wanandroid.repository.home.HarmonyRepository
 import com.yl.wanandroid.utils.TipsToast
 
 /**
@@ -13,7 +13,7 @@ import com.yl.wanandroid.utils.TipsToast
  * @date 2024/10/20 16:10
  * @version 1.0
  */
-class HarmonyFragmentViewModel:BaseViewModel() {
+class HarmonyFragmentViewModel: BaseViewModel() {
     //获取仓库对象
 /*    val harmonyRepository = getRepository<HarmonyRepository>()*/
 

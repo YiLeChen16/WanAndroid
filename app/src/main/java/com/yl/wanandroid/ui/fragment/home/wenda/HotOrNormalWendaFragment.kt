@@ -8,10 +8,10 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import com.yl.wanandroid.Constant
 import com.yl.wanandroid.R
 import com.yl.wanandroid.app.AppViewModel
-import com.yl.wanandroid.base.BaseVMFragment
+import com.yl.wanandroid.base.fragment.BaseVMFragment
 import com.yl.wanandroid.databinding.FragmentWendaHotOrNormalBinding
 import com.yl.wanandroid.model.ViewStateEnum
-import com.yl.wanandroid.ui.activity.LoginActivity
+import com.yl.wanandroid.ui.activity.login.LoginActivity
 import com.yl.wanandroid.ui.adapter.BlogListAdapter
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast

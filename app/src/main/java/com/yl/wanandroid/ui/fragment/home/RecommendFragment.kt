@@ -5,10 +5,10 @@ import android.content.Intent
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yl.wanandroid.R
 import com.yl.wanandroid.app.AppViewModel
-import com.yl.wanandroid.base.BaseVMFragment
+import com.yl.wanandroid.base.fragment.BaseVMFragment
 import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.databinding.FragmentRecommendBinding
-import com.yl.wanandroid.ui.activity.LoginActivity
+import com.yl.wanandroid.ui.activity.login.LoginActivity
 import com.yl.wanandroid.ui.adapter.BlogListAdapter
 import com.yl.wanandroid.ui.custom.SearchBoxView
 import com.yl.wanandroid.utils.LogUtils

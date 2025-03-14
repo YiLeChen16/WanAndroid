@@ -2,9 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-    </data>
+    <data />
 
     <FrameLayout
         android:layout_width="wrap_content"
@@ -21,6 +19,7 @@
             android:layout_marginBottom="@dimen/dp_13"
             android:drawablePadding="@dimen/dp_4"
             android:gravity="center"
+            android:textColor="@color/md_theme_onSecondary"
             android:textSize="@dimen/sp_15"
             tools:text="弹窗消息" />
 

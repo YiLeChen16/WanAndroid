@@ -1,7 +1,7 @@
 package com.yl.wanandroid.model
 
 /**
- * @description: TODO
+ * @description:
  * @author YL Chen
  * @date 2025/2/10 18:20
  * @version 1.0

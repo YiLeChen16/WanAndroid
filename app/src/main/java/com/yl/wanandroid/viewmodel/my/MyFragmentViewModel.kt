@@ -2,18 +2,18 @@ package com.yl.wanandroid.viewmodel.my
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
-import com.yl.wanandroid.base.BaseViewModel
+import com.yl.wanandroid.base.viewModel.BaseViewModel
 import com.yl.wanandroid.model.Children
 import com.yl.wanandroid.model.User
 import com.yl.wanandroid.model.UserDataBean
-import com.yl.wanandroid.repository.LoginAndRegisterRepository
-import com.yl.wanandroid.repository.MyRepository
-import com.yl.wanandroid.repository.UserRepository
+import com.yl.wanandroid.repository.login.LoginAndRegisterRepository
+import com.yl.wanandroid.repository.my.MyRepository
+import com.yl.wanandroid.repository.my.UserRepository
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast
 
 /**
- * @description: "我的"界面对应ViewModel//TODO
+ * @description: "我的"界面对应ViewModel
  * @author YL Chen
  * @date 2024/9/7 16:05
  * @version 1.0
@@ -113,6 +113,8 @@ class MyFragmentViewModel : BaseViewModel() {
     }
 
     override fun onReload() {
+        getUserInfo()
+        getCoinInfo()
         getWxArticleTabs()
     }
 }

@@ -1,9 +1,9 @@
 package com.yl.wanandroid.viewmodel.my
 
 import androidx.lifecycle.MutableLiveData
-import com.yl.wanandroid.base.BaseViewModel
+import com.yl.wanandroid.base.viewModel.BaseViewModel
 import com.yl.wanandroid.model.ArticleDataBean
-import com.yl.wanandroid.repository.MyRepository
+import com.yl.wanandroid.repository.my.MyRepository
 import com.yl.wanandroid.utils.TipsToast
 
 /**

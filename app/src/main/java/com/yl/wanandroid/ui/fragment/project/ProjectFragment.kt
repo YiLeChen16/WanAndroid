@@ -1,17 +1,19 @@
 package com.yl.wanandroid.ui.fragment.project
 
 import android.graphics.Typeface
+import android.text.Html
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.yl.wanandroid.R
 import com.yl.wanandroid.base.BaseApplication
-import com.yl.wanandroid.base.BaseVMFragment
+import com.yl.wanandroid.base.fragment.BaseVMFragment
 import com.yl.wanandroid.databinding.FragmentProjectBinding
 import com.yl.wanandroid.model.ProjectCategoryDataBeanItem
 import com.yl.wanandroid.model.ViewStateEnum
-import com.yl.wanandroid.ui.adapter.ProjectTabViewPagerAdapter
+import com.yl.wanandroid.ui.adapter.project.ProjectTabViewPagerAdapter
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.viewmodel.project.ProjectFragmentViewModel
 import javax.inject.Inject
@@ -53,7 +55,7 @@ class ProjectFragment :
         //TabLayout选中监听事件
         mBinding.projectTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                if(tab == null){
+                if (tab == null) {
                     return
                 }
                 // 设置 ViewPager2 当前项
@@ -63,14 +65,14 @@ class ProjectFragment :
                 tabSelected.textSize = 18f
                 tabSelected.setTextColor(context!!.getColor(R.color.md_theme_primary))
                 //tabSelected.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD))
-                LogUtils.d(this@ProjectFragment,"tabSelected.text-->${tabSelected.text}")
-                LogUtils.d(this@ProjectFragment,"tab.text-->${tab.text}")
+                LogUtils.d(this@ProjectFragment, "tabSelected.text-->${tabSelected.text}")
+                LogUtils.d(this@ProjectFragment, "tab.text-->${tab.text}")
                 tabSelected.setTypeface(selectedTypeface)
                 tabSelected.text = (tab.customView as TextView).text
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
-                if(tab == null){
+                if (tab == null) {
                     return
                 }
                 //未选中
@@ -93,7 +95,7 @@ class ProjectFragment :
     private fun initTab(projectCategoryDataBeanItems: MutableList<ProjectCategoryDataBeanItem>) {
         for (i in 0 until projectCategoryDataBeanItems.size) {
             val view = LayoutInflater.from(context).inflate(R.layout.item_tab, null) as TextView
-            view.text = projectCategoryDataBeanItems[i].name
+            view.text = Html.fromHtml(projectCategoryDataBeanItems[i].name,Html.FROM_HTML_MODE_COMPACT)
             view.tag = projectCategoryDataBeanItems[i].id//将分类tab的id存入tag中
             val tab: TabLayout.Tab = mBinding.projectTab.newTab().setCustomView(view)
             mBinding.projectTab.addTab(tab)
@@ -113,15 +115,13 @@ class ProjectFragment :
         mViewModel.projectCategoriesData.observe(viewLifecycleOwner) {
             LogUtils.d(this, " mViewModel.projectCategoriesData-->${it}")
             //动态添加tab
-            if (it != null) {
-                //动态创建Tab条目
-                initTab(it)
-                //为tabViewPager适配器设置数据
-                projectTabViewPagerAdapter?.setFragmentSize(it)
-                mViewModel.changeStateView(ViewStateEnum.VIEW_LOAD_SUCCESS)
-            } else {
-                mViewModel.changeStateView(ViewStateEnum.VIEW_NET_ERROR)
-            }
+            if (it == null) return@observe
+            //动态创建Tab条目
+            initTab(it)
+            //为tabViewPager适配器设置数据
+            projectTabViewPagerAdapter?.setFragmentSize(it)
+            mViewModel.changeStateView(ViewStateEnum.VIEW_LOAD_SUCCESS)
+
         }
     }
 }

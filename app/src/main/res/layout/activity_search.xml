@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_0"
             android:layout_marginTop="@dimen/dp_10"
-            app:layout_constraintBottom_toTopOf="@id/guild_line1"
+            app:layout_constraintBottom_toTopOf="@id/guild_line"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -50,7 +50,7 @@
                 android:orientation="horizontal"
                 android:paddingEnd="@dimen/dp_5"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/guild_line1"
+                app:layout_constraintEnd_toStartOf="@id/guild_line"
                 app:layout_constraintStart_toEndOf="@id/iv_back"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="RtlSymmetry">
@@ -82,7 +82,7 @@
 
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guild_line1"
+                android:id="@+id/guild_line"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -101,12 +101,12 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/guild_line1"
+                app:layout_constraintStart_toEndOf="@id/guild_line"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@id/guild_line1"
+            android:id="@id/guild_line"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -122,7 +122,7 @@
             android:layout_height="@dimen/dp_0"
             android:layout_marginTop="@dimen/dp_5"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guild_line1" />
+            app:layout_constraintTop_toBottomOf="@id/guild_line" />
 
         <!--搜索结果Fragment-->
         <androidx.fragment.app.FragmentContainerView
@@ -132,6 +132,6 @@
             android:layout_height="@dimen/dp_0"
             android:layout_marginTop="@dimen/dp_5"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guild_line1" />
+            app:layout_constraintTop_toBottomOf="@id/guild_line" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

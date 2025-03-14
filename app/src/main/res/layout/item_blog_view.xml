@@ -61,7 +61,6 @@
                     android:paddingTop="@dimen/dp_8"
                     android:paddingEnd="@dimen/dp_8"
                     android:paddingBottom="@dimen/dp_10"
-                    android:searchResultHighlightColor="@color/md_theme_primary"
                     android:text="@{Html.fromHtml(itemData.title,Html.FROM_HTML_MODE_COMPACT).toString()}"
                     android:textSize="@dimen/sp_16"
                     android:textStyle="bold"
@@ -102,6 +101,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/classify_layout"
                         android:layout_width="@dimen/dp_0"
                         android:layout_height="wrap_content"
                         android:layout_weight="3">
@@ -130,7 +130,7 @@
                         android:focusable="true"
                         android:paddingEnd="@dimen/dp_5"
                         android:src="@drawable/no_star"
-                        app:layout_constraintBottom_toBottomOf="@id/layout1"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/layout1"
                         tools:ignore="RtlSymmetry" />

@@ -18,7 +18,7 @@ class DBInstance {
         private const val DB_NAME = "wan_android_database"
 
         //数据库更新迁移
-        private val MIGRATION_1_2 = object : Migration(1, 2) {
+        /*private val MIGRATION_1_2 = object : Migration(1, 2) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("CREATE TABLE users(account TEXT PRIMARY KEY NOT NULL)")
             }
@@ -33,7 +33,7 @@ class DBInstance {
                 database.execSQL("ALTER TABLE users ADD COLUMN birthday TEXT")
                 database.execSQL("ALTER TABLE users ADD COLUMN email TEXT")
             }
-        }
+        }*/
 
         private val MIGRATION_3_4: Migration = object : Migration(3, 4) {
             override fun migrate(database: SupportSQLiteDatabase) {

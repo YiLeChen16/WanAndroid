@@ -11,7 +11,7 @@ import android.widget.TextView
 import com.yl.wanandroid.Constant
 import com.yl.wanandroid.R
 import com.yl.wanandroid.model.SearchHotKeyDataBean
-import com.yl.wanandroid.ui.activity.SearchActivity
+import com.yl.wanandroid.ui.activity.search.SearchActivity
 import com.yl.wanandroid.utils.LogUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +20,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 /**
- * @description: 自定义搜索控件 实现搜索热词提示，点击搜索按钮直接搜索提示的热词，点击搜索框跳转到搜索界面 TODO::自定义控件双向数据绑定
+ * @description: 自定义搜索控件 实现搜索热词提示，点击搜索按钮直接搜索提示的热词，点击搜索框跳转到搜索界面
  * @author YL Chen
  * @date 2024/10/21 13:48
  * @version 1.0
@@ -40,24 +40,24 @@ class SearchBoxView : LinearLayout {
     //搜索热词数据
     private var mDatas: List<SearchHotKeyDataBean> = mutableListOf()
 
-    private var DefaultMainColor: Int = resources.getColor(R.color.md_theme_primary)
-    private var DefaultDuration: Int = 10000
+    private  val mDefaultMainColor: Int = resources.getColor(R.color.md_theme_primary,context.theme)
+    private var mDefaultDuration: Int = 10000
 
-    private var mDuration: Int = DefaultDuration
-    private var mMainColor: Int = DefaultMainColor
+    private var mDuration: Int = mDefaultDuration
+    private var mMainColor: Int = mDefaultMainColor
 
     private lateinit var searchButton: TextView
     private lateinit var editSearchBox: EditText
 
     //创建协程作用域
-    val scope = CoroutineScope(Job() + Dispatchers.Main)
+    private val scope = CoroutineScope(Job() + Dispatchers.Main)
 
 
     private fun initView(context: Context, attrs: AttributeSet?) {
         //获取自定义属性
         val a = context.obtainStyledAttributes(attrs, R.styleable.SearchBoxView)
-        mMainColor = a.getColor(R.styleable.SearchBoxView_main_color, DefaultMainColor)
-        mDuration = a.getInteger(R.styleable.SearchBoxView_change_duration, DefaultDuration)
+        mMainColor = a.getColor(R.styleable.SearchBoxView_main_color, mDefaultMainColor)
+        mDuration = a.getInteger(R.styleable.SearchBoxView_change_duration, mDefaultDuration)
         a.recycle()
         //载入布局
         LayoutInflater.from(context).inflate(R.layout.custom_search_box_view, this, true)

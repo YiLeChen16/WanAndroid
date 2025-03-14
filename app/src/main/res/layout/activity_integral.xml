@@ -7,7 +7,7 @@
 
         <variable
             name="integralActivityViewModel"
-            type="com.yl.wanandroid.viewmodel.IntegralActivityViewModel" />
+            type="com.yl.wanandroid.viewmodel.my.rank.IntegralActivityViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

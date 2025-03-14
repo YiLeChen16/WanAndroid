@@ -2,12 +2,12 @@ package com.yl.wanandroid.viewmodel.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.yl.wanandroid.base.BaseViewModel
+import com.yl.wanandroid.base.viewModel.BaseViewModel
 import com.yl.wanandroid.model.ArticleDataBean
 import com.yl.wanandroid.model.SearchHotKeyDataBean
 import com.yl.wanandroid.model.ViewStateEnum
-import com.yl.wanandroid.repository.SearchHistoryRepository
-import com.yl.wanandroid.repository.SearchRepository
+import com.yl.wanandroid.repository.search.SearchHistoryRepository
+import com.yl.wanandroid.repository.search.SearchRepository
 import com.yl.wanandroid.room.entity.SearchHistoryItem
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast

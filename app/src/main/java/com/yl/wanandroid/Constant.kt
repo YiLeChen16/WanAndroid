@@ -35,7 +35,6 @@ object Constant {
     const val PAGE_SIZE = 50
     const val KEY_PASSWORD = "userPassword_key"
     const val CONNECT_TIME_OUT = 10L//默认链接超时时间
-    const val THEME__CHANGE_KEY = "theme__change_key"
 
 
 

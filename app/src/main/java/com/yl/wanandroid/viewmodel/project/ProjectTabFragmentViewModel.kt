@@ -1,9 +1,9 @@
 package com.yl.wanandroid.viewmodel.project
 
 import androidx.lifecycle.MutableLiveData
-import com.yl.wanandroid.base.BaseViewModel
+import com.yl.wanandroid.base.viewModel.BaseViewModel
 import com.yl.wanandroid.model.ArticleDataBean
-import com.yl.wanandroid.repository.ProjectRepository
+import com.yl.wanandroid.repository.project.ProjectRepository
 import com.yl.wanandroid.utils.TipsToast
 
 /**
@@ -12,7 +12,7 @@ import com.yl.wanandroid.utils.TipsToast
  * @date 2024/12/1 22:22
  * @version 1.0
  */
-class ProjectTabFragmentViewModel:BaseViewModel() {
+class ProjectTabFragmentViewModel: BaseViewModel() {
     var cid: Int = 0
 
     //项目数据
@@ -44,7 +44,7 @@ class ProjectTabFragmentViewModel:BaseViewModel() {
         currentPage++
         launchUI(
             errorCallback = {
-                _,errorMsg->
+                    _, _ ->
                 moreProjectData.value = null
                 currentPage--
             },

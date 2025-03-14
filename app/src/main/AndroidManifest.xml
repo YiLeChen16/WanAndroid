@@ -32,22 +32,22 @@
              </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.SearchActivity"
+            android:name=".ui.activity.search.SearchActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity android:name=".ui.activity.SystemActivity" />
-        <activity android:name=".ui.activity.SystemCourseActivity" />
+        <activity android:name=".ui.activity.system.SystemActivity" />
+        <activity android:name=".ui.activity.system.SystemCourseActivity" />
         <activity
-            android:name=".ui.activity.LoginActivity"
+            android:name=".ui.activity.login.LoginActivity"
             android:launchMode="singleTask" />
-        <activity android:name=".ui.activity.PrivacyPolicyActivity" />
-        <activity android:name=".ui.activity.RegisterActivity" />
-        <activity android:name=".ui.activity.CollectActivity" />
-        <activity android:name=".ui.activity.IntegralActivity" />
-        <activity android:name=".ui.activity.RankActivity" />
-        <activity android:name=".ui.activity.SettingActivity" />
-        <activity android:name=".ui.activity.UserInfoActivity" />
-        <activity android:name=".ui.activity.ShareActivity" />
-        <activity android:name=".ui.activity.AboutActivity" />
+        <activity android:name=".ui.activity.login.PrivacyPolicyActivity" />
+        <activity android:name=".ui.activity.login.RegisterActivity" />
+        <activity android:name=".ui.activity.collect.CollectActivity" />
+        <activity android:name=".ui.activity.my.rank.IntegralActivity" />
+        <activity android:name=".ui.activity.my.rank.RankActivity" />
+        <activity android:name=".ui.activity.my.setting.SettingActivity" />
+        <activity android:name=".ui.activity.my.UserInfoActivity" />
+        <activity android:name=".ui.activity.my.share.ShareActivity" />
+        <activity android:name=".ui.activity.my.about.AboutActivity" />
 
     </application>
 

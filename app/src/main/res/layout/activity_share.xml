@@ -7,7 +7,7 @@
 
         <variable
             name="shareActivityViewModel"
-            type="com.yl.wanandroid.viewmodel.my.ShareActivityViewModel" />
+            type="com.yl.wanandroid.viewmodel.my.share.ShareActivityViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

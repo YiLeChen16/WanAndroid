@@ -5,11 +5,11 @@ import androidx.recyclerview.widget.SimpleItemAnimator
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.yl.wanandroid.R
 import com.yl.wanandroid.app.AppViewModel
-import com.yl.wanandroid.base.BaseVMFragment
+import com.yl.wanandroid.base.fragment.BaseVMFragment
 import com.yl.wanandroid.databinding.FragmentProjectTabBinding
 import com.yl.wanandroid.model.ViewStateEnum
-import com.yl.wanandroid.ui.activity.LoginActivity
-import com.yl.wanandroid.ui.adapter.ProjectListAdapter
+import com.yl.wanandroid.ui.activity.login.LoginActivity
+import com.yl.wanandroid.ui.adapter.project.ProjectListAdapter
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast
 import com.yl.wanandroid.viewmodel.project.ProjectTabFragmentViewModel
@@ -69,14 +69,11 @@ class ProjectTabFragment() :
     override fun observeLiveData() {
         mViewModel.projectData.observe(viewLifecycleOwner) {
             LogUtils.d(this, " mViewModel.projectData-->${it}")
-            if (it != null) {
-                //装载数据
-                projectListAdapter.setData(it.datas)
-                mViewModel.changeStateView(ViewStateEnum.VIEW_LOAD_SUCCESS)
-            } else {
-                TipsToast.showTips(R.string.tip_null)
-                mViewModel.changeStateView(ViewStateEnum.VIEW_NET_ERROR)
-            }
+            if (it == null) return@observe
+            //装载数据
+            projectListAdapter.setData(it.datas)
+            mViewModel.changeStateView(ViewStateEnum.VIEW_LOAD_SUCCESS)
+
             mRefreshLayout.finishRefresh()
             mRefreshLayout.finishLoadMore()
         }
@@ -85,6 +82,7 @@ class ProjectTabFragment() :
                 if (it.curPage == it.pageCount + 1) {
                     //最后一页后的一页,不包含数据
                     TipsToast.showTips(R.string.tip_toast_last_page)
+                    mRefreshLayout.finishLoadMore()
                     mRefreshLayout.setEnableLoadMore(false)//标记当前没有更多数据了
                 } else {
                     //装载数据
@@ -98,9 +96,9 @@ class ProjectTabFragment() :
                 mRefreshLayout.finishLoadMore()
             }
         }
-        appViewModel.shouldNavigateToLogin.observe(this){
+        appViewModel.shouldNavigateToLogin.observe(this) {
             //跳转到登录页面
-            if (it){
+            if (it) {
                 startActivity(Intent(context, LoginActivity::class.java))
                 //重置变量,避免多次跳转
                 appViewModel.shouldNavigateToLogin.value = false

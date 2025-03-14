@@ -3,9 +3,9 @@ package com.yl.wanandroid.ui.fragment.home.wenda
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.yl.wanandroid.R
-import com.yl.wanandroid.base.BaseFragment
+import com.yl.wanandroid.base.fragment.BaseFragment
 import com.yl.wanandroid.databinding.FragmentWendaBinding
-import com.yl.wanandroid.ui.adapter.WendaTabViewPagerAdapter
+import com.yl.wanandroid.ui.adapter.home.WendaTabViewPagerAdapter
 import com.yl.wanandroid.ui.custom.ViewPager2Container
 
 /**

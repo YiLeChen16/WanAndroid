@@ -7,7 +7,7 @@
 
         <variable
             name="registerActivityViewModel"
-            type="com.yl.wanandroid.viewmodel.RegisterActivityViewModel" />
+            type="com.yl.wanandroid.viewmodel.login.RegisterActivityViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

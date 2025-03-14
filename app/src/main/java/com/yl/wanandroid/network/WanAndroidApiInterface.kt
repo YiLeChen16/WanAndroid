@@ -49,6 +49,8 @@ interface WanAndroidApiInterface {
             val build = OkHttpClient.Builder()
             build.connectTimeout(Constant.CONNECT_TIME_OUT,TimeUnit.SECONDS)
             build.readTimeout(Constant.CONNECT_TIME_OUT,TimeUnit.SECONDS)
+            build.writeTimeout(Constant.CONNECT_TIME_OUT,TimeUnit.SECONDS)
+            build.retryOnConnectionFailure(true)
             //为OkHttp添加拦截器,以实现自动拦截存储Cookie和为需要Cookie的接口拦截添加Cookie
             build.addInterceptor(CookiesInterceptor())
             build.addInterceptor(HeaderInterceptor())

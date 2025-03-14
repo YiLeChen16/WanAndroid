@@ -5,7 +5,7 @@
     <data>
         <variable
             name="systemChildFragmentViewModel"
-            type="com.yl.wanandroid.viewmodel.system.SystemChildFragmentViewModel" />
+            type="com.yl.wanandroid.viewmodel.system.left.SystemChildFragmentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

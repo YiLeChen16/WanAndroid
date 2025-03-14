@@ -84,7 +84,7 @@ enum class ERROR(val code: Int, val errMsg: String) {
     /**
      * 未知Host
      */
-    UNKNOW_HOST(1007, "未知Host"),
+    UNKNOW_HOST(1007, "网络连接异常,请检查网络状态~"),
 
     /**
      * 协程取消

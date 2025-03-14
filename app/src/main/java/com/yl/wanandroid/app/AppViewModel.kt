@@ -2,10 +2,10 @@ package com.yl.wanandroid.app
 
 import androidx.lifecycle.MutableLiveData
 import com.yl.wanandroid.R
-import com.yl.wanandroid.base.BaseViewModel
+import com.yl.wanandroid.base.viewModel.BaseViewModel
 import com.yl.wanandroid.model.CollectionEvent
-import com.yl.wanandroid.repository.CollectRepository
-import com.yl.wanandroid.repository.LoginAndRegisterRepository
+import com.yl.wanandroid.repository.collect.CollectRepository
+import com.yl.wanandroid.repository.login.LoginAndRegisterRepository
 import com.yl.wanandroid.ui.adapter.OnCollectionEventListener
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast
@@ -57,7 +57,7 @@ class AppViewModel @Inject constructor() :
         }
     }
 
-    fun collectArticle(collectId: Int) {
+    private fun collectArticle(collectId: Int) {
         launchUI(
             errorCallback = { _, errMsg ->
                 TipsToast.showTips(errMsg)
@@ -80,7 +80,7 @@ class AppViewModel @Inject constructor() :
     }
 
 
-    fun cancelCollectArticle(id: Int) {
+    private fun cancelCollectArticle(id: Int) {
         launchUI(
             errorCallback = { _, errMsg ->
                 TipsToast.showTips(errMsg)
@@ -96,7 +96,7 @@ class AppViewModel @Inject constructor() :
      * @param id Int
      * @param originId Int 此字段若不传会导致只有我的收藏界面的收藏会被取消,其他页面的收藏仍然显示收藏状态!
      */
-    fun cancelMyCollectArticle(id: Int, originId: Int) {
+    private fun cancelMyCollectArticle(id: Int, originId: Int) {
         launchUI(
             errorCallback = { _, errMsg -> TipsToast.showTips(errMsg) },
             requestCall = {
@@ -116,7 +116,7 @@ class AppViewModel @Inject constructor() :
                 true
             } else {
                 //未登录
-                TipsToast.showTips(getStringFromResource(R.string.tip_no_login))
+                //TipsToast.showTips(getStringFromResource(R.string.tip_no_login))
                 LogUtils.d(this@AppViewModel, "isLogin2-->")
                 false
             }
@@ -140,9 +140,6 @@ class AppViewModel @Inject constructor() :
         }.let {
             return it
         }
-    }
-
-    override fun onReload() {
     }
 }
 

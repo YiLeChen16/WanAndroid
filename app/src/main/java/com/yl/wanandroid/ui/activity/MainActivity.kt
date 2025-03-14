@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.yl.wanandroid.R
-import com.yl.wanandroid.base.BaseActivity
+import com.yl.wanandroid.base.activity.BaseActivity
 import com.yl.wanandroid.databinding.ActivityMainBinding
 import com.yl.wanandroid.ui.fragment.home.HomeFragment
 import com.yl.wanandroid.ui.fragment.my.MyFragment
@@ -83,8 +83,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         })
         //禁用viewPager的滑动，避免和首页的viewpager滑动冲突
         mBinding.fragmentContainer.isUserInputEnabled = false
+        mBinding.fragmentContainer.offscreenPageLimit = 3
         mMultiplyStateView.showSuccess()//展示成功视图
-
     }
 
 

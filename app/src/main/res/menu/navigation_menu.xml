@@ -3,21 +3,21 @@
     <item
         android:orderInCategory="0"
         android:id="@+id/home"
-        android:icon="@drawable/home"
+        android:icon="@drawable/home_32px"
         android:title="@string/tips_home" />
     <item
         android:orderInCategory="1"
         android:id="@+id/project"
-        android:icon="@drawable/project"
+        android:icon="@drawable/android_32px"
         android:title="@string/tips_project" />
     <item
         android:orderInCategory="2"
         android:id="@+id/system"
-        android:icon="@drawable/system"
+        android:icon="@drawable/system_32px"
         android:title="@string/tips_system" />
     <item
         android:orderInCategory="3"
         android:id="@+id/my"
-        android:icon="@drawable/my"
+        android:icon="@drawable/person_32px"
         android:title="@string/tips_my" />
 </menu>

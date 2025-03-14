@@ -2,11 +2,10 @@ package com.yl.wanandroid.viewmodel.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.yl.wanandroid.base.BaseViewModel
+import com.yl.wanandroid.base.viewModel.BaseViewModel
 import com.yl.wanandroid.model.ViewStateEnum
 import com.yl.wanandroid.model.BannerDataBean
-import com.yl.wanandroid.repository.HomeRepository
-import com.yl.wanandroid.repository.LoginAndRegisterRepository
+import com.yl.wanandroid.repository.home.HomeRepository
 import com.yl.wanandroid.utils.LogUtils
 import com.yl.wanandroid.utils.TipsToast
 
