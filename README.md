@@ -4,7 +4,7 @@
 
 - **MVVM 架构模式**：通过将业务逻辑与 UI 层分离，帮助开发者理解如何组织和管理应用的代码，提升代码的可维护性和可扩展性。
 - **Kotlin 语言特性**：项目全面采用 Kotlin 语言，展示了 Kotlin 的简洁、安全和高效的特性，帮助开发者更好地掌握 Kotlin 编程技巧。
-- **网络请求与数据处理**：使用 **Retrofit**  + **OkHttp3** 与 **Kotlin协程 **配合，展示了如何进行高效、可靠的网络请求，并处理 API 返回的数据。
+- **网络请求与数据处理**：使用 **Retrofit**  + **OkHttp3** 与 **Kotlin协程**配合，展示了如何进行高效、可靠的网络请求，并处理 API 返回的数据。
 - **Jetpack 组件**：项目集成了 Jetpack 的多个关键组件（包括 **LiveData**、**ViewModel**、**Flow**、**Paging**、**Room**、**Navigation** 等），帮助开发者了解现代 Android 开发的最佳实践。
 - **Material Design 3**：采用最新的 Material Design 3 设计规范，展示了如何创建符合现代设计标准的界面，并提供一致且流畅的用户体验。
 
