@@ -142,7 +142,11 @@ class WebViewActivity :
             ) {
                 super.onReceivedError(view, request, error)
                 //标记网络错误
-                mViewModel.isNetError.value = true
+                LogUtils.d(this@WebViewActivity,"error-->${error?.errorCode}")
+                LogUtils.d(this@WebViewActivity,"error-->${error?.description}")
+                if (error?.errorCode == ERROR_HOST_LOOKUP){
+                    mViewModel.isNetError.value = true
+                }
             }
 
         }
