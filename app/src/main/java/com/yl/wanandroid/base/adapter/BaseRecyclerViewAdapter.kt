@@ -67,4 +67,8 @@ abstract class BaseRecyclerViewAdapter<ItemData,ItemViewBinding:ViewDataBinding>
         this.datas.addAll(itemDatas)
         notifyItemRangeChanged(oldIndex, itemDatas.size)
     }
+
+    fun clearData(){
+        this.datas.clear()
+    }
 }

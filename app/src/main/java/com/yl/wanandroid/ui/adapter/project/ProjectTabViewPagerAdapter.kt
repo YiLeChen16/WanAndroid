@@ -12,7 +12,7 @@ import com.yl.wanandroid.ui.fragment.project.ProjectTabFragment
  * @version 1.0
  */
 class ProjectTabViewPagerAdapter(fragment:Fragment): FragmentStateAdapter(fragment) {
-    private var tabFragmentList = mutableListOf<ProjectTabFragment>()
+    var tabFragmentList = mutableListOf<ProjectTabFragment>()
 
     override fun getItemCount(): Int {
         return tabFragmentList.size

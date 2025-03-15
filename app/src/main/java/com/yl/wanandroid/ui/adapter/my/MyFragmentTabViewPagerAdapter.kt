@@ -12,7 +12,7 @@ import com.yl.wanandroid.ui.fragment.my.MyTabFragment
  * @version 1.0
  */
 class MyFragmentTabViewPagerAdapter  (fragment: Fragment) : FragmentStateAdapter(fragment) {
-    private var tabFragmentList = mutableListOf<MyTabFragment>()
+    var tabFragmentList = mutableListOf<MyTabFragment>()
 
     override fun getItemCount(): Int {
         return tabFragmentList.size

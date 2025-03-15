@@ -148,4 +148,10 @@ class HomeFragment :
     override fun getVariableId(): Int {
         return BR.homeViewModel
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mBinding.tabViewPager.adapter = null
+        homeTabViewPagerAdapter.fragmentList.clear()
+    }
 }

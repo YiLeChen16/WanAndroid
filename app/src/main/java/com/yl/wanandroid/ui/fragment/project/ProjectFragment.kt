@@ -125,4 +125,10 @@ class ProjectFragment :
 
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mBinding.projectViewPager.adapter = null
+        projectTabViewPagerAdapter?.tabFragmentList?.clear()
+    }
 }

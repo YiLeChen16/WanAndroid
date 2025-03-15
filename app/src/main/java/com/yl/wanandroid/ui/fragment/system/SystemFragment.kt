@@ -1,5 +1,6 @@
 package com.yl.wanandroid.ui.fragment.system
 
+import android.annotation.SuppressLint
 import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.widget.TextView
@@ -67,6 +68,7 @@ class SystemFragment :
     }
 
     //初始化tab条目的样式
+    @SuppressLint("InflateParams")
     private fun initTab() {
         val initData = listOf("体系", "课程")
         LogUtils.d(this, "initTab-->mBinding.tab.tabCount==${mBinding.tabLayout.tabCount}")
@@ -76,6 +78,12 @@ class SystemFragment :
             val tab: TabLayout.Tab = mBinding.tabLayout.newTab().setCustomView(view)
             mBinding.tabLayout.addTab(tab,false)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mBinding.viewpager.adapter = null
+        systemViewPagerAdapter?.fragments?.clear()
     }
 
 }

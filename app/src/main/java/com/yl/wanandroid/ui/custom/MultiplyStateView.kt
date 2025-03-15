@@ -35,7 +35,7 @@ open class MultiplyStateView : FrameLayout {
     private var mEmptyView: View? = null
 
     //当前视图状态
-    var currentState: ViewStateEnum = ViewStateEnum.VIEW_NONE
+    private var currentState: ViewStateEnum = ViewStateEnum.VIEW_NONE
 
     constructor(context: Context) : this(context, null)
 
@@ -81,13 +81,13 @@ open class MultiplyStateView : FrameLayout {
     //动态加载并展示加载页面
     fun showLoading() {
         if (mLoadingView == null) {
-            mLoadingView = mInflater.inflate(mLoadingViewId, null);
+            mLoadingView = mInflater.inflate(mLoadingViewId, null)
         }
         if (mLoadingView != null ) {
             removeAllViews()
             addView(mLoadingView, 0, params)
         } else {
-            throw NullPointerException("you have to set loading view before that");
+            throw NullPointerException("you have to set loading view before that")
         }
     }
 
@@ -312,6 +312,11 @@ open class MultiplyStateView : FrameLayout {
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         super.onLayout(changed, left, top, right, bottom)
         updateVisibility()
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        mOnReLodListener = null // 清除监听器引用
     }
 
 }

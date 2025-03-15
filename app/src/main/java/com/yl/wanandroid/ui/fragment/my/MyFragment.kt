@@ -233,4 +233,10 @@ class MyFragment : BaseVMFragment<FragmentMyBinding, MyFragmentViewModel>(R.layo
     override fun getVariableId(): Int {
         return BR.myFragmentViewModel
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mBinding.tabViewPager.adapter = null
+        myFragmentTabViewPagerAdapter?.tabFragmentList?.clear()
+    }
 }

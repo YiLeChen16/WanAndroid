@@ -12,7 +12,7 @@ import com.yl.wanandroid.ui.fragment.system.course.SystemCourseFragment
  * @version 1.0
  */
 class SystemViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
-    private val fragments = mutableListOf<Fragment>()
+    val fragments = mutableListOf<Fragment>()
 
     init {
         val systemChildFragment = SystemChildFragment()

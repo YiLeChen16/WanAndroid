@@ -14,7 +14,7 @@ import com.yl.wanandroid.ui.fragment.home.wenda.WendaFragment
  */
 class HomeTabViewPagerAdapter (fragment: Fragment) : FragmentStateAdapter(fragment) {
     //管理所有Fragment
-    private var fragmentList = mutableListOf<Fragment>()
+    var fragmentList = mutableListOf<Fragment>()
 
     init {
         //创建所需Fragment
