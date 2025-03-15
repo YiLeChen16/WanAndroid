@@ -2,6 +2,8 @@
 agp = "8.5.1"
 appcompat = "1.7.0"
 constraintlayout = "2.1.4"
+flexbox = "3.0.0"
+hiltAndroid = "2.44"
 kotlin = "1.8.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -15,6 +17,7 @@ material = "1.12.0"
 activity = "1.9.1"
 glide = "5.0.0-rc01"
 converterGson = "2.11.0"
+navigationFragmentKtx = "2.5.3"
 retrofit = "2.11.0"
 loggingInterceptor = "5.0.0-alpha.14"
 recyclerviewVersion = "1.3.0"
@@ -38,6 +41,11 @@ xxpermissions = "20.0"
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
+androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationFragmentKtx" }
+flexbox = { module = "com.google.android.flexbox:flexbox", version.ref = "flexbox" }
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
+hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroid" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
