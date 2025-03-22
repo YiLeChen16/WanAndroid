@@ -122,13 +122,12 @@ dependencies {
     implementation(libs.xxpermissions)
 
 
-//    //电话号码前缀选择器
-//    implementation("com.github.sahooz:country-region-picker-android:3.1.0")
-
 
     //MarkDown语法解析器
     implementation(libs.markdown.processor)
 
+/*
     debugImplementation ("com.squareup.leakcanary:leakcanary-android:2.12")
+*/
 
 }
