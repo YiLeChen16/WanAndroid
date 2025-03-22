@@ -1,5 +1,6 @@
 package com.yl.wanandroid.repository.base
 
+import com.yl.wanandroid.Constant
 import com.yl.wanandroid.network.exeception.ApiException
 import com.yl.wanandroid.network.result.BaseResult
 import com.yl.wanandroid.utils.LogUtils
@@ -14,8 +15,6 @@ import kotlinx.coroutines.withTimeout
  * @version 1.0
  */
 open class BaseRepository {
-   private val Default_Timeout:Long = 5 * 1000
-
     /**
      * IO中处理请求,请求错误抛出自定义异常
      * @param requestCall SuspendFunction0<BaseResult<T>?>
@@ -23,7 +22,7 @@ open class BaseRepository {
      */
     suspend fun <T> requestResponse(requestCall: suspend () -> BaseResult<T>?): T? {
         val result = withContext(Dispatchers.IO) {
-            withTimeout(Default_Timeout) {
+            withTimeout(Constant.CONNECT_TIME_OUT * 1000) {
                 requestCall()
             }
         } ?: return null

@@ -43,8 +43,6 @@ abstract class BaseVMActivity<VB : ViewDataBinding, VM : BaseViewModel>(@LayoutR
         initVMData()
         //监听liveData
         observeLiveData()
-        //监听View类生命周期
-        lifecycle.addObserver(mViewModel)
         //设置状态页点击重新加载监听
         mMultiplyStateView.setOnReLodListener(mViewModel)
     }
@@ -147,8 +145,7 @@ abstract class BaseVMActivity<VB : ViewDataBinding, VM : BaseViewModel>(@LayoutR
             return ViewModelProvider(
                 this,
                 ViewModelProvider.AndroidViewModelFactory.getInstance(application)
-            )
-                .get(tClass as Class<VM>)
+            )[tClass as Class<VM>]
         }
         return null
     }

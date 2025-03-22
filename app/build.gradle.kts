@@ -129,8 +129,6 @@ dependencies {
     //MarkDown语法解析器
     implementation(libs.markdown.processor)
 
-/*
     debugImplementation ("com.squareup.leakcanary:leakcanary-android:2.12")
-*/
 
 }

@@ -82,6 +82,7 @@ class MyLoadingView(context: Context, attrs: AttributeSet?) : AppCompatImageView
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         mRegistry.currentState = Lifecycle.State.DESTROYED
+        stopRotate()
     }
 
     override fun onWindowVisibilityChanged(visibility: Int) {

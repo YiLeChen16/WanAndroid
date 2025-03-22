@@ -1,6 +1,5 @@
 package com.yl.wanandroid.base.viewModel
 
-import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -18,7 +17,7 @@ import kotlinx.coroutines.launch
  * @date 2024/9/6 14:17
  * @version 1.0
  */
-abstract class BaseViewModel : ViewModel(), LifecycleObserver,MultiplyStateView.OnReLodListener {
+abstract class BaseViewModel : ViewModel(),MultiplyStateView.OnReLodListener {
 
     /**
      * 控制状态视图的LiveData
@@ -59,7 +58,7 @@ abstract class BaseViewModel : ViewModel(), LifecycleObserver,MultiplyStateView.
             //统一异常处理
             //将异常转为ApiException
             val apiException = ExceptionHandler.handleException(e)
-            if (apiException.errCode == ERROR.UNKNOW_HOST.code){
+            if (apiException.errCode == ERROR.UNKNOW_HOST.code || apiException.errCode == ERROR.NETWORD_ERROR.code){
                 changeStateView(ViewStateEnum.VIEW_NET_ERROR)
             }
             errorCallback(apiException.errCode,apiException.errMsg)
